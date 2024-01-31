@@ -5,12 +5,19 @@ import { Logo } from "./svg/Logo";
 import Link from "next/link";
 import { XIcon } from "./svg/XIcon";
 import { HambIcon } from "./svg/HambIcon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 
 export const Header = () => {
-    const menuOpen = false;
+    const currentPath = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [currentPath])
+
+
     const session = false;
     const isAdmin = false;
     return (
