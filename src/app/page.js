@@ -1,7 +1,11 @@
+import { HomepageCover } from "@/components/homepageCover/HomepageCover";
+import { Introduction } from "@/components/introduction/Introduction";
+
 export default function Naslovna() {
     return (
         <main>
-            <h1>Naslovna</h1>
+            <HomepageCover />
+            <Introduction />
         </main>
     );
 }

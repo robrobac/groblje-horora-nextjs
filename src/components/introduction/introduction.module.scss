@@ -1,0 +1,89 @@
+.introductionContainer {
+    margin-bottom: 100px;
+    padding: 0 var(--paddingM);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+
+    @media (max-width: 768px) {
+        margin-bottom: 50px;
+    }
+
+    p {
+        max-width: 750px;
+        font-size: var(--textL);
+        line-height: var(--lineHeightL);
+        color: var(--white80);
+        text-align: center;
+
+        strong {
+            font-size: inherit;
+        }
+
+        @media (max-width: 900px) {
+            max-width: 640px;
+        }
+
+        @media (max-width: 768px) {
+            max-width: 550px;
+            font-size: var(--textM);
+            line-height: var(--lineHeightM);
+        }
+
+        @media (max-width: 530px) {
+            max-width: 450px;
+        }
+
+        @media (max-width: 425px) {
+            max-width: 425px;
+            text-align: left;
+        }
+    }
+
+    h1 {
+        width: fit-content;
+        font-weight: 400;
+        text-align: center;
+        letter-spacing: 5px;
+        font-family: 'Creepster', sans-serif;
+        font-size: var(--textXXXLtitle);
+        line-height: var(--lineHeightXXXLtitle);
+        text-align: center;
+        color: var(--redBright);
+
+
+
+        @media (max-width: 900px) {
+            font-size: var(--textXXLtitle);
+            line-height: var(--lineHeightXXLtitle);
+        }
+
+        @media (max-width: 768px) {
+            font-size: var(--textXXXLtitle);
+            line-height: calc(var(--lineHeightXXXLtitle) * .7);
+        }
+
+        @media (max-width: 530px) {
+            font-size: var(--textXXLtitle);
+            line-height: calc(var(--lineHeightXXLtitle) * .7);
+        }
+
+        @media (max-width: 425px) {
+            font-size: var(--textXLtitle);
+            line-height: calc(var(--lineHeightXLtitle) * .7);
+        }
+
+        @media (max-width: 320px) {
+            font-size: var(--textLtitle);
+            line-height: calc(var(--lineHeightLtitle) * .7);
+        }
+
+        @media (max-width: 240px) {
+            font-size: var(--textMtitle);
+            line-height: calc(var(--lineHeightMtitle) * .7);
+        }
+    }
+}

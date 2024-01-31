@@ -1,0 +1,45 @@
+.coverImage {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+    max-height: 800px;
+    height: 88vh;
+    max-width: 2560px;
+    margin-top: -2rem;
+
+
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    @media (max-width: 1024px) {
+        max-height: 700px;
+
+    }
+
+    @media (max-width: 768px) {
+        max-height: 480px;
+    }
+
+    @media (max-width: 630px) {
+        height: 400px;
+    }
+
+    @media (max-width: 425px) {
+        height: 200px;
+    }
+
+    .coverImageTrees {
+        width: 100vw !important;
+        height: 100% !important;
+        display: flex;
+        justify-content: space-between;
+
+        img {
+            height: 100%;
+            width: auto;
+        }
+    }
+}

@@ -1,0 +1,29 @@
+.footerContainer {
+    -webkit-box-shadow: 0px 5px 10px 3px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 5px 10px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 5px 10px 3px rgba(0, 0, 0, 0.5);
+
+    background-color: var(--black);
+    color: var(--white80);
+    padding: 10px var(--paddingM);
+
+    margin-top: 100px;
+}
+
+.copyright {
+    text-align: center;
+    font-size: var(--textXS);
+    line-height: var(--lineHeightXS);
+    color: var(--white50);
+
+
+    a {
+        font-size: inherit;
+        color: var(--white80);
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--red);
+        }
+    }
+}

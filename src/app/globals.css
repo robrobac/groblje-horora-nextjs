@@ -2,9 +2,7 @@
     --gap20: 20px;
     --gap50: 50px;
 
-    --laptop1024: 1024px;
-
-    --white: #ededede6;
+    --white: #ededed;
     --white80: #edededcc;
     --white50: #ededed80;
     --white25: #ededed40;
@@ -12,13 +10,15 @@
     --white05: #ededed0d;
     --white02: #ededed05;
 
-    --black: #141414FF;
+    --black: #141414;
     --black90: #141414E6;
     --black80: #141414CC;
     --black50: #14141480;
     --black25: #14141440;
 
     --red: #7C2E2E;
+    --redBright: #a53132;
+    --redHover: #552020;
 
     --paddingM: 1rem;
     
@@ -44,6 +44,18 @@
     --lineHeightXXXL: 72px;
     --textHUGE: 60px;
     --lineHeightHUGE: 90px;
+
+    /* Main Title Sizes */
+    --textXXXLtitle: 120px;
+    --lineHeightXXXLtitle: 180px;
+    --textXXLtitle: 100px;
+    --lineHeightXXLtitle: 150px;
+    --textXLtitle: 80px;
+    --lineHeightXLtitle: 120px;
+    --textLtitle: 60px;
+    --lineHeightLtitle: 90px;
+    --textMtitle: 40px;
+    --lineHeightMtitle: 60px;
 }
 
 * {
@@ -61,6 +73,17 @@ body {
 
     font-size: var(--textM);
     line-height: var(--lineHeightM);
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 0;
+}
+
+
+/* For Edge and IE */
+body::-ms-scrollbar {
+    width: 0;
 }
 
 a {
