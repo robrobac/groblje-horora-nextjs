@@ -2,7 +2,7 @@ import draftToHtml from "draftjs-to-html";
 import { notFound } from "next/navigation";
 
 async function getData() {
-    const res = await fetch('http://localhost:3000/api/review', {cache: 'no-store'});
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/review`, {cache: 'no-store'});
     if (!res.ok) {
         return notFound();
     }
