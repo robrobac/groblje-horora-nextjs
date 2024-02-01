@@ -1,50 +1,47 @@
-import draftToHtml from "draftjs-to-html";
-import Head from "next/head";
-import { notFound } from "next/navigation";
-
-async function getData() {
-    const res = await fetch(`${process.env.DOMAIN_URL}/api/review`, {cache: 'no-store'});
-    if (!res.ok) {
-        return notFound();
-    }
-    return res.json();
-}
+"use server"
+import styles from "@/app/recenzije/[slug]/page.module.scss";
+import { Movie } from "@/components/singleReview/movie/Movie";
+import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeader";
+import { getReview } from "@/lib/data";
+import { format } from "date-fns";
 
 function shortenStringTo30Words(str) {
     const words = str.split(' ');
     const shortenedWords = words.slice(0, 30);
     const shortenedString = shortenedWords.join(' ');
+    console.log(shortenedString)
     return shortenedString + '</p>';
 }
 
 
-function getRawContent(content) {
-    if (content) {
-        const rawContent = JSON.parse(content)
-        const markup = draftToHtml(rawContent)
-        return markup
-    }
-}
+
+
 
 const SinglePostPage = async ({params}) => {
-    const data = await getData();
+    const {slug} = params;
+    const data = await getReview(slug);
     console.log(data)
-
     return (
-        <>
-        <Head>
-        <meta property="og:title" content={data.reviewTitle} />
-        <meta
-          property="og:description"
-          content={shortenStringTo30Words(data.movies[0].reviewContent)}
-        />
-      </Head>
-        <h1>{data.reviewTitle}</h1>
+        <main className={styles.singlePostContainer}>
+            {data.reviewType === 'quad' && (
+                <>
+                <ReviewHeader data={data}/>
+                <div className={styles.movieAndDate}>
+                    <p className={styles.reviewDate}>
+                        {format(new Date(data?.createdAt), 'dd.MM.yyyy')}
+                    </p>
+                    <h1 className={styles.titleH1}>{data.reviewTitle}</h1>
+                </div>
+                </>
+            )}
 
-        {shortenStringTo30Words(getRawContent(data.movies[0].reviewContent))}
-        
-        </>
+            {data?.movies.map((movie) => (
+                <Movie key={movie._id} data={data} movie={movie}/>
+            ))}
+            
+        </main>
     );
 };
 
 export default SinglePostPage;
+

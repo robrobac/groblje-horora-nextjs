@@ -13,7 +13,7 @@
 .copyright {
     text-align: center;
     font-size: var(--textXS);
-    line-height: var(--lineHeightXS);
+    line-height: calc(var(--textS) * 1.5);
     color: var(--white50);
 
 

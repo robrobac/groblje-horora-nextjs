@@ -82,7 +82,7 @@
 
             .navLink {
                 font-size: var(--textM);
-                line-height: var(--lineHeightM);
+                line-height: calc(var(--textM) * 1.5);
                 color: var(--white);
                 padding: 5px;
                 transition: all 0.1s ease-in-out;

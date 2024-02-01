@@ -1,0 +1,49 @@
+.reviewHeader {
+    width: 100%;
+    max-width: 1920px;
+    margin-top: -2rem;
+
+    @media (max-width: 768px) {
+        padding: 0 var(--paddingM);
+        margin-top: 0;
+
+        .image0 {
+            border-radius: var(--radiusM) 0 0 0;
+
+        }
+
+        .image1 {
+            border-radius: 0 var(--radiusM) 0 0;
+        }
+
+        .image2 {
+            border-radius: 0 0 0 var(--radiusM);
+
+        }
+
+        .image3 {
+            border-radius: 0 var(radiusM) var(--radiusM) 0;
+        }
+    }
+}
+
+.reviewHeaderContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    transition: .1s;
+    border-radius: var(radiusM);
+
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 425px;
+    }
+}
+
+.quadImageContainer {
+    img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+}

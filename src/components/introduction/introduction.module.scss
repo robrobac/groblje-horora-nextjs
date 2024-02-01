@@ -15,7 +15,7 @@
     p {
         max-width: 750px;
         font-size: var(--textL);
-        line-height: var(--lineHeightL);
+        line-height: calc(var(--textL) * 1.5);
         color: var(--white80);
         text-align: center;
 
@@ -30,7 +30,7 @@
         @media (max-width: 768px) {
             max-width: 550px;
             font-size: var(--textM);
-            line-height: var(--lineHeightM);
+            line-height: calc(var(--textM) * 1.5);
         }
 
         @media (max-width: 530px) {
@@ -50,7 +50,7 @@
         letter-spacing: 5px;
         font-family: 'Creepster', sans-serif;
         font-size: var(--textXXXLtitle);
-        line-height: var(--lineHeightXXXLtitle);
+        line-height: calc(var(--textXXXLtitle) * 1.5);
         text-align: center;
         color: var(--redBright);
 
@@ -58,32 +58,32 @@
 
         @media (max-width: 900px) {
             font-size: var(--textXXLtitle);
-            line-height: var(--lineHeightXXLtitle);
+            line-height: calc((var(--textXXLtitle) * 1.5) * 0.7);
         }
 
         @media (max-width: 768px) {
             font-size: var(--textXXXLtitle);
-            line-height: calc(var(--lineHeightXXXLtitle) * .7);
+            line-height: calc((var(--textXXXLtitle) * 1.5) * 0.7);
         }
 
         @media (max-width: 530px) {
             font-size: var(--textXXLtitle);
-            line-height: calc(var(--lineHeightXXLtitle) * .7);
+            line-height: calc((var(--textXXLtitle) * 1.5) * 0.7);
         }
 
         @media (max-width: 425px) {
             font-size: var(--textXLtitle);
-            line-height: calc(var(--lineHeightXLtitle) * .7);
+            line-height: calc((var(--textXLtitle) * 1.5) * 0.7);
         }
 
         @media (max-width: 320px) {
             font-size: var(--textLtitle);
-            line-height: calc(var(--lineHeightLtitle) * .7);
+            line-height: calc((var(--textLtitle) * 1.5) * 0.7);
         }
 
         @media (max-width: 240px) {
             font-size: var(--textMtitle);
-            line-height: calc(var(--lineHeightMtitle) * .7);
+            line-height: calc((var(--textMtitle) * 1.5) * 0.7);
         }
     }
 }
