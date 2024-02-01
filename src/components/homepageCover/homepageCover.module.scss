@@ -7,9 +7,12 @@
     max-height: 800px;
     height: 88vh;
     max-width: 2560px;
+    margin: 0 auto;
     margin-top: -2rem;
 
     overflow: hidden;
+
+    border: 1px solid var(--black);
 
     @media (max-width: 1024px) {
         max-height: 700px;
@@ -36,8 +39,9 @@
 
     .coverImageTrees {
         position: absolute;
-        width: 100vw !important;
-        height: 100% !important;
+        width: 100%;
+        max-width: 2560px;
+        height: 100%;
         display: flex;
         justify-content: space-between;
 

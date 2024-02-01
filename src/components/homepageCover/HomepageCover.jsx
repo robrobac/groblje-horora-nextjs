@@ -8,10 +8,10 @@ export const HomepageCover = () => {
 
     return (
         <div className={styles.coverImage}>
-            <Image src={coverImage} alt='tree silhouette on the left side of the screen'/>
+            <Image width={100} height={100} src={coverImage} alt='tree silhouette on the left side of the screen'/>
             <div className={styles.coverImageTrees}>
-                <Image src={leftTree} alt='tree silhouette on the left side of the screen'/>
-                <Image src={rightTree} alt='tree silhouette on the right side of the screen'/>
+                <Image width={'100%'} height={'100%'} src={leftTree} alt='tree silhouette on the left side of the screen'/>
+                <Image width={100} height={100} src={rightTree} alt='tree silhouette on the right side of the screen'/>
             </div>
         </div>
     )
