@@ -1,7 +1,7 @@
 // next.config.js
 const nextConfig = {
     images: {
-        domains: ['localhost:3000'], // Replace with your actual domain
+        domains: ['groblje-horora-nextjs.vercel.app/'], // Replace with your actual domain
     },
 };
 
