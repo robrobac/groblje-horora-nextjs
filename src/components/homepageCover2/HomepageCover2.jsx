@@ -1,10 +1,12 @@
-import styles from '@/components/homepageCover/homepageCover.module.scss';
+import styles from '@/components/homepageCover2/homepageCover2.module.scss';
 import Image from 'next/image';
 import coverImage from '../../../public/images/groblje-horora-home-page-cover.webp';
 import leftTree from '../../../public/images/groblje-horora-cover-left-tree.png';
 import rightTree from '../../../public/images/groblje-horora-cover-right-tree.png';
 
-export const HomepageCover = () => {
+
+
+export const HomepageCover2 = () => {
 
     return (
         <div className={styles.coverImage}>
