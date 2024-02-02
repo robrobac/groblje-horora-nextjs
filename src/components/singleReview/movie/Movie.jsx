@@ -1,16 +1,8 @@
-import draftToHtml from "draftjs-to-html"
 import pageStyles from "@/app/recenzije/[slug]/page.module.scss"
 import styles from "@/components/singleReview/movie/movie.module.scss";
 import { format } from "date-fns";
 import { Rating } from "@/components/rating/Rating";
-
-function getRawContent(content) {
-    if (content) {
-        const rawContent = JSON.parse(content)
-        const markup = draftToHtml(rawContent)
-        return markup
-    }
-}
+import { getRawContent } from "@/lib/utils";
 
 export const Movie = ({data, movie}) => {
     console.log(movie)

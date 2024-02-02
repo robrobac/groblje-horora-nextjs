@@ -3,6 +3,7 @@ import styles from "@/app/recenzije/[slug]/page.module.scss";
 import { Movie } from "@/components/singleReview/movie/Movie";
 import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeader";
 import { getReview } from "@/lib/data";
+import { getRawContent } from "@/lib/utils";
 import { format } from "date-fns";
 
 function shortenStringTo30Words(str) {
@@ -13,9 +14,15 @@ function shortenStringTo30Words(str) {
     return shortenedString + '</p>';
 }
 
+export const generateMetadata = async ({params}) => {
+    const {slug} = params;
+    const data = await getReview(slug);
 
-
-
+    return {
+        title: data.reviewTitle,
+        description: shortenStringTo30Words(getRawContent(data.movies[0].reviewContent)),
+    }
+}
 
 const SinglePostPage = async ({params}) => {
     const {slug} = params;

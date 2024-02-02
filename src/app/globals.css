@@ -2,24 +2,6 @@
     --gap20: 20px;
     --gap50: 50px;
 
-    --white: #ededed;
-    --white80: #edededcc;
-    --white50: #ededed80;
-    --white25: #ededed40;
-    --white15: #ededed26;
-    --white05: #ededed0d;
-    --white02: #ededed05;
-
-    --black: #141414;
-    --black90: #141414E6;
-    --black80: #141414CC;
-    --black50: #14141480;
-    --black25: #14141440;
-
-    --red: #7C2E2E;
-    --redBright: #a53132;
-    --redHover: #552020;
-
     --paddingM: 1rem;
     
     --widthDefault: 1200px;
@@ -29,34 +11,45 @@
     --radiusM: 10px;
     --radiusL: 20px;
 
-    --textXS: 12px;
-    --lineHeightXS: 18px;
-    --textS: 14px;
-    --lineHeightS: 20px;
-    --textM: 16px;
-    --lineHeightM: 24px;
-    --textL: 20px;
-    --lineHeightL: 30px;
-    --textXL: 24px;
-    --lineHeightXL: 36px;
-    --textXXL: 32px;
-    --lineHeightXXL: 48px;
-    --textXXXL: 48px;
-    --lineHeightXXXL: 72px;
-    --textHUGE: 60px;
-    --lineHeightHUGE: 90px;
+    /* COLORS */
+    /*   WHITE VARIANTS */
+        --white: #ededed;
+        --white80: #edededcc;
+        --white50: #ededed80;
+        --white25: #ededed40;
+        --white15: #ededed26;
+        --white05: #ededed0d;
+        --white02: #ededed05;
 
-    /* Main Title Sizes */
-    --textXXXLtitle: 120px;
-    --lineHeightXXXLtitle: 180px;
-    --textXXLtitle: 100px;
-    --lineHeightXXLtitle: 150px;
-    --textXLtitle: 80px;
-    --lineHeightXLtitle: 120px;
-    --textLtitle: 60px;
-    --lineHeightLtitle: 90px;
-    --textMtitle: 40px;
-    --lineHeightMtitle: 60px;
+    /*   BLACK VARIANTS */
+        --black: #141414;
+        --black90: #141414E6;
+        --black80: #141414CC;
+        --black50: #14141480;
+        --black25: #14141440;
+
+    /*   RED VARIANTS */
+        --red: #7C2E2E;
+        --redBright: #a53132;
+        --redHover: #552020;
+
+    /* FONT SIZES */
+    /*   Regular */
+        --textXS: 12px;
+        --textS: 14px;
+        --textM: 16px;
+        --textL: 20px;
+        --textXL: 24px;
+        --textXXL: 32px;
+        --textXXXL: 48px;
+        --textHUGE: 60px;
+
+    /*   Main Title */
+        --textXXXLtitle: 120px;
+        --textXXLtitle: 100px;
+        --textXLtitle: 80px;
+        --textLtitle: 60px;
+        --textMtitle: 40px;
 }
 
 * {
@@ -64,23 +57,23 @@
     padding: 0;
     box-sizing: border-box;
     border: medium none;
-        border-spacing: 0;
-        font-size: 16px;
+    border-spacing: 0;
+    font-family: 'Lexend', sans-serif;
+    font-size: var(--textM);
+    line-height: calc(var(--textM) * 1.5);
 }
 
 body {
     background-color: var(--black);
     color: var(--white);
 
-    font-size: var(--textM);
-    line-height: var(--lineHeightM);
+   
 }
 
 /* SCROLLBAR */
 ::-webkit-scrollbar {
     width: 0;
 }
-
 
 /* For Edge and IE */
 body::-ms-scrollbar {
