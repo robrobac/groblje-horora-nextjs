@@ -7,11 +7,13 @@ import { getRawContent } from "@/lib/utils";
 import { format } from "date-fns";
 
 function shortenStringTo30Words(str) {
-    const words = str.split(' ');
+    const cleanedString = str.replace(/<\/?[^>]+(>|$)/g, "");
+    const cleanedStringWithoutTags = cleanedString.replace(/<\/?(p|b|strong|em|i|u|strike)>/g, "");
+    const words = cleanedStringWithoutTags.split(' ');
     const shortenedWords = words.slice(0, 30);
     const shortenedString = shortenedWords.join(' ');
-    console.log(shortenedString)
-    return shortenedString + '</p>';
+    console.log(shortenedString);
+    return shortenedString;
 }
 
 export const generateMetadata = async ({params}) => {
