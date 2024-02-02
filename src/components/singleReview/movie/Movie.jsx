@@ -2,6 +2,7 @@ import draftToHtml from "draftjs-to-html"
 import pageStyles from "@/app/recenzije/[slug]/page.module.scss"
 import styles from "@/components/singleReview/movie/movie.module.scss";
 import { format } from "date-fns";
+import { Rating } from "@/components/rating/Rating";
 
 function getRawContent(content) {
     if (content) {
@@ -25,7 +26,7 @@ export const Movie = ({data, movie}) => {
                         {format(new Date(data.createdAt), 'dd.MM.yyyy')}
                     </p>
                     <h1 className={pageStyles.titleH1}>{movie.title} <span>({movie.year})</span></h1>
-                    {/* <Rating rating={movie.rating} detailed={true}/> */}
+                    <Rating rating={movie.rating} detailed={true}/>
                 </div>
             ) : (
                 <div className={styles.movieInfo}>
@@ -33,7 +34,7 @@ export const Movie = ({data, movie}) => {
                         <img src={movie.coverImage} alt='movie-cover'></img>
                     </div>
                     <div className={pageStyles.titleH2}>{movie.title} <span>({movie.year})</span></div>
-                    {/* <Rating rating={movie.rating} detailed={true}/> */}
+                    <Rating rating={movie.rating} detailed={true}/>
                 </div>
             )}
             <div className={styles.readingSection}>

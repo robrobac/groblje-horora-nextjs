@@ -1,0 +1,12 @@
+.ratingContainer {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+
+    span {
+        font-size: 14px;
+        color: var(--white50);
+    }
+}
