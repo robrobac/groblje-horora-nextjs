@@ -3,6 +3,7 @@ import styles from '@/components/latest/latest.module.scss';
 import { Rating } from "../rating/Rating";
 import { StandardBtn } from "../buttons/standardBtn/StandardBtn";
 import { formatMongoDate, getRawContent } from "@/lib/utils";
+import { getLatestRecenzija } from "@/lib/data/latestData";
 
 const getData = async () => {
     const res = await fetch(`${process.env.DOMAIN_URL}api/latestRecenzija`);
@@ -23,7 +24,7 @@ const getData = async () => {
 // }
 
 export const LatestRecenzija = async () => {
-    const data = await getData();
+    const data = await getLatestRecenzija();
     // const shortDescription = await shortenDescription(data[0].movies[0].reviewContent)
 
     return (
