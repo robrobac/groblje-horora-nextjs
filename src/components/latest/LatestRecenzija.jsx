@@ -32,7 +32,7 @@ export const LatestRecenzija = async () => {
                             </h2>
                         </Link>
                         <Rating rating={data[0].movies[0].rating} detailed={true} />
-                        <p className={styles.recenzijaDescription} dangerouslySetInnerHTML={{__html: data[0].shortDescription}}/>
+                        <p className={styles.recenzijaDescription}>{data[0].shortDescription}</p>
                     </div>
                     <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={true}/>
                 </div>
@@ -62,7 +62,7 @@ export const LatestRecenzija = async () => {
                             </h2>
                         </Link>
                         <Rating rating={data[0].movies[0].rating} detailed={true} />
-                        <p className={styles.recenzijaDescription} dangerouslySetInnerHTML={{__html: data[0].shortDescription}}/>
+                        <p className={styles.recenzijaDescription}>{data[0].shortDescription}</p>
                     </div>
                     <div className={styles.buttonContainer}>
                         <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={true}/>
