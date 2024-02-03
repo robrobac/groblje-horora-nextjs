@@ -67,6 +67,10 @@ const CommentSchema = new Schema({
         type: String,
         required: true
     },
+    shortDescription: {
+        type: String,
+        required: false
+    },
 }, {
     timestamps: true
 })
