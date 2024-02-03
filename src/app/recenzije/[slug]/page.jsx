@@ -2,7 +2,6 @@
 import styles from "@/app/recenzije/[slug]/page.module.scss";
 import { Movie } from "@/components/singleReview/movie/Movie";
 import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeader";
-import { getReview } from "@/lib/data";
 import { getRawContent } from "@/lib/utils";
 import { format } from "date-fns";
 
