@@ -3,7 +3,6 @@ import styles from '@/components/latest/latest.module.scss';
 import { Rating } from "../rating/Rating";
 import { StandardBtn } from "../buttons/standardBtn/StandardBtn";
 import { formatMongoDate, getRawContent } from "@/lib/utils";
-import { getLatestRecenzija } from "@/lib/data/latestData";
 
 const getData = async () => {
     const res = await fetch(`${process.env.DOMAIN_URL}/api/latestRecenzija`);
@@ -13,18 +12,9 @@ const getData = async () => {
     return res.json();
 }
 
-// const shortenDescription = async (description) => {
-//     const data = await getData()
-//     const formattedDescription = getRawContent(description);
-//     const descriptionWithoutImages = formattedDescription.replace(/<img[^>]*>/g, '');
-//     const descriptionWithoutTags = descriptionWithoutImages.replace(/<\/?[a-z][a-z0-9]*[^<>]*>/ig, '');
-//     const words = descriptionWithoutTags.split(' ');
-//     const shortenedDescription = words.slice(0, 100).join(' ');
-//     return shortenedDescription;
-// }
-
 export const LatestRecenzija = async () => {
     const data = await getData();
+    console.log(data[0].shortDescription)
     // const shortDescription = await shortenDescription(data[0].movies[0].reviewContent)
 
     return (
@@ -42,7 +32,7 @@ export const LatestRecenzija = async () => {
                             </h2>
                         </Link>
                         <Rating rating={data[0].movies[0].rating} detailed={true} />
-                        <p className={styles.recenzijaDescription} dangerouslySetInnerHTML={{__html: 'shortDescription'}}/>
+                        <p className={styles.recenzijaDescription} dangerouslySetInnerHTML={{__html: data[0].shortDescription}}/>
                     </div>
                     <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={true}/>
                 </div>
@@ -72,7 +62,7 @@ export const LatestRecenzija = async () => {
                             </h2>
                         </Link>
                         <Rating rating={data[0].movies[0].rating} detailed={true} />
-                        <p className={styles.recenzijaDescription} dangerouslySetInnerHTML={{__html: 'shortDescription'}}/>
+                        <p className={styles.recenzijaDescription} dangerouslySetInnerHTML={{__html: data[0].shortDescription}}/>
                     </div>
                     <div className={styles.buttonContainer}>
                         <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={true}/>

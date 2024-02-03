@@ -2,7 +2,6 @@ import styles from '@/components/latest/latest.module.scss';
 import { formatMongoDate } from '@/lib/utils';
 import Link from 'next/link';
 import { StandardBtn } from '../buttons/standardBtn/StandardBtn';
-import { getLatestPregled } from '@/lib/data/latestData';
 
 const getData = async () => {
     const res = await fetch(`${process.env.DOMAIN_URL}/api/latestPregled`);
