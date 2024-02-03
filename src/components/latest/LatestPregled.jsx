@@ -13,7 +13,7 @@ const getData = async () => {
 }
 
 export const LatestPregled = async () => {
-    const data = await getLatestPregled();
+    const data = await getData();
 
     return (
         <>
