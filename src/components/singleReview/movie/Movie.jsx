@@ -16,6 +16,7 @@ export const Movie = ({data, movie, id}) => {
                     <p className={pageStyles.reviewDate}>
                         {format(new Date(data.createdAt), 'dd.MM.yyyy')}
                     </p>
+                    
                     <h1 className={pageStyles.titleH1}>{movie.title} <span>({movie.year})</span></h1>
                     <Rating rating={movie.rating} detailed={true}/>
                 </div>
