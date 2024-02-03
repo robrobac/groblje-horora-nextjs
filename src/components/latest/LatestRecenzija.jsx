@@ -6,7 +6,7 @@ import { formatMongoDate, getRawContent } from "@/lib/utils";
 import { getLatestRecenzija } from "@/lib/data/latestData";
 
 const getData = async () => {
-    const res = await fetch(`${process.env.DOMAIN_URL}api/latestRecenzija`);
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/latestRecenzija`);
     if (!res.ok) {
         throw new Error('Failed to fetch LatestSingle data');
     }
