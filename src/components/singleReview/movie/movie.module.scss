@@ -27,6 +27,10 @@
     text-align: left;
     gap: 1rem;
     color: var(--white80);
+
+    img {
+        border-radius: var(--radiusS);
+    }
 }
 
 .movieImage {

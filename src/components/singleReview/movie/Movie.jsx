@@ -4,11 +4,10 @@ import { format } from "date-fns";
 import { Rating } from "@/components/rating/Rating";
 import { getRawContent } from "@/lib/utils";
 
-export const Movie = ({data, movie}) => {
-    console.log(movie)
+export const Movie = ({data, movie, id}) => {
 
     return (
-        <div className={styles.movieContainer}>
+        <div className={styles.movieContainer} id={id}>
             {data.reviewType === 'single' ? (
                 <div className={styles.movieInfo}>
                     <div className={styles.movieImage}>

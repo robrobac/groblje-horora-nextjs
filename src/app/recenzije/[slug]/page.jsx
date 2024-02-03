@@ -12,7 +12,7 @@ function shortenStringTo30Words(str) {
     const words = cleanedStringWithoutTags.split(' ');
     const shortenedWords = words.slice(0, 30);
     const shortenedString = shortenedWords.join(' ');
-    console.log(shortenedString);
+    // console.log(shortenedString);
     return shortenedString;
 }
 
@@ -29,7 +29,6 @@ export const generateMetadata = async ({params}) => {
 const SinglePostPage = async ({params}) => {
     const {slug} = params;
     const data = await getReview(slug);
-    console.log(data)
     return (
         <main className={styles.singlePostContainer}>
             {data.reviewType === 'quad' && (
@@ -44,8 +43,8 @@ const SinglePostPage = async ({params}) => {
                 </>
             )}
 
-            {data?.movies.map((movie) => (
-                <Movie key={movie._id} data={data} movie={movie}/>
+            {data?.movies.map((movie, index) => (
+                <Movie key={movie._id} data={data} movie={movie} id={`movie${index}`}/>
             ))}
             
         </main>

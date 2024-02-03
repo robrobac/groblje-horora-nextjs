@@ -1,0 +1,54 @@
+.button {
+    width: fit-content;
+    font-size: var(--textL);
+    line-height: var(--textL);
+    background-color: var(--red);
+    color: var(--white);
+    border-radius: var(--radiusS);
+    border: none;
+    cursor: pointer;
+    padding: 20px;
+
+    span {
+        font-weight: 400;
+        color: var(--white50);
+
+        @media (max-width: 250px) {
+            display: none;
+        }
+    }
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: var(--redHover);
+        }
+    }
+
+    &.disabled {
+        opacity: .5;
+        cursor: default;
+
+        &:hover {
+            background-color: var(--red);
+        }
+    }
+
+    @media (max-width: 425px) {
+        width: 100%;
+    }
+}
+
+.textButton {
+    font-size: var(--textM);
+    background-color: transparent;
+    color: var(--white);
+    padding: 0;
+    width: unset;
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: transparent;
+            color: var(--red);
+        }
+    }
+}

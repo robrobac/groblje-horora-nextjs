@@ -5,6 +5,7 @@ export const getReviews = async () => {
     try {
         dbConnect()
         const data = await reviewModel.find()
+        console.log('All posts successfully fetched')
         return data
     } catch (err) {
         console.log(err)
@@ -16,7 +17,7 @@ export const getReview = async (slug) => {
     try {
         dbConnect()
         const data = await reviewModel.findOne({ slug: slug })
-        console.log(data)
+        console.log('Single post successfully fetched: ', data.reviewTitle)
         return data
     } catch (err) {
         console.log(err)
