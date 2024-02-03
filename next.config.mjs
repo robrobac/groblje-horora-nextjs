@@ -1,7 +1,7 @@
 // next.config.js
 const nextConfig = {
     images: {
-        domains: ['groblje-horora-nextjs.vercel.app/'], // Replace with your actual domain
+        domains: ['https://firebasestorage.googleapis.com/'], // Replace with your actual domain
     },
 };
 
