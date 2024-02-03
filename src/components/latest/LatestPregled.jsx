@@ -4,15 +4,6 @@ import Link from 'next/link';
 import { StandardBtn } from '../buttons/standardBtn/StandardBtn';
 import { getLatestPregled } from '@/lib/data/latestData';
 
-<<<<<<< HEAD
-// const getData = async () => {
-//     const res = await fetch(`${process.env.DOMAIN_URL}api/latestPregled`);
-//     if (!res.ok) {
-//         throw new Error(`Failed to fetch LatestQuad data: ${res.statusText}`);
-//     }
-//     return res.json();
-// }
-=======
 const getData = async () => {
     const res = await fetch(`${process.env.DOMAIN_URL}/api/latestPregled`);
     if (!res.ok) {
@@ -20,7 +11,6 @@ const getData = async () => {
     }
     return res.json();
 }
->>>>>>> parent of 2021dc6 (,)
 
 export const LatestPregled = async () => {
     const data = await getLatestPregled();

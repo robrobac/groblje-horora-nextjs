@@ -25,7 +25,6 @@ const getData = async () => {
 
 export const LatestRecenzija = async () => {
     const data = await getData();
-    const data2 = await getLatestRecenzija();
     // const shortDescription = await shortenDescription(data[0].movies[0].reviewContent)
 
     return (
