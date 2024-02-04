@@ -1,6 +1,8 @@
 import TitleSubtitle from "@/components/reviewsGallery/titleSubtitle/TitleSubtitle";
 import PostsFlex from "@/components/reviewsGallery/postsFlex/PostsFlex";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
     title: "Top 25 Preporuka",
     description: "Filmovi na ovoj top listi mijenjaju se kako dođe neki novi naslov na blogu koji zaslužuje jednaku pažnju ili ocjenu. Linkove na recenzije možete pronaći na Top 25 popisu.",
