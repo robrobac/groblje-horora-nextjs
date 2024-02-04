@@ -17,7 +17,6 @@ const getData = async () => {
 
 const Top25Page = async () => {
     const reviews = await getData();
-    console.log(reviews)
 
     return (
         <main className="reviewsContainer">
