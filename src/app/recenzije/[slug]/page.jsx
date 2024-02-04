@@ -12,7 +12,6 @@ function shortenStringTo30Words(str) {
     const words = cleanedStringWithoutTags.split(' ');
     const shortenedWords = words.slice(0, 30);
     const shortenedString = shortenedWords.join(' ');
-    // console.log(shortenedString);
     return shortenedString;
 }
 

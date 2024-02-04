@@ -1,0 +1,159 @@
+.postCardContainer {
+    flex-basis: 20%;
+    position: relative;
+    padding: var(--paddingM);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+
+    @media(max-width: 1024px) {
+        flex-basis: 33.33%;
+    }
+
+    @media(max-width: 768px) {
+        flex-basis: 50%;
+    }
+
+    @media(max-width: 425px) {
+        flex-basis: 100%;
+    }
+}
+
+.postCardDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+// POST DESCRIPTION STYLES
+.previewDetails {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+
+    .titleAndRating {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+
+    }
+}
+
+.postTitle {
+    display: inline-block;
+    width: fit-content;
+    font-size: var(--textL);
+    transition: .1s;
+
+    @media (hover: hover) {
+        &:hover {
+            color: var(--red);
+        }
+    }
+
+    span {
+        color: var(--white50);
+    }
+
+    @media (max-width: 425px) {
+        font-size: var(--textXXL);
+    }
+
+    @media (max-width: 320px) {
+        font-size: var(--textXL);
+    }
+}
+
+.postSubTitle {
+    font-size: var(--textS);
+    color: var(--white80);
+
+    span {
+        color: var(--white50);
+    }
+}
+
+.postDate {
+    font-size: var(--textS);
+    color: var(--white50);
+}
+
+// POST IMAGE STYLES
+
+.previewImage {
+    position: relative;
+    aspect-ratio: 20800 / 30513;
+    overflow: hidden;
+    border-radius: var(--radiusM);
+
+    @media (hover: hover) {
+        &:hover {
+            -webkit-box-shadow: 0px 0px 21px 1px #000000;
+            box-shadow: 0px 0px 21px 1px #000000;
+        }
+    }
+
+    .singleMovieImage {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: var(--radiusM);
+        background-color: var(--white15);
+    }
+}
+
+.quadImageContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    aspect-ratio: 20800 / 30513;
+    overflow: hidden;
+    border-radius: var(--radiusM);
+
+    @media (hover: hover) {
+        &:hover {
+            -webkit-box-shadow: 0px 0px 21px 1px #000000;
+            box-shadow: 0px 0px 21px 1px #000000;
+        }
+    }
+}
+
+.quadImage {
+    width: 50%;
+    height: 50%;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        background-color: var(--white15);
+    }
+
+    .image01 {
+
+        border-radius: var(--radiusM) 0 0 0;
+
+    }
+
+    .image02 {
+
+        border-radius: 0 var(--radiusM) 0 0;
+
+    }
+
+    .image03 {
+
+        border-radius: 0 0 0 var(--radiusM);
+
+    }
+
+    .image04 {
+        border-radius: 0 0 var(--radiusM) 0;
+    }
+}

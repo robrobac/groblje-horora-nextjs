@@ -90,3 +90,12 @@ a {
     text-decoration: none;
     color: inherit;
 }
+/* Class used in Top 25 preporuka, Top 20 smeca i Recenzije, drzi. Main element koji drzi sve na tim stranicama */
+
+.reviewsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    min-height: 100vh;
+}

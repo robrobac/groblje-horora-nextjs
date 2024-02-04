@@ -1,0 +1,24 @@
+.postsFlexContainer {
+    max-width: var(--widthDefault);
+    margin: 0 auto;
+}
+
+.postsFlexRow {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    width: var(--widthDefault);
+    row-gap: 50px;
+
+
+
+    @media(max-width: 1200px) {
+
+        max-width: var(--widthDefault);
+        width: 100vw;
+    }
+
+    @media(max-width: 425px) {
+        gap: 60px;
+    }
+}

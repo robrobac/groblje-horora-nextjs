@@ -14,7 +14,6 @@ const getData = async () => {
 
 export const LatestRecenzija = async () => {
     const data = await getData();
-    console.log(data[0].shortDescription)
 
     return (
         <>

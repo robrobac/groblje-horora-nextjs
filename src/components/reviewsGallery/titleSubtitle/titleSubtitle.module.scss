@@ -1,0 +1,16 @@
+.reviewsTitleContainer {
+    position: relative;
+    z-index: 85;
+    width: 100%;
+    max-width: var(--widthDefault);
+    padding: 0 var(--paddingM);
+
+    h1 {
+        font-size: var(--textXXXL);
+        line-height: calc(var(--textXXXL) * 1.5);
+    }
+
+    p {
+        max-width: var(--widthReading);
+    }
+}
