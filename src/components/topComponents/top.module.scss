@@ -1,0 +1,94 @@
+.topContainer {
+    padding: 0 var(--paddingM);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 50px;
+    width: 100%;
+    max-width: var(--widthReading);
+    margin: 100px 0;
+
+    .topInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    @media (max-width: 768px) {
+        flex-direction: column-reverse;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin: 50px 0;
+
+        &.reverse {
+            flex-direction: column-reverse;
+        }
+    }
+}
+
+.topTitle {
+    display: inline-block;
+    width: fit-content;
+    font-size: var(--textHUGE);
+    line-height: calc(var(--textHUGE) * 1.5);
+    transition: .1s;
+
+    @media (hover: hover) {
+        &:hover {
+            color: var(--red);
+        }
+    }
+
+    span {
+        color: var(--white50);
+    }
+
+    @media (max-width: 360px) {
+        font-size: var(--textXXL);
+        line-height: calc(var(--textXXL) * 1.5);
+    }
+
+    @media (max-width: 230px) {
+        font-size: var(--textXL);
+        line-height: calc(var(--textXL) * 1.5);
+    }
+}
+
+
+.topDescription {
+    font-size: var(--textL);
+    line-height: calc(var(--textL) * 1.5);
+    color: var(--white80);
+}
+
+.topImage {
+    min-width: 300px;
+    border-radius: var(--radiusM);
+    transition: .1s;
+
+    img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+
+        border-radius: var(--radiusM);
+    }
+
+    @media (hover: hover) {
+        &:hover {
+            -webkit-box-shadow: 0px 0px 21px 1px #000000;
+            box-shadow: 0px 0px 21px 1px #000000;
+        }
+    }
+
+    @media (max-width: 768px) {
+        max-width: 425px;
+        min-width: unset;
+
+        a {
+            display: flex;
+        }
+    }
+}
