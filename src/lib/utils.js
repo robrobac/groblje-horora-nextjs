@@ -15,3 +15,11 @@ export const formatMongoDate = (date) => {
     const formattedDate = format(newDate, 'dd.MM.yyyy')
     return formattedDate
 }
+
+export const getCountAll = async () => {
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/countAllReviews`);
+    if (!res.ok) {
+        throw new Error('Failed to fetch countAllReviews data');
+    }
+    return res.json();
+}

@@ -1,0 +1,80 @@
+.recenzijeHomeCoverContainer {
+    position: relative;
+    height: 400px;
+    padding: 0 var(--paddingM);
+    margin: 100px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: var(--widthDefault);
+
+    @media (max-width: 768px) {
+        height: unset;
+        gap: 20px;
+    }
+
+    .coverImage {
+        height: 100%;
+        object-fit: cover;
+        object-position: left;
+        border-radius: var(--radiusM);
+        -webkit-box-shadow: 0px 0px 19px -7px rgba(0, 0, 0, 1);
+        -moz-box-shadow: 0px 0px 19px -7px rgba(0, 0, 0, 1);
+        box-shadow: 0px 0px 19px -7px rgba(0, 0, 0, 1);
+
+        @media (max-width: 768px) {
+            height: 300px;
+        }
+    }
+
+    .coverContent {
+        width: 100%;
+        padding: 100px;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        align-items: flex-end;
+
+        h2 {
+            font-size: var(--textHUGE);
+            line-height: calc(var(--textHUGE) * 1.5);
+            transition: .1s;
+            text-shadow: 0px 0px 18px #141414;
+
+            @media (hover: hover) {
+                &:hover {
+                    color: var(--red);
+                }
+            }
+
+            @media (max-width: 360px) {
+                font-size: var(--textXXL);
+                line-height: calc(var(--textXXL) * 1.5);
+            }
+
+            @media (max-width: 230px) {
+                font-size: var(--textXL);
+                line-height: calc(var(--textXL) * 1.5);
+            }
+
+
+
+        }
+
+        @media (max-width: 768px) {
+            position: relative;
+            align-items: flex-start;
+            padding: 0;
+            gap: 20px;
+        }
+
+        a {
+            @media (max-width: 768px) {
+                align-items: flex-start;
+                width: 100%;
+            }
+        }
+    }
+}

@@ -3,9 +3,9 @@ import { StandardBtn } from '../buttons/standardBtn/StandardBtn'
 import topImage from '../../../public/images/groblje-horora-top25-image.webp';
 import Link from 'next/link';
 
+export default async function Top25() {
+    
 
-export default function Top25() {
-    console.log(topImage.src)
     return (
         <div className={styles.topContainer}>
             <div className={styles.topImage}>
