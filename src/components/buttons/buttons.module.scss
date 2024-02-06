@@ -68,9 +68,12 @@
     cursor: pointer;
     border-radius: var(--radiusS);
     font-size: var(--textS);
+    line-height: calc(var(--textS) * 1.5);
 
     span {
         display: none;
+        font-size: inherit;
+        line-height: inherit;
     }
 
     @media (hover: hover) {
@@ -96,6 +99,7 @@
 
     @media (max-width: 768px) {
         font-size: var(--textS);
+        line-height: calc(var(--textS) * 1.5);
     }
 }
 

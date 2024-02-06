@@ -1,4 +1,5 @@
 "use client"
+import { SORT_OPTIONS } from '@/lib/sortOptions';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react';
 
@@ -36,6 +37,33 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
     console.log('search: ', search)
 
 
+    useEffect(() => {
+        // Initialize new search parameters
+        const newSearchParams = new URLSearchParams(searchParams);
+
+        // Set default values if not present in the URL
+        if (!newSearchParams.has('page')) {
+            newSearchParams.set('page', '1');
+            setPage(1)
+        }
+
+        // Set default values if not present in the URL
+        if (!newSearchParams.has('sort')) {
+            newSearchParams.set('sort', initialSort);
+            setSort(initialSort)
+        }
+
+        // Set default values if not present in the URL
+        if (!newSearchParams.has('order')) {
+            newSearchParams.set('order', initialOrder);
+            setOrder(initialOrder)
+        }
+
+        // Update searchParams with default values if needed
+        router.push(pathname + '?' + newSearchParams.toString());
+    }, []); // Empty dependency array ensures the effect runs only once when the component mounts
+
+
     const fetchReviews = async () => {
         const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews?search=${search}&sort=${sort}&order=${order}&page=${page}&perPage=${perPage}&filter=${filter}`);
         const json = await res.json()
@@ -53,6 +81,21 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
     useEffect(() => {
         fetchReviews();
     }, [page, filter, sort, order, search]);
+
+
+    useEffect(() => {
+        const pageNumber = parseInt(searchParams.get('page'), 10) || 1;
+        const filterValue = searchParams.get('filter') || '';
+        const sortValue = searchParams.get('sort') || '';
+        const orderValue = searchParams.get('order') || '';
+        const searchValue = searchParams.get('search') || '';
+        setPage(pageNumber);
+        setFilter(filterValue);
+        setSort(sortValue)
+        setOrder(orderValue)
+        setSearch(searchValue)
+        
+    }, [searchParams.get('page'), searchParams.get('filter'), searchParams.get('sort'), searchParams.get('order'), searchParams.get('search')])
 
 
     const handlePageChange = (num) => {
@@ -113,6 +156,76 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
         }
     }
 
+    const handleSortAndOrder = (sortVal, orderVal) => {
+        if (sort === sortVal) {
+            if (orderVal === 'desc') {
+                setOrder('asc')
+                setPage(1)
+
+                // Create a new URLSearchParams object before modifying it
+                const newSearchParams = new URLSearchParams(searchParams);
+                // Update the 'page' parameter
+                newSearchParams.set('order', 'asc');
+                newSearchParams.set('page', 1);
+                newSearchParams.delete('search');
+                // Use setSearchParams to apply the changes
+                router.push(pathname + '?' + newSearchParams.toString());
+            }
+            if (orderVal === 'asc') {
+                setOrder('desc')
+                setPage(1)
+
+                // Create a new URLSearchParams object before modifying it
+                const newSearchParams = new URLSearchParams(searchParams);
+                // Update the 'page' parameter
+                newSearchParams.set('order', 'desc');
+                newSearchParams.set('page', 1);
+                newSearchParams.delete('search');
+                // Use setSearchParams to apply the changes
+                router.push(pathname + '?' + newSearchParams.toString());
+            }
+        } else {
+            setSort(sortVal)
+
+            // Create a new URLSearchParams object before modifying it
+            const newSearchParams = new URLSearchParams(searchParams);
+            newSearchParams.set('sort', sortVal);
+            newSearchParams.delete('search');
+
+            if (sortVal === SORT_OPTIONS.TITLE) {
+                setOrder('asc')
+                setPage(1)
+
+                // Update the 'page' parameter
+                newSearchParams.set('order', 'asc');
+                newSearchParams.set('page', 1);
+                // Use setSearchParams to apply the changes
+                router.push(pathname + '?' + newSearchParams.toString());
+                return
+            }
+            if (sortVal === SORT_OPTIONS.CATEGORY) {
+                setOrder('asc')
+                setPage(1)
+
+                // Update the 'page' parameter
+                newSearchParams.set('order', 'asc');
+                newSearchParams.set('page', 1);
+                // Use setSearchParams to apply the changes
+                router.push(pathname + '?' + newSearchParams.toString());
+                return
+            }
+            setOrder('desc')
+            setPage(1)
+
+            // Update the 'page' parameter
+            newSearchParams.set('order', 'desc');
+            newSearchParams.set('page', 1);
+            // Use setSearchParams to apply the changes
+            router.push(pathname + '?' + newSearchParams.toString());
+        }
+
+    }
+
     return {
         reviews,
         page,
@@ -121,6 +234,9 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
         search,
         handleSearch,
         filter,
-        handleFilter
+        handleFilter,
+        sort,
+        order,
+        handleSortAndOrder
     }
 }

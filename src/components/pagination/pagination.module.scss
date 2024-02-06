@@ -10,6 +10,7 @@
     width: 48px;
     height: 48px;
     font-size: var(--textL);
+    line-height: calc(var(--textL) * 1.5);
     background-color: transparent;
     color: var(--white);
     border-radius: var(--radiusM);
@@ -44,6 +45,7 @@
 
     p {
         font-size: var(--textL);
+        line-height: calc(var(--textL) * 1.5);
         color: var(--white80);
 
 
@@ -62,6 +64,7 @@
     border: unset;
     background-color: var(--white02);
     font-size: var(--textL);
+    line-height: calc(var(--textL) * 1.4);
     font-weight: 800;
     color: var(--white80);
     text-align: right;
