@@ -12,7 +12,7 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
 
     const router = useRouter();
     const pathname = usePathname();
-    const searchParams = useSearchParams();
+    var searchParams = useSearchParams();
 
     // Page States and Params
     const urlPage = searchParams.get('page');
@@ -67,10 +67,34 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
         router.push(pathname + '?' + newSearchParams.toString());
     }
 
+    const handleSearch = (value) => {
+        setSearch(value)
+        setPage(1)
+
+        // Create a new URLSearchParams object before modifying it
+        const newSearchParams = new URLSearchParams(searchParams);
+
+        if (value) {
+            // Update the 'page' parameter
+            newSearchParams.set('search', value);
+            newSearchParams.set('page', 1);
+        }
+        if (!value) {
+            // Update the 'page' parameter
+            newSearchParams.delete('search');
+            newSearchParams.set('page', 1);
+        }
+        // Use setSearchParams to apply the changes
+        router.push(pathname + '?' + newSearchParams.toString());
+
+    }
+
     return {
         reviews,
         page,
         totalPages,
-        handlePageChange
+        handlePageChange,
+        search,
+        handleSearch
     }
 }
