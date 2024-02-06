@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 export default function useFetchReviewsWithParams(pageName, initialSort, initialOrder, initialPerPage) {
     console.log('----------')
 
+    const [loading, setLoading] = useState(true);
     const [reviews, setReviews] = useState([]);
     const [totalItems, setTotalItems] = useState()
     const [totalPages, setTotalPages] = useState([])
@@ -63,19 +64,30 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
         router.push(pathname + '?' + newSearchParams.toString());
     }, []); // Empty dependency array ensures the effect runs only once when the component mounts
 
-
+    
     const fetchReviews = async () => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews?search=${search}&sort=${sort}&order=${order}&page=${page}&perPage=${perPage}&filter=${filter}`);
-        const json = await res.json()
-        if (!res.ok) {
-            throw new Error('Failed to fetch LatestQuad data');
+        if (search) {
+            setLoading(false);
+        } else  {
+            setLoading(true);
         }
-        if (res.ok) {
-            setReviews(json.reviews);
-            const pagesArray = Array.from({ length: json.totalPages }, (_, index) => index + 1);
-            setTotalPages(pagesArray);
-            setTotalItems(json.totalItems)
-        }
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews?search=${search}&sort=${sort}&order=${order}&page=${page}&perPage=${perPage}&filter=${filter}`);
+            const json = await res.json()
+            if (!res.ok) {
+                throw new Error('Failed to fetch Reviews data');
+            }
+            if (res.ok) {
+                setReviews(json.reviews);
+                const pagesArray = Array.from({ length: json.totalPages }, (_, index) => index + 1);
+                setTotalPages(pagesArray);
+                setTotalItems(json.totalItems)
+            }
+        } catch (err) {
+            console.error('Error fetching reviews:', err.message);
+        } finally {
+            setLoading(false);
+        }   
     }
 
     useEffect(() => {
@@ -237,6 +249,7 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
         handleFilter,
         sort,
         order,
-        handleSortAndOrder
+        handleSortAndOrder,
+        loading
     }
 }

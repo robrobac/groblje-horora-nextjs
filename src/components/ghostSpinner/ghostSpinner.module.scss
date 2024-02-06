@@ -1,0 +1,24 @@
+.spinnerContainer {
+    animation: rotate-center 1.3s ease-in-out 0s infinite normal none;
+
+    svg {
+        // height: 50px;
+        // width: 50px;
+
+        path {
+            fill: var(--white);
+        }
+    }
+
+
+}
+
+@keyframes rotate-center {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
