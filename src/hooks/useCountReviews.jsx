@@ -7,7 +7,7 @@ export default function useCountReviews() {
     useEffect(() => {
         const countReviews = async () => {
             try {
-                const response = await fetch(`${process.env.DOMAIN_URL}/api/countAllReviews`);
+                const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/countAllReviews`);
                 const json = await response.json();
 
                 if (response.ok) {

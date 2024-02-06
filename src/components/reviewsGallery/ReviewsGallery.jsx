@@ -16,13 +16,15 @@ export default function ReviewsGallery({searchParams}) {
         totalPages,
         handlePageChange,
         search,
-        handleSearch
+        handleSearch,
+        filter,
+        handleFilter
     } = useFetchReviewsWithParams('recenzije', SORT_OPTIONS.CREATED, 'desc', 30)
 
     console.log(reviews)
     return (
         <>
-            <Search controls={true} handleSearch={handleSearch} search={search}/>
+            <Search controls={true} handleSearch={handleSearch} search={search} handleFilter={handleFilter} filter={filter}/>
             <PostsFlex posts={reviews}/>
             <Pagination currentPage={page} totalPages={totalPages} handlePageChange={handlePageChange}/>
         </>
