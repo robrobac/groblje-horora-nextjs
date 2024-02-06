@@ -37,7 +37,7 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
 
 
     const fetchReviews = async () => {
-        const res = await fetch(`http://localhost:3000/api/reviews?search=${search}&sort=${sort}&order=${order}&page=${page}&perPage=${perPage}&filter=${filter}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews?search=${search}&sort=${sort}&order=${order}&page=${page}&perPage=${perPage}&filter=${filter}`);
         const json = await res.json()
         if (!res.ok) {
             throw new Error('Failed to fetch LatestQuad data');
