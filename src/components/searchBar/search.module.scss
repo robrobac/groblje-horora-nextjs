@@ -1,0 +1,65 @@
+.searchComp {
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 var(--paddingM);
+    max-width: var(--widthDefault);
+    width: 100%;
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+}
+
+.searchIcon {
+    position: absolute;
+    display: flex;
+    padding: 10px;
+
+    svg {
+        fill: var(--white50);
+    }
+}
+
+.searchBar {
+    border: 1px solid var(--white50);
+    background-color: transparent;
+    font-size: 1rem;
+    color: var(--white);
+    padding: 10px;
+    padding-left: 40px;
+    width: 100%;
+    border-radius: var(--radiusS);
+
+    &:focus {
+        border: 1px solid var(--white);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: var(--white25);
+    }
+}
+
+.searchControls {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.sortControl {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-content: flex-start
+}
+
+.filterControl {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-content: flex-start
+}

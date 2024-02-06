@@ -6,7 +6,7 @@ export default function postImage({post}) {
     return (
         <Link href={`/recenzije/${post?.slug}`} target='_blank'>
             {post?.movies.length === 4 ? (
-                <div className={styles.QuadImageContainer}>
+                <div className={styles.quadImageContainer}>
                     <div className={styles.quadImage}>
                         <img className={styles.image01} src={post.movies[0].coverImage} alt='movie1-cover'></img>
                     </div>

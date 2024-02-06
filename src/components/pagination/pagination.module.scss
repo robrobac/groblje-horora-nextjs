@@ -1,0 +1,84 @@
+.styledPagination {
+    display: flex;
+    max-width: 425px;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 var(--paddingM);
+}
+
+.paginationButton {
+    width: 48px;
+    height: 48px;
+    font-size: var(--textL);
+    background-color: transparent;
+    color: var(--white);
+    border-radius: var(--radiusM);
+    border: 1px solid var(--white50);
+    cursor: pointer;
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: var(--white25);
+        }
+    }
+
+    &.disabled {
+        opacity: .3;
+        cursor: default;
+
+        &:hover {
+            background-color: unset;
+        }
+    }
+}
+
+.pageForm {
+    height: 48px;
+    width: 140px;
+    border: 1px solid var(--white15);
+    border-radius: var(--radiusM);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        font-size: var(--textL);
+        color: var(--white80);
+
+
+        &:last-child {
+            width: 42%;
+            margin: 0 8px;
+            flex: 1;
+        }
+    }
+}
+
+.pageInput {
+    width: 42%;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    border: unset;
+    background-color: var(--white02);
+    font-size: var(--textL);
+    font-weight: 800;
+    color: var(--white80);
+    text-align: right;
+    border: unset;
+    margin: 0 6px;
+    padding: 3px 5px;
+    border-radius: var(--radiusS);
+
+
+    &:focus {
+        border: unset;
+        outline: none;
+    }
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
