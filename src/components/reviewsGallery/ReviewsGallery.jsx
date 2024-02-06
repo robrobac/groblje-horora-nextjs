@@ -33,7 +33,9 @@ export default function ReviewsGallery() {
             {loading ? (<GhostSpinner />) : (
                 <>
                     <PostsFlex posts={reviews} loading={loading}/>
-                    <Pagination currentPage={page} totalPages={totalPages} handlePageChange={handlePageChange}/>
+                    {reviews.length !== 0 ? 
+                        <Pagination currentPage={page} totalPages={totalPages} handlePageChange={handlePageChange}/>
+                    : ""} 
                 </>
             )}
         </>

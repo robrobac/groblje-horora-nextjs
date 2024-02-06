@@ -66,11 +66,7 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
 
     
     const fetchReviews = async () => {
-        if (search) {
-            setLoading(false);
-        } else  {
-            setLoading(true);
-        }
+        setLoading(true);
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews?search=${search}&sort=${sort}&order=${order}&page=${page}&perPage=${perPage}&filter=${filter}`);
             const json = await res.json()
