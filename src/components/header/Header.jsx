@@ -6,11 +6,14 @@ import Link from "next/link";
 import { XIcon } from "./svg/XIcon";
 import { HambIcon } from "./svg/HambIcon";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import { handleLastVisitedURL } from "@/lib/utils";
 
 
 export const Header = () => {
     const currentPath = usePathname();
+    const searchParams = useSearchParams();
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
@@ -41,7 +44,7 @@ export const Header = () => {
                     ) : (
                         <p className={styles.navAuth}>
                             Imaš komentar?
-                            <Link href='/prijava' className={styles.authButton}>
+                            <Link href='/prijava' className={styles.authButton} onClick={(e) => handleLastVisitedURL(currentPath, searchParams)}>
                                 Prijavi se
                             </Link>
                         </p>

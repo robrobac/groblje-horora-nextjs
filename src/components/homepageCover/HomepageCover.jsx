@@ -10,7 +10,7 @@ export const HomepageCover = () => {
         <div className={styles.coverImage}>
             <Image width={2560} height={800} src={coverImage} alt='tree silhouette on the left side of the screen'/>
             <div className={styles.coverImageTrees}>
-                <Image width={428} height={800} src={leftTree} alt='tree silhouette on the left side of the screen'/>
+                <Image width={428} height={800} src={leftTree} alt='main background, a graveyard silhouette'/>
                 <Image width={428} height={800} src={rightTree} alt='tree silhouette on the right side of the screen'/>
             </div>
         </div>

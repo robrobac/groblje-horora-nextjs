@@ -22,6 +22,7 @@
         --white02: #ededed05;
 
     /*   BLACK VARIANTS */
+        --background: #161616;
         --black: #141414;
         --black90: #141414E6;
         --black80: #141414CC;
@@ -98,4 +99,51 @@ a {
     align-items: center;
     gap: 50px;
     min-height: 100vh;
+}
+
+.authContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+
+/* INPUT FIELDS ETC... */
+
+.inputContainer {
+    width: 100%;
+    display: flex; 
+    flex-direction: column;
+}
+.inputLabel {
+    color: var(--white80);
+    padding-left: 10px;
+    font-size: .9rem;
+    font-weight: 600;
+
+    span.error {
+        color: red;
+    }
+}
+.inputField {
+    padding: 10px 10px;
+    border: 1px solid var(--white15);
+    border-radius: var(--radiusS);
+    background-color: transparent;
+    font-size: var(--textM);
+    color: var(--white80);
+
+    &.error {
+        border: 1px solid red;
+    }
+
+    &:focus {
+        border: 1px solid var(--white50);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: var(--white15);
+    }
 }

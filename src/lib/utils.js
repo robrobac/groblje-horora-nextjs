@@ -23,3 +23,13 @@ export const getCountAll = async (env) => {
     }
     return res.json();
 }
+
+export const handleLastVisitedURL = (pathname, searchParams) => {
+    var path = pathname
+    if (searchParams.size === 0) {
+        path = pathname
+    } else {
+        path = pathname + '?' + searchParams.toString()
+    }
+    localStorage.setItem('lastVisitedUrl', path);
+}

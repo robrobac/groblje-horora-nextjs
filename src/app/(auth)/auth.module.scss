@@ -1,0 +1,123 @@
+.authPage {
+    position: absolute;
+    top: 0;
+    padding: 50px var(--paddingM);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    width: 100vw;
+    min-height: 100vh;
+    z-index: 1500;
+    background-position: center;
+    background-size: cover;
+
+    svg {
+        scale: 2;
+        filter: drop-shadow(0px 0px 25px #000000);
+        fill: var(--white);
+    }
+}
+
+.authContainer {
+    background-color: var(--background);
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 0px 24px 1px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 0px 24px 1px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    opacity: .9;
+
+    p {
+        text-align: center;
+
+        a {
+            color: var(--white);
+        }
+    }
+
+    .error {
+        font-size: .8rem;
+        font-weight: 600;
+        color: red;
+    }
+
+    p:last-of-type {
+        color: #ffffff60;
+    }
+
+    p.separator {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        font-size: var(--textM);
+        font-weight: 200;
+
+        &::before,
+        &::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #ffffff60;
+        }
+
+        &:not(empty)::before {
+            margin-right: 1rem;
+        }
+
+        &:not(empty)::after {
+            margin-left: 1rem;
+        }
+    }
+}
+
+.authForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.googleLoginButton {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 10px 16px 10px 16px;
+    border: none;
+    border-radius: 3px;
+    background-color: #ffffff10;
+    color: var(--white50);
+    font-size: 14px;
+
+    svg {
+        scale: 1.3;
+    }
+
+    @media (hover: hover) {
+        &:hover {
+            -webkit-box-shadow: 0px 0px 24px 1px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    &:focus {
+        outline: none;
+        -webkit-box-shadow: 0px 0px 24px 1px rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    &:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+}
