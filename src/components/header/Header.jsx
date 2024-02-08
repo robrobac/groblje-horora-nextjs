@@ -1,21 +1,19 @@
-"use client"
+'use client'
 import { Links } from "./links/Links";
 import styles from '@/components/header/header.module.scss';
 import { Logo } from "./svg/Logo";
 import Link from "next/link";
 import { XIcon } from "./svg/XIcon";
 import { HambIcon } from "./svg/HambIcon";
-import { useEffect, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { handleLastVisitedURL } from "@/lib/utils";
+import HeaderAuth from "./headerAuth/HeaderAuth";
 
 
 export const Header = () => {
-    const currentPath = usePathname();
-    const searchParams = useSearchParams();
-
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    const currentPath = usePathname();
     useEffect(() => {
         setIsMenuOpen(false);
     }, [currentPath])
@@ -42,12 +40,9 @@ export const Header = () => {
                             </button>
                         </p>
                     ) : (
-                        <p className={styles.navAuth}>
-                            Imaš komentar?
-                            <Link href='/prijava' className={styles.authButton} onClick={(e) => handleLastVisitedURL(currentPath, searchParams)}>
-                                Prijavi se
-                            </Link>
-                        </p>
+                        <Suspense>
+                            <HeaderAuth />
+                        </Suspense>
                     )}
                 </nav>
                 <div className={`${styles.menuIcon} ${isMenuOpen && styles.isOpen}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
