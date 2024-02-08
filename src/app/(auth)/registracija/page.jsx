@@ -78,19 +78,23 @@ const RegistracijaPage = () => {
             await sendEmailVerification(auth.currentUser);
             console.log('verification email sent')
 
-            // Redirect to the previous page stored in local storage
-            const backURL = localStorage.getItem('lastVisitedUrl');
-            localStorage.removeItem('lastVisitedUrl');
-
+            // Redirect to the previous page stored in session storage
+            
+            console.log('Registration Successful')
+            const backURL = sessionStorage.getItem('lastVisitedUrl');
             if (backURL) {
+                sessionStorage.removeItem('lastVisitedUrl');
+                console.log('Navigating to last visited URL')
                 router.push(backURL)
             } else {
                 setEmail('')
                 setUsername('')
                 setPassword('')
+                console.log('Navigating to Login page')
+                router.push('/prijava')
             }
             
-            console.log('Registration Successful, Navigating')
+            
 
 
         } catch(err) {
@@ -126,7 +130,7 @@ const RegistracijaPage = () => {
                         </div>
                         <div className='inputContainer'>
                             <label className='inputLabel' htmlFor='username'>Username</label>
-                            <input className='inputField' id='username' name='username' type='text' value={username} onChange={(e) => setUsername(e.target.value)}/>
+                            <input className='inputField' id='username' name='username' type='text' maxLength="15" value={username} onChange={(e) => setUsername(e.target.value)}/>
                         </div>
                         <div className='inputContainer'>
                             <label className='inputLabel' htmlFor='password'>Password</label>

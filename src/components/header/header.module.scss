@@ -54,7 +54,12 @@
         align-items: center;
 
         .navAuth {
+            font-size: var(--textS);
+            line-height: calc(var(--textS) * 1.5);
+
             .authButton {
+                font-size: inherit;
+                line-height: inherit;
                 cursor: pointer;
                 padding: 5px 10px;
                 margin-left: 8px;

@@ -18,6 +18,11 @@ export async function POST(request, response) {
             if (existingUser) {
                 errorMessages.push('Username already exists');
             }
+
+            if (username.length > 15 || username.length < 3) {
+                errorMessages.push('Username requires 3-15 characters');
+            }
+
         }
 
         if (!email) {

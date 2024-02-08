@@ -31,5 +31,5 @@ export const handleLastVisitedURL = (pathname, searchParams) => {
     } else {
         path = pathname + '?' + searchParams.toString()
     }
-    localStorage.setItem('lastVisitedUrl', path);
+    sessionStorage.setItem('lastVisitedUrl', path);
 }

@@ -18,9 +18,6 @@ export const Header = () => {
         setIsMenuOpen(false);
     }, [currentPath])
 
-
-    const session = false;
-    const isAdmin = false;
     return (
         <>
         <header className={styles.header}>
@@ -32,18 +29,9 @@ export const Header = () => {
                 </div>
                 <nav className={`${styles.mainNav} ${isMenuOpen && styles.isOpen}`}>
                     <Links />
-                    {session ? (
-                        <p className={styles.navAuth}>
-                            Robac
-                            <button className={styles.authButton}>
-                                Odjavi se
-                            </button>
-                        </p>
-                    ) : (
-                        <Suspense>
-                            <HeaderAuth />
-                        </Suspense>
-                    )}
+                    <Suspense>
+                        <HeaderAuth />
+                    </Suspense>
                 </nav>
                 <div className={`${styles.menuIcon} ${isMenuOpen && styles.isOpen}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     {isMenuOpen ? (

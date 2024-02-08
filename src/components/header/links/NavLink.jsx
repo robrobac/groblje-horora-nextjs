@@ -11,7 +11,7 @@ export const NavLink = ({link}) => {
     return (
             <Link
             href={link.path}
-            className={`${styles.navLink} ${currentPath === link.path && styles.active}`}
+            className={`${styles.navLink} ${currentPath === link.activeLink && styles.active}`}
             >
                 {link.name}
             </Link>
