@@ -9,7 +9,7 @@ export default function useAuth() {
 
     useEffect(() => {
             const getMongoUser = async () => {
-                if (user.email) {
+                if (user?.email) {
                     const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/users/${user.email}`, {
                         method: 'GET'
                     })
