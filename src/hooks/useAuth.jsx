@@ -14,7 +14,11 @@ export default function useAuth() {
                     const json = await response.json()
 
                     if (!response.ok) {
-                        console.log('error fetching mongo user', json)
+                        console.log('error fetching mongo user, trying again...', json)
+
+                        const secondResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/users/${user.email}`)
+                        const json = await secondResponse.json()
+                        setMongoUser(json)
                         return
                     }
                     setMongoUser(json)
