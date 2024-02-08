@@ -37,9 +37,19 @@
     p {
         text-align: center;
 
-        a {
+        a,
+        span {
             color: var(--white);
+            cursor: pointer;
+
+            @media (hover: hover) {
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
         }
+
+
     }
 
     .error {

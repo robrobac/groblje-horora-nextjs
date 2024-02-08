@@ -94,9 +94,7 @@ const RegistracijaPage = () => {
                 router.push('/prijava')
             }
             
-            
-
-
+        
         } catch(err) {
             console.log(err);
 
@@ -142,7 +140,7 @@ const RegistracijaPage = () => {
                     <button className={styles.googleLoginButton} type="button" disabled>
                         <GoogleIcon /> Sign in with Google
                     </button> */}
-                    <p>Već imate račun? <Link href='/login'>Prijavite se</Link></p>
+                    <p>Već imate račun? <Link href='/prijava'>Prijavite se</Link></p>
                 </div>
             </div>
         </main>

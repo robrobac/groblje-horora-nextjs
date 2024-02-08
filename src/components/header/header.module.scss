@@ -63,21 +63,32 @@
                 cursor: pointer;
                 padding: 5px 10px;
                 margin-left: 8px;
-                border: 1px solid var(--white);
+                border: none;
                 border-radius: var(--radiusS);
-                background-color: var(--black);
+                background-color: var(--red);
                 color: var(--white);
                 transition: all 0.1s ease-in-out;
+
+                &.logoutButton {
+                    background-color: var(--black);
+                    border: 1px solid var(--white);
+                }
 
                 @media (hover: hover) {
                     &:hover {
                         background-color: var(--red);
                         color: var(--white);
                         border-radius: var(--radiusL);
-                        border: 1px solid var(--red);
+                        border: none;
+                    }
+
+                    &.logoutButton {
+                        background-color: var(--black);
+                        border: 1px solid var(--white);
                     }
                 }
             }
+
         }
 
         .navRoutes {
