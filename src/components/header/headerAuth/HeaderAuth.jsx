@@ -3,6 +3,8 @@ import styles from '@/components/header/header.module.scss';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react'
+import { auth } from '@/lib/firebase/config';
+import useAuth from '@/hooks/useAuth';
 
 export default function HeaderAuth() {
     const currentPath = usePathname();
@@ -11,12 +13,14 @@ export default function HeaderAuth() {
 
     const isLoggedIn = false;
 
+    const { firebaseUser, mongoUser, isLoadingUser, logout} = useAuth()
+
     const handleAuthButton = () => {
-        if (isLoggedIn) {
-            // Logout functionality
+        if (firebaseUser) {
+            logout()
         }
 
-        if (!isLoggedIn) {
+        if (!firebaseUser) {
             handleLastVisitedURL(currentPath, searchParams);
             router.push('/prijava');
         }
@@ -26,9 +30,9 @@ export default function HeaderAuth() {
     return (
 
         <p className={styles.navAuth}>
-            {isLoggedIn ? "Robac" : "Imaš komentar?"}
+            {firebaseUser ? mongoUser?.username : "Imaš komentar?"}
             <button className={styles.authButton} onClick={handleAuthButton}>
-                {isLoggedIn ? "Odjavi se" : "Prijavi se"}
+                {firebaseUser ? "Odjavi se" : "Prijavi se"}
             </button>
         </p>
 

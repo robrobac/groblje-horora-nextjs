@@ -28,9 +28,19 @@ export async function DELETE(request, { params }) {
 
 export async function GET(request, { params }) {
     const { email } = params
-    console.log(email)
-    return new NextResponse(JSON.stringify(email), {
-        status: 200
-    })
-
+    try {
+        const user = await userModel.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } })
+        if (!user) {
+            return new NextResponse(JSON.stringify({ error: 'No such user' }), {
+                status: 404
+            })
+        }
+        return new NextResponse(JSON.stringify(user), {
+            status: 200
+        })
+    } catch (err) {
+        return new NextResponse(JSON.stringify({ error: err.message }), {
+            status: 500
+        })
+    }
 }
