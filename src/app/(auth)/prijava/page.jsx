@@ -1,23 +1,20 @@
 "use client"
 import styles from '@/app/(auth)/auth.module.scss';
 import { LoadingBtn } from '@/components/buttons/loadingBtn';
-import { StandardBtn } from '@/components/buttons/standardBtn/StandardBtn';
 import { Logo } from '@/components/header/svg/Logo';
-import GoogleIcon from '@/components/svgComponents/GoogleIcon';
 import { auth } from '@/lib/firebase/config';
 import background from '../../../../public/images/groblje-horora-bg-image.jpg';
-import { sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useAuth from '@/hooks/useAuth';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 
 const PrijavaPage = () => {
     const router = useRouter();
-    const searchParams = useSearchParams()
 
-    const { firebaseUser, mongoUser, isLoadingUser, logout} = useAuth()
+    const { firebaseUser } = useAuth()
 
     const [loggingIn, setLoggingIn] = useState(false)
 

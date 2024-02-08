@@ -1,17 +1,13 @@
 import { handleLastVisitedURL } from '@/lib/utils';
 import styles from '@/components/header/header.module.scss';
-import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react'
-import { auth } from '@/lib/firebase/config';
 import useAuth, { logout } from '@/hooks/useAuth';
 
 export default function HeaderAuth() {
     const currentPath = usePathname();
     const searchParams = useSearchParams()
     const router = useRouter();
-
-    const isLoggedIn = false;
 
     const { user, mongoUser } = useAuth()
     console.log(user, mongoUser)

@@ -1,6 +1,6 @@
 import { auth } from "@/lib/firebase/config"
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { onAuthStateChanged, signOut } from "firebase/auth"
+import { signOut } from "firebase/auth"
 import { useEffect, useState } from "react"
 
 export default function useAuth() {

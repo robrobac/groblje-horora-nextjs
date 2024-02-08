@@ -2,7 +2,6 @@
 import styles from '@/app/(auth)/auth.module.scss';
 import { LoadingBtn } from '@/components/buttons/loadingBtn';
 import { Logo } from '@/components/header/svg/Logo';
-import GoogleIcon from '@/components/svgComponents/GoogleIcon';
 import { auth } from '@/lib/firebase/config';
 import Link from 'next/link';
 import background from '../../../../public/images/groblje-horora-bg-image.jpg';
