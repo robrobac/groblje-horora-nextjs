@@ -11,6 +11,7 @@ export const GET = async (request) => {
     const perPage = request.nextUrl.searchParams.get('perPage');
     const filter = request.nextUrl.searchParams.get('filter');
     console.log(sort, order, search, page, perPage, filter)
+    console.log(request.nextUrl)
 
     const getOrder = (orderBy) => {
         if (orderBy === 'desc') {
