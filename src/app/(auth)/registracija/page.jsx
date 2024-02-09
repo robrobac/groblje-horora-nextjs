@@ -25,6 +25,15 @@ const RegistracijaPage = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         console.log('Register Form Submitted')
+
+        const formattedEmail = email.replace(/\s/g, '').trim()
+        setEmail(formattedEmail)
+        const formattedUsername = username.replace(/\s/g, '')
+        setUsername(formattedUsername)
+        const formattedPassword = password.replace(/\s/g, '')
+        setPassword(formattedPassword)
+        console.log(formattedEmail)
+        console.log('strings formatted, no empty spaces allowed.')
         setCreatingUser(true)
         setErrors([])
         try {
