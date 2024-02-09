@@ -22,13 +22,12 @@ export async function POST(request, response) {
             if (username.length > 15 || username.length < 3) {
                 errorMessages.push('Username requires 3-15 characters');
             }
-
         }
 
         if (!email) {
             errorMessages.push('Invalid Email');
         } else {
-            const existingEmail = await userModel.findOne({ email });
+            const existingEmail = await userModel.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } })
 
             if (existingEmail) {
                 errorMessages.push('Email already exists');
