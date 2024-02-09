@@ -80,18 +80,24 @@ const RegistracijaPage = () => {
             // Redirect to the previous page stored in session storage
             
             console.log('Registration Successful')
-            const backURL = sessionStorage.getItem('lastVisitedUrl');
-            if (backURL) {
-                sessionStorage.removeItem('lastVisitedUrl');
-                console.log('Navigating to last visited URL')
-                router.push(backURL)
-            } else {
-                setEmail('')
-                setUsername('')
-                setPassword('')
-                console.log('Navigating to Login page')
-                router.push('/prijava')
-            }
+            // const backURL = sessionStorage.getItem('lastVisitedUrl');
+            // if (backURL) {
+            //     sessionStorage.removeItem('lastVisitedUrl');
+            //     console.log('Navigating to last visited URL')
+            //     router.push(backURL)
+            // } else {
+            //     setEmail('')
+            //     setUsername('')
+            //     setPassword('')
+            //     console.log('Navigating to Login page')
+            //     router.push('/prijava')
+            // }
+
+            setEmail('')
+            setUsername('')
+            setPassword('')
+            console.log('Navigating to Login page')
+            router.push('/prijava')
             
         
         } catch(err) {

@@ -6,7 +6,6 @@ import { useEffect, useState } from "react"
 export default function useAuth() {
     const [user, loading, error] = useAuthState(auth)
     const [mongoUser, setMongoUser] = useState(null)
-    const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
             const getMongoUser = async () => {

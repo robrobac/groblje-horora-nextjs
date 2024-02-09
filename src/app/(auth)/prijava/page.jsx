@@ -6,8 +6,8 @@ import { auth } from '@/lib/firebase/config';
 import background from '../../../../public/images/groblje-horora-bg-image.jpg';
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 import Link from 'next/link';
-import { useState } from 'react';
-import useAuth from '@/hooks/useAuth';
+import { useEffect, useState } from 'react';
+import useAuth, { logout } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 
 
@@ -24,6 +24,13 @@ const PrijavaPage = () => {
     const [error, setError] = useState('')
 
     const [forgotPassword, setForgotPassword] = useState(false)
+
+    useEffect(() => {
+        if (auth.currentUser?.emailVerified === false) {
+            logout()
+            setError('Email nije verificiran')
+        }
+    }, [])
 
     // Handle login form submission
     const handleLogin = async (e) => {
