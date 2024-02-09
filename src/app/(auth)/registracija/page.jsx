@@ -27,12 +27,12 @@ const RegistracijaPage = () => {
         console.log('Register Form Submitted')
 
         const formattedEmail = email.replace(/\s/g, '').trim()
-        setEmail(formattedEmail)
+        // setEmail(formattedEmail)
         const formattedUsername = username.replace(/\s/g, '')
-        setUsername(formattedUsername)
+        // setUsername(formattedUsername)
         const formattedPassword = password.replace(/\s/g, '')
         setPassword(formattedPassword)
-        console.log(formattedEmail)
+        // console.log(formattedEmail)
         console.log('strings formatted, no empty spaces allowed.')
         setCreatingUser(true)
         setErrors([])
@@ -46,7 +46,7 @@ const RegistracijaPage = () => {
             });
             const validationJson = await validation.json();
             if (!validation.ok) {
-                console.log(validationJson)
+                // console.log(validationJson)
                 setErrors(validationJson.errorMessages)
                 return
             }

@@ -128,7 +128,7 @@ const PrijavaPage = ({searchParams}) => {
 
     const handleResendVerification = async () => {
         setSendingVerification(true);
-        console.log(verficationAuthData);
+        // console.log(verficationAuthData);
         setSuccess('');
         setError('')
         try {

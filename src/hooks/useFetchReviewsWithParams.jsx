@@ -19,23 +19,23 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
     // Page States and Params
     const urlPage = searchParams.get('page');
     const [page, setPage] = useState(urlPage ? parseInt(urlPage) : 1);
-    console.log('page: ', page)
+    // console.log('page: ', page)
 
     const urlSort = searchParams.get('sort');
     const [sort, setSort] = useState(urlSort ? urlSort : initialSort)
-    console.log('sort: ', sort)
+    // console.log('sort: ', sort)
 
     const urlOrder = searchParams.get('order');
     const [order, setOrder] = useState(urlOrder ? urlOrder : initialOrder)
-    console.log('order: ', order)
+    // console.log('order: ', order)
 
     const urlFilter = searchParams.get('filter')
     const [filter, setFilter] = useState(urlFilter ? urlFilter : '')
-    console.log('filter: ', filter)
+    // console.log('filter: ', filter)
 
     const urlSearch = searchParams.get('search')
     const [search, setSearch] = useState(urlSearch ? urlSearch : '')
-    console.log('search: ', search)
+    // console.log('search: ', search)
 
 
     useEffect(() => {
@@ -107,7 +107,6 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
 
 
     const handlePageChange = (num) => {
-        console.log("dadadada")
         setPage(num)
         // Create a new URLSearchParams object before modifying it
         const newSearchParams = new URLSearchParams(searchParams);

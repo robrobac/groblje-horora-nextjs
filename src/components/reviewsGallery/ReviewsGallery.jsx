@@ -26,7 +26,6 @@ export default function ReviewsGallery() {
         loading
     } = useFetchReviewsWithParams('recenzije', SORT_OPTIONS.CREATED, 'desc', 30)
 
-    console.log(reviews)
     return (
         <>
             <Search controls={true} handleSearch={handleSearch} search={search} handleFilter={handleFilter} filter={filter} handleSortAndOrder={handleSortAndOrder} sort={sort} order={order}/>
