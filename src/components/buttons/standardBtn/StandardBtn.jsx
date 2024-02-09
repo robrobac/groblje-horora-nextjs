@@ -19,6 +19,14 @@ export const StandardBtn = ({path, content, type, span, newTab}) => {
         )
     }
 
+    if (type === 'fit-content') {
+        return (
+            <Link style={{width: 'fit-content'}} href={path} target={newTab ? '_blank' : '_self'}>
+                <button className={styles.button}>{content} <span>{span}</span></button>
+            </Link>
+        )
+    }
+
     else {
         return (
             <Link style={{width: '100%'}} href={path} target={newTab ? '_blank' : '_self'}>

@@ -1,4 +1,5 @@
 import styles from "@/app/recenzije/page.module.scss";
+import NewPostButtons from "@/components/newPostButtons/NewPostButtons";
 import ReviewsGallery from "@/components/reviewsGallery/ReviewsGallery";
 
 export const dynamic = 'force-dynamic';
@@ -15,6 +16,7 @@ const RecenzijePage = ({searchParams}) => {
                 <h1>{metadata.title}</h1>
                 <p>{metadata.description}</p>
             </div>
+            <NewPostButtons />
             <ReviewsGallery searchParams={searchParams}/>
             
         </main>
