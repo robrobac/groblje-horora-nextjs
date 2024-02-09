@@ -6,13 +6,12 @@ import { useEffect, useState } from "react"
 export default function useAuth() {
     const [user, loading, error] = useAuthState(auth)
     const [mongoUser, setMongoUser] = useState(null)
+    const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
             const getMongoUser = async () => {
-                if (user?.email) {
-                    const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/users/${user.email}`, {
-                        method: 'GET'
-                    })
+                if (user) {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/users/${user.email}`)
                     const json = await response.json()
 
                     if (!response.ok) {
@@ -27,7 +26,7 @@ export default function useAuth() {
 
             getMongoUser();
 
-    }, [user, error])
+    }, [user])
 
     return {
         user,

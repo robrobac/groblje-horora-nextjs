@@ -27,6 +27,7 @@ export async function DELETE(request, { params }) {
 
 
 export async function GET(request, { params }) {
+    dbConnect()
     const { email } = params
     try {
         const user = await userModel.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } })
