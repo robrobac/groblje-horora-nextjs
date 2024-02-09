@@ -4,31 +4,39 @@ import { LoadingBtn } from '@/components/buttons/loadingBtn';
 import { Logo } from '@/components/header/svg/Logo';
 import { auth } from '@/lib/firebase/config';
 import background from '../../../../public/images/groblje-horora-bg-image.jpg';
-import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
+import { sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import useAuth, { logout } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
+import GhostSpinner from '@/components/ghostSpinner/GhostSpinner';
 
 
-const PrijavaPage = () => {
+const PrijavaPage = ({searchParams}) => {
     const router = useRouter();
 
     const { firebaseUser } = useAuth()
 
     const [loggingIn, setLoggingIn] = useState(false)
 
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState(searchParams.email || '')
     const [password, setPassword] = useState('')
     
     const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
 
     const [forgotPassword, setForgotPassword] = useState(false)
 
+    const [emailVerified, setEmailVerified] = useState(true)
+    const [verficationAuthData, setVerificationAuthData] = useState(null)
+    const [sendingVerification, setSendingVerification] = useState(false)
+
     useEffect(() => {
         if (auth.currentUser?.emailVerified === false) {
+            setVerificationAuthData(auth.currentUser)
+            setError('Potvrdi email prije prijave')
+            setEmailVerified(false)
             logout()
-            setError('Email nije verificiran')
         }
     }, [])
 
@@ -37,12 +45,24 @@ const PrijavaPage = () => {
         e.preventDefault()
         console.log('Login Form Submitted')
         setLoggingIn(true)
+        setError('')
+        setSuccess('')
+        setEmailVerified(true)
         try {
             // Sign in with email and password using Firebase
             const user = await signInWithEmailAndPassword(auth, email, password)
             console.log('Firebase User Signed In', user.user);
 
             console.log('Login Successful')
+
+            if (auth.currentUser?.emailVerified === false) {
+                setVerificationAuthData(auth.currentUser)
+                setError('Potvrdi email prije prijave')
+                setEmailVerified(false)
+                logout()
+                return
+            }
+
             const backURL = sessionStorage.getItem('lastVisitedUrl');
             if (backURL) {
                 sessionStorage.removeItem('lastVisitedUrl');
@@ -67,6 +87,8 @@ const PrijavaPage = () => {
     const handleForgotPassword = async (e) => {
         e.preventDefault()
         setLoggingIn(true)
+        setError('')
+        setSuccess('')
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/users/${email}`)
             const json = await response.json()
@@ -77,7 +99,7 @@ const PrijavaPage = () => {
             }
 
             sendPasswordResetEmail(auth, email)
-            setError(`Email za oporavak lozinke poslan na ${email}`)
+            setSuccess(`Email za oporavak lozinke poslan na ${email}`)
 
             
         } catch (err) {
@@ -94,6 +116,35 @@ const PrijavaPage = () => {
         setPassword('')
     }
 
+    // const handleResendVerification = async () => {
+    //     setSendingVerification(true)
+    //     console.log(verficationAuthData)
+    //     await sendEmailVerification(verficationAuthData);
+    //     console.log('verification email sent')
+    //     setSendingVerification(false)
+    //     setSuccess('Email za potvrdu poslan')
+    //     setError('')
+    // }
+
+    const handleResendVerification = async () => {
+        setSendingVerification(true);
+        console.log(verficationAuthData);
+        setSuccess('');
+        setError('')
+        try {
+            await sendEmailVerification(verficationAuthData);
+            console.log('verification email sent');
+            setSuccess('Email za potvrdu poslan');
+            setError('');
+        } catch (error) {
+            console.error('Error sending verification email:', error);
+            setError('Potvrda je nedavno poslana, pričekajte minutu i pokušajte ponovo');
+        } finally {
+            setSendingVerification(false);
+        }
+    }
+
+
     return (
         <main className="authContainer">
             <div className={styles.authPage} style={{backgroundImage: `url(${background.src})`}}>
@@ -103,7 +154,20 @@ const PrijavaPage = () => {
                 {!forgotPassword ? (
                     <div className={styles.authContainer}>
                         <h3>PRIJAVA</h3>
-                        <p className='error'>{error}</p>
+                        {error ? (
+                            <>
+                                {sendingVerification && <GhostSpinner size={'16px'}/>}
+                                <p className={styles.error}>{error}</p>
+                            </>
+                        ) : (
+                            <>
+                                {sendingVerification && <GhostSpinner size={'16px'}/>}
+                                <p className={`${styles.error} ${styles.success}`}>{success}</p>
+                            </>
+                        )}
+                        {!emailVerified && (
+                            <p style={{color: '#ffffff60'}}>Niste dobili email s potvrdom? <span onClick={() => handleResendVerification()}>Pošalji ponovo</span></p>
+                        )}
                         <form className={styles.authForm} onSubmit={handleLogin}>
                             <div className='inputContainer'>
                                 <label className='inputLabel' htmlFor='email'>Email</label>
@@ -126,7 +190,8 @@ const PrijavaPage = () => {
                 ) : (
                     <div className={styles.authContainer}>
                         <h3>ZABORAVLJENA LOZINKA</h3>
-                        <p className='error'>{error}</p>
+                        <p className={styles.error}>{error}</p>
+                        <p className={`${styles.error} ${styles.success}`}>{success}</p>
                         <form className={styles.authForm} onSubmit={handleForgotPassword}>
                             <div className='inputContainer'>
                                 <label className='inputLabel' htmlFor='email'>Email</label>

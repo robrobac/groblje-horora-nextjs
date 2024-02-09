@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 
 
 const RegistracijaPage = () => {
+
     const router = useRouter();
 
     const [username, setUsername] = useState('')
@@ -97,7 +98,7 @@ const RegistracijaPage = () => {
             setUsername('')
             setPassword('')
             console.log('Navigating to Login page')
-            router.push('/prijava')
+            router.push(`/prijava${auth.currentUser ? `?email=${auth.currentUser.email}` : ''}`)
             
         
         } catch(err) {

@@ -8,6 +8,12 @@ export default function useAuth() {
     const [mongoUser, setMongoUser] = useState(null)
 
     useEffect(() => {
+        if (!user) {
+            setMongoUser(null)
+        }
+    }, [mongoUser])
+
+    useEffect(() => {
             const getMongoUser = async () => {
                 if (user) {
                     const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/users/${user.email}`)

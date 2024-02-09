@@ -53,9 +53,14 @@
     }
 
     .error {
-        font-size: .8rem;
+        font-size: var(--textM);
+        line-height: calc(var(--textM) * 1.5);
         font-weight: 600;
         color: red;
+    }
+
+    .success {
+        color: green;
     }
 
     p:last-of-type {
