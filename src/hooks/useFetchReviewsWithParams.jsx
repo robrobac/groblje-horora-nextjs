@@ -4,7 +4,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react';
 
 export default function useFetchReviewsWithParams(pageName, initialSort, initialOrder, initialPerPage) {
-    console.log('----------')
+    // console.log('----------')
 
     const [loading, setLoading] = useState(true);
     const [reviews, setReviews] = useState([]);

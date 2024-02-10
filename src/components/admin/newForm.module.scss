@@ -1,0 +1,130 @@
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 200px;
+}
+
+.formSection {
+    width: 100%;
+    max-width: var(--widthDefault);
+    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap-reverse;
+}
+
+// .tabs {
+
+// }
+
+.tabList {
+    display: flex;
+    text-align: center;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 10px 0;
+    border-radius: var(--radiusS) var(--radiusS) 0 0;
+    flex: 1;
+    color: var(--white25);
+    background-color: var(--black);
+    margin-top: 1rem;
+
+    &.isActive {
+        color: var(--white80);
+        background-color: var(--commentsBG);
+    }
+
+    &:hover {
+        background-color: var(--commentsBG);
+    }
+}
+
+.tabPanel {
+    display: none;
+    padding: var(--paddingM);
+    background-color: var(--commentsBG);
+    border-radius: 0 0 var(--radiusM) var(--radiusM);
+    margin-bottom: 2rem;
+
+    &.isActive {
+        display: block;
+    }
+
+    h3 {
+        color: var(--white80);
+        font-size: var(--textM);
+
+        span {
+            font-size: var(--textS);
+            color: var(--white50);
+        }
+    }
+}
+
+.formContainer {
+    max-width: var(--widthReading);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1rem;
+
+    .dualInput {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+.styledForm {
+    width: var(--widthReading);
+}
+
+.textEditorContainer {
+    max-width: var(--widthReading);
+}
+
+// IMAGE UPLOAD
+.file {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.fileLabel {
+    border: 1px solid var(--white15);
+    border-radius: var(--radiusM);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    height: 460px;
+
+    &.error {
+        border: 1px solid red;
+    }
+}
+
+.formImage {
+    cursor: pointer;
+    width: 322px;
+    height: 460px;
+    border-radius: var(--radiusM);
+
+    img {
+        width: 100%;
+        height: 460px;
+        object-fit: cover;
+        border-radius: var(--radiusM);
+    }
+}
+
+// FORM STYLES
+.formContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

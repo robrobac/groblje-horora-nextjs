@@ -10,7 +10,7 @@ export default function HeaderAuth() {
     const router = useRouter();
 
     const { user, mongoUser } = useAuth()
-    console.log(user, mongoUser)
+    // console.log(user, mongoUser)
 
     const handleAuthButton = () => {
         if (user) {

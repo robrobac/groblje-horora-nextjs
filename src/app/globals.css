@@ -28,6 +28,7 @@
         --black80: #141414CC;
         --black50: #14141480;
         --black25: #14141440;
+        --commentsBG: #00000020;
 
     /*   RED VARIANTS */
         --red: #7C2E2E;
@@ -91,8 +92,8 @@ a {
     text-decoration: none;
     color: inherit;
 }
-/* Class used in Top 25 preporuka, Top 20 smeca i Recenzije, drzi. Main element koji drzi sve na tim stranicama */
 
+/* Class used in Top 25 preporuka, Top 20 smeca i Recenzije, drzi. Main element koji drzi sve na tim stranicama */
 .reviewsContainer {
     display: flex;
     flex-direction: column;

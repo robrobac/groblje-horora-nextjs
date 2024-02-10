@@ -1,0 +1,70 @@
+// TEXT EDITOR
+.styledEditor {
+    .rdw-editor-wrapper {
+        border: 1px solid var(--white15)
+    }
+
+    .error {
+        border: 1px solid red;
+    }
+
+    .rdw-editor-main {
+        overflow: auto;
+        min-height: 200px;
+        padding: 0 20px;
+
+        font-weight: 200;
+
+        span[style*="font-style: italic"] {
+            /* Your styles for the selected span element with font-weight: bold */
+            color: yellow;
+        }
+
+        span[style*="font-weight: bold"] {
+            /* Your styles for the selected span element with font-weight: bold */
+            color: blue;
+        }
+
+
+        a {
+            color: red;
+        }
+    }
+
+    .rdw-editor-toolbar {
+        background-color: var(--commentsBG);
+        border: none;
+        border-bottom: 1px solid var(--white15);
+        border-top: 1px solid var(--white15);
+        padding: 10px 20px 5px 20px;
+        position: sticky;
+        top: 85px;
+        background-color: var(--commentsBG);
+        z-index: 80;
+    }
+
+    .rdw-image-modal,
+    .rdw-link-modal {
+        background-color: var(--commentsBG);
+        box-shadow: none;
+        border: 1px solid var(--white15);
+        height: unset;
+    }
+
+    .rdw-image-modal-header {
+        display: none;
+    }
+
+    .rdw-image-mandatory-sign {
+        display: none;
+    }
+
+    .rdw-image-modal-url-input {
+        width: 100%;
+        margin: 0;
+    }
+
+    .rdw-image-modal-size {
+        display: none;
+    }
+}

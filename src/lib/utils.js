@@ -33,3 +33,10 @@ export const handleLastVisitedURL = (pathname, searchParams) => {
     }
     sessionStorage.setItem('lastVisitedUrl', path);
 }
+
+
+export function stringFormatting(inputString, sufix) {
+    const formattedString = inputString.replace(/\s+/g, '-');
+    const result = formattedString + sufix;
+    return result;
+}
