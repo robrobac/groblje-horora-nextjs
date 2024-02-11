@@ -61,7 +61,7 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
             let path = '';
     
             // create firebase storage path
-            path = `postImages/${stringFormatting('post-image-', Date.now())}`;
+            path = `postImagesTEST/${stringFormatting('post-image-', Date.now())}`;
     
             try {
                 // Upload to Firebase and retrieve image's url and path
@@ -79,7 +79,7 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
             };
     
             // Saving uploaded image to MongoDB collection
-            const response = await fetch('http://localhost:4000/api/tempMedia', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/tempMedia`, {
                 method: 'POST',
                 body: JSON.stringify(uploadedImage),
                 headers: {
@@ -125,7 +125,7 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
 
         handleContentImages(contentImages.filter((image) => image.path !== imageToDelete.path))
         
-        const deleteResponse = await fetch(`http://localhost:4000/api/tempMedia/${imageToDelete.id}`, {
+        const deleteResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/tempMedia/${imageToDelete.id}`, {
             method: 'DELETE'
         })
         const json = await deleteResponse.json()

@@ -79,7 +79,7 @@ export default function PreviewDialog({postPreview, formFailed, loading}) {
                 ) : ('')}
 
                 {post?.movies.map((movie, index) => (
-                    <>
+                    <React.Fragment key={`movieFragment${index}`}>
                         <div className={movieStyles.movieContainer} id={`movie${index}`}>
                             {post.reviewType === 'single' ? (
                                 <div className={movieStyles.movieInfo}>
@@ -110,7 +110,7 @@ export default function PreviewDialog({postPreview, formFailed, loading}) {
                                 <section className={movieStyles.readingContent} dangerouslySetInnerHTML={{__html: draftToHtml(movie.reviewContent)}}/>
                             </div>
                         </div>
-                    </>
+                    </React.Fragment>
                 ))}
 
             </div>
