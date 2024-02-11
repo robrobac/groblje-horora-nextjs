@@ -17,6 +17,7 @@ import { stringFormatting } from '@/lib/utils';
 import { uploadImageToFirebaseStorage } from '@/lib/firebase/firebaseUtils';
 import { compressImage } from '@/lib/compressImage';
 import { useRouter } from 'next/navigation';
+import PreviewDialog from './PreviewDialog';
 
 
 
@@ -333,7 +334,7 @@ export default function NewForm({ numberOfMovies }) {
                             </div>
                         </div>
                     ))}
-                    {/* {postPreview ? <PreviewDialog loading={loading} postPreview={postPreview} formFailed={formFailed}/> : ''} */}
+                    {postPreview ? <PreviewDialog loading={loading} postPreview={postPreview} formFailed={formFailed}/> : ''}
                 </form>
                 {/* <ImageRepo handleContentImages={handleContentImages} contentImages={contentImages} formSubmitted={formSubmitted}/> */}
             </div>

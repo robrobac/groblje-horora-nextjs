@@ -19,6 +19,7 @@
             transform: scale(1.1);
             transition: all .1s ease-in-out;
         }
+
     }
 
     @media (max-width: 768px) {
@@ -40,7 +41,7 @@
         }
 
         .image3 {
-            border-radius: 0 var(radiusM) var(--radiusM) 0;
+            border-radius: 0 0 var(--radiusM) 0;
         }
     }
 }
