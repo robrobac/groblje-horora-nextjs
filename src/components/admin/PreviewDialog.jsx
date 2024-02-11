@@ -63,20 +63,27 @@ export default function PreviewDialog({postPreview, formFailed, loading}) {
             </div>
             <div className={pageStyles.singlePostContainer}>
                 {reviewType === 'quad' ? (
-                    <div className={reviewHeaderStyles.reviewHeader}>
-                        <div className={reviewHeaderStyles.reviewHeaderContainer}>
-                            {post?.movies.map((movie, index) => (
-                                <div key={`movieImage${index + 1}`} className={reviewHeaderStyles.quadImageContainer}>
-                                    {movie.coverImage ? (
-                                        <img className={reviewHeaderStyles[`image${index}`]} src={movie.coverImage} alt='movie-cover'></img>
-                                    ) : (
-                                        <img className={reviewHeaderStyles[`image${index}`]} src={movie.compressedCoverImage ? URL.createObjectURL(movie.compressedCoverImage) : ''} alt='movie-cover'></img>
-                                    )}
-                                </div>
-                            ))}
+                    <>
+                        <div className={reviewHeaderStyles.reviewHeader}>
+                            <div className={reviewHeaderStyles.reviewHeaderContainer}>
+                                {post?.movies.map((movie, index) => (
+                                    <div key={`movieImage${index + 1}`} className={reviewHeaderStyles.quadImageContainer}>
+                                        {movie.coverImage ? (
+                                            <img className={reviewHeaderStyles[`image${index}`]} src={movie.coverImage} alt='movie-cover'></img>
+                                        ) : (
+                                            <img className={reviewHeaderStyles[`image${index}`]} src={movie.compressedCoverImage ? URL.createObjectURL(movie.compressedCoverImage) : ''} alt='movie-cover'></img>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                        <div className={pageStyles.movieAndDate}>
+                            <h1 className={pageStyles.titleH1}>{post?.reviewTitle}</h1>
+                        </div>
+                    </>
                 ) : ('')}
+
+                
 
                 {post?.movies.map((movie, index) => (
                     <React.Fragment key={`movieFragment${index}`}>

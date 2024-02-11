@@ -32,14 +32,13 @@
     }
 
     .rdw-editor-toolbar {
-        background-color: var(--commentsBG);
         border: none;
         border-bottom: 1px solid var(--white15);
         border-top: 1px solid var(--white15);
         padding: 10px 20px 5px 20px;
         position: sticky;
         top: 85px;
-        background-color: var(--commentsBG);
+        background-color: var(--black80);
         z-index: 80;
     }
 

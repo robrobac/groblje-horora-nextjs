@@ -36,6 +36,11 @@
         background-color: var(--commentsBG);
     }
 
+    &.error {
+        color: red;
+        border: 1px solid red;
+    }
+
     &:hover {
         background-color: var(--commentsBG);
     }

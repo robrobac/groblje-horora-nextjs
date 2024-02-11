@@ -159,7 +159,7 @@ export default function NewForm({ numberOfMovies }) {
                 if (movie.compressedCoverImage) {
                     // create firebase storage path
                     const sanitizedMovieTitle = movie.title.replace(/\//g, '-')
-                    const path = `coverImages/${stringFormatting(sanitizedMovieTitle, `-cover-image-${Date.now()}`)}`;
+                    const path = `coverImagesTEST/${stringFormatting(sanitizedMovieTitle, `-cover-image-${Date.now()}`)}`;
 
                     try {
                         // requiredInputs handles checking if there's empty fields in the form, if there is then don't upload cover images to firebase
@@ -200,8 +200,10 @@ export default function NewForm({ numberOfMovies }) {
                     contentImages,
                 };
 
+                console.log(review)
+
                 // API Call to post a new Review
-                const response = await fetch('http://localhost:4000/api/reviews', {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews`, {
                     method: 'POST',
                     body: JSON.stringify(review),
                     headers: {
@@ -230,7 +232,7 @@ export default function NewForm({ numberOfMovies }) {
                     // Delete images from tempImages, Images in ImageRepo are saved to TempImages in case user uploaded images through ImageRepo but never finished the form.
                     // That way we know what images are uploaded to firebase storage but are not used for anything in the posts
                     contentImages.forEach(async (image) => {
-                        const deleteResponse = await fetch(`http://localhost:4000/api/tempMedia/${image.id}`, {
+                        const deleteResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/tempMedia/${image.id}`, {
                             method: 'DELETE',
                         });
                         const deleteJson = await deleteResponse.json();
@@ -245,7 +247,7 @@ export default function NewForm({ numberOfMovies }) {
                     setContentImages([]);
 
                     // Navigate to new post
-                    navigate(`/recenzije/${json.slug}`);
+                    router.push(`/recenzije/${json.slug}`);
                 }
             });
     };
