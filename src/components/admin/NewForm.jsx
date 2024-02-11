@@ -18,6 +18,7 @@ import { uploadImageToFirebaseStorage } from '@/lib/firebase/firebaseUtils';
 import { compressImage } from '@/lib/compressImage';
 import { useRouter } from 'next/navigation';
 import PreviewDialog from './PreviewDialog';
+import ImageRepo from './ImageRepo';
 
 
 
@@ -336,7 +337,7 @@ export default function NewForm({ numberOfMovies }) {
                     ))}
                     {postPreview ? <PreviewDialog loading={loading} postPreview={postPreview} formFailed={formFailed}/> : ''}
                 </form>
-                {/* <ImageRepo handleContentImages={handleContentImages} contentImages={contentImages} formSubmitted={formSubmitted}/> */}
+                <ImageRepo handleContentImages={handleContentImages} contentImages={contentImages} formSubmitted={formSubmitted}/>
             </div>
         </main>
 )
