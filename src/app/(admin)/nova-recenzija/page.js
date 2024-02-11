@@ -2,6 +2,6 @@
 
 import NewForm from "@/components/admin/NewForm"
 
-export default function page() {
+export default function NewPostPage() {
     return (<NewForm numberOfMovies={1} />)
 }
