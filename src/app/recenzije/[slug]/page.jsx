@@ -1,9 +1,11 @@
-"use server"
+
 import styles from "@/app/recenzije/[slug]/page.module.scss";
 import { Movie } from "@/components/singleReview/movie/Movie";
 import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeader";
 import { getRawContent } from "@/lib/utils";
 import { format } from "date-fns";
+
+export const dynamic = 'force-dynamic';
 
 function shortenStringTo30Words(str) {
     const cleanedString = str.replace(/<\/?[^>]+(>|$)/g, "");
@@ -15,12 +17,15 @@ function shortenStringTo30Words(str) {
 }
 
 const getData = async (slug) => {
+    console.log(slug)
     const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${slug}`);
     if (!res.ok) {
         throw new Error('Failed to fetch Single Post data');
     }
     return res.json();
 }
+
+
 
 export const generateMetadata = async ({params}) => {
     const {slug} = params;

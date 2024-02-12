@@ -23,6 +23,7 @@ export default function EditForm({slug}) {
     const [post, setPost] = useState({})
     const [reviewTitle, setReviewTitle] = useState('')
     const [contentImages, setContentImages] = useState([])
+    console.log(contentImages)
     const [movies, setMovies] = useState([
         {
             title: '',
@@ -73,6 +74,7 @@ export default function EditForm({slug}) {
             
         }
     ])
+    console.log(movies)
 
     const [formSubmitted, setFormSubmitted] = useState(false)
     // If form fails checks on backend, change the state to trigger useEffect in PreviewDialog components and that way close the Preview Modal.
@@ -233,6 +235,7 @@ export default function EditForm({slug}) {
 
                 // if cover image is uploaded and compressed upload it to firebase storage
                 if (movie.compressedCoverImage) {
+                    console.log("ima compressedCoverImage")
                     // create firebase storage path
                     const sanitizedMovieTitle = movie.title.replace(/\//g, '-')
                     const path = `coverImagesTEST/${stringFormatting(sanitizedMovieTitle, `-coverImage-${Date.now()}`)}`
@@ -241,7 +244,9 @@ export default function EditForm({slug}) {
                         // requiredInputs handles checking if there's empty fields in the form, if there is then don't upload cover images to firebase
                         if (requiredInputs.length === 0) {
                             //  Remove old cover image from storage
+                            console.log("Deleting old cover image from storage")
                             await deleteImageFromFirebaseStorage(oldCoverPath)
+                            console.log("Old cover image deleted from storage")
                             // Upload new cover image to storage
                             const result = await uploadImageToFirebaseStorage(movie.compressedCoverImage, path)
                             // Setting a new URL to save it in MongoDB document as a reference to the uploaded file

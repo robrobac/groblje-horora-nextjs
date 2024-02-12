@@ -54,6 +54,7 @@ export default function PreviewDialog({postPreview, formFailed, loading}) {
             setReviewType('single')
         }
     }, [postPreview])
+    
 
     return (
         <>
@@ -68,10 +69,10 @@ export default function PreviewDialog({postPreview, formFailed, loading}) {
                             <div className={reviewHeaderStyles.reviewHeaderContainer}>
                                 {post?.movies.map((movie, index) => (
                                     <div key={`movieImage${index + 1}`} className={reviewHeaderStyles.quadImageContainer}>
-                                        {movie.coverImage ? (
-                                            <img className={reviewHeaderStyles[`image${index}`]} src={movie.coverImage} alt='movie-cover'></img>
+                                        {movie.compressedCoverImage ? (
+                                            <img className={reviewHeaderStyles[`image${index}`]} src={URL.createObjectURL(movie.compressedCoverImage)} alt='movie-cover'></img>
                                         ) : (
-                                            <img className={reviewHeaderStyles[`image${index}`]} src={movie.compressedCoverImage ? URL.createObjectURL(movie.compressedCoverImage) : ''} alt='movie-cover'></img>
+                                            <img className={reviewHeaderStyles[`image${index}`]} src={movie.coverImage} alt='movie-cover'></img>
                                         )}
                                     </div>
                                 ))}
@@ -91,10 +92,10 @@ export default function PreviewDialog({postPreview, formFailed, loading}) {
                             {post.reviewType === 'single' ? (
                                 <div className={movieStyles.movieInfo}>
                                     <div className={movieStyles.movieImage}>
-                                        {movie.coverImage ? (
-                                            <img src={movie.coverImage} alt='movie-cover'></img>
+                                        {movie.compressedCoverImage ? (
+                                            <img src={URL.createObjectURL(movie.compressedCoverImage)} alt='movie-cover'></img>
                                         ) : (
-                                            <img src={movie.compressedCoverImage ? URL.createObjectURL(movie.compressedCoverImage) : ''} alt='movie-cover'></img>
+                                            <img src={movie.coverImage} alt='movie-cover'></img>
                                         )}
                                     </div>
                                     <h1 className={pageStyles.titleH1}>{movie.title} <span>({movie.year})</span></h1>
@@ -103,10 +104,10 @@ export default function PreviewDialog({postPreview, formFailed, loading}) {
                             ) : (
                                 <div className={movieStyles.movieInfo}>
                                     <div className={movieStyles.movieImage}>
-                                        {movie.coverImage ? (
-                                            <img src={movie.coverImage} alt='movie-cover'></img>
+                                        {movie.compressedCoverImage ? (
+                                            <img src={URL.createObjectURL(movie.compressedCoverImage)} alt='movie-cover'></img>
                                         ) : (
-                                            <img src={movie.compressedCoverImage ? URL.createObjectURL(movie.compressedCoverImage) : ''} alt='movie-cover'></img>
+                                            <img src={movie.coverImage} alt='movie-cover'></img>
                                         )}
                                     </div>
                                     <div className={pageStyles.titleH2}>{movie.title} <span>({movie.year})</span></div>
