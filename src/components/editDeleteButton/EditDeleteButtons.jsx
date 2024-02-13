@@ -1,4 +1,4 @@
-import useAuth from '@/hooks/useAuth'
+'use client'
 import React, { useState } from 'react'
 import styles from './editDeleteButtons.module.scss'
 import Link from 'next/link'
