@@ -8,8 +8,10 @@ import PostsFlex from './postsFlex/PostsFlex';
 import Pagination from '../pagination/Pagination';
 import Search from '../searchBar/Search';
 import GhostSpinner from '../ghostSpinner/GhostSpinner';
+import useAuth from '@/hooks/useAuth';
 
 export default function ReviewsGallery() {
+    const { user, mongoUser } = useAuth()
 
     const {
         reviews,
@@ -23,7 +25,8 @@ export default function ReviewsGallery() {
         sort,
         order,
         handleSortAndOrder,
-        loading
+        loading,
+        handleRefresh
     } = useFetchReviewsWithParams('recenzije', SORT_OPTIONS.CREATED, 'desc', 30)
 
     return (
@@ -31,7 +34,7 @@ export default function ReviewsGallery() {
             <Search controls={true} handleSearch={handleSearch} search={search} handleFilter={handleFilter} filter={filter} handleSortAndOrder={handleSortAndOrder} sort={sort} order={order}/>
             {loading ? (<GhostSpinner />) : (
                 <>
-                    <PostsFlex posts={reviews} loading={loading}/>
+                    <PostsFlex posts={reviews} loading={loading} handleRefresh={handleRefresh} user={user} mongoUser={mongoUser}/>
                     {reviews.length !== 0 ? 
                         <Pagination currentPage={page} totalPages={totalPages} handlePageChange={handlePageChange}/>
                     : ""} 

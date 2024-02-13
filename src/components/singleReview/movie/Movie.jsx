@@ -3,6 +3,7 @@ import styles from "@/components/singleReview/movie/movie.module.scss";
 import { format } from "date-fns";
 import { Rating } from "@/components/rating/Rating";
 import { getRawContent } from "@/lib/utils";
+import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteButtonsSingle";
 
 export const Movie = ({data, movie, id}) => {
 
@@ -13,6 +14,7 @@ export const Movie = ({data, movie, id}) => {
                     <div className={styles.movieImage}>
                         <img src={movie.coverImage} alt='movie-cover'></img>
                     </div>
+                    <EditDeleteButtonsSingle post={data}/>
                     <p className={pageStyles.reviewDate}>
                         {format(new Date(data.createdAt), 'dd.MM.yyyy')}
                     </p>

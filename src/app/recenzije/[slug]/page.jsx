@@ -1,9 +1,11 @@
 
 import styles from "@/app/recenzije/[slug]/page.module.scss";
+import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteButtonsSingle";
 import { Movie } from "@/components/singleReview/movie/Movie";
 import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeader";
 import { getRawContent } from "@/lib/utils";
 import { format } from "date-fns";
+import { notFound } from "next/navigation";
 
 export const dynamic = 'force-dynamic';
 
@@ -20,7 +22,8 @@ const getData = async (slug) => {
     console.log(slug)
     const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${slug}`);
     if (!res.ok) {
-        throw new Error('Failed to fetch Single Post data');
+        notFound()
+        // throw new Error('Failed to fetch Single Post data');
     }
     return res.json();
 }
@@ -40,12 +43,14 @@ export const generateMetadata = async ({params}) => {
 const SinglePostPage = async ({params}) => {
     const {slug} = params;
     const data = await getData(slug);
+
     return (
         <main className={styles.singlePostContainer}>
             {data.reviewType === 'quad' && (
                 <>
                 <ReviewHeader data={data}/>
                 <div className={styles.movieAndDate}>
+                    <EditDeleteButtonsSingle post={data}/>
                     <p className={styles.reviewDate}>
                         {format(new Date(data?.createdAt), 'dd.MM.yyyy')}
                     </p>
@@ -53,7 +58,7 @@ const SinglePostPage = async ({params}) => {
                 </div>
                 </>
             )}
-
+            
             {data?.movies.map((movie, index) => (
                 <Movie key={movie._id} data={data} movie={movie} id={`movie${index}`}/>
             ))}

@@ -1,7 +1,7 @@
 import { dbConnect } from "@/lib/mongo/dbConnect"
 import reviewModel from "@/lib/mongo/models/reviewModel"
 import { slugify } from "@/lib/utils"
-import mongoose from "mongoose"
+import mongoose, { Mongoose } from "mongoose"
 import { NextResponse } from "next/server"
 
 export const GET = async (request, { params }) => {
@@ -130,5 +130,28 @@ export const PATCH = async (request, { params }) => {
             status: 400
         })
     }
+}
 
+export async function DELETE(request, { params }) {
+    dbConnect()
+    const { slug } = params
+    console.log(slug)
+
+    if (!mongoose.Types.ObjectId.isValid(slug)) {
+        return new NextResponse(JSON.stringify({ error: 'No such review' }), {
+            status: 404
+        })
+    }
+
+    const review = await reviewModel.findOneAndDelete({ _id: slug })
+
+    if (!review) {
+        return new NextResponse(JSON.stringify({ error: 'No such review' }), {
+            status: 404
+        })
+    }
+
+    return new NextResponse(JSON.stringify(review), {
+        status: 200
+    })
 }

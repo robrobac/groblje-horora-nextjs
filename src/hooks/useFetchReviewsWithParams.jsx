@@ -12,6 +12,8 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
     const [totalPages, setTotalPages] = useState([])
     const [perPage, setPerPage] = useState(initialPerPage);
 
+    const [refresh, setRefresh] = useState(false);
+
     const router = useRouter();
     const pathname = usePathname();
     var searchParams = useSearchParams();
@@ -88,7 +90,7 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
 
     useEffect(() => {
         fetchReviews();
-    }, [page, filter, sort, order, search]);
+    }, [page, filter, sort, order, search, refresh]);
 
 
     useEffect(() => {
@@ -233,6 +235,10 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
 
     }
 
+    const handleRefresh = () => {
+        setRefresh(!refresh)
+    }
+
     return {
         reviews,
         page,
@@ -245,6 +251,7 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
         sort,
         order,
         handleSortAndOrder,
-        loading
+        loading,
+        handleRefresh
     }
 }

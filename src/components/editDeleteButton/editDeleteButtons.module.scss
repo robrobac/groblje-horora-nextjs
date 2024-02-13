@@ -1,0 +1,35 @@
+.editDeleteButtonsContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+
+    &.alignLeft {
+        justify-content: flex-start;
+    }
+
+    svg {
+        fill: var(--white50)
+    }
+
+    .adminBtn {
+        cursor: pointer;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid var(--white50);
+        border-radius: var(--radiusM);
+    }
+
+    @media (hover: hover) {
+        .adminBtn:hover {
+            border: 1px solid var(--red);
+
+            svg {
+                fill: var(--red);
+            }
+        }
+    }
+}

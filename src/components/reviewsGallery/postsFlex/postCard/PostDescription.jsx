@@ -22,7 +22,7 @@ export default function PostDescription({post}) {
                     </p>
                     {/* TU IDE COMMENTS I LIKES KOMPONENTA */}
                     <Link href={`/recenzije/${post?.slug}`} target='_blank'>
-                        <h2 className={styles.postTitle}>{post?.movies[0].title} <span>({post?.movies[0].year})</span></h2>
+                        <h2 className={styles.postTitle}>{post?.reviewTitle}</h2>
                     </Link>
                     <p className={styles.postSubTitle}>
                         {post?.movies[0].title} <span>({post?.movies[0].year})</span>, {post?.movies[1].title} <span>({post?.movies[1].year})</span>, {post?.movies[2].title} <span>({post?.movies[2].year})</span>, {post?.movies[3].title} <span>({post?.movies[3].year})</span>
