@@ -23,7 +23,6 @@ export default function EditForm({slug}) {
     const [post, setPost] = useState({})
     const [reviewTitle, setReviewTitle] = useState('')
     const [contentImages, setContentImages] = useState([])
-    console.log(contentImages)
     const [movies, setMovies] = useState([
         {
             title: '',
@@ -74,7 +73,6 @@ export default function EditForm({slug}) {
             
         }
     ])
-    console.log(movies)
 
     const [formSubmitted, setFormSubmitted] = useState(false)
     // If form fails checks on backend, change the state to trigger useEffect in PreviewDialog components and that way close the Preview Modal.

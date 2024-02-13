@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 export default function useAuth() {
     const [user, loading, error] = useAuthState(auth)
     const [mongoUser, setMongoUser] = useState(null)
+    const [userLoading, setUserLoading] = useState(true)
 
     useEffect(() => {
         if (!user) {
@@ -23,9 +24,15 @@ export default function useAuth() {
                         console.log('error fetching mongo user, trying again...', json)
                         return
                     }
-                    setMongoUser(json)
+
+                    if (response.ok) {
+                        setMongoUser(json)
+                        setUserLoading(false)
+                    }
+
                 } else {
                     setMongoUser(null)
+                    setUserLoading(false)
                 }
             }
 
@@ -35,7 +42,8 @@ export default function useAuth() {
 
     return {
         user,
-        mongoUser
+        mongoUser,
+        userLoading,
     }
 }
 

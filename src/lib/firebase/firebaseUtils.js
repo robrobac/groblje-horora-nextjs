@@ -1,5 +1,6 @@
 import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from './config';
+import useAuth from '@/hooks/useAuth';
 
 export const uploadImageToFirebaseStorage = async (file, path) => {
     try {
