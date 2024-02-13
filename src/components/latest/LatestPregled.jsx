@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { StandardBtn } from '../buttons/standardBtn/StandardBtn';
 
 const getData = async () => {
-    const res = await fetch(`${process.env.DOMAIN_URL}/api/latestPregled`);
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/latestPregled`, { next: { revalidate: 5 } });
     if (!res.ok) {
         throw new Error('Failed to fetch LatestQuad data');
     }
