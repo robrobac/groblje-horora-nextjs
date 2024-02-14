@@ -1,0 +1,137 @@
+.commentsContainer {
+    width: 100%;
+    max-width: var(--widthDefault);
+    padding: 0 var(--paddingM);
+    height: fit-content;
+}
+
+.commentsHeader {
+    max-width: var(--widthReading);
+    display: flex;
+    justify-content: space-between;
+}
+
+.likeHead {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding-right: 10px;
+
+    svg {
+        cursor: pointer;
+        fill: var(--white25);
+
+        &.liked {
+            fill: var(--redBright);
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                fill: var(--redBright);
+            }
+        }
+    }
+
+    p {
+        color: var(--white80);
+    }
+}
+
+.commentsContent {
+    background-color: var(--commentsBG);
+    padding: 32px;
+    border-radius: var(--radiusM) 0 var(--radiusM) var(--radiusM);
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.commentsList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 32px;
+
+    .noComments {
+        text-align: center;
+        font-size: var(--textS);
+        color: var(--white50);
+    }
+}
+
+.comment {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+
+    .removeComment {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: none;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        border-radius: 50px;
+        font-weight: 600;
+        background-color: var(--red);
+        color: var(--black);
+    }
+
+    .commentAuthor {
+        color: var(--white);
+
+        span {
+            color: var(--white50);
+            font-size: var(--textS);
+        }
+    }
+
+    .commentMessage {
+        color: var(--white80);
+    }
+
+    .divider {
+        height: 1px;
+        background-color: var(--white15);
+        border: 0;
+    }
+}
+
+.commentForm {
+    display: flex;
+    gap: 10px;
+
+    @media (max-width: 630px) {
+        flex-direction: column;
+
+        button {
+            width: 100% !important;
+            height: 46px;
+        }
+    }
+}
+
+.formInput {
+    flex: 1;
+    border-radius: var(--radiusS);
+    font-size: var(--textM);
+    font-weight: 400;
+    padding: 10px 20px;
+    border: 1px solid var(--white15);
+    background-color: transparent;
+    width: 100%;
+    color: var(--white80);
+
+    &:focus {
+        border: 1px solid var(--white50);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: var(--white15);
+    }
+
+}

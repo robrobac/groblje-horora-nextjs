@@ -1,5 +1,6 @@
 
 import styles from "@/app/recenzije/[slug]/page.module.scss";
+import CommentsAndLikes from "@/components/commentsAndLikes/CommentsAndLikes";
 import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteButtonsSingle";
 import { Movie } from "@/components/singleReview/movie/Movie";
 import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeader";
@@ -62,6 +63,7 @@ const SinglePostPage = async ({params}) => {
             {data?.movies.map((movie, index) => (
                 <Movie key={movie._id} data={data} movie={movie} id={`movie${index}`}/>
             ))}
+            <CommentsAndLikes post={data}/>
             
         </main>
     );
