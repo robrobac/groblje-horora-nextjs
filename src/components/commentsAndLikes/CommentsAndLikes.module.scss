@@ -16,19 +16,24 @@
     gap: 5px;
     align-items: center;
     padding-right: 10px;
+    cursor: pointer;
 
     svg {
-        cursor: pointer;
         fill: var(--white25);
+    }
 
-        &.liked {
-            fill: var(--redBright);
-        }
-
-        @media (hover: hover) {
-            &:hover {
+    @media (hover: hover) {
+        &:hover {
+            svg {
                 fill: var(--redBright);
             }
+
+        }
+    }
+
+    &.liked {
+        svg {
+            fill: var(--redBright);
         }
     }
 

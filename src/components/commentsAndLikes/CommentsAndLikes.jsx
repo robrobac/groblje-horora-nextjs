@@ -96,7 +96,7 @@ export default function Comments({post}) {
                 console.log('like Data prepared for storing to MongoDB', likeData)
         
                 // Add like data to MongoDB
-                const response = await fetch(`http://localhost:4000/api/likes/${post._id}`, {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/likes?id=${post._id}`, {
                     method: 'POST',
                     body: JSON.stringify(likeData),
                     headers: {
@@ -132,11 +132,15 @@ export default function Comments({post}) {
         }
     }
 
+    const testFunction = () => {
+        console.log("dadadada")
+    }
+
     return (
         <div className={styles.commentsContainer}>
             <div className={styles.commentsHeader}>
-                <div className={styles.likeHead}>
-                    <LikeIcon onClick={mongoUser && user?.emailVerified ? handleSubmitLike : null} className={liked ? 'liked' : ''}/>
+                <div className={`${styles.likeHead} ${liked ? styles.liked : ''}`} onClick={user && mongoUser ? handleSubmitLike : null}>
+                    <LikeIcon/>
                     <p>{numberOfLikes}</p>
                 </div>
                 <button className={`${buttonStyles.button} ${buttonStyles.commentsTabButton} ${buttonStyles.active}`}>Komentari <span>{`(${post?.comments.length})`}</span></button>
