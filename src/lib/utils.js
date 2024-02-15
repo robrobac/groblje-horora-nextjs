@@ -64,3 +64,10 @@ export const slugify = (input, year) => {
 
     return slug;
 }
+
+export const scrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+};

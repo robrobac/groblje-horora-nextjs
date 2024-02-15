@@ -1,0 +1,56 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.styledBackToTopButton {
+    position: fixed;
+    bottom: 4rem;
+    right: 4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+    border: 2px solid var(--white15);
+    z-index: 1000;
+    background-color: var(--white05);
+    cursor: pointer;
+
+    svg {
+        fill: var(--white25);
+        height: 30px;
+        width: 30px;
+    }
+
+    @media (max-width: 768px) {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+
+    @media (max-width: 425px) {
+        bottom: .5rem;
+        right: .5rem;
+    }
+
+    @media (hover: hover) {
+        &:hover {
+            border-color: var(--red);
+
+            svg {
+                fill: var(--red);
+            }
+        }
+    }
+
+    animation: fadeIn 0.3s ease-in;
+}

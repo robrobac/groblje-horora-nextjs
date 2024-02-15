@@ -10,7 +10,7 @@ export default function PostCard({post, handleRefresh, user, mongoUser}) {
             <div className={styles.postCardDetails}>
                 <PostImage post={post} />
                 <EditDeleteButtons post={post} targetBlank={true} handleRefresh={handleRefresh} user={user} mongoUser={mongoUser}/>
-                <PostDescription post={post} />
+                <PostDescription post={post} mongoUser={mongoUser}/>
             </div>
             <StandardBtn path={`/recenzije/${post?.slug}`} content='Pročitaj više →' type='textOnly' newTab={true}/>
         </div>
