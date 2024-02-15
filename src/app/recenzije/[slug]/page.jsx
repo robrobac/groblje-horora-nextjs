@@ -37,21 +37,21 @@ export const generateMetadata = async ({params, searchParams}) => {
     const data = await getData(slug);
     const movieNumber = movie - 1
 
-    if (searchParams) {
+    if (movie) {
         return {
-            title: data.movies[movieNumber].title,
-            description: shortenStringTo30Words(getRawContent(data.movies[movieNumber].reviewContent)),
+            title: data?.movies[movieNumber].title,
+            description: shortenStringTo30Words(getRawContent(data?.movies[movieNumber].reviewContent)),
             openGraph: {
-                images: data.movies[movieNumber].coverImage,
+                images: data?.movies[movieNumber].coverImage,
             },
         }
     }
    
     return {
-        title: data.reviewTitle,
-        description: shortenStringTo30Words(getRawContent(data.movies[0].reviewContent)),
+        title: data?.reviewTitle,
+        description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
         openGraph: {
-            images: data.movies[0].coverImage,
+            images: data?.movies[0].coverImage,
         },
     }
 }
