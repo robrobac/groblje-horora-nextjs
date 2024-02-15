@@ -74,7 +74,7 @@ export default function Comments({post}) {
             if (liked) {
                 setNumberOfLikes(numberOfLikes - 1)
                 // Remove like data to MongoDB
-                const response = await fetch(`http://localhost:4000/api/reviews/${post._id}/likes/${mongoUser?.email}`, {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/likes?reviewId=${post._id}&likeEmail=${mongoUser?.email}`, {
                     method: 'DELETE',
                 });
                 const json = await response.json();
@@ -116,10 +116,11 @@ export default function Comments({post}) {
         }
     };
 
+    
     // Handle comment removal
     const handleDeleteComment = async (commentId) => {
         try {
-            const deleteResponse = await fetch(`http://localhost:4000/api/reviews/${post._id}/comments/${commentId}`, {
+            const deleteResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/comments?reviewId=${post._id}&commentId=${commentId}`, {
                 method: 'DELETE'
             })
             const json = await deleteResponse.json()
@@ -130,10 +131,6 @@ export default function Comments({post}) {
         } catch (err) {
             console.log(err)
         }
-    }
-
-    const testFunction = () => {
-        console.log("dadadada")
     }
 
     return (

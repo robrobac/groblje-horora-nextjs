@@ -42,3 +42,37 @@ export async function POST(request) {
         })
     }
 }
+
+
+export async function DELETE(request) {
+    const reviewId = request.nextUrl.searchParams.get('reviewId');
+    const likeEmail = request.nextUrl.searchParams.get('likeEmail');
+
+    if (!mongoose.Types.ObjectId.isValid(reviewId)) {
+        return new NextResponse(JSON.stringify({ error: 'No such review' }), {
+            status: 404
+        })
+    }
+
+    try {
+        const updatedReview = await reviewModel.findOneAndUpdate(
+            { _id: reviewId },
+            { $pull: { likes: { likeEmail: likeEmail } } },
+            { new: true }
+        );
+
+        if (!updatedReview) {
+            return new NextResponse(JSON.stringify({ error: 'No such review' }), {
+                status: 404
+            })
+        }
+
+        return new NextResponse(JSON.stringify(updatedReview), {
+            status: 200
+        })
+    } catch (error) {
+        return new NextResponse(JSON.stringify({ error: error.message }), {
+            status: 400
+        })
+    }
+}

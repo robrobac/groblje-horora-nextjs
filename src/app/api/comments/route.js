@@ -48,3 +48,39 @@ export async function POST(request) {
         })
     }
 }
+
+
+export async function DELETE(request) {
+    const reviewId = request.nextUrl.searchParams.get('reviewId');
+    const commentId = request.nextUrl.searchParams.get('commentId');
+
+    if (!mongoose.Types.ObjectId.isValid(reviewId) || !mongoose.Types.ObjectId.isValid(commentId)) {
+        return new NextResponse(JSON.stringify({ error: 'Invalid review or comment ID' }), {
+            status: 404
+        })
+    }
+
+    try {
+        const updatedReview = await reviewModel.findOneAndUpdate(
+            { _id: reviewId },
+            { $pull: { comments: { _id: commentId } } },
+            { new: true }
+        );
+
+        if (!updatedReview) {
+            return new NextResponse(JSON.stringify({ error: 'No such review' }), {
+                status: 404
+            })
+        }
+
+        return new NextResponse(JSON.stringify(updatedReview), {
+            status: 200
+        })
+
+    } catch (err) {
+        return new NextResponse(JSON.stringify({ error: err.message }), {
+            status: 400
+        })
+    }
+}
+
