@@ -17,11 +17,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <BackToTopButton />
+
             <body suppressHydrationWarning={true} className={inter.className}>
+
                 <Header />
                 {children}
                 <Footer />
+                <BackToTopButton />
             </body>
         </html>
     );

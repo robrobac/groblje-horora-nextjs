@@ -9,7 +9,7 @@ export const metadata = {
     description: "Na ovoj stranici pronađite sve recenzije i kratke preglede od 2007. godine do danas. Koristeći pretraživač filtrirajte, sortirajte, pretražite i pronađite željeni horor film. Ne zamjerite na svim recenzijama za filmove koje su napisane u ranoj fazi bloga, tamo od 2007. do 2010., tada sam bio klinjo od svega 14-15 godina.",
 };
 
-const RecenzijePage = ({searchParams}) => {
+const RecenzijePage = () => {
     return (
         <main className="reviewsContainer">
             <div className={styles.reviewsTitleContainer}>
@@ -17,7 +17,7 @@ const RecenzijePage = ({searchParams}) => {
                 <p>{metadata.description}</p>
             </div>
             <NewPostButtons />
-            <ReviewsGallery searchParams={searchParams}/>
+            <ReviewsGallery />
             
         </main>
     );

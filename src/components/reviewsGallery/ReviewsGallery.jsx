@@ -29,6 +29,7 @@ export default function ReviewsGallery() {
         handleRefresh
     } = useFetchReviewsWithParams('recenzije', SORT_OPTIONS.CREATED, 'desc', 30)
 
+
     return (
         <>
             <Search controls={true} handleSearch={handleSearch} search={search} handleFilter={handleFilter} filter={filter} handleSortAndOrder={handleSortAndOrder} sort={sort} order={order}/>

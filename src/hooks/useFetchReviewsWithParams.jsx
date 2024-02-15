@@ -63,7 +63,7 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
         }
 
         // Update searchParams with default values if needed
-        router.push(pathname + '?' + newSearchParams.toString());
+        router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
     }, []); // Empty dependency array ensures the effect runs only once when the component mounts
 
     
@@ -137,7 +137,7 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
             newSearchParams.set('page', 1);
         }
         // Use setSearchParams to apply the changes
-        router.push(pathname + '?' + newSearchParams.toString());
+        router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
 
     }
 
@@ -154,14 +154,14 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
             newSearchParams.set('page', 1);
             newSearchParams.delete('search');
             // Use setSearchParams to apply the changes
-            router.push(pathname + '?' + newSearchParams.toString());
+            router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
         } else {
             // Update the 'page' parameter
             newSearchParams.delete('filter');
             newSearchParams.set('page', 1);
             newSearchParams.delete('search');
             // Use setSearchParams to apply the changes
-            router.push(pathname + '?' + newSearchParams.toString());
+            router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
         }
     }
 
@@ -178,7 +178,7 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
                 newSearchParams.set('page', 1);
                 newSearchParams.delete('search');
                 // Use setSearchParams to apply the changes
-                router.push(pathname + '?' + newSearchParams.toString());
+                router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
             }
             if (orderVal === 'asc') {
                 setOrder('desc')
@@ -191,7 +191,7 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
                 newSearchParams.set('page', 1);
                 newSearchParams.delete('search');
                 // Use setSearchParams to apply the changes
-                router.push(pathname + '?' + newSearchParams.toString());
+                router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
             }
         } else {
             setSort(sortVal)
@@ -209,7 +209,7 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
                 newSearchParams.set('order', 'asc');
                 newSearchParams.set('page', 1);
                 // Use setSearchParams to apply the changes
-                router.push(pathname + '?' + newSearchParams.toString());
+                router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
                 return
             }
             if (sortVal === SORT_OPTIONS.CATEGORY) {
@@ -220,7 +220,7 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
                 newSearchParams.set('order', 'asc');
                 newSearchParams.set('page', 1);
                 // Use setSearchParams to apply the changes
-                router.push(pathname + '?' + newSearchParams.toString());
+                router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
                 return
             }
             setOrder('desc')
@@ -230,7 +230,7 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
             newSearchParams.set('order', 'desc');
             newSearchParams.set('page', 1);
             // Use setSearchParams to apply the changes
-            router.push(pathname + '?' + newSearchParams.toString());
+            router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
         }
 
     }
