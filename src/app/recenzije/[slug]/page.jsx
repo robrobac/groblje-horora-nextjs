@@ -31,13 +31,28 @@ const getData = async (slug) => {
 
 
 
-export const generateMetadata = async ({params}) => {
+export const generateMetadata = async ({params, searchParams}) => {
     const {slug} = params;
+    const {movie} = searchParams;
     const data = await getData(slug);
+    const movieNumber = movie - 1
 
+    if (searchParams) {
+        return {
+            title: data.movies[movieNumber].title,
+            description: shortenStringTo30Words(getRawContent(data.movies[movieNumber].reviewContent)),
+            openGraph: {
+                images: data.movies[movieNumber].coverImage,
+            },
+        }
+    }
+   
     return {
         title: data.reviewTitle,
         description: shortenStringTo30Words(getRawContent(data.movies[0].reviewContent)),
+        openGraph: {
+            images: data.movies[0].coverImage,
+        },
     }
 }
 

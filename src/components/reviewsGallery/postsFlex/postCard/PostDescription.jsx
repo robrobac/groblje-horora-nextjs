@@ -1,3 +1,5 @@
+'use client'
+
 import { Rating } from '@/components/rating/Rating';
 import styles from '@/components/reviewsGallery/postsFlex/postCard/postCard.module.scss';
 import CommentIcon from '@/components/svgComponents/CommentIcon';
