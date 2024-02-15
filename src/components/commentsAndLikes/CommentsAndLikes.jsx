@@ -11,7 +11,6 @@ import { format } from 'date-fns'
 export default function Comments({post}) {
     const [commentValue, setCommentValue] = useState('')
     const { user, mongoUser } = useAuth()
-    console.log(user)
 
     const [liked, setLiked] = useState(false)
     const [numberOfLikes, setNumberOfLikes] = useState(0)
@@ -43,7 +42,7 @@ export default function Comments({post}) {
             console.log('Comment Data prepared for storing to MongoDB')
     
             // Add comment data to MongoDB
-            const response = await fetch(`http://localhost:4000/api/comments/${post._id}`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/comments?id=${post._id}`, {
                 method: 'POST',
                 body: JSON.stringify(commentData),
                 headers: {
