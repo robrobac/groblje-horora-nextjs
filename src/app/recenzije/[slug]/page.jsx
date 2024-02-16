@@ -61,7 +61,7 @@ export const generateMetadata = async ({params, searchParams}) => {
                 title: data?.reviewTitle,
                 description: `${data.movies[0].title}(${data.movies[0].year}), ${data.movies[1].title}(${data.movies[1].year}), ${data.movies[2].title}(${data.movies[2].year}), ${data.movies[3].title}(${data.movies[3].year})`,
                 openGraph: {
-                    images: coverImage,
+                    images: coverImage.src,
                 },
             }
         }
