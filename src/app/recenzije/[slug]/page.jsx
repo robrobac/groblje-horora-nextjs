@@ -7,7 +7,7 @@ import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeade
 import { getRawContent } from "@/lib/utils";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
-import coverIMage from '../../../../public/images/groblje-horora-og-image.webp';
+import coverImage from '../../../../public/images/groblje-horora-og-image.webp';
 
 export const dynamic = 'force-dynamic';
 
@@ -61,7 +61,7 @@ export const generateMetadata = async ({params, searchParams}) => {
                 title: data?.reviewTitle,
                 description: `${data.movies[0].title}(${data.movies[0].year}), ${data.movies[1].title}(${data.movies[1].year}), ${data.movies[2].title}(${data.movies[2].year}), ${data.movies[3].title}(${data.movies[3].year})`,
                 openGraph: {
-                    images: '/public/images/groblje-horora-og-image.webp',
+                    images: coverImage,
                 },
             }
         }
