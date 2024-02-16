@@ -35,6 +35,7 @@ export const generateMetadata = async ({params, searchParams}) => {
     const {movie} = searchParams;
     const data = await getData(slug);
     const movieNumber = movie - 1
+    console.log(movie)
 
     if (data.movies.length === 1) {
         return {
@@ -55,7 +56,7 @@ export const generateMetadata = async ({params, searchParams}) => {
                     images: data?.movies[movieNumber].coverImage,
                 },
             }
-        } else {
+        } if (!movie) {
             return {
                 title: data?.reviewTitle + 'aaaaa',
                 description: `${data.movies[0].title}(${data.movies[0].year}), ${data.movies[1].title}(${data.movies[1].year}), ${data.movies[2].title}(${data.movies[2].year}), ${data.movies[3].title}(${data.movies[3].year})`,
