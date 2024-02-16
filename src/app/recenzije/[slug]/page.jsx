@@ -41,7 +41,7 @@ export const generateMetadata = async ({params, searchParams}) => {
             title: data?.reviewTitle,
             description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
             openGraph: {
-                images: 'https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/groblje-horora-og-image.webp?alt=media&token=9505221c-7713-4907-8a95-78047f2cd1b7',
+                images: data?.movies[0].coverImage,
             },
         }
     }
@@ -60,7 +60,7 @@ export const generateMetadata = async ({params, searchParams}) => {
                 title: data?.reviewTitle,
                 description: `${data.movies[0].title}(${data.movies[0].year}), ${data.movies[1].title}(${data.movies[1].year}), ${data.movies[2].title}(${data.movies[2].year}), ${data.movies[3].title}(${data.movies[3].year})`,
                 openGraph: {
-                    images: coverImage.src,
+                    images: 'https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/groblje-horora-og-image.webp?alt=media&token=9505221c-7713-4907-8a95-78047f2cd1b7',
                 },
             }
         }
