@@ -30,29 +30,40 @@ const getData = async (slug) => {
 }
 
 
-
 export const generateMetadata = async ({params, searchParams}) => {
     const {slug} = params;
     const {movie} = searchParams;
     const data = await getData(slug);
     const movieNumber = movie - 1
 
-    if (movie) {
+    if (data.movies.length === 1) {
         return {
-            title: data?.movies[movieNumber].title,
-            description: shortenStringTo30Words(getRawContent(data?.movies[movieNumber].reviewContent)),
+            title: data?.reviewTitle,
+            description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
             openGraph: {
-                images: data?.movies[movieNumber].coverImage,
+                images: data?.movies[0].coverImage,
             },
         }
     }
-   
-    return {
-        title: data?.reviewTitle,
-        description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
-        openGraph: {
-            images: data?.movies[0].coverImage,
-        },
+
+    if (data.movies.length === 4) {
+        if (movie) {
+            return {
+                title: data?.movies[movieNumber].title,
+                description: shortenStringTo30Words(getRawContent(data?.movies[movieNumber].reviewContent)),
+                openGraph: {
+                    images: data?.movies[movieNumber].coverImage,
+                },
+            }
+        } else {
+            return {
+                title: data?.reviewTitle,
+                description: `${data.movies[0].title}, ${data.movies[1].title}, ${data.movies[2].title}, ${data.movies[3].title}`,
+                openGraph: {
+                    images: '/public/images/groblje-horora-bg-image.jpg',
+                },
+            }
+        }
     }
 }
 

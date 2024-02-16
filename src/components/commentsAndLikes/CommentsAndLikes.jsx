@@ -167,7 +167,7 @@ export default function Comments({post}) {
                 <form className={styles.commentForm} onSubmit={handleSubmitComment}>
                     <input className={styles.formInput}
                         disabled={mongoUser && user.emailVerified ? false : true}
-                        type='text' placeholder={mongoUser ? 'Upiši komentar' : 'Prijavite se da ostavite komentar'}
+                        type='text' placeholder={mongoUser ? 'Upiši komentar' : 'Prijavite se da ostavite komentar ili like'}
                         value={commentValue}
                         onChange={(e) => {setCommentValue(e.target.value)}}
                     />
