@@ -34,6 +34,7 @@ export const Movie = ({data, movie, id}) => {
             <div className={styles.readingSection}>
                 <section className={styles.readingContent} dangerouslySetInnerHTML={{__html: getRawContent(movie.reviewContent)}}/>
             </div>
+            <hr className={styles.movieDivider}></hr>
         </div>
     )
 }

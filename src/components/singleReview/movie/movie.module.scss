@@ -44,3 +44,10 @@
         border-radius: var(--radiusM);
     }
 }
+
+.movieDivider {
+    width: 100%;
+    max-width: var(--widthDefault);
+    border: 1px solid var(--white05);
+    margin: 16px 0;
+}

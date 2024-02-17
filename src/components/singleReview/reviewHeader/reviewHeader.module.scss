@@ -5,22 +5,22 @@
 
     &:hover {}
 
-    @media (hover: hover) {
+    // @media (hover: hover) {
 
-        .image0:hover,
-        .image1:hover,
-        .image2:hover,
-        .image3:hover {
-            cursor: pointer;
-            position: relative;
-            z-index: 10;
-            -webkit-box-shadow: 0px 0px 21px 1px #000000;
-            box-shadow: 0px 0px 21px 1px #000000;
-            transform: scale(1.1);
-            transition: all .1s ease-in-out;
-        }
+    //     .image0:hover,
+    //     .image1:hover,
+    //     .image2:hover,
+    //     .image3:hover {
+    //         cursor: pointer;
+    //         position: relative;
+    //         z-index: 10;
+    //         -webkit-box-shadow: 0px 0px 21px 1px #000000;
+    //         box-shadow: 0px 0px 21px 1px #000000;
+    //         transform: scale(1.1);
+    //         transition: all .1s ease-in-out;
+    //     }
 
-    }
+    // }
 
     @media (max-width: 768px) {
         padding: 0 var(--paddingM);
