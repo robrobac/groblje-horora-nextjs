@@ -24,7 +24,7 @@
     font-size: var(--textHUGE);
     line-height: calc(var(--textHUGE) * 1.5);
     color: var(--white);
-    margin-bottom: 40px;
+
 
     span {
         color: var(--white50);
@@ -35,13 +35,23 @@
     @media (max-width: 425px) {
         font-size: var(--textXXXL);
         line-height: calc(var(--textXXXL) * 1.5);
-        margin-bottom: 20px;
     }
 
     @media (max-width: 375px) {
         overflow-wrap: break-word;
         font-size: var(--textXXL);
         line-height: calc(var(--textXXL) * 1.5);
+    }
+}
+
+.h1Margin {
+    margin-bottom: 40px;
+
+    @media (max-width: 425px) {
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 375px) {
         margin-bottom: 10px;
     }
 }

@@ -84,7 +84,7 @@ const SinglePostPage = async ({params}) => {
                     <p className={styles.reviewDate}>
                         {format(new Date(data?.createdAt), 'dd.MM.yyyy')}
                     </p>
-                    <h1 className={styles.titleH1}>{data.reviewTitle}</h1>
+                    <h1 className={`${styles.titleH1} ${styles.h1Margin}`}>{data.reviewTitle}</h1>
                 </div>
                 </>
             )}
