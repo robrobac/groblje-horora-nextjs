@@ -4,8 +4,9 @@ import { format } from "date-fns";
 import { Rating } from "@/components/rating/Rating";
 import { getRawContent } from "@/lib/utils";
 import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteButtonsSingle";
+import SocialShare from "../socialShare/SocialShare";
 
-export const Movie = ({data, movie, id}) => {
+export const Movie = ({data, movie, id, index}) => {
 
     return (
         <div className={styles.movieContainer} id={id}>
@@ -34,6 +35,7 @@ export const Movie = ({data, movie, id}) => {
             <div className={styles.readingSection}>
                 <section className={styles.readingContent} dangerouslySetInnerHTML={{__html: getRawContent(movie.reviewContent)}}/>
             </div>
+            <SocialShare slug={data?.slug} reviewType={data?.reviewType} index={index}/>
             <hr className={styles.movieDivider}></hr>
         </div>
     )
