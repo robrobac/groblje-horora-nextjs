@@ -4,6 +4,7 @@ import CommentsAndLikes from "@/components/commentsAndLikes/CommentsAndLikes";
 import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteButtonsSingle";
 import { Movie } from "@/components/singleReview/movie/Movie";
 import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeader";
+import ScrollToSection from "@/components/singleReview/scrollToSection/ScrollToSection";
 import { getRawContent } from "@/lib/utils";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
@@ -20,7 +21,7 @@ function shortenStringTo30Words(str) {
 }
 
 const getData = async (slug) => {
-    console.log(slug)
+    // console.log(slug)
     const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${slug}`);
     if (!res.ok) {
         notFound()
@@ -35,7 +36,7 @@ export const generateMetadata = async ({params, searchParams}) => {
     const {movie} = searchParams;
     const data = await getData(slug);
     const movieNumber = movie - 1
-    console.log(movie)
+    // console.log(movie)
 
     if (data.movies.length === 1) {
         return {
@@ -58,7 +59,7 @@ export const generateMetadata = async ({params, searchParams}) => {
             }
         } if (!movie) {
             return {
-                title: data?.reviewTitle + 'aaaaa',
+                title: data?.reviewTitle,
                 description: `${data.movies[0].title}(${data.movies[0].year}), ${data.movies[1].title}(${data.movies[1].year}), ${data.movies[2].title}(${data.movies[2].year}), ${data.movies[3].title}(${data.movies[3].year})`,
                 openGraph: {
                     images: 'https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/groblje-horora-og-image.webp?alt=media&amp;token=9505221c-7713-4907-8a95-78047f2cd1b7',
@@ -74,6 +75,7 @@ const SinglePostPage = async ({params}) => {
 
     return (
         <main className={styles.singlePostContainer}>
+            <ScrollToSection />
             {data.reviewType === 'quad' && (
                 <>
                 <ReviewHeader data={data}/>
@@ -88,7 +90,7 @@ const SinglePostPage = async ({params}) => {
             )}
             
             {data?.movies.map((movie, index) => (
-                <Movie key={movie._id} data={data} movie={movie} id={`movie${index}`}/>
+                <Movie key={movie._id} data={data} movie={movie} id={`movie${index + 1}`}/>
             ))}
             <CommentsAndLikes post={data}/>
             
