@@ -18,27 +18,27 @@ export default function SocialShare({slug, reviewType, index}) {
         <div>
             <p>Share: </p>
             <FacebookShareButton
-                url={ reviewType === 'single' ? `https://groblje-horora-nextjs.vercel.app/recenzije/${slug}` : `https://groblje-horora-nextjs.vercel.app/recenzije/${slug}?movie=${index + 1}`}
+                url={ reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`}
             >
                 <FacebookIcon size={48} round/>
             </FacebookShareButton>
 
             <WhatsappShareButton
-                url={ reviewType === 'single' ? `https://groblje-horora-nextjs.vercel.app/recenzije/${slug}` : `https://groblje-horora-nextjs.vercel.app/recenzije/${slug}?movie=${index + 1}`}
+                url={ reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`}
                 appId={''}
             >
                 <WhatsappIcon size={48} round />
             </WhatsappShareButton>
 
             <ViberShareButton
-                url={ reviewType === 'single' ? `https://groblje-horora-nextjs.vercel.app/recenzije/${slug}` : `https://groblje-horora-nextjs.vercel.app/recenzije/${slug}?movie=${index + 1}`}
+                url={ reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`}
                 appId={''}
             >
                 <ViberIcon size={48} round />
             </ViberShareButton>
 
             <EmailShareButton
-                url={ reviewType === 'single' ? `https://groblje-horora-nextjs.vercel.app/recenzije/${slug}` : `https://groblje-horora-nextjs.vercel.app/recenzije/${slug}?movie=${index + 1}`}
+                url={ reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`}
                 appId={''}
             >
                 <EmailIcon size={48} round />
