@@ -6,6 +6,7 @@ import { LoadingBtn } from '../buttons/loadingBtn'
 import { useEffect, useState } from 'react'
 import useAuth from '@/hooks/useAuth'
 import { format } from 'date-fns'
+import io from 'socket.io-client';
 
 
 export default function Comments({post}) {
@@ -26,6 +27,25 @@ export default function Comments({post}) {
         const likes = post?.likes.length
         setNumberOfLikes(likes)
     }, [post])
+
+
+
+    useEffect(() => {
+        const socket = io('http://localhost:4000'); // Replace with your server URL and port
+
+        socket.on('connect', () => {
+            console.log('Connected to socket.io');
+        });
+
+        socket.on('reviewChange', (change) => {
+            console.log('changed', change)
+          });
+
+        return () => {
+            socket.disconnect();
+        };
+    }, [])
+
     
     // Handle comment form submission
     const handleSubmitComment = async (e) => {

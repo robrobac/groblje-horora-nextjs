@@ -23,7 +23,8 @@
     "react-dom": "^18",
     "react-draft-wysiwyg": "^1.15.0",
     "react-firebase-hooks": "^5.1.1",
-    "sass": "^1.70.0"
+    "sass": "^1.70.0",
+    "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
     "eslint": "^8",
