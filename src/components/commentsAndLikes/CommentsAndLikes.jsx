@@ -9,9 +9,12 @@ import { format } from 'date-fns'
 import io from 'socket.io-client';
 
 
-export default function Comments({post}) {
+export default function Comments({post, slug}) {
     const [commentValue, setCommentValue] = useState('')
     const { user, mongoUser } = useAuth()
+
+    const [comments, setComments] = useState([])
+    // console.log(comments)
 
     const [liked, setLiked] = useState(false)
     const [numberOfLikes, setNumberOfLikes] = useState(0)
@@ -29,9 +32,8 @@ export default function Comments({post}) {
     }, [post])
 
 
-
     useEffect(() => {
-        const socket = io('http://localhost:4000'); // Replace with your server URL and port
+        const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL); // Replace with your server URL and port
 
         socket.on('connect', () => {
             console.log('Connected to socket.io');
@@ -39,12 +41,28 @@ export default function Comments({post}) {
 
         socket.on('reviewChange', (change) => {
             console.log('changed', change)
-          });
+            fetchPost()
+        });
+
+        const fetchPost = async () => {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${slug}`)
+            const data = await response.json()
+
+            if (response.ok) {
+                setComments(data.comments)
+            }
+
+            if (!response.ok) {
+                console.log("error fetching comments", data)
+            }
+        }
+
+        fetchPost()
 
         return () => {
             socket.disconnect();
         };
-    }, [])
+    }, [slug])
 
     
     // Handle comment form submission
@@ -164,14 +182,14 @@ export default function Comments({post}) {
             </div>
             <div className={`${styles.commentsHeader} ${styles.commentsContent}`}>
                 <ul className={styles.commentsList}>
-                    {post?.comments.length === 0 ? 
+                    {comments.length === 0 ? 
                         <p className={styles.noComments}><i>Nema komentara, budi prvi i ostavi svoj komentar</i></p>
                     :
                         ''
                     }
-                    {post?.comments.map((comment, index) => (
+                    {comments.map((comment, index) => (
                         <li className={styles.comment} key={`comment${index}`}>
-                            <div className={styles.commentAuthor}>{comment?.authorName} @ <span>{format(new Date(comment?.createdAt), 'dd.MM.yyyy HH:mm:ss')}</span></div>
+                            <div className={styles.commentAuthor}>{comment?.authorName} {comment.authorName !== "Groblje Horora Arhiva" && (<span>@ {format(new Date(comment?.createdAt), 'dd.MM.yyyy HH:mm:ss')}</span>)} </div>
                             {mongoUser?.role === 'admin' || mongoUser?.username === comment.authorName || mongoUser?.email === comment.authorEmail ?
                                 <button className={styles.removeComment} onClick={() => handleDeleteComment(comment._id)}>X</button>
                             :

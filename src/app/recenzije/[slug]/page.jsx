@@ -92,7 +92,7 @@ const SinglePostPage = async ({params}) => {
             {data?.movies.map((movie, index) => (
                 <Movie key={movie._id} data={data} movie={movie} id={`movie${index + 1}`} index={index}/>
             ))}
-            <CommentsAndLikes post={data}/>
+            <CommentsAndLikes post={data} slug={slug}/>
             
         </main>
     );

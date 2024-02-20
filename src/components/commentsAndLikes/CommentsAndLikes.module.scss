@@ -87,8 +87,10 @@
 
     .commentAuthor {
         color: var(--white);
+        font-weight: 600;
 
         span {
+            font-weight: 400;
             color: var(--white50);
             font-size: var(--textS);
         }
