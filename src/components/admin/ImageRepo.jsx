@@ -61,7 +61,7 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
             let path = '';
     
             // create firebase storage path
-            path = `postImagesTEST/${stringFormatting('post-image-', Date.now())}`;
+            path = `postImages/${stringFormatting('post-image-', Date.now())}`;
     
             try {
                 // Upload to Firebase and retrieve image's url and path

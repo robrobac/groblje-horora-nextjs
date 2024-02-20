@@ -237,7 +237,7 @@ export default function EditForm({slug}) {
                     console.log("ima compressedCoverImage")
                     // create firebase storage path
                     const sanitizedMovieTitle = movie.title.replace(/\//g, '-')
-                    const path = `coverImagesTEST/${stringFormatting(sanitizedMovieTitle, `-coverImage-${Date.now()}`)}`
+                    const path = `coverImages/${stringFormatting(sanitizedMovieTitle, `-coverImage-${Date.now()}`)}`
 
                     try {
                         // requiredInputs handles checking if there's empty fields in the form, if there is then don't upload cover images to firebase

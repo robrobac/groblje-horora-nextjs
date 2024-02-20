@@ -159,7 +159,7 @@ export default function NewForm({ numberOfMovies }) {
                 if (movie.compressedCoverImage) {
                     // create firebase storage path
                     const sanitizedMovieTitle = movie.title.replace(/\//g, '-')
-                    const path = `coverImagesTEST/${stringFormatting(sanitizedMovieTitle, `-cover-image-${Date.now()}`)}`;
+                    const path = `coverImages/${stringFormatting(sanitizedMovieTitle, `-cover-image-${Date.now()}`)}`;
 
                     try {
                         // requiredInputs handles checking if there's empty fields in the form, if there is then don't upload cover images to firebase
