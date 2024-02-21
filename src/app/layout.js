@@ -1,10 +1,10 @@
-import { Inter } from "next/font/google";
+import { Lexend } from "next/font/google";
 import "./globals.css";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/footer";
 import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
 
-const inter = Inter({ subsets: ["latin"] });
+const lexend = Lexend({ subsets: ["latin"] });
 
 export const metadata = {
     title: {
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="hr">
 
-            <body suppressHydrationWarning={true} className={inter.className}>
+            <body suppressHydrationWarning={true} className={lexend.className}>
 
                 <Header />
                 {children}

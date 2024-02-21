@@ -60,7 +60,7 @@
     box-sizing: border-box;
     border: medium none;
     border-spacing: 0;
-    font-family: 'Lexend', sans-serif;
+    /* font-family: 'Lexend', sans-serif; */
     font-size: var(--textM);
     line-height: calc(var(--textM) * 1.5);
 }
