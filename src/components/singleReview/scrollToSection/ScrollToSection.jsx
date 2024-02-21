@@ -14,14 +14,17 @@ export default function ScrollToSection() {
         setLoading(true)
         if (movieParam) {
             const scrollTarget = document.getElementById(`movie${movieParam}`)
+            console.log(scrollTarget)
             if (scrollTarget) {
-                scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' })
+                scrollTarget.scrollIntoView()
                 window.scrollBy(0, -100); // Adjust the offset value as needed
+                console.log("scrolled")
             }
+            
         }
-        console.log("scrolled")
+        
         setLoading(false)
-    })
+    }, [])
 
     if (loading) {
         return (
