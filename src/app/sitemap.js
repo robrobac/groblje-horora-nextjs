@@ -16,6 +16,22 @@ export default async function sitemap() {
             url: baseUrl,
             lastModified: new Date()
         },
+        {
+            url: `${baseUrl}/top25`,
+            lastModified: new Date()
+        },
+        {
+            url: `${baseUrl}/recenzije`,
+            lastModified: new Date()
+        },
+        {
+            url: `${baseUrl}/top20smeca`,
+            lastModified: new Date()
+        },
+        {
+            url: `${baseUrl}/0-blogu`,
+            lastModified: new Date()
+        },
         ...postsUrls,
     ]
 }

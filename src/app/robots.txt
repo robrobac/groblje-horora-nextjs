@@ -1,0 +1,8 @@
+
+User-agent: *
+Disallow: /prijava
+Disallow: /registracija
+Disallow: /nova-recenzija
+Disallow: /novi-kratki-pregled
+
+Sitemap: https://www.groblje-horora.com/sitemap.xml

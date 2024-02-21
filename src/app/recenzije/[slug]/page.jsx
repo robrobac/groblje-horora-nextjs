@@ -45,6 +45,9 @@ export const generateMetadata = async ({params, searchParams}) => {
             openGraph: {
                 images: data?.movies[0].coverImage,
             },
+            alternates: {
+                canonical: `https://www.groblje-horora.com/recenzije/${data?.slug}`
+            }
         }
     }
 
@@ -56,6 +59,9 @@ export const generateMetadata = async ({params, searchParams}) => {
                 openGraph: {
                     images: data?.movies[movieNumber].coverImage,
                 },
+                alternates: {
+                    canonical: `https://www.groblje-horora.com/recenzije/${data?.slug}`
+                }
             }
         } if (!movie) {
             return {
@@ -64,6 +70,9 @@ export const generateMetadata = async ({params, searchParams}) => {
                 openGraph: {
                     images: 'https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/groblje-horora-og-image.webp?alt=media&amp;token=9505221c-7713-4907-8a95-78047f2cd1b7',
                 },
+                alternates: {
+                    canonical: `https://www.groblje-horora.com/recenzije/${data?.slug}`
+                }
             }
         }
     }
