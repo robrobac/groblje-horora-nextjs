@@ -12,14 +12,23 @@
     --radiusL: 20px;
 
     /* COLORS */
-    /*   WHITE VARIANTS */
+      /* WHITE VARIANTS
         --white: #ededed;
         --white80: #edededcc;
         --white50: #ededed80;
         --white25: #ededed40;
         --white15: #ededed26;
         --white05: #ededed0d;
-        --white02: #ededed05;
+        --white02: #ededed05; */
+
+        /*   WHITE VARIANTS */
+        --white: rgba(237, 222, 222, 1);
+        --white80: rgba(237, 222, 222, 0.8);
+        --white50: rgba(237, 222, 222, 0.5);
+        --white25: rgba(237, 222, 222, 0.25);
+        --white15: rgba(237, 222, 222, 0.15);
+        --white05: rgba(237, 222, 222, 0.05);
+        --white02: rgba(237, 222, 222, 0.02);
 
     /*   BLACK VARIANTS */
         --background: #161616;
