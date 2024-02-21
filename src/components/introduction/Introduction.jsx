@@ -1,7 +1,7 @@
 import styles from '@/components/introduction/introduction.module.scss';
 import { Creepster } from "next/font/google";
 
-const creepster = Inter({ subsets: ["latin"] });
+const creepster = Creepster({ subsets: ["latin"], weight: '400' });
 
 export const Introduction = () => {
 
