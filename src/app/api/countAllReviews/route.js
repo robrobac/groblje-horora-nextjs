@@ -2,6 +2,8 @@ import { dbConnect } from "@/lib/mongo/dbConnect"
 import reviewModel from "@/lib/mongo/models/reviewModel"
 import { NextResponse } from "next/server"
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async (request) => {
     try {
         dbConnect()
