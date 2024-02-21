@@ -72,6 +72,7 @@
     /* font-family: 'Lexend', sans-serif; */
     font-size: var(--textM);
     line-height: calc(var(--textM) * 1.5);
+    cursor: url('/normal-select.cur'), auto;
 }
 
 body {
