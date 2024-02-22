@@ -16,10 +16,19 @@
     gap: 5px;
     align-items: center;
     padding-right: 10px;
-    cursor: var(--defaultCursor);
+    cursor: var(--pointerCursor1);
+
+    p {
+        cursor: inherit;
+    }
 
     svg {
         fill: var(--white25);
+        cursor: inherit;
+
+        path {
+            cursor: inherit;
+        }
 
     }
 

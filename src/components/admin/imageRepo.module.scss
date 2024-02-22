@@ -23,7 +23,7 @@
 
     .compressedImage {
         height: 150px;
-        cursor: (var--noDropCursor);
+        cursor: var(--noDropCursor);
     }
 
     .uploadedImage {
@@ -34,7 +34,7 @@
         gap: 5px;
         padding: 5px;
         border: 1px solid var(--white15);
-        cursor: (var--copyCursor);
+        cursor: var(--copyCursor);
 
         @media (hover: hover) {
             &:hover {
@@ -80,7 +80,7 @@
 
         img {
             height: 150px;
-            cursor: (var--copyCursor);
+            cursor: inherit;
         }
 
         p {
@@ -92,7 +92,7 @@
             /* IE 10 and IE 11 */
             user-select: none;
             /* Standard syntax */
-            cursor: (var--copyCursor);
+            cursor: inherit;
 
         }
     }

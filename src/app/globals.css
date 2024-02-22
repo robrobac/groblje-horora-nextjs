@@ -69,7 +69,16 @@
         --inputCursor: url('/cursors/input.cur'), auto;
         --noDropCursor: url('/cursors/no-drop.cur'), auto;
         --copyCursor: url('/cursors/copy.cur'), auto;
+        
 
+        /*  CURSORS DEFAULT  
+        --defaultCursor: default;
+        --pointerCursor: pointer;
+        --pointerCursor1: pointer;
+        --inputCursor: text;
+        --noDropCursor: no-drop;
+        --copyCursor: copy;
+        */
 }
 
 * {

@@ -277,7 +277,7 @@ export default function NewForm({ numberOfMovies }) {
                                     <div>
                                         {movie.compressedCoverImage
                                         ?
-                                            <img src={URL.createObjectURL(movie.compressedCoverImage)} alt='uploadedImage' onClick={() => handleUploadClick(index)}/>
+                                            <img src={URL.createObjectURL(movie.compressedCoverImage)} className={styles.uploadedCoverImage} alt='uploadedImage' onClick={() => handleUploadClick(index)}/>
                                         :
                                             <label className={`${styles.fileLabel} ${emptyFields.includes(`movie${index}coverImage`) ? 'error' : ''}`} htmlFor={`coverImage${index}`}>Cover Image</label>
                                         }

@@ -118,11 +118,16 @@
     height: 460px;
     border-radius: var(--radiusM);
 
+    div .uploadedCoverImage {
+        cursor: var(--pointerCursor);
+    }
+
     img {
         width: 100%;
         height: 460px;
         object-fit: cover;
         border-radius: var(--radiusM);
+        cursor: inherit;
     }
 }
 
