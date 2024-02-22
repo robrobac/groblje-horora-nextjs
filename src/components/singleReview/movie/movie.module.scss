@@ -28,6 +28,22 @@
     gap: 1rem;
     color: var(--white80);
 
+    p {
+        strong {
+            color: var(--white)
+        }
+
+        em {
+            font-weight: 300;
+        }
+
+        a {
+            color: var(--redBright);
+            text-decoration: underline;
+            cursor: url('/cursors/pointer.cur'), auto;
+        }
+    }
+
     img {
         border-radius: var(--radiusS);
     }

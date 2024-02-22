@@ -23,23 +23,23 @@
         min-height: 200px;
         padding: 0 20px;
 
-        font-weight: 200;
+        font-weight: 300;
         cursor: url('/cursors/input.cur'), auto;
 
 
         span[style*="font-style: italic"] {
             /* Your styles for the selected span element with font-weight: bold */
-            color: yellow;
         }
 
         span[style*="font-weight: bold"] {
             /* Your styles for the selected span element with font-weight: bold */
-            color: blue;
+
         }
 
 
         a {
-            color: red;
+            color: var(--redBright);
+            text-decoration: underline;
         }
     }
 
