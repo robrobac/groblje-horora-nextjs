@@ -17,11 +17,11 @@ export default function Search({search, handleSearch, sort, order, handleSortAnd
     //  event listeners for closing the virtual keyboard on touch outside the input field
     useEffect(() => {
         // Attach scroll event listener when component mounts
-        window.addEventListener('touchstart', handleOutsideClick);
+        window.addEventListener('touchmove', handleOutsideClick);
         
         // Detach scroll event listener when component unmounts
         return () => {
-            window.removeEventListener('touchstart', handleOutsideClick);
+            window.removeEventListener('touchmove', handleOutsideClick);
         };
     }, []);
 
