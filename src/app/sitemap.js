@@ -4,7 +4,10 @@ export const revalidate = 60;
 export default async function sitemap() {
     const baseUrl = "https://www.groblje-horora.com"
 
-    const res = await fetch(`${baseUrl}/api/reviews`);
+    const res = await fetch(`${baseUrl}/api/reviews`, {
+        next: { revalidate: 60 },
+    });
+
     const posts = await res.json()
 
     const postsUrls = posts.reviews?.map((review) => {
