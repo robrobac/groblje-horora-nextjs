@@ -1,0 +1,45 @@
+.filterAndSortContainer {
+    position: relative;
+    width: fit-content;
+    display: flex;
+    justify-content: right;
+
+
+    .filterAndSortControls {
+        font-weight: 300;
+        position: absolute;
+        top: 38px;
+        right: 0;
+        background-color: rgb(12, 12, 12);
+        background-color: var(--black90);
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        padding: var(--paddingM);
+        border-radius: var(--radiusM);
+
+        -webkit-box-shadow: 0px 0px 21px 1px #000000;
+        box-shadow: 0px 0px 21px 1px #000000;
+
+
+        @media (max-width: 425px) {
+            flex-direction: column;
+        }
+
+
+        .filterOptions,
+        .sortOptions {
+            display: flex;
+            flex-direction: column;
+            flex-direction: column;
+            min-width: 130px;
+            width: fit-content;
+            gap: 8px;
+
+        }
+
+        .filterOptions {}
+
+        .sortOptions {}
+    }
+}

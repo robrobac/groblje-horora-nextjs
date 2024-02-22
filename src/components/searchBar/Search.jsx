@@ -5,6 +5,7 @@ import Filter from './Filter'
 import Sort from './Sort'
 import useCountReviews from '@/hooks/useCountReviews';
 import { SORT_OPTIONS } from '@/lib/sortOptions';
+import FilterAndSort from './filterAndSort/FilterAndSort';
 
 export default function Search({search, handleSearch, sort, order, handleSortAndOrder, handleFilter, filter, controls}) {
     const inputRef = useRef(null)
@@ -51,7 +52,7 @@ export default function Search({search, handleSearch, sort, order, handleSortAnd
             </div>
             {controls ? (
                 <div className={styles.searchControls}>
-                    <div className={styles.filterControl}>
+                    {/* <div className={styles.filterControl}>
                         <Filter clickFunction={handleFilter} title='Sve' label='' filter={filter} search={search} count={count} counting={count?.numberOfReviews}/>
                         <Filter clickFunction={handleFilter} title='Kratki Pregledi' label='quad' filter={filter} search={search} count={count} counting={count?.quadReviews}/>
                         <Filter clickFunction={handleFilter} title='Recenzije' label='single' filter={filter} search={search} count={count} counting={count?.singleReviews}/>
@@ -60,7 +61,8 @@ export default function Search({search, handleSearch, sort, order, handleSortAnd
                         <Sort clickFunction={handleSortAndOrder} title='Naslov' sortOption={SORT_OPTIONS.TITLE} sort={sort} order={order} search={search}/>
                         <Sort clickFunction={handleSortAndOrder} title='Ocjena' sortOption={SORT_OPTIONS.RATING} sort={sort} order={order} search={search}/>
                         <Sort clickFunction={handleSortAndOrder} title='Datum' sortOption={SORT_OPTIONS.CREATED} sort={sort} order={order} search={search}/>
-                    </div>
+                    </div> */}
+                    <FilterAndSort handleFilter={handleFilter} filter={filter} search={search} count={count} handleSortAndOrder={handleSortAndOrder} sort={sort} order={order}/>
                 </div>
             ) : ''}
         </div>
