@@ -51,7 +51,7 @@
     font-size: var(--textXXL);
     line-height: calc(var(--textXXL) * 1.5);
     transition: .1s;
-    cursor: url('/cursors/pointer.cur'), auto;
+    cursor: var(--pointerCursor);
 
     @media (hover: hover) {
         &:hover {
@@ -98,7 +98,7 @@
 }
 
 .quadCoverContainer {
-    cursor: url('/cursors/pointer.cur'), auto;
+    cursor: var(--pointerCursor);
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -147,7 +147,7 @@
         object-fit: cover;
         height: 100%;
         width: 100%;
-        cursor: url('/cursors/pointer.cur'), auto;
+        cursor: var(--pointerCursor);
     }
 }
 
@@ -217,7 +217,7 @@
     font-size: var(--textXXL);
     line-height: calc(var(--textXXL) * 1.5);
     transition: .1s;
-    cursor: url('/cursors/pointer.cur'), auto;
+    cursor: var(--pointerCursor);
 
     @media (hover: hover) {
         &:hover {
@@ -229,7 +229,7 @@
         color: var(--white50);
         font-size: inherit;
         line-height: inherit;
-        cursor: url('/cursors/pointer.cur'), auto;
+        cursor: var(--pointerCursor);
     }
 
     @media (max-width: 230px) {
@@ -286,7 +286,7 @@
         object-fit: cover;
         height: 100%;
         width: 100%;
-        cursor: url('/cursors/pointer.cur'), auto;
+        cursor: var(--pointerCursor);
         border-radius: var(--radiusM);
     }
 

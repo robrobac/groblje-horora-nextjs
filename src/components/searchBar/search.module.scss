@@ -32,7 +32,7 @@
     padding-left: 40px;
     width: 100%;
     border-radius: var(--radiusS);
-    cursor: url('/cursors/input.cur'), auto;
+    cursor: var(--inputCursor);
 
     &:focus {
         border: 1px solid var(--white);

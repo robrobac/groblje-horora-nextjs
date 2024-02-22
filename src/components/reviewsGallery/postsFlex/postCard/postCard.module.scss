@@ -50,7 +50,7 @@
     font-size: var(--textL);
     line-height: calc(var(--textL) * 1.5);
     transition: .1s;
-    cursor: url('/cursors/pointer.cur'), auto;
+    cursor: var(--pointerCursor);
 
     @media (hover: hover) {
         &:hover {
@@ -62,7 +62,7 @@
         font-size: inherit;
         line-height: inherit;
         color: var(--white50);
-        cursor: url('/cursors/pointer.cur'), auto;
+        cursor: var(--pointerCursor);
     }
 
     @media (max-width: 425px) {
@@ -118,7 +118,7 @@
         object-fit: cover;
         border-radius: var(--radiusM);
         background-color: var(--white15);
-        cursor: url('/cursors/pointer.cur'), auto;
+        cursor: var(--pointerCursor);
     }
 }
 
@@ -148,7 +148,7 @@
         width: 100%;
         object-fit: cover;
         background-color: var(--white15);
-        cursor: url('/cursors/pointer.cur'), auto;
+        cursor: var(--pointerCursor);
     }
 
     .image01 {

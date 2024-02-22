@@ -23,7 +23,7 @@
 }
 
 .tab {
-    cursor: url('/cursors/pointer.cur'), auto;
+    cursor: var(--pointerCursor);
     padding: 10px 0;
     border-radius: var(--radiusS) var(--radiusS) 0 0;
     flex: 1;
@@ -100,7 +100,7 @@
 .fileLabel {
     border: 1px solid var(--white15);
     border-radius: var(--radiusM);
-    cursor: url('/cursors/pointer.cur'), auto;
+    cursor: var(--pointerCursor);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,7 +113,7 @@
 }
 
 .formImage {
-    cursor: url('/cursors/pointer.cur'), auto;
+    cursor: var(--pointerCursor);
     width: 322px;
     height: 460px;
     border-radius: var(--radiusM);
@@ -168,7 +168,7 @@
     fill: var(--white);
     background-color: var(--black);
     border-radius: var(--radiusM);
-    cursor: url('/cursors/pointer.cur'), auto;
+    cursor: var(--pointerCursor);
     z-index: 20;
 
     @media (hover: hover) {

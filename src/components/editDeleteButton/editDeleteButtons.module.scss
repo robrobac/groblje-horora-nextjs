@@ -10,15 +10,15 @@
 
     svg {
         fill: var(--white50);
-        cursor: url('/cursors/pointer.cur'), auto;
+        cursor: var(--pointerCursor);
 
         path {
-            cursor: url('/cursors/pointer.cur'), auto;
+            cursor: var(--pointerCursor);
         }
     }
 
     .adminBtn {
-        cursor: url('/cursors/pointer.cur'), auto;
+        cursor: var(--pointerCursor);
         width: 48px;
         height: 48px;
         display: flex;

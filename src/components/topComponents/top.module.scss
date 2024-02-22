@@ -34,7 +34,7 @@
     font-size: var(--textHUGE);
     line-height: calc(var(--textHUGE) * 1.5);
     transition: .1s;
-    cursor: url('/cursors/pointer.cur'), auto;
+    cursor: var(--pointerCursor);
 
     @media (hover: hover) {
         &:hover {
@@ -73,7 +73,7 @@
         object-fit: cover;
         height: 100%;
         width: 100%;
-        cursor: url('/cursors/pointer.cur'), auto;
+        cursor: var(--pointerCursor);
         border-radius: var(--radiusM);
     }
 

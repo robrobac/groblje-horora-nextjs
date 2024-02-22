@@ -11,7 +11,7 @@
     //     .image1:hover,
     //     .image2:hover,
     //     .image3:hover {
-    //         cursor: url('/cursors/pointer.cur'), auto;
+    //         cursor: var(--pointerCursor);
     //         position: relative;
     //         z-index: 10;
     //         -webkit-box-shadow: 0px 0px 21px 1px #000000;

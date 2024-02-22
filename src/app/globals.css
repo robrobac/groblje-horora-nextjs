@@ -61,6 +61,15 @@
         --textXLtitle: 80px;
         --textLtitle: 60px;
         --textMtitle: 40px;
+
+    /*  CURSORS  */
+        --defaultCursor: url('/cursors/default.cur'), auto;
+        --pointerCursor: url('/cursors/pointer.cur'), auto;
+        --pointerCursor1: url('/cursors/pointer1.cur'), auto;
+        --inputCursor: url('/cursors/input.cur'), auto;
+        --noDropCursor: url('/cursors/no-drop.cur'), auto;
+        --copyCursor: url('/cursors/copy.cur'), auto;
+
 }
 
 * {
@@ -72,7 +81,7 @@
     /* font-family: 'Lexend', sans-serif; */
     font-size: var(--textM);
     line-height: calc(var(--textM) * 1.5);
-    cursor: url('/cursors/default.cur'), auto;
+    cursor: var(--defaultCursor);
 }
 
 body {
@@ -132,7 +141,7 @@ a {
     padding-left: 10px;
     font-size: .9rem;
     font-weight: 600;
-    cursor: url('/cursors/pointer1.cur'), auto;
+    cursor: var(--pointerCursor1);
 
     span.error {
         color: red;
@@ -145,7 +154,7 @@ a {
     background-color: transparent;
     font-size: var(--textM);
     color: var(--white80);
-    cursor: url('/cursors/input.cur'), auto;
+    cursor: var(--inputCursor);
 
     &.error {
         border: 1px solid red;

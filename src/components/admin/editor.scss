@@ -9,12 +9,12 @@
     }
 
     .DraftEditor-root * * {
-        cursor: url('/cursors/input.cur'), auto;
+        cursor: var(--inputCursor);
     }
 
     .rdw-link-decorator-wrapper {
         img {
-            cursor: url('/cursors/pointer1.cur'), auto;
+            cursor: var(--pointerCursor1);
         }
     }
 
@@ -24,7 +24,7 @@
         padding: 0 20px;
 
         font-weight: 300;
-        cursor: url('/cursors/input.cur'), auto;
+        cursor: var(--inputCursor);
 
 
         span[style*="font-style: italic"] {
@@ -62,16 +62,16 @@
         height: unset;
 
         label {
-            cursor: url('/cursors/pointer1.cur'), auto;
+            cursor: var(--pointerCursor1);
         }
 
         input {
-            cursor: url('/cursors/input.cur'), auto;
+            cursor: var(--inputCursor);
         }
 
         span {
             button {
-                cursor: url('/cursors/pointer.cur'), auto;
+                cursor: var(--pointerCursor);
             }
         }
     }
@@ -106,18 +106,18 @@
     }
 
     .rdw-option-wrapper {
-        cursor: url('/cursors/pointer.cur'), auto;
+        cursor: var(--pointerCursor);
 
         img {
-            cursor: url('/cursors/pointer.cur'), auto;
+            cursor: var(--pointerCursor);
         }
     }
 
     .rdw-option-disabled {
-        cursor: url('/cursors/default.cur'), auto;
+        cursor: var(--defaultCursor);
 
         img {
-            cursor: url('/cursors/default.cur'), auto;
+            cursor: var(--defaultCursor);
         }
     }
 }

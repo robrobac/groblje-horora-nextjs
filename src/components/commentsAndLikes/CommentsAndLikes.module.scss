@@ -16,7 +16,7 @@
     gap: 5px;
     align-items: center;
     padding-right: 10px;
-    cursor: url('/cursors/default.cur'), auto;
+    cursor: var(--defaultCursor);
 
     svg {
         fill: var(--white25);
@@ -77,7 +77,7 @@
         top: 0;
         right: 0;
         border: none;
-        cursor: url('/cursors/pointer.cur'), auto;
+        cursor: var(--pointerCursor);
         width: 20px;
         height: 20px;
         border-radius: 50px;
@@ -132,7 +132,7 @@
     background-color: transparent;
     width: 100%;
     color: var(--white80);
-    cursor: url('/cursors/input.cur'), auto;
+    cursor: var(--inputCursor);
 
     &:focus {
         border: 1px solid var(--white50);
@@ -144,7 +144,7 @@
     }
 
     &:disabled {
-        cursor: url('/cursors/default.cur'), auto;
+        cursor: var(--defaultCursor);
     }
 
 }

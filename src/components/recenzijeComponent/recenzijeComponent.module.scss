@@ -42,7 +42,7 @@
             line-height: calc(var(--textHUGE) * 1.5);
             transition: .1s;
             text-shadow: 0px 0px 18px #141414;
-            cursor: url('/cursors/pointer.cur'), auto;
+            cursor: var(--pointerCursor);
 
             @media (hover: hover) {
                 &:hover {

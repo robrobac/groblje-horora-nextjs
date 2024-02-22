@@ -179,10 +179,6 @@ const PrijavaPage = ({searchParams}) => {
                             </div>
                             <LoadingBtn loading={loggingIn} content="Pošalji" type={loggingIn ? 'button' : 'submit'} size={'20px'}/>
                         </form>
-                        {/* <p className={styles.separator}>google uskoro</p>
-                        <button className={styles.googleLoginButton} type="button" disabled>
-                            <GoogleIcon /> Sign in with Google
-                        </button> */}
                         <p onClick={() => handleSwitch(true)}><span>Zaboravili ste lozinku?</span></p>
                         <p>Nemaš korisnički račun? <Link href='/registracija'>Registriraj se</Link></p>
                         

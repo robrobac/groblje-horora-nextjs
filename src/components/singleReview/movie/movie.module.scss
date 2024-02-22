@@ -40,7 +40,7 @@
         a {
             color: var(--redBright);
             text-decoration: underline;
-            cursor: url('/cursors/pointer.cur'), auto;
+            cursor: var(--pointerCursor);
         }
     }
 

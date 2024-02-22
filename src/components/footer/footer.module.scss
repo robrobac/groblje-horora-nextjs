@@ -21,7 +21,7 @@
         font-size: inherit;
         color: var(--white80);
         text-decoration: underline;
-        cursor: url('/cursors/pointer.cur'), auto;
+        cursor: var(--pointerCursor);
 
         &:hover {
             color: var(--red);

@@ -35,10 +35,10 @@
         svg {
             fill: var(--white);
             transition: all 0.1s ease-in-out;
-            cursor: url('/cursors/pointer.cur'), auto;
+            cursor: var(--pointerCursor);
 
             path {
-                cursor: url('/cursors/pointer.cur'), auto;
+                cursor: var(--pointerCursor);
             }
         }
 
@@ -64,7 +64,7 @@
             .authButton {
                 font-size: inherit;
                 line-height: inherit;
-                cursor: url('/cursors/pointer.cur'), auto;
+                cursor: var(--pointerCursor);
                 padding: 5px 10px;
                 margin-left: 8px;
                 border: none;
@@ -106,7 +106,7 @@
                 color: var(--white);
                 padding: 5px;
                 transition: all 0.1s ease-in-out;
-                cursor: url('/cursors/pointer.cur'), auto;
+                cursor: var(--pointerCursor);
 
                 &.active {
                     color: var(--red);
@@ -162,10 +162,10 @@
         svg {
             fill: var(--white);
             transition: all 0.1s ease-in-out;
-            cursor: url('/cursors/pointer.cur'), auto;
+            cursor: var(--pointerCursor);
 
             path {
-                cursor: url('/cursors/pointer.cur'), auto;
+                cursor: var(--pointerCursor);
             }
         }
 

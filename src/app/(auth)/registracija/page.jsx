@@ -151,10 +151,6 @@ const RegistracijaPage = () => {
                         </div>
                         <LoadingBtn loading={creatingUser} content="Registracija" type={creatingUser ? 'button' : 'submit'} size={'20px'}/>
                     </form>
-                    {/* <p className={styles.separator}>google uskoro</p>
-                    <button className={styles.googleLoginButton} type="button" disabled>
-                        <GoogleIcon /> Sign in with Google
-                    </button> */}
                     <p>Već imate račun? <Link href='/prijava'>Prijavite se</Link></p>
                 </div>
             </div>
