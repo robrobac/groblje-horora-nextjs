@@ -38,6 +38,8 @@ export default function FilterAndSort({handleFilter, filter, search, count, hand
                         <Filter clickFunction={handleFilter} title='Sve' label='' filter={filter} search={search} count={count} counting={count?.numberOfReviews}/>
                         <Filter clickFunction={handleFilter} title='Kratki Pregledi' label='quad' filter={filter} search={search} count={count} counting={count?.quadReviews}/>
                         <Filter clickFunction={handleFilter} title='Recenzije' label='single' filter={filter} search={search} count={count} counting={count?.singleReviews}/>
+                        <Filter title='Kratki Filmovi' label='...'/>
+                        <Filter title='Horor Serije' label='...'/>
                     </div>
                     
                     <div className={styles.sortOptions}>
