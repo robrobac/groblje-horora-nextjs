@@ -30,10 +30,10 @@
         fill: var(--white25);
         height: 30px;
         width: 30px;
-        cursor: var(--pointerCursor);
+        cursor: inherit;
 
         path {
-            cursor: var(--pointerCursor);
+            cursor: inherit;
         }
     }
 
