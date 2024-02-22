@@ -24,12 +24,17 @@
     border: 2px solid var(--white15);
     z-index: 1000;
     background-color: var(--white05);
-    cursor: pointer;
+    cursor: url('/cursors/pointer.cur'), auto;
 
     svg {
         fill: var(--white25);
         height: 30px;
         width: 30px;
+        cursor: url('/cursors/pointer.cur'), auto;
+
+        path {
+            cursor: url('/cursors/pointer.cur'), auto;
+        }
     }
 
     @media (max-width: 768px) {

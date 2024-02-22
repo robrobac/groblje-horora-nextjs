@@ -16,10 +16,11 @@
     gap: 5px;
     align-items: center;
     padding-right: 10px;
-    cursor: pointer;
+    cursor: url('/cursors/default.cur'), auto;
 
     svg {
         fill: var(--white25);
+
     }
 
     @media (hover: hover) {
@@ -76,7 +77,7 @@
         top: 0;
         right: 0;
         border: none;
-        cursor: pointer;
+        cursor: url('/cursors/pointer.cur'), auto;
         width: 20px;
         height: 20px;
         border-radius: 50px;
@@ -131,6 +132,7 @@
     background-color: transparent;
     width: 100%;
     color: var(--white80);
+    cursor: url('/cursors/input.cur'), auto;
 
     &:focus {
         border: 1px solid var(--white50);
@@ -139,6 +141,10 @@
 
     &::placeholder {
         color: var(--white15);
+    }
+
+    &:disabled {
+        cursor: url('/cursors/default.cur'), auto;
     }
 
 }

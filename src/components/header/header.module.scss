@@ -35,7 +35,11 @@
         svg {
             fill: var(--white);
             transition: all 0.1s ease-in-out;
-            cursor: pointer;
+            cursor: url('/cursors/pointer.cur'), auto;
+
+            path {
+                cursor: url('/cursors/pointer.cur'), auto;
+            }
         }
 
         @media (hover: hover) {
@@ -60,7 +64,7 @@
             .authButton {
                 font-size: inherit;
                 line-height: inherit;
-                cursor: pointer;
+                cursor: url('/cursors/pointer.cur'), auto;
                 padding: 5px 10px;
                 margin-left: 8px;
                 border: none;
@@ -102,6 +106,7 @@
                 color: var(--white);
                 padding: 5px;
                 transition: all 0.1s ease-in-out;
+                cursor: url('/cursors/pointer.cur'), auto;
 
                 &.active {
                     color: var(--red);
@@ -153,10 +158,15 @@
         display: none;
         margin-left: auto;
 
+
         svg {
             fill: var(--white);
             transition: all 0.1s ease-in-out;
-            cursor: pointer;
+            cursor: url('/cursors/pointer.cur'), auto;
+
+            path {
+                cursor: url('/cursors/pointer.cur'), auto;
+            }
         }
 
         @media (max-width: 1024px) {

@@ -44,10 +44,24 @@
 
     .rdw-image-modal,
     .rdw-link-modal {
-        background-color: var(--commentsBG);
+        background-color: var(--black90);
         box-shadow: none;
         border: 1px solid var(--white15);
         height: unset;
+
+        label {
+            cursor: url('/cursors/pointer1.cur'), auto;
+        }
+
+        input {
+            cursor: url('/cursors/input.cur'), auto;
+        }
+
+        span {
+            button {
+                cursor: url('/cursors/pointer.cur'), auto;
+            }
+        }
     }
 
     .rdw-image-modal-header {
@@ -65,5 +79,21 @@
 
     .rdw-image-modal-size {
         display: none;
+    }
+
+    .rdw-option-wrapper {
+        cursor: url('/cursors/pointer.cur'), auto;
+
+        img {
+            cursor: url('/cursors/pointer.cur'), auto;
+        }
+    }
+
+    .rdw-option-disabled {
+        cursor: url('/cursors/default.cur'), auto;
+
+        img {
+            cursor: url('/cursors/default.cur'), auto;
+        }
     }
 }

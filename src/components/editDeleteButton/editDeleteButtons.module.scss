@@ -9,11 +9,16 @@
     }
 
     svg {
-        fill: var(--white50)
+        fill: var(--white50);
+        cursor: url('/cursors/pointer.cur'), auto;
+
+        path {
+            cursor: url('/cursors/pointer.cur'), auto;
+        }
     }
 
     .adminBtn {
-        cursor: pointer;
+        cursor: url('/cursors/pointer.cur'), auto;
         width: 48px;
         height: 48px;
         display: flex;

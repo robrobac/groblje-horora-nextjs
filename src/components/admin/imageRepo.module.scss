@@ -23,7 +23,7 @@
 
     .compressedImage {
         height: 150px;
-        cursor: no-drop;
+        cursor: url('/cursors/no-drop.cur'), auto;
     }
 
     .uploadedImage {
@@ -34,7 +34,7 @@
         gap: 5px;
         padding: 5px;
         border: 1px solid var(--white15);
-        cursor: copy;
+        cursor: url('/cursors/copy.cur'), auto;
 
         @media (hover: hover) {
             &:hover {
@@ -43,7 +43,7 @@
         }
 
         .deleteButton {
-            cursor: pointer;
+            cursor: url('/cursors/pointer.cur'), auto;
             position: absolute;
             top: 10px;
             right: 10px;
@@ -80,6 +80,7 @@
 
         img {
             height: 150px;
+            cursor: url('/cursors/copy.cur'), auto;
         }
 
         p {
@@ -91,6 +92,7 @@
             /* IE 10 and IE 11 */
             user-select: none;
             /* Standard syntax */
+            cursor: url('/cursors/copy.cur'), auto;
 
         }
     }

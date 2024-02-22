@@ -15,7 +15,7 @@
     color: var(--white);
     border-radius: var(--radiusM);
     border: 1px solid var(--white50);
-    cursor: pointer;
+    cursor: url('/cursors/pointer.cur'), auto;
 
     @media (hover: hover) {
         &:hover {
@@ -25,7 +25,7 @@
 
     &.disabled {
         opacity: .3;
-        cursor: default;
+        cursor: url('/cursors/default.cur'), auto;
 
         &:hover {
             background-color: unset;
