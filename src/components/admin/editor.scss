@@ -8,12 +8,24 @@
         border: 1px solid red;
     }
 
+    .DraftEditor-root * * {
+        cursor: url('/cursors/input.cur'), auto;
+    }
+
+    .rdw-link-decorator-wrapper {
+        img {
+            cursor: url('/cursors/pointer1.cur'), auto;
+        }
+    }
+
     .rdw-editor-main {
         overflow: auto;
         min-height: 200px;
         padding: 0 20px;
 
         font-weight: 200;
+        cursor: url('/cursors/input.cur'), auto;
+
 
         span[style*="font-style: italic"] {
             /* Your styles for the selected span element with font-weight: bold */
@@ -61,6 +73,18 @@
             button {
                 cursor: url('/cursors/pointer.cur'), auto;
             }
+        }
+    }
+
+    .rdw-image-alignment-options-popup {
+        background-color: var(--black90);
+        position: absolute;
+        left: 45%;
+        width: fit-content;
+
+        div {
+            color: var(--black);
+            font-weight: 800;
         }
     }
 
