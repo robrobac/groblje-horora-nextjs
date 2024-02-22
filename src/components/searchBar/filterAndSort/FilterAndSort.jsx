@@ -10,32 +10,20 @@ export default function FilterAndSort({handleFilter, filter, search, count, hand
     const [optionsOpen, setOptionsOpen] = useState(false)
     const filterAndSortControlsRef = useRef(null);
 
-
-    function handleClickOutside(event) {
-        if (optionsOpen) {
-            if (filterAndSortControlsRef.current && !filterAndSortControlsRef.current.contains(event.target)) {
-                setOptionsOpen(false);
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (optionsOpen) {
+                if (filterAndSortControlsRef.current && !filterAndSortControlsRef.current.contains(event.target)) {
+                    setOptionsOpen(false);
+                }
             }
         }
-    }
 
-    useEffect(() => {
         document.addEventListener('click', handleClickOutside);
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
     }, [optionsOpen]);
-
-    //  event listeners for closing the virtual keyboard on touch outside the input field
-    useEffect(() => {
-        // Attach scroll event listener when component mounts
-        window.addEventListener('touchstart', handleClickOutside);
-        
-        // Detach scroll event listener when component unmounts
-        return () => {
-            window.removeEventListener('touchstart', handleClickOutside);
-        };
-    }, []);
 
     return (
         <div className={styles.filterAndSortContainer}>

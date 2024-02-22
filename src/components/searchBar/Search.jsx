@@ -27,7 +27,6 @@ export default function Search({search, handleSearch, sort, order, handleSortAnd
 
     //  function that handles tapping outside the input value in order to close virtual keyboard
     const handleOutsideClick = (e) => {
-        console.log('Tap outside')
         // Blur input if the click is outside of the input element
         if (inputRef.current && !inputRef.current.contains(e.target)) {
             inputRef.current.blur();
