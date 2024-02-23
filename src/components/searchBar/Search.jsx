@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import styles from '@/components/searchBar/search.module.scss';
 import SearchIcon from './svg/SearchIcon'
 import Filter from './Filter'
@@ -6,13 +6,15 @@ import Sort from './Sort'
 import useCountReviews from '@/hooks/useCountReviews';
 import { SORT_OPTIONS } from '@/lib/sortOptions';
 import FilterAndSort from './filterAndSort/FilterAndSort';
+import { ReviewsGalleryContext } from '../reviewsGallery/ReviewsGallery';
 
-export default function Search({search, handleSearch, sort, order, handleSortAndOrder, handleFilter, filter, controls}) {
+export default function Search() {
     const inputRef = useRef(null)
 
     const {
-        count
-    } = useCountReviews()
+        handleSearch,
+        search,
+    } = useContext(ReviewsGalleryContext)
 
     //  event listeners for closing the virtual keyboard on touch outside the input field
     useEffect(() => {
@@ -47,23 +49,20 @@ export default function Search({search, handleSearch, sort, order, handleSortAnd
                 <label className={styles.searchIcon} htmlFor='adminSearch'>
                     <SearchIcon />
                 </label>
-                <input className={styles.searchBar} ref={inputRef} onKeyUp={onEnter} id='adminSearch' type='search' placeholder='Search' value={search} onChange={(e) => handleSearch(e.target.value || '')}/>
+                <input
+                    className={styles.searchBar}
+                    ref={inputRef}
+                    onKeyUp={onEnter}
+                    id='adminSearch'
+                    type='search'
+                    placeholder='Search'
+                    value={search}
+                    onChange={(e) => handleSearch(e.target.value || '')}
+                />
             </div>
-            {controls ? (
                 <div className={styles.searchControls}>
-                    {/* <div className={styles.filterControl}>
-                        <Filter clickFunction={handleFilter} title='Sve' label='' filter={filter} search={search} count={count} counting={count?.numberOfReviews}/>
-                        <Filter clickFunction={handleFilter} title='Kratki Pregledi' label='quad' filter={filter} search={search} count={count} counting={count?.quadReviews}/>
-                        <Filter clickFunction={handleFilter} title='Recenzije' label='single' filter={filter} search={search} count={count} counting={count?.singleReviews}/>
-                    </div>
-                    <div className={styles.sortControl}>
-                        <Sort clickFunction={handleSortAndOrder} title='Naslov' sortOption={SORT_OPTIONS.TITLE} sort={sort} order={order} search={search}/>
-                        <Sort clickFunction={handleSortAndOrder} title='Ocjena' sortOption={SORT_OPTIONS.RATING} sort={sort} order={order} search={search}/>
-                        <Sort clickFunction={handleSortAndOrder} title='Datum' sortOption={SORT_OPTIONS.CREATED} sort={sort} order={order} search={search}/>
-                    </div> */}
-                    <FilterAndSort handleFilter={handleFilter} filter={filter} search={search} count={count} handleSortAndOrder={handleSortAndOrder} sort={sort} order={order}/>
+                    <FilterAndSort/>
                 </div>
-            ) : ''}
         </div>
     )
 }

@@ -1,14 +1,14 @@
 "use client"
+import React, { createContext } from 'react'
 import useFetchReviewsWithParams from '@/hooks/useFetchReviewsWithParams'
 import { SORT_OPTIONS } from '@/lib/sortOptions'
-
-import React from 'react'
-
 import PostsFlex from './postsFlex/PostsFlex';
 import Pagination from '../pagination/Pagination';
 import Search from '../searchBar/Search';
 import GhostSpinner from '../ghostSpinner/GhostSpinner';
 import useAuth from '@/hooks/useAuth';
+
+export const ReviewsGalleryContext = createContext()
 
 export default function ReviewsGallery() {
     const { user, mongoUser } = useAuth()
@@ -31,8 +31,16 @@ export default function ReviewsGallery() {
 
 
     return (
-        <>
-            <Search controls={true} handleSearch={handleSearch} search={search} handleFilter={handleFilter} filter={filter} handleSortAndOrder={handleSortAndOrder} sort={sort} order={order}/>
+        <ReviewsGalleryContext.Provider value={{
+            handleSearch,
+            search,
+            handleFilter,
+            filter,
+            handleSortAndOrder,
+            sort,
+            order,
+        }}>
+            <Search controls={true}/>
             {loading ? (<GhostSpinner />) : (
                 <>
                     <PostsFlex posts={reviews} loading={loading} handleRefresh={handleRefresh} user={user} mongoUser={mongoUser}/>
@@ -41,6 +49,6 @@ export default function ReviewsGallery() {
                     : ""} 
                 </>
             )}
-        </>
+        </ReviewsGalleryContext.Provider>
     )
 }

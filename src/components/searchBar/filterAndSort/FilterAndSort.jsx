@@ -1,14 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import buttonStyles from '@/components/buttons/buttons.module.scss'
 import SortAndFilterIcon from '@/components/svgComponents/SortAndFilterIcon'
 import styles from './filterAndSort.module.scss'
 import Filter from '../Filter'
 import { SORT_OPTIONS } from '@/lib/sortOptions'
 import Sort from '../Sort'
+import useCountReviews from '@/hooks/useCountReviews'
+import { ReviewsGalleryContext } from '@/components/reviewsGallery/ReviewsGallery'
 
-export default function FilterAndSort({handleFilter, filter, search, count, handleSortAndOrder, sort, order}) {
-    const [optionsOpen, setOptionsOpen] = useState(false)
+export default function FilterAndSort() {
     const filterAndSortControlsRef = useRef(null);
+
+    const [optionsOpen, setOptionsOpen] = useState(false)
+
+    const {
+        search,
+        handleFilter,
+        filter,
+        handleSortAndOrder,
+        sort,
+        order,
+    } = useContext(ReviewsGalleryContext)
+    
+    const { count } = useCountReviews()
 
     useEffect(() => {
         function handleClickOutside(event) {
