@@ -386,12 +386,35 @@ export default function EditForm({slug}) {
         <main className={styles.pageContainer}>
             <div className={styles.formSection}>
                 <form className={styles.styledForm} onSubmit={handleSubmit}>
-                    {movies.length=== 4 ? (
-                        <div className='inputContainer'>
-                            <label className='inputLabel' htmlFor='reviewTitle'>Review Title {emptyFields.includes('titleExists') ? <span className='error'>Title already exists</span> : ''}</label>
-                            <input className={`inputField ${emptyFields.includes('reviewTitle') ? 'error' : '' }`} id='reviewTitle' type='text' value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)}/>
+                    {movies.length === 4 ? (
+                        <>
+                            <div className='inputContainer'>
+                                <label className='inputLabel' htmlFor='reviewTitle'>Review Title {emptyFields.includes('titleExists') ? <span className='error'>Title already exists</span> : ''}</label>
+                                <input className={`inputField ${emptyFields.includes('reviewTitle') ? 'error' : '' }`} id='reviewTitle' type='text' value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)}/>
+                            </div>
+                            <div className={styles.subcategoryContainer}>
+                                <div className={styles.checkboxWrapper} style={{width: '160px'}}>
+                                    <input id='kratkiPregled' type='checkbox'/>
+                                    <label htmlFor='kratkiPregled'>Kratki Pregled</label>
+                                </div>
+                                <div className={styles.checkboxWrapper} style={{width: '150px'}}>
+                                    <input id='kratkiHorori' type='checkbox'/>
+                                    <label htmlFor='kratkiHorori'>Kratki Horori</label>
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <div className={styles.subcategoryContainer}>
+                            <div className={styles.checkboxWrapper} style={{width: '135px'}}>
+                                <input id='hororFilm' type='checkbox'/>
+                                <label htmlFor='hororFilm'>Horor Film</label>
+                            </div>
+                            <div className={styles.checkboxWrapper} style={{width: '145px'}}>
+                                <input id='hororSerija' type='checkbox'/>
+                                <label htmlFor='hororSerija'>Horor Serija</label>
+                            </div>
                         </div>
-                    ) : ''}
+                    )}
                     <div className={styles.tabs}>
                         <div className={styles.tabList}>
                             {movies.map((movie, index) => (
@@ -431,18 +454,20 @@ export default function EditForm({slug}) {
                                         <label className='inputLabel' htmlFor='imdbLink'>Imdb Link</label>
                                         <input className='inputField' id='imdbLink'  type='text' value={movie.imdbLink} onChange={(e) => handleChange(index, 'imdbLink', e.target.value)}/>
                                     </div>
-                                    <div className="dualInput">
-                                        <div>
-                                            <label htmlFor='top25'>Top25</label>
-                                            <input id='top25' type='checkbox' value={movie.top25} checked={movie.top25} onChange={(e) => handleChange(index, 'top25', !movie.top25)}/>
-                                        </div>
-                                        <div>
-                                            <label htmlFor='worse20'>
-                                                Worse20
+
+                                    {movies.length === 1 && (
+                                        <div className={styles.topWorseContainer}>
+                                            <div className={styles.checkboxWrapper} style={{width: '100px'}}>
+                                                <input id='top25' type='checkbox' value={movie.top25} checked={movie.top25} onChange={(e) => handleChange(index, 'top25', !movie.top25)}/>
+                                                <label htmlFor='top25'>Top25</label>
+                                            </div>
+                                            <div className={styles.checkboxWrapper} style={{width: '160px'}}>
                                                 <input id='worse20' type='checkbox' value={movie.worse20} checked={movie.worse20} onChange={(e) => handleChange(index, 'worse20', !movie.worse20)}/>
-                                            </label>
+                                                <label htmlFor='worse20'>Worse20</label>
+                                            </div>
                                         </div>
-                                    </div>
+                                    )}
+
                                 </div>
                             </div>
                             <div className={styles.textEditorContainer}>
