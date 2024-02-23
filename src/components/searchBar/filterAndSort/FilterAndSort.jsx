@@ -3,14 +3,13 @@ import buttonStyles from '@/components/buttons/buttons.module.scss'
 import SortAndFilterIcon from '@/components/svgComponents/SortAndFilterIcon'
 import styles from './filterAndSort.module.scss'
 import Filter from '../Filter'
-import { SORT_OPTIONS } from '@/lib/sortOptions'
+import { SORTING_OPTIONS } from '@/lib/sortOptions'
 import Sort from '../Sort'
 import useCountReviews from '@/hooks/useCountReviews'
 import { ReviewsGalleryContext } from '@/components/reviewsGallery/ReviewsGallery'
 
 export default function FilterAndSort() {
     const filterAndSortControlsRef = useRef(null);
-
     const [optionsOpen, setOptionsOpen] = useState(false)
 
     const {
@@ -58,11 +57,17 @@ export default function FilterAndSort() {
                     
                     <div className={styles.sortOptions}>
                         <p>Sortiraj</p>
-                        <Sort clickFunction={handleSortAndOrder} title='Datum' sortOption={SORT_OPTIONS.CREATED} sort={sort} order={order} search={search}/>
-                        <Sort clickFunction={handleSortAndOrder} title='Ocjena' sortOption={SORT_OPTIONS.RATING} sort={sort} order={order} search={search}/>
-                        <Sort clickFunction={handleSortAndOrder} title='Naslov' sortOption={SORT_OPTIONS.TITLE} sort={sort} order={order} search={search}/>
-                        
-                        
+                        {Object.keys(SORTING_OPTIONS).map(option => (
+                            <Sort
+                                key={SORTING_OPTIONS[option].dbKey}
+                                title={SORTING_OPTIONS[option].label}
+                                sortOption={SORTING_OPTIONS[option].dbKey}
+                                search={search}
+                                clickFunction={handleSortAndOrder}
+                                sort={sort}
+                                order={order}
+                                />
+                        ))}
                     </div>
                 </div>
             )}

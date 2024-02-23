@@ -129,6 +129,7 @@
     svg {
         fill: var(--white80);
         cursor: var(--pointerCursor);
+        pointer-events: none;
 
         path {
             cursor: inherit;

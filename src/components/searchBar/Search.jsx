@@ -1,10 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import styles from '@/components/searchBar/search.module.scss';
 import SearchIcon from './svg/SearchIcon'
-import Filter from './Filter'
-import Sort from './Sort'
-import useCountReviews from '@/hooks/useCountReviews';
-import { SORT_OPTIONS } from '@/lib/sortOptions';
 import FilterAndSort from './filterAndSort/FilterAndSort';
 import { ReviewsGalleryContext } from '../reviewsGallery/ReviewsGallery';
 

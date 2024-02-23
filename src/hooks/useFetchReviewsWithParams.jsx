@@ -1,15 +1,17 @@
 "use client"
-import { SORT_OPTIONS } from '@/lib/sortOptions';
+import { SORTING_OPTIONS } from '@/lib/sortOptions';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react';
 
-export default function useFetchReviewsWithParams(pageName, initialSort, initialOrder, initialPerPage) {
+export default function useFetchReviewsWithParams(initialSort, initialOrder, initialPerPage) {
     // console.log('----------')
 
     const [loading, setLoading] = useState(true);
     const [reviews, setReviews] = useState([]);
     const [totalItems, setTotalItems] = useState()
+    console.log(totalItems)
     const [totalPages, setTotalPages] = useState([])
+
     const [perPage, setPerPage] = useState(initialPerPage);
 
     const [refresh, setRefresh] = useState(false);
@@ -165,64 +167,44 @@ export default function useFetchReviewsWithParams(pageName, initialSort, initial
         }
     }
 
-    const handleSortAndOrder = (sortVal, orderVal) => {
-        if (sort === sortVal) {
-            if (orderVal === 'desc') {
-                setOrder('asc')
-                setPage(1)
-
-                // Create a new URLSearchParams object before modifying it
-                const newSearchParams = new URLSearchParams(searchParams);
-                // Update the 'page' parameter
-                newSearchParams.set('order', 'asc');
-                newSearchParams.set('page', 1);
-                newSearchParams.delete('search');
-                // Use setSearchParams to apply the changes
-                router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
-            }
-            if (orderVal === 'asc') {
-                setOrder('desc')
-                setPage(1)
-
-                // Create a new URLSearchParams object before modifying it
-                const newSearchParams = new URLSearchParams(searchParams);
-                // Update the 'page' parameter
-                newSearchParams.set('order', 'desc');
-                newSearchParams.set('page', 1);
-                newSearchParams.delete('search');
-                // Use setSearchParams to apply the changes
-                router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
-            }
-        } else {
-            setSort(sortVal)
+    const handleSortAndOrder = (sortOption, orderVal) => {
+        if (sort === sortOption) {
+            const newOrder = orderVal === 'asc' ? 'desc' : 'asc';
+            setOrder(newOrder)
+            setPage(1)
 
             // Create a new URLSearchParams object before modifying it
             const newSearchParams = new URLSearchParams(searchParams);
-            newSearchParams.set('sort', sortVal);
+            // Update the 'page' parameter
+            newSearchParams.set('order', newOrder);
+            newSearchParams.set('page', 1);
+            newSearchParams.delete('search');
+            // Use setSearchParams to apply the changes
+            router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
+            return
+        } else {
+            setSort(sortOption)
+
+            // Create a new URLSearchParams object before modifying it
+            const newSearchParams = new URLSearchParams(searchParams);
+            newSearchParams.set('sort', sortOption);
             newSearchParams.delete('search');
 
-            if (sortVal === SORT_OPTIONS.TITLE) {
-                setOrder('asc')
-                setPage(1)
+            const selectedSortingOption = Object.values(SORTING_OPTIONS).find(option => option.dbKey === sortOption)
+            console.log(selectedSortingOption)
+
+            if (selectedSortingOption) {
+                setOrder(selectedSortingOption.defaultOrder);
+                setPage(1);
 
                 // Update the 'page' parameter
-                newSearchParams.set('order', 'asc');
+                newSearchParams.set('order', selectedSortingOption.defaultOrder);
                 newSearchParams.set('page', 1);
                 // Use setSearchParams to apply the changes
                 router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
                 return
             }
-            if (sortVal === SORT_OPTIONS.CATEGORY) {
-                setOrder('asc')
-                setPage(1)
 
-                // Update the 'page' parameter
-                newSearchParams.set('order', 'asc');
-                newSearchParams.set('page', 1);
-                // Use setSearchParams to apply the changes
-                router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
-                return
-            }
             setOrder('desc')
             setPage(1)
 

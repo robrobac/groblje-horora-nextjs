@@ -89,24 +89,6 @@ export const GET = async (request) => {
                 })
             }
 
-            // if (sort === 'reviewType') {
-            //     // sort by type
-            //     const reviews = await reviewModel.find({})
-            //         .skip(skip)
-            //         .limit(perPage)
-            //         .sort([
-            //             ['reviewType', getOrder(order)],
-            //             [sort, getOrder(order)],
-            //         ]);
-            //     const totalReviewsCount = await reviewModel.countDocuments()
-
-            //     return NextResponse.json({
-            //         reviews,
-            //         totalItems: totalReviewsCount,
-            //         totalPages: Math.ceil(totalReviewsCount / perPage)
-            //     })
-            // }
-
             if (sort === 'createdAt') {
                 const typeFilter = filter ? { 'reviewType': filter } : {}
                 // sort by date created
@@ -125,24 +107,6 @@ export const GET = async (request) => {
                     totalPages: Math.ceil(totalReviewsCount / perPage)
                 })
             }
-
-            // if (sort === 'updatedAt') {
-            //     // sort by date updated
-            //     const reviews = await reviewModel.find({})
-            //         .skip(skip)
-            //         .limit(perPage)
-            //         .sort([
-            //             ['updatedAt', getOrder(order)],
-            //             [sort, getOrder(order)],
-            //         ]);
-            //     const totalReviewsCount = await reviewModel.countDocuments()
-
-            //     return NextResponse.json({
-            //         reviews,
-            //         totalItems: totalReviewsCount,
-            //         totalPages: Math.ceil(totalReviewsCount / perPage)
-            //     })
-            // }
 
             if (!sort) {
                 // if there's no sort, fetch by date created

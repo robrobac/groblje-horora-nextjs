@@ -1,12 +1,12 @@
 "use client"
 import React, { createContext } from 'react'
 import useFetchReviewsWithParams from '@/hooks/useFetchReviewsWithParams'
-import { SORT_OPTIONS } from '@/lib/sortOptions'
 import PostsFlex from './postsFlex/PostsFlex';
 import Pagination from '../pagination/Pagination';
 import Search from '../searchBar/Search';
 import GhostSpinner from '../ghostSpinner/GhostSpinner';
 import useAuth from '@/hooks/useAuth';
+import { SORTING_OPTIONS } from '@/lib/sortOptions';
 
 export const ReviewsGalleryContext = createContext()
 
@@ -27,7 +27,7 @@ export default function ReviewsGallery() {
         handleSortAndOrder,
         loading,
         handleRefresh
-    } = useFetchReviewsWithParams('recenzije', SORT_OPTIONS.CREATED, 'desc', 30)
+    } = useFetchReviewsWithParams(SORTING_OPTIONS.CREATED.dbKey, 'desc', 30)
 
 
     return (
