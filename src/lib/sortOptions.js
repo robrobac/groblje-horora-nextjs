@@ -25,34 +25,24 @@ export const FILTERING_OPTIONS = {
     SINGLE: {
         dbKey: 'reviewType',
         dbValue: 'single',
-        label: 'Recenzija',
+        label: 'Recenzije',
         subCategories: {
             MOVIE: {
                 dbKey: 'reviewSubtype',
                 dbValue: 'singleMovie',
-                label: 'Film',
-            },
-            SHOW: {
-                dbKey: 'reviewSubtype',
-                dbValue: 'singleShow',
-                label: 'Serija',
+                label: 'Horor Filmovi',
             },
         }
     },
     QUAD: {
         dbKey: 'reviewType',
         dbValue: 'quad',
-        label: 'Pregled',
+        label: 'Pregledi',
         subCategories: {
             SHORT_REVIEW: {
                 dbKey: 'reviewSubtype',
                 dbValue: 'quadShortReview',
-                label: 'Kratki Pregled',
-            },
-            SHORT_MOVIE: {
-                dbKey: 'reviewSubtype',
-                dbValue: 'quadShortMovie',
-                label: 'Kratki Horori',
+                label: 'Kratki Pregledi',
             },
         }
     },

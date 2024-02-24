@@ -3,7 +3,7 @@ import buttonStyles from '@/components/buttons/buttons.module.scss'
 import SortAndFilterIcon from '@/components/svgComponents/SortAndFilterIcon'
 import styles from './filterAndSort.module.scss'
 import Filter from '../Filter'
-import { SORTING_OPTIONS } from '@/lib/sortOptions'
+import { FILTERING_OPTIONS, SORTING_OPTIONS } from '@/lib/sortOptions'
 import Sort from '../Sort'
 import useCountReviews from '@/hooks/useCountReviews'
 import { ReviewsGalleryContext } from '@/components/reviewsGallery/ReviewsGallery'
@@ -51,8 +51,21 @@ export default function FilterAndSort() {
                         <Filter clickFunction={handleFilter} title='Sve' label='' filter={filter} search={search} count={count} counting={count?.numberOfReviews}/>
                         <Filter clickFunction={handleFilter} title='Kratki Pregledi' label='quad' filter={filter} search={search} count={count} counting={count?.quadReviews}/>
                         <Filter clickFunction={handleFilter} title='Recenzije' label='single' filter={filter} search={search} count={count} counting={count?.singleReviews}/>
-                        <Filter title='Kratki Filmovi' label='...'/>
-                        <Filter title='Horor Serije' label='...'/>
+                        {Object.keys(FILTERING_OPTIONS).map(optionKey => {
+                            const option = FILTERING_OPTIONS[optionKey];
+                            return (
+                                <React.Fragment key={option.dbValue}>
+                                    {/* <p>{option.label}</p> */}
+                                    <Filter key={option.dbValue} title={option.label} label='...'/>
+                                    {option.subCategories && Object.keys(option.subCategories).map(subCategoryKey => {
+                                        const subCategory = option.subCategories[subCategoryKey];
+                                        return (
+                                            <Filter key={subCategory.dbValue} title={subCategory.label} label='...'/>
+                                        );
+                                    })}
+                                </React.Fragment>
+                            );
+                        })}
                     </div>
                     
                     <div className={styles.sortOptions}>
