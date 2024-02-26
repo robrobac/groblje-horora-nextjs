@@ -57,10 +57,10 @@ export default function FilterAndSort() {
                             return (
                                 <React.Fragment key={option.dbValue}>
                                     <Filter key={option.dbValue} clickFunction={handleFilter} title={option.label} filterValue={option.dbValue} filterKey={option.dbKey} selectedFilterKey={selectedFilterKey} selectedFilterVal={selectedFilterVal} search={search} count={totalItems} loading={loading}/>
-                                    {option.subCategories && Object.keys(option.subCategories).map(subCategoryKey => {
-                                        const subCategory = option.subCategories[subCategoryKey];
+                                    {option.categories && Object.keys(option.categories).map(categoryKey => {
+                                        const category = option.categories[categoryKey];
                                         return (
-                                            <Filter key={subCategory.dbValue} clickFunction={handleFilter} title={subCategory.label} filterValue={subCategory.dbValue} filterKey={subCategory.dbKey} selectedFilterKey={selectedFilterKey} selectedFilterVal={selectedFilterVal} search={search} count={totalItems} loading={loading}/>
+                                            <Filter key={category.dbValue} clickFunction={handleFilter} title={category.label} filterValue={category.dbValue} filterKey={category.dbKey} selectedFilterKey={selectedFilterKey} selectedFilterVal={selectedFilterVal} search={search} count={totalItems} loading={loading}/>
                                         );
                                     })}
                                 </React.Fragment>

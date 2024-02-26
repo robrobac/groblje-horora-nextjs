@@ -94,7 +94,7 @@ const ReviewSchema = new Schema({
         type: String,
         required: true
     },
-    subcategory: {
+    category: {
         type: String,
         required: true
     },
