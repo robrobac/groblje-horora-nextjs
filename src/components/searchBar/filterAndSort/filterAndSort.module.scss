@@ -21,25 +21,31 @@
         -webkit-box-shadow: 0px 0px 21px 1px #000000;
         box-shadow: 0px 0px 21px 1px #000000;
 
-
-        @media (max-width: 340px) {
-            flex-direction: column;
-        }
-
-
         .filterOptions,
         .sortOptions {
             display: flex;
             flex-direction: column;
             flex-direction: column;
-            min-width: 130px;
             width: fit-content;
             gap: 8px;
 
         }
 
-        .filterOptions {}
+        .filterOptions {
+            min-width: 160px;
+        }
 
-        .sortOptions {}
+        .sortOptions {
+            min-width: 100px;
+        }
+
+        @media (max-width: 340px) {
+            flex-direction: column;
+
+            .filterOptions,
+            .sortOptions {
+                min-width: 160px;
+            }
+        }
     }
 }

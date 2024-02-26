@@ -30,29 +30,29 @@ export const FILTERING_OPTIONS = {
             MOVIE: {
                 dbKey: 'category', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 dbValue: 'singleMovie', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
-                label: 'Horor Filmovi',
+                label: 'Horor Filmovi', // CHECKBOX AND FILTER BUTTON LABEL
             },
             SHOW: {
                 dbKey: 'category', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 dbValue: 'singleShow', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
-                label: 'Horor Serije',
+                label: 'Horor Serije', // CHECKBOX AND FILTER BUTTON LABEL
             },
         }
     },
     QUAD: {
         dbKey: 'reviewType', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
         dbValue: 'quad', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
-        label: 'Pregledi',
+        label: 'Pregledi', // CHECKBOX AND FILTER BUTTON LABEL
         categories: {
             SHORT_REVIEW: {
                 dbKey: 'category', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 dbValue: 'shortReviews', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
-                label: 'Kratki Pregledi',
+                label: 'Kratki Pregledi', // CHECKBOX AND FILTER BUTTON LABEL
             },
             SHORT_HORROR: {
                 dbKey: 'category', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 dbValue: 'shortHorrors', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
-                label: 'Kratki Horori',
+                label: 'Kratki Horori', // CHECKBOX AND FILTER BUTTON LABEL
             },
         }
     },
