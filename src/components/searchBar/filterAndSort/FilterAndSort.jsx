@@ -56,7 +56,7 @@ export default function FilterAndSort() {
                             const option = FILTERING_OPTIONS[optionKey];
                             return (
                                 <React.Fragment key={option.dbValue}>
-                                    <Filter key={option.dbValue} clickFunction={handleFilter} title={option.label} filterValue={option.dbValue} filterKey={option.dbKey} selectedFilterKey={selectedFilterKey} selectedFilterVal={selectedFilterVal} search={search} count={totalItems} loading={loading}/>
+                                    {/* <Filter key={option.dbValue} clickFunction={handleFilter} title={option.label} filterValue={option.dbValue} filterKey={option.dbKey} selectedFilterKey={selectedFilterKey} selectedFilterVal={selectedFilterVal} search={search} count={totalItems} loading={loading}/> */}
                                     {option.categories && Object.keys(option.categories).map(categoryKey => {
                                         const category = option.categories[categoryKey];
                                         return (

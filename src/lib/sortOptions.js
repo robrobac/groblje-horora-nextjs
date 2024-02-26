@@ -4,20 +4,20 @@
 
 
 export const SORTING_OPTIONS = {
-    TITLE: {
-        dbKey: 'reviewTitle', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
-        label: 'Naslov',
-        defaultOrder: 'asc',
+    CREATED: {
+        dbKey: 'createdAt', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+        label: 'Datum',
+        defaultOrder: 'desc',
     },
     RATING: {
         dbKey: 'movies.0.rating', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
         label: 'Ocjena',
         defaultOrder: 'desc',
     },
-    CREATED: {
-        dbKey: 'createdAt', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
-        label: 'Datum',
-        defaultOrder: 'desc',
+    TITLE: {
+        dbKey: 'reviewTitle', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+        label: 'Naslov',
+        defaultOrder: 'asc',
     },
 }
 

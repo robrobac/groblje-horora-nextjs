@@ -29,7 +29,6 @@ export default function NewForm({ numberOfMovies }) {
     const [movies, setMovies] = useState(Array.from({length: numberOfMovies }, () => getInitialMovieState()));
 
     const [selectedcategory, setSelectedcategory] = useState('')
-    console.log(selectedcategory)
 
     const [selectedTab, setSelectedTab] = useState('movie1')
     const [postPreview, setPostPreview] = useState(null);
