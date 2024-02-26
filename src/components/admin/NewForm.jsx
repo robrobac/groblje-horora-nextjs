@@ -19,6 +19,7 @@ import { compressImage } from '@/lib/compressImage';
 import { useRouter } from 'next/navigation';
 import PreviewDialog from './PreviewDialog';
 import ImageRepo from './ImageRepo';
+import { FILTERING_OPTIONS } from '@/lib/sortOptions';
 
 
 
@@ -26,6 +27,9 @@ export default function NewForm({ numberOfMovies }) {
     const [reviewTitle, setReviewTitle] = useState(numberOfMovies === 1 ? 'Not required for single movie review' : '');
     const [contentImages, setContentImages] = useState([]);
     const [movies, setMovies] = useState(Array.from({length: numberOfMovies }, () => getInitialMovieState()));
+
+    const [selectedSubcategory, setSelectedSubcategory] = useState('')
+    console.log(selectedSubcategory)
 
     const [selectedTab, setSelectedTab] = useState('movie1')
     const [postPreview, setPostPreview] = useState(null);
@@ -131,6 +135,10 @@ export default function NewForm({ numberOfMovies }) {
         if (!reviewTitle) {
             requiredInputs.push('reviewTitle')
         }
+
+        if (!selectedSubcategory) {
+            requiredInputs.push('subcategory')
+        }
     
         movies.forEach((movie, index) => {
             if (!movie.title) {
@@ -198,6 +206,7 @@ export default function NewForm({ numberOfMovies }) {
                     reviewTitle: resolvedMovieReviews.length === 1 ? resolvedMovieReviews[0].title : reviewTitle,
                     movies: resolvedMovieReviews,
                     contentImages,
+                    selectedSubcategory: selectedSubcategory,
                 };
 
                 console.log(review)
@@ -223,6 +232,7 @@ export default function NewForm({ numberOfMovies }) {
                 if (response.ok) {
                     // If response is OK, restart form states
                     setReviewTitle('');
+                    setSelectedSubcategory('')
                     setEmptyFields([])
                     setMovies(Array.from({ length: numberOfMovies }, () => getInitialMovieState()));
 
@@ -263,26 +273,22 @@ export default function NewForm({ numberOfMovies }) {
                                 <input className={`inputField ${emptyFields.includes('reviewTitle') ? 'error' : '' }`} id='reviewTitle' type='text' value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)}/>
                             </div>
                             <div className={styles.subcategoryContainer}>
-                                <div className={styles.checkboxWrapper} style={{width: '160px'}}>
-                                    <input id='kratkiPregled' type='checkbox'/>
-                                    <label htmlFor='kratkiPregled'>Kratki Pregled</label>
-                                </div>
-                                <div className={styles.checkboxWrapper} style={{width: '150px'}}>
-                                    <input id='kratkiHorori' type='checkbox'/>
-                                    <label htmlFor='kratkiHorori'>Kratki Horori</label>
-                                </div>
+                                {Object.values(FILTERING_OPTIONS.QUAD.subCategories).map(subcategory => (
+                                    <div key={subcategory.dbValue} className={styles.checkboxWrapper} style={{width: '170px'}}>
+                                        <input id={subcategory.dbValue} type='checkbox' onChange={() => setSelectedSubcategory(subcategory.dbValue)} checked={selectedSubcategory === subcategory.dbValue}/>
+                                        <label htmlFor={subcategory.dbValue} className={emptyFields.includes('subcategory') ? styles.error : ''}>{subcategory.label}</label>
+                                    </div>
+                                ))}
                             </div>
                         </>
                     ) : (
                         <div className={styles.subcategoryContainer}>
-                            <div className={styles.checkboxWrapper} style={{width: '135px'}}>
-                                <input id='hororFilm' type='checkbox'/>
-                                <label htmlFor='hororFilm'>Horor Film</label>
-                            </div>
-                            <div className={styles.checkboxWrapper} style={{width: '145px'}}>
-                                <input id='hororSerija' type='checkbox'/>
-                                <label htmlFor='hororSerija'>Horor Serija</label>
-                            </div>
+                            {Object.values(FILTERING_OPTIONS.SINGLE.subCategories).map(subcategory => (
+                                <div key={subcategory.dbValue} className={styles.checkboxWrapper} style={{width: '160px'}}>
+                                    <input id={subcategory.dbValue} type='checkbox' onChange={() => setSelectedSubcategory(subcategory.dbValue)} checked={selectedSubcategory === subcategory.dbValue}/>
+                                    <label htmlFor={subcategory.dbValue} className={emptyFields.includes('subcategory') ? styles.error : ''}>{subcategory.label}</label>
+                                </div>
+                            ))}
                         </div>
                     )}
                                        

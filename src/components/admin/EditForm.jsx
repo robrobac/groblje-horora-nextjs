@@ -15,6 +15,7 @@ const Editor = dynamic(() => import('react-draft-wysiwyg').then(mod => mod.Edito
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./editor.scss";
 import styles from './newForm.module.scss';
+import { FILTERING_OPTIONS } from '@/lib/sortOptions'
 
 export default function EditForm({slug}) {
     const [postPreview, setPostPreview] = useState(null)
@@ -24,6 +25,8 @@ export default function EditForm({slug}) {
     console.log(post)
     const [reviewTitle, setReviewTitle] = useState('')
     const [contentImages, setContentImages] = useState([])
+    const [selectedSubcategory, setSelectedSubcategory] = useState('')
+    console.log(selectedSubcategory)
     const [movies, setMovies] = useState([
         {
             title: '',
@@ -98,6 +101,7 @@ export default function EditForm({slug}) {
                     setPost(data)
                     setReviewTitle(data.reviewTitle)
                     setContentImages(data.contentImages)
+                    setSelectedSubcategory(data.subcategory)
 
                     setMovies(data.movies.map((movie) => {
                         return {
@@ -206,6 +210,10 @@ export default function EditForm({slug}) {
         if (!reviewTitle) {
             requiredInputs.push('reviewTitle')
         }
+
+        if (!selectedSubcategory) {
+            requiredInputs.push('subcategory')
+        }
     
         movies.forEach((movie, index) => {
             if (!movie.title) {
@@ -281,6 +289,7 @@ export default function EditForm({slug}) {
                     reviewTitle: resolvedMovieReviews.length === 1 ? resolvedMovieReviews[0].title : reviewTitle,
                     movies: resolvedMovieReviews,
                     contentImages: contentImages,
+                    selectedSubcategory: selectedSubcategory,
                 }
 
                 // API Call to post a new Review
@@ -304,6 +313,7 @@ export default function EditForm({slug}) {
                     // If response is OK, restart form states
                     setReviewTitle('')
                     setEmptyFields([])
+                    setSelectedSubcategory('')
                     setMovies([
                         {
                             title: '',
@@ -393,26 +403,22 @@ export default function EditForm({slug}) {
                                 <input className={`inputField ${emptyFields.includes('reviewTitle') ? 'error' : '' }`} id='reviewTitle' type='text' value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)}/>
                             </div>
                             <div className={styles.subcategoryContainer}>
-                                <div className={styles.checkboxWrapper} style={{width: '160px'}}>
-                                    <input id='kratkiPregled' type='checkbox'/>
-                                    <label htmlFor='kratkiPregled'>Kratki Pregled</label>
-                                </div>
-                                <div className={styles.checkboxWrapper} style={{width: '150px'}}>
-                                    <input id='kratkiHorori' type='checkbox'/>
-                                    <label htmlFor='kratkiHorori'>Kratki Horori</label>
-                                </div>
+                                {Object.values(FILTERING_OPTIONS.QUAD.subCategories).map(subcategory => (
+                                    <div key={subcategory.dbValue} className={styles.checkboxWrapper} style={{width: '170px'}}>
+                                        <input id={subcategory.dbValue} type='checkbox' onChange={() => setSelectedSubcategory(subcategory.dbValue)} checked={selectedSubcategory === subcategory.dbValue}/>
+                                        <label htmlFor={subcategory.dbValue} className={emptyFields.includes('subcategory') ? styles.error : ''}>{subcategory.label}</label>
+                                    </div>
+                                ))}
                             </div>
                         </>
                     ) : (
                         <div className={styles.subcategoryContainer}>
-                            <div className={styles.checkboxWrapper} style={{width: '135px'}}>
-                                <input id='hororFilm' type='checkbox'/>
-                                <label htmlFor='hororFilm'>Horor Film</label>
-                            </div>
-                            <div className={styles.checkboxWrapper} style={{width: '145px'}}>
-                                <input id='hororSerija' type='checkbox'/>
-                                <label htmlFor='hororSerija'>Horor Serija</label>
-                            </div>
+                            {Object.values(FILTERING_OPTIONS.SINGLE.subCategories).map(subcategory => (
+                                <div key={subcategory.dbValue} className={styles.checkboxWrapper} style={{width: '160px'}}>
+                                    <input id={subcategory.dbValue} type='checkbox' onChange={() => setSelectedSubcategory(subcategory.dbValue)} checked={selectedSubcategory === subcategory.dbValue}/>
+                                    <label htmlFor={subcategory.dbValue} className={emptyFields.includes('subcategory') ? styles.error : ''}>{subcategory.label}</label>
+                                </div>
+                            ))}
                         </div>
                     )}
                     <div className={styles.tabs}>

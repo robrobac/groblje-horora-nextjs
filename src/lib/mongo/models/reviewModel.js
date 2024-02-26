@@ -94,6 +94,10 @@ const ReviewSchema = new Schema({
         type: String,
         required: true
     },
+    subcategory: {
+        type: String,
+        required: true
+    },
     likes: [LikeSchema],
     comments: [CommentSchema],
 }, {

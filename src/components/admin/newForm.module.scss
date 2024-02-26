@@ -211,6 +211,10 @@
     line-height: 2;
     cursor: pointer;
     display: inline-flex;
+
+    &.error {
+        color: red;
+    }
 }
 
 .checkboxWrapper label:before {

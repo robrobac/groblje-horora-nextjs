@@ -40,7 +40,7 @@ export const PATCH = async (request, { params }) => {
     }
 
     const data = await request.json()
-    const { reviewTitle, movies, comments, likes, contentImages } = data
+    const { reviewTitle, movies, comments, likes, contentImages, selectedSubcategory } = data
 
     let newSlug = ''
 
@@ -56,6 +56,10 @@ export const PATCH = async (request, { params }) => {
 
     if (!reviewTitle) {
         emptyFields.push('reviewTitle')
+    }
+
+    if (!selectedSubcategory) {
+        emptyFields.push('subcategory')
     }
 
     const existingSlug = await reviewModel.findOne({ slug: newSlug, _id: { $ne: id } })
@@ -98,6 +102,7 @@ export const PATCH = async (request, { params }) => {
                 likes,
                 contentImages,
                 reviewType: 'single',
+                subcategory: selectedSubcategory,
             }, { new: true })
         }
         if (movies.length === 4) {
@@ -109,6 +114,7 @@ export const PATCH = async (request, { params }) => {
                 likes,
                 contentImages,
                 reviewType: 'quad',
+                subcategory: selectedSubcategory,
             }, { new: true })
         }
 

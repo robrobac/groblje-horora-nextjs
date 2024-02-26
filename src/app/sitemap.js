@@ -1,4 +1,4 @@
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export default async function sitemap() {
     const baseUrl = "https://www.groblje-horora.com"

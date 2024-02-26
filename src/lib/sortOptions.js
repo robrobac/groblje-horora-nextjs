@@ -5,17 +5,17 @@
 
 export const SORTING_OPTIONS = {
     TITLE: {
-        dbKey: 'reviewTitle',
+        dbKey: 'reviewTitle', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
         label: 'Naslov',
         defaultOrder: 'asc',
     },
     RATING: {
-        dbKey: 'movies.0.rating',
+        dbKey: 'movies.0.rating', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
         label: 'Ocjena',
         defaultOrder: 'desc',
     },
     CREATED: {
-        dbKey: 'createdAt',
+        dbKey: 'createdAt', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
         label: 'Datum',
         defaultOrder: 'desc',
     },
@@ -23,26 +23,36 @@ export const SORTING_OPTIONS = {
 
 export const FILTERING_OPTIONS = {
     SINGLE: {
-        dbKey: 'reviewType',
-        dbValue: 'single',
+        dbKey: 'reviewType', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+        dbValue: 'single', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
         label: 'Recenzije',
         subCategories: {
             MOVIE: {
-                dbKey: 'reviewSubtype',
-                dbValue: 'singleMovie',
+                dbKey: 'reviewSubtype', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+                dbValue: 'singleMovie', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 label: 'Horor Filmovi',
+            },
+            SHOW: {
+                dbKey: 'reviewSubtype', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+                dbValue: 'singleShow', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+                label: 'Horor Serije',
             },
         }
     },
     QUAD: {
-        dbKey: 'reviewType',
-        dbValue: 'quad',
+        dbKey: 'reviewType', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+        dbValue: 'quad', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
         label: 'Pregledi',
         subCategories: {
             SHORT_REVIEW: {
-                dbKey: 'reviewSubtype',
-                dbValue: 'quadShortReview',
+                dbKey: 'reviewSubtype', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+                dbValue: 'shortReviews', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 label: 'Kratki Pregledi',
+            },
+            SHORT_HORROR: {
+                dbKey: 'reviewSubtype', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+                dbValue: 'shortHorrors', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+                label: 'Kratki Horori',
             },
         }
     },

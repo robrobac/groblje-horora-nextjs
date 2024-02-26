@@ -132,9 +132,7 @@ export const GET = async (request) => {
 export async function POST(request) {
     dbConnect()
     const data = await request.json()
-    const { reviewTitle, movies, comments, likes, contentImages } = data
-
-    console.log(movies)
+    const { reviewTitle, movies, comments, likes, contentImages, selectedSubcategory } = data
 
     let slug = ''
 
@@ -150,6 +148,10 @@ export async function POST(request) {
 
     if (!reviewTitle) {
         emptyFields.push('reviewTitle')
+    }
+
+    if (!selectedSubcategory) {
+        emptyFields.push('subcategory')
     }
 
     const existingSlug = await reviewModel.findOne({ slug: slug })
@@ -193,6 +195,7 @@ export async function POST(request) {
                 likes,
                 contentImages,
                 reviewType: 'single',
+                subcategory: selectedSubcategory,
             })
         }
         if (movies.length === 4) {
@@ -204,6 +207,7 @@ export async function POST(request) {
                 likes,
                 contentImages,
                 reviewType: 'quad',
+                subcategory: selectedSubcategory,
             })
         }
         return new NextResponse(JSON.stringify(review), {
