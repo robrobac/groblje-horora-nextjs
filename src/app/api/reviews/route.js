@@ -12,10 +12,6 @@ export const GET = async (request) => {
     const perPage = request.nextUrl.searchParams.get('perPage');
     const selectedFilterKey = request.nextUrl.searchParams.get('selectedFilterKey')
     const selectedFilterVal = request.nextUrl.searchParams.get('selectedFilterVal')
-    // console.log(sort, order, search, page, perPage, filter)
-    // console.log(request.nextUrl)
-
-    console.log(selectedFilterKey, selectedFilterVal)
 
     const getOrder = (orderBy) => {
         if (orderBy === 'desc') {
@@ -65,7 +61,6 @@ export const GET = async (request) => {
                         [sort, getOrder(order)],
                     ]);
                 const totalReviewsCount = await reviewModel.countDocuments(typeFilter)
-                console.log(reviews)
 
                 return NextResponse.json({
                     reviews,
@@ -85,7 +80,6 @@ export const GET = async (request) => {
                         [sort, getOrder(order)],
                     ]);
                 const totalReviewsCount = await reviewModel.countDocuments(typeFilter)
-                console.log(reviews)
 
                 return NextResponse.json({
                     reviews,
@@ -105,7 +99,6 @@ export const GET = async (request) => {
                         [sort, getOrder(order)],
                     ]);
                 const totalReviewsCount = await reviewModel.countDocuments(typeFilter)
-                console.log(reviews)
 
                 return NextResponse.json({
                     reviews,
@@ -121,7 +114,6 @@ export const GET = async (request) => {
                     .limit(perPage)
                     .sort({ createdAt: -1 })
                 const totalReviewsCount = await reviewModel.countDocuments()
-                console.log(reviews)
 
                 return NextResponse.json({
                     reviews,

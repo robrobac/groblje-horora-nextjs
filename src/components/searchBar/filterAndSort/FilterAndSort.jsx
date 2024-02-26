@@ -20,12 +20,11 @@ export default function FilterAndSort() {
         handleSortAndOrder,
         sort,
         order,
+        totalItems,
+        loading,
     } = useContext(ReviewsGalleryContext)
-
-    console.log('filterKEy: ', selectedFilterKey)
-    console.log('filterValue: ',selectedFilterVal)
     
-    const { count } = useCountReviews()
+    // const { count } = useCountReviews()
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -52,16 +51,16 @@ export default function FilterAndSort() {
                 <div className={styles.filterAndSortControls} ref={filterAndSortControlsRef}>
                     <div className={styles.filterOptions}>
                         <p>Filtriraj</p>
-                        <Filter clickFunction={handleFilter} title='Sve' filterValue='' filterKey='' selectedFilterKey='' selectedFilterVal='' search={search} count={count} counting={count?.numberOfReviews}/>
+                        <Filter clickFunction={handleFilter} title='Sve' filterValue='' filterKey='' selectedFilterKey={selectedFilterKey} selectedFilterVal={selectedFilterVal} search={search} count={totalItems} loading={loading}/>
                         {Object.keys(FILTERING_OPTIONS).map(optionKey => {
                             const option = FILTERING_OPTIONS[optionKey];
                             return (
                                 <React.Fragment key={option.dbValue}>
-                                    <Filter key={option.dbValue} clickFunction={handleFilter} title={option.label} filterValue={option.dbValue} filterKey={option.dbKey} selectedFilterKey={selectedFilterKey} selectedFilterVal={selectedFilterVal} search={search} count={count} counting={count?.quadReviews}/>
+                                    <Filter key={option.dbValue} clickFunction={handleFilter} title={option.label} filterValue={option.dbValue} filterKey={option.dbKey} selectedFilterKey={selectedFilterKey} selectedFilterVal={selectedFilterVal} search={search} count={totalItems} loading={loading}/>
                                     {option.subCategories && Object.keys(option.subCategories).map(subCategoryKey => {
                                         const subCategory = option.subCategories[subCategoryKey];
                                         return (
-                                            <Filter key={subCategory.dbValue} clickFunction={handleFilter} title={subCategory.label} filterValue={subCategory.dbValue} filterKey={subCategory.dbKey} selectedFilterKey={selectedFilterKey} selectedFilterVal={selectedFilterVal} search={search} count={count} counting={count?.quadReviews}/>
+                                            <Filter key={subCategory.dbValue} clickFunction={handleFilter} title={subCategory.label} filterValue={subCategory.dbValue} filterKey={subCategory.dbKey} selectedFilterKey={selectedFilterKey} selectedFilterVal={selectedFilterVal} search={search} count={totalItems} loading={loading}/>
                                         );
                                     })}
                                 </React.Fragment>

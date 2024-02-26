@@ -9,7 +9,7 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
     const [loading, setLoading] = useState(true);
     const [reviews, setReviews] = useState([]);
     const [totalItems, setTotalItems] = useState()
-    console.log(totalItems)
+
     const [totalPages, setTotalPages] = useState([])
 
     const [perPage, setPerPage] = useState(initialPerPage);
@@ -35,11 +35,11 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
 
     const urlSelectedFilterKey = searchParams.get('filterKey')
     const [selectedFilterKey, setSelectedFilterKey] = useState(urlSelectedFilterKey ? urlSelectedFilterKey : '')
-    console.log('Selected Filter Key: ', selectedFilterKey)
+    // console.log('Selected Filter Key: ', selectedFilterKey)
 
     const urlSelectedFilterVal = searchParams.get('filterVal')
     const [selectedFilterVal, setSelectedFilterVal] = useState(urlSelectedFilterVal ? urlSelectedFilterVal : '')
-    console.log('Selected Filter Val: ', selectedFilterVal)
+    // console.log('Selected Filter Val: ', selectedFilterVal)
 
     const urlSearch = searchParams.get('search')
     const [search, setSearch] = useState(urlSearch ? urlSearch : '')
@@ -200,7 +200,7 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
             newSearchParams.delete('search');
 
             const selectedSortingOption = Object.values(SORTING_OPTIONS).find(option => option.dbKey === sortOption)
-            console.log(selectedSortingOption)
+            // console.log(selectedSortingOption)
 
             if (selectedSortingOption) {
                 setOrder(selectedSortingOption.defaultOrder);
@@ -231,6 +231,7 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
     }
 
     return {
+        totalItems,
         reviews,
         page,
         totalPages,
@@ -244,6 +245,7 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
         order,
         handleSortAndOrder,
         loading,
-        handleRefresh
+        handleRefresh,
+        
     }
 }

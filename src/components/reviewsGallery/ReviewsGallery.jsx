@@ -27,7 +27,8 @@ export default function ReviewsGallery() {
         order,
         handleSortAndOrder,
         loading,
-        handleRefresh
+        handleRefresh,
+        totalItems,
     } = useFetchReviewsWithParams(SORTING_OPTIONS.CREATED.dbKey, 'desc', 30)
 
 
@@ -41,6 +42,8 @@ export default function ReviewsGallery() {
             handleSortAndOrder,
             sort,
             order,
+            totalItems,
+            loading,
         }}>
             <Search controls={true}/>
             {loading ? (<GhostSpinner />) : (
