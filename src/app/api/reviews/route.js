@@ -10,9 +10,12 @@ export const GET = async (request) => {
     const search = request.nextUrl.searchParams.get('search');
     const page = request.nextUrl.searchParams.get('page');
     const perPage = request.nextUrl.searchParams.get('perPage');
-    const filter = request.nextUrl.searchParams.get('filter');
+    const selectedFilterKey = request.nextUrl.searchParams.get('selectedFilterKey')
+    const selectedFilterVal = request.nextUrl.searchParams.get('selectedFilterVal')
     // console.log(sort, order, search, page, perPage, filter)
     // console.log(request.nextUrl)
+
+    console.log(selectedFilterKey, selectedFilterVal)
 
     const getOrder = (orderBy) => {
         if (orderBy === 'desc') {
@@ -52,7 +55,7 @@ export const GET = async (request) => {
             // Else if there's no Search in the query, continue with sorting and ordering
 
             if (sort === 'movies.0.rating') {
-                const typeFilter = filter ? { 'reviewType': filter } : {}
+                const typeFilter = selectedFilterKey && selectedFilterVal ? { [selectedFilterKey]: selectedFilterVal } : {}
                 // sory by rating
                 const reviews = await reviewModel.find(typeFilter)
                     .skip(skip)
@@ -62,6 +65,7 @@ export const GET = async (request) => {
                         [sort, getOrder(order)],
                     ]);
                 const totalReviewsCount = await reviewModel.countDocuments(typeFilter)
+                console.log(reviews)
 
                 return NextResponse.json({
                     reviews,
@@ -71,7 +75,7 @@ export const GET = async (request) => {
             }
 
             if (sort === 'reviewTitle') {
-                const typeFilter = filter ? { 'reviewType': filter } : {}
+                const typeFilter = selectedFilterKey && selectedFilterVal ? { [selectedFilterKey]: selectedFilterVal } : {}
                 // sort by title
                 const reviews = await reviewModel.find(typeFilter)
                     .skip(skip)
@@ -81,6 +85,7 @@ export const GET = async (request) => {
                         [sort, getOrder(order)],
                     ]);
                 const totalReviewsCount = await reviewModel.countDocuments(typeFilter)
+                console.log(reviews)
 
                 return NextResponse.json({
                     reviews,
@@ -90,7 +95,7 @@ export const GET = async (request) => {
             }
 
             if (sort === 'createdAt') {
-                const typeFilter = filter ? { 'reviewType': filter } : {}
+                const typeFilter = selectedFilterKey && selectedFilterVal ? { [selectedFilterKey]: selectedFilterVal } : {}
                 // sort by date created
                 const reviews = await reviewModel.find(typeFilter)
                     .skip(skip)
@@ -100,6 +105,7 @@ export const GET = async (request) => {
                         [sort, getOrder(order)],
                     ]);
                 const totalReviewsCount = await reviewModel.countDocuments(typeFilter)
+                console.log(reviews)
 
                 return NextResponse.json({
                     reviews,
@@ -115,6 +121,7 @@ export const GET = async (request) => {
                     .limit(perPage)
                     .sort({ createdAt: -1 })
                 const totalReviewsCount = await reviewModel.countDocuments()
+                console.log(reviews)
 
                 return NextResponse.json({
                     reviews,

@@ -33,9 +33,13 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
     const [order, setOrder] = useState(urlOrder ? urlOrder : initialOrder)
     // console.log('order: ', order)
 
-    const urlFilter = searchParams.get('filter')
-    const [filter, setFilter] = useState(urlFilter ? urlFilter : '')
-    // console.log('filter: ', filter)
+    const urlSelectedFilterKey = searchParams.get('filterKey')
+    const [selectedFilterKey, setSelectedFilterKey] = useState(urlSelectedFilterKey ? urlSelectedFilterKey : '')
+    console.log('Selected Filter Key: ', selectedFilterKey)
+
+    const urlSelectedFilterVal = searchParams.get('filterVal')
+    const [selectedFilterVal, setSelectedFilterVal] = useState(urlSelectedFilterVal ? urlSelectedFilterVal : '')
+    console.log('Selected Filter Val: ', selectedFilterVal)
 
     const urlSearch = searchParams.get('search')
     const [search, setSearch] = useState(urlSearch ? urlSearch : '')
@@ -72,7 +76,7 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
     const fetchReviews = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews?search=${search}&sort=${sort}&order=${order}&page=${page}&perPage=${perPage}&filter=${filter}`);
+            const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews?search=${search}&sort=${sort}&order=${order}&page=${page}&perPage=${perPage}&selectedFilterKey=${selectedFilterKey}&selectedFilterVal=${selectedFilterVal}`);
             const json = await res.json()
             if (!res.ok) {
                 throw new Error('Failed to fetch Reviews data');
@@ -92,22 +96,24 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
 
     useEffect(() => {
         fetchReviews();
-    }, [page, filter, sort, order, search, refresh]);
+    }, [page, selectedFilterKey, selectedFilterVal, sort, order, search, refresh]);
 
 
     useEffect(() => {
         const pageNumber = parseInt(searchParams.get('page'), 10) || 1;
-        const filterValue = searchParams.get('filter') || '';
+        const filterKey = searchParams.get('filterKey' || '')
+        const filterValue = searchParams.get('filterVal') || '';
         const sortValue = searchParams.get('sort') || '';
         const orderValue = searchParams.get('order') || '';
         const searchValue = searchParams.get('search') || '';
         setPage(pageNumber);
-        setFilter(filterValue);
+        setSelectedFilterKey(filterKey)
+        setSelectedFilterVal(filterValue)
         setSort(sortValue)
         setOrder(orderValue)
         setSearch(searchValue)
         
-    }, [searchParams.get('page'), searchParams.get('filter'), searchParams.get('sort'), searchParams.get('order'), searchParams.get('search')])
+    }, [searchParams.get('page'), searchParams.get('filterKey'), searchParams.get('filterVal'), searchParams.get('sort'), searchParams.get('order'), searchParams.get('search')])
 
 
     const handlePageChange = (num) => {
@@ -143,23 +149,26 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
 
     }
 
-    const handleFilter = (value) => {
-        setFilter(value)
+    const handleFilter = (filterKey, filterValue) => {
+        setSelectedFilterKey(filterKey)
+        setSelectedFilterVal(filterValue)
         setPage(1)
 
         // Create a new URLSearchParams object before modifying it
         const newSearchParams = new URLSearchParams(searchParams);
 
-        if (value) {
+        if (filterKey && filterValue) {
             // Update the 'page' parameter
-            newSearchParams.set('filter', value);
+            newSearchParams.set('filterKey', filterKey)
+            newSearchParams.set('filterVal', filterValue)
             newSearchParams.set('page', 1);
             newSearchParams.delete('search');
             // Use setSearchParams to apply the changes
             router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
         } else {
             // Update the 'page' parameter
-            newSearchParams.delete('filter');
+            newSearchParams.delete('filterKey')
+            newSearchParams.delete('filterVal')
             newSearchParams.set('page', 1);
             newSearchParams.delete('search');
             // Use setSearchParams to apply the changes
@@ -228,7 +237,8 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
         handlePageChange,
         search,
         handleSearch,
-        filter,
+        selectedFilterKey,
+        selectedFilterVal,
         handleFilter,
         sort,
         order,

@@ -28,12 +28,12 @@ export const FILTERING_OPTIONS = {
         label: 'Recenzije',
         subCategories: {
             MOVIE: {
-                dbKey: 'reviewSubtype', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+                dbKey: 'subcategory', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 dbValue: 'singleMovie', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 label: 'Horor Filmovi',
             },
             SHOW: {
-                dbKey: 'reviewSubtype', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+                dbKey: 'subcategory', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 dbValue: 'singleShow', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 label: 'Horor Serije',
             },
@@ -45,12 +45,12 @@ export const FILTERING_OPTIONS = {
         label: 'Pregledi',
         subCategories: {
             SHORT_REVIEW: {
-                dbKey: 'reviewSubtype', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+                dbKey: 'subcategory', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 dbValue: 'shortReviews', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 label: 'Kratki Pregledi',
             },
             SHORT_HORROR: {
-                dbKey: 'reviewSubtype', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
+                dbKey: 'subcategory', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 dbValue: 'shortHorrors', // THIS SHOULD NOT BE CHANGED BECAUSE IT REFLECTS THE DATA IN THE DATABASE.
                 label: 'Kratki Horori',
             },
