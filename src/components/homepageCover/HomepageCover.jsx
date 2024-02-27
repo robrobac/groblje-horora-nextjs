@@ -9,11 +9,11 @@ export const HomepageCover = () => {
     return (
         <div className={styles.coverImage}>
             <Image priority={true} width={2560} height={800} src={coverImage} alt='main background, a graveyard silhouette'
-                sizes="(max-width: 425px) 100vw"
+                sizes="(max-width: 425px) 100%"
             />
             <div className={styles.coverImageTrees}>
-                <Image sizes="(max-width: 425px) 15vw, (max-width: 630px) 20vw" priority={true} width={428} height={800} src={leftTree} alt='tree silhouette on the left side of the screen'/>
-                <Image sizes="(max-width: 425px) 15vw, (max-width: 630px) 20vw" priority={true} width={428} height={800} src={rightTree} alt='tree silhouette on the right side of the screen'/>
+                <Image priority={true} width={428} height={800} src={leftTree} alt='tree silhouette on the left side of the screen'/>
+                <Image priority={true} width={428} height={800} src={rightTree} alt='tree silhouette on the right side of the screen'/>
             </div>
         </div>
     )
