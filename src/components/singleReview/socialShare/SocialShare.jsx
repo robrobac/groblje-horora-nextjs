@@ -1,6 +1,8 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
+import styles from './socialShare.module.scss'
+import copyLinkIcon from '../../../../public/images/copyLinkIcon.png';
 import {
     FacebookShareButton,
     FacebookIcon,
@@ -11,38 +13,54 @@ import {
     ViberShareButton,
     ViberIcon,
   } from 'next-share'
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 export default function SocialShare({slug, reviewType, index}) {
+    const [copied, setCopied] = useState(false)
+    console.log(copied)
+
+    const handleCopy = () => {
+        setCopied(true)
+
+        setTimeout(() => {
+            setCopied(false)
+        }, '1000')
+    }
 
     return (
-        <div>
+        <div className={styles.socialShareSection}>
             <p>Share: </p>
-            <FacebookShareButton
-                url={ reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`}
-            >
-                <FacebookIcon size={48} round/>
-            </FacebookShareButton>
+            <div className={styles.socialShareIcons}>
+                <FacebookShareButton
+                    url={ reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`}
+                >
+                    <FacebookIcon size={36} round/>
+                </FacebookShareButton>
 
-            <WhatsappShareButton
-                url={ reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`}
-                appId={''}
-            >
-                <WhatsappIcon size={48} round />
-            </WhatsappShareButton>
+                <WhatsappShareButton
+                    url={ reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`}
+                    appId={''}
+                >
+                    <WhatsappIcon size={36} round />
+                </WhatsappShareButton>
 
-            <ViberShareButton
-                url={ reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`}
-                appId={''}
-            >
-                <ViberIcon size={48} round />
-            </ViberShareButton>
-
-            <EmailShareButton
-                url={ reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`}
-                appId={''}
-            >
-                <EmailIcon size={48} round />
-            </EmailShareButton>
+                <ViberShareButton
+                    url={ reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`}
+                    appId={''}
+                >
+                    <ViberIcon size={36} round />
+                </ViberShareButton>
+                <CopyToClipboard text={reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`} onCopy={handleCopy}>
+                    <div className={styles.copyLinkButton}>
+                        <img src={copyLinkIcon.src} alt="copy link icon" />
+                    </div>
+                </CopyToClipboard>
+                {copied && (
+                    <div className={styles.copied}>
+                        <span>Link kopiran</span>
+                    </div>
+                )}
+            </div>
         </div>
     )
 
