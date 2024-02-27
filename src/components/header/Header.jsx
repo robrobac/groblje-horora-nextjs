@@ -23,7 +23,7 @@ export const Header = () => {
         <header className={styles.header}>
             <div className={styles.headerWrap}>
                 <div className={styles.navLogo}>
-                    <Link href={`${process.env.NEXT_PUBLIC_DOMAIN_URL}`} >
+                    <Link href={`${process.env.NEXT_PUBLIC_DOMAIN_URL}`} aria-label="Idi na Groblje Horora Naslovnu">
                         <Logo />
                     </Link>
                 </div>
