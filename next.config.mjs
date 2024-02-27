@@ -9,7 +9,12 @@ const nextConfig = {
                 // pathname: '/account123/**',
             },
         ],
-    }
+    },
+    logging: {
+        fetches: {
+            fullUrl: true,
+        },
+    },
     // images: {
     //     domains: ['https://firebasestorage.googleapis.com/'], // Replace with your actual domain
     // },

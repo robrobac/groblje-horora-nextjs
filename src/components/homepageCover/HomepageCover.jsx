@@ -1,3 +1,5 @@
+'use server'
+
 import styles from '@/components/homepageCover/homepageCover.module.scss';
 import Image from 'next/image';
 import coverImage from '../../../public/images/groblje-horora-home-page-cover.webp';
