@@ -9,6 +9,7 @@ export const HomepageCover = () => {
     return (
         <div className={styles.coverImage}>
             <Image priority={true} width={2560} height={800} src={coverImage} alt='main background, a graveyard silhouette'
+                sizes="(max-width: 425px) 100vw"
             />
             <div className={styles.coverImageTrees}>
                 <Image priority={true} width={428} height={800} src={leftTree} alt='tree silhouette on the left side of the screen'/>
