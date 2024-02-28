@@ -2,13 +2,14 @@
 
 import styles from '@/components/homepageCover/homepageCover.module.scss';
 import Image from 'next/image';
-import coverImage from '../../../public/images/groblje-horora-home-page-cover.webp'
+// import coverImage from '../../../public/images/groblje-horora-home-page-cover.webp'
+import coverImage2 from '../../../public/images/test.jpg'
 
 export const HomepageCover = () => {
 
     return (
         <div className={styles.coverImage}>
-            <img src={'/images/groblje-horora-home-page-cover.webp'} alt='main background, a graveyard silhouette'
+            <Image priority={true} src={coverImage2} alt='main background, a graveyard silhouette'
                 
             />
             <div className={styles.coverImageTrees}>
