@@ -5,6 +5,7 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/footer";
 import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react"
 
 const lexend = Lexend({ subsets: ["latin"] });
 
@@ -22,6 +23,8 @@ export default function RootLayout({ children }) {
 
             <body suppressHydrationWarning={true} className={lexend.className}>
                 <SpeedInsights />
+                <Analytics />
+
                 <Header />
                 {children}
                 <Footer />
