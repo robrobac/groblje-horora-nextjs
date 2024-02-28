@@ -20,6 +20,8 @@ export default function Comments({post, slug}) {
     const [numberOfLikes, setNumberOfLikes] = useState(0)
     const [postingComment, setPostingComment] = useState(false)
 
+    const [socketConnected, setSocketConnected] = useState(false)
+
     useEffect(() => {
         // Check if the current user has liked the post
         const hasLiked = post?.likes?.some(like => like.likeName === user?.username || like.likeEmail === mongoUser?.email);
@@ -37,6 +39,7 @@ export default function Comments({post, slug}) {
 
         socket.on('connect', () => {
             console.log('Connected to socket.io');
+            setSocketConnected(true)
         });
 
         socket.on('reviewChange', (change) => {
@@ -202,15 +205,17 @@ export default function Comments({post, slug}) {
                         </li>
                     ))}
                 </ul>
+                {!socketConnected && (<p className={styles.socketError}>Socket not connected: Osvjezi stranicu i pricekaj 5-10 sekundi</p>)}
                 <form className={styles.commentForm} onSubmit={handleSubmitComment}>
+                    
                     <input className={styles.formInput}
                         disabled={mongoUser && user?.emailVerified ? false : true}
-                        type='text' placeholder={mongoUser ? 'Upiši komentar' : 'Prijavite se da ostavite komentar ili like'}
+                        type='text' placeholder={mongoUser && socketConnected ? 'Upiši komentar' : 'Prijavite se da ostavite komentar ili like'}
                         value={commentValue}
                         onChange={(e) => {setCommentValue(e.target.value)}}
                     />
                     {/* <LoadingButton disabled={mongoUser ? false : true} customClass={mongoUser ? '' : 'disabled'} type={postingComment ? 'button' : 'submit'} title='Pošalji' loading={postingComment} minWidth='110px'/> */}
-                    <LoadingBtn loading={postingComment} type={postingComment ? 'button' : 'submit'} content='Pošalji' disabled={mongoUser ? false : true} customClass={mongoUser ? '' : 'disabled'} size={20} width={100}/>
+                    <LoadingBtn loading={postingComment} type={postingComment ? 'button' : 'submit'} content='Pošalji' disabled={mongoUser && socketConnected ? false : true} customClass={mongoUser ? '' : 'disabled'} size={20} width={100}/>
                 </form>
             </div>
         </div>

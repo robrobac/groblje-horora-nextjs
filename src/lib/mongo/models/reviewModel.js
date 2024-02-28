@@ -98,6 +98,10 @@ const ReviewSchema = new Schema({
         type: String,
         required: true
     },
+    moreLikeThis: {
+        type: Array,
+        required: false
+    },
     likes: [LikeSchema],
     comments: [CommentSchema],
 }, {

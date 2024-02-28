@@ -2,6 +2,7 @@
 import styles from "@/app/recenzije/[slug]/page.module.scss";
 import CommentsAndLikes from "@/components/commentsAndLikes/CommentsAndLikes";
 import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteButtonsSingle";
+import MoreLikeThis from "@/components/singleReview/moreLikeThis/MoreLikeThis";
 import { Movie } from "@/components/singleReview/movie/Movie";
 import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeader";
 import ScrollToSection from "@/components/singleReview/scrollToSection/ScrollToSection";
@@ -81,6 +82,7 @@ export const generateMetadata = async ({params, searchParams}) => {
 const SinglePostPage = async ({params}) => {
     const {slug} = params;
     const data = await getData(slug);
+    console.log(data.moreLikeThis)
 
     return (
         <main className={styles.singlePostContainer}>
@@ -102,7 +104,7 @@ const SinglePostPage = async ({params}) => {
                 <Movie key={movie._id} data={data} movie={movie} id={`movie${index + 1}`} index={index}/>
             ))}
             <CommentsAndLikes post={data} slug={slug}/>
-            
+            <MoreLikeThis data={data.moreLikeThis} />
         </main>
     );
 };

@@ -48,6 +48,7 @@
 
     /* FONT SIZES */
     /*   Regular */
+        --textXXS: 10px;
         --textXS: 12px;
         --textS: 14px;
         --textM: 16px;
