@@ -12,7 +12,7 @@
 
     overflow: hidden;
 
-    border: 1px solid var(--black);
+
 
     @media (max-width: 1024px) {
         max-height: 700px;
@@ -28,6 +28,7 @@
 
     @media (max-width: 425px) {
         height: 200px;
+
     }
 
     img {
@@ -35,6 +36,7 @@
         height: 100%;
         object-fit: cover;
         object-position: center;
+        mix-blend-mode: lighten;
     }
 
     .coverImageTrees {
@@ -46,8 +48,15 @@
         justify-content: space-between;
 
         img {
+            margin-top: -2px;
             height: 100%;
             width: auto;
+            mix-blend-mode: darken;
+        }
+
+        .rightTree {
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
         }
     }
 }
