@@ -8,7 +8,7 @@ export const HomepageCover = () => {
 
     return (
         <div className={styles.coverImage}>
-            <Image priority={true} width={1280} height={400} src={'/images/groblje-horora-home-page-cover.webp'} alt='main background, a graveyard silhouette'
+            <Image priority={true} width={640} height={200} src={'/images/groblje-horora-home-page-cover.webp'} alt='main background, a graveyard silhouette'
                 
             />
             <div className={styles.coverImageTrees}>
