@@ -1,5 +1,6 @@
 import styles from '@/components/reviewsGallery/postsFlex/postCard/postCard.module.scss';
 import Link from 'next/link'
+import bloodyBorder from '../../../../../public/images/bloody-border.png'
 
 
 export default function postImage({post}) {
@@ -21,8 +22,9 @@ export default function postImage({post}) {
                     </div>
                 </div>
             ) : (
-                <div className={styles.previewImage}>
+                <div className={`${styles.previewImage} ${post.movies[0].top25 && styles.top25}`}>
                     <img className={styles.singleMovieImage} src={post.movies[0].coverImage} alt='movie-cover'></img>
+                    {post.movies[0].top25 && (<img className={styles.bloodyBorder} src={bloodyBorder.src} alt='bloody border representing top 25'></img>)}
                 </div>
             )}
         </Link>
