@@ -117,13 +117,17 @@
         box-shadow: 0px 0px 21px 1px #000000;
         stroke: #0a0a0a;
         stroke-width: 4px;
+
+        .singleMovieImage {
+            border-radius: calc(var(--radiusM) + 10px);
+        }
     }
 
     .singleMovieImage {
         height: 100%;
         width: 100%;
         object-fit: cover;
-        border-radius: calc(var(--radiusM) + 10px);
+        border-radius: var(--radiusM);
         background-color: var(--white15);
         cursor: var(--pointerCursor);
     }
