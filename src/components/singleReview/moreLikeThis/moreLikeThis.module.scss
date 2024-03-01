@@ -13,10 +13,9 @@
     }
 
     .divider {
-        height: 1px;
-        background-color: var(--white15);
         border: 0;
         max-width: var(--widthReading);
+        border: 1px solid var(--white05)
     }
 }
 

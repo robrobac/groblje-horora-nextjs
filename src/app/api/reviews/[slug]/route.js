@@ -24,17 +24,17 @@ export const GET = async (request, { params }) => {
 
     let moreLikeThis = await reviewModel.find({ slug: { $ne: slug }, $text: { $search: review.reviewTitle } })
         .sort({ score: { $meta: "textScore" } })
-        .limit(4) // Limit the number of results
+        .limit(8) // Limit the number of results
         .skip(0)   // Optionally skip some documents
 
 
-    if (moreLikeThis.length !== 4) {
+    if (moreLikeThis.length !== 8) {
         const count = await reviewModel.countDocuments()
         var random = Math.floor(Math.random() * count)
 
         const additionalDocuments = await reviewModel.aggregate([
             { $match: { slug: { $ne: slug, $nin: moreLikeThis.map(doc => doc.slug) } } },
-            { $sample: { size: 4 - moreLikeThis.length } }
+            { $sample: { size: 8 - moreLikeThis.length } }
         ]);
 
         moreLikeThis = [...moreLikeThis, ...additionalDocuments];
