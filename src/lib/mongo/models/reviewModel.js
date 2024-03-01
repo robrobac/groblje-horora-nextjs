@@ -75,6 +75,19 @@ const CommentSchema = new Schema({
     timestamps: true
 })
 
+const tagsSchema = new Schema({
+    tagLabel: {
+        type: String,
+        required: true
+    },
+    tagValue: {
+        type: String,
+        required: true
+    },
+}, {
+    timestamps: false
+})
+
 
 const ReviewSchema = new Schema({
     reviewTitle: {
@@ -104,6 +117,7 @@ const ReviewSchema = new Schema({
     },
     likes: [LikeSchema],
     comments: [CommentSchema],
+    tags: [tagsSchema]
 }, {
     timestamps: true
 })

@@ -86,7 +86,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    margin-top: 1rem;
 }
 
 .styledForm {
@@ -209,7 +208,7 @@
     padding-left: 2em;
     padding-right: 1em;
     line-height: 2;
-    cursor: pointer;
+    cursor: var(--pointerCursor);
     display: inline-flex;
 
     &.error {
@@ -248,3 +247,38 @@
 .checkboxWrapper label::before {
     transition: 0.25s all ease;
 }
+
+.categoriesAndTags {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+
+}
+
+.tag {
+    cursor: var(--pointerCursor);
+    background-color: transparent;
+    color: var(--white50);
+    border: 1px solid var(--white50);
+    padding: 3px 6px;
+    border-radius: var(--radiusS);
+
+    &:hover {
+        color: white;
+        border-color: var(--white);
+    }
+
+    &.selected {
+        color: white;
+        background-color: var(--red30);
+        border-color: var(--red);
+    }
+}
+

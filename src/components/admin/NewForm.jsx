@@ -20,6 +20,7 @@ import { useRouter } from 'next/navigation';
 import PreviewDialog from './PreviewDialog';
 import ImageRepo from './ImageRepo';
 import { FILTERING_OPTIONS } from '@/lib/sortOptions';
+import { sortedTags } from '@/lib/tags';
 
 
 
@@ -29,6 +30,8 @@ export default function NewForm({ numberOfMovies }) {
     const [movies, setMovies] = useState(Array.from({length: numberOfMovies }, () => getInitialMovieState()));
 
     const [selectedcategory, setSelectedcategory] = useState('')
+    const [selectedTags, setSelectedTags] = useState([])
+    console.log(selectedTags)
 
     const [selectedTab, setSelectedTab] = useState('movie1')
     const [postPreview, setPostPreview] = useState(null);
@@ -206,6 +209,7 @@ export default function NewForm({ numberOfMovies }) {
                     movies: resolvedMovieReviews,
                     contentImages,
                     selectedcategory: selectedcategory,
+                    selectedTags: selectedTags
                 };
 
                 console.log(review)
@@ -232,6 +236,7 @@ export default function NewForm({ numberOfMovies }) {
                     // If response is OK, restart form states
                     setReviewTitle('');
                     setSelectedcategory('')
+                    setSelectedTags([])
                     setEmptyFields([])
                     setMovies(Array.from({ length: numberOfMovies }, () => getInitialMovieState()));
 
@@ -261,6 +266,23 @@ export default function NewForm({ numberOfMovies }) {
             });
     };
 
+    const handleTag = (tag) => {
+        // Check if the tag is already in the state
+        const tagIndex = selectedTags.findIndex(selectedTag => selectedTag.tagValue === tag.tagValue);
+        
+        if (tagIndex === -1) {
+            // If tag is not in state, add it
+            const newTagsState = [...selectedTags, tag];
+            newTagsState.sort((a, b) => a.tagLabel.localeCompare(b.tagLabel)); // Sort alphabetically
+            setSelectedTags(newTagsState);
+        } else {
+            // If tag is in state, remove it
+            const newTagsState = [...selectedTags];
+            newTagsState.splice(tagIndex, 1);
+            setSelectedTags(newTagsState);
+        }
+    };
+
   return (
         <main className={styles.pageContainer}>
             <div className={styles.formSection}>
@@ -271,24 +293,57 @@ export default function NewForm({ numberOfMovies }) {
                                 <label className='inputLabel' htmlFor='reviewTitle'>Review Title {emptyFields.includes('titleExists') ? <span className='error'>Title already exists</span> : ''}</label>
                                 <input className={`inputField ${emptyFields.includes('reviewTitle') ? 'error' : '' }`} id='reviewTitle' type='text' value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)}/>
                             </div>
+                            <div className={styles.categoriesAndTags}>
+                                <p>Kategorije:</p>
+                                <div className={styles.categoryContainer}>
+                                    {Object.values(FILTERING_OPTIONS.QUAD.categories).map(category => (
+                                        <div key={category.dbValue} className={styles.checkboxWrapper} style={{width: '170px'}}>
+                                            <input id={category.dbValue} type='checkbox' onChange={() => setSelectedcategory(category.dbValue)} checked={selectedcategory === category.dbValue}/>
+                                            <label htmlFor={category.dbValue} className={emptyFields.includes('category') ? styles.error : ''}>{category.label}</label>
+                                        </div>
+                                    ))}
+                                </div>
+                                <p>Oznake:</p>
+                                <div className={styles.tags}>
+                                    {sortedTags.map((tag, index) => (
+                                        <button
+                                            onClick={() => handleTag(tag)}
+                                            key={tag.tagLabel+index}
+                                            className={`${styles.tag} ${selectedTags.some(selectedTag => selectedTag.tagValue === tag.tagValue) ? styles.selected : ''}`}
+                                            type='button'
+                                        >
+                                            {tag.tagLabel}   
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <div className={styles.categoriesAndTags}>
+                            <p>Kategorije:</p>
                             <div className={styles.categoryContainer}>
-                                {Object.values(FILTERING_OPTIONS.QUAD.categories).map(category => (
-                                    <div key={category.dbValue} className={styles.checkboxWrapper} style={{width: '170px'}}>
+                                {Object.values(FILTERING_OPTIONS.SINGLE.categories).map(category => (
+                                    <div key={category.dbValue} className={styles.checkboxWrapper} style={{width: '160px'}}>
                                         <input id={category.dbValue} type='checkbox' onChange={() => setSelectedcategory(category.dbValue)} checked={selectedcategory === category.dbValue}/>
                                         <label htmlFor={category.dbValue} className={emptyFields.includes('category') ? styles.error : ''}>{category.label}</label>
                                     </div>
                                 ))}
                             </div>
-                        </>
-                    ) : (
-                        <div className={styles.categoryContainer}>
-                            {Object.values(FILTERING_OPTIONS.SINGLE.categories).map(category => (
-                                <div key={category.dbValue} className={styles.checkboxWrapper} style={{width: '160px'}}>
-                                    <input id={category.dbValue} type='checkbox' onChange={() => setSelectedcategory(category.dbValue)} checked={selectedcategory === category.dbValue}/>
-                                    <label htmlFor={category.dbValue} className={emptyFields.includes('category') ? styles.error : ''}>{category.label}</label>
-                                </div>
-                            ))}
+                            <p>Oznake:</p>
+                            <div className={styles.tags}>
+                                {sortedTags.map((tag, index) => (
+                                    <button
+                                        onClick={() => handleTag(tag)}
+                                        key={tag.tagLabel+index}
+                                        className={`${styles.tag} ${selectedTags.some(selectedTag => selectedTag.tagValue === tag.tagValue) ? styles.selected : ''}`}
+                                        type='button'
+                                    >
+                                        {tag.tagLabel}   
+                                    </button>
+                                ))}
+                            </div>
                         </div>
+                        
                     )}
                                        
                     <div className={styles.tabs}>
@@ -343,7 +398,6 @@ export default function NewForm({ numberOfMovies }) {
                                             </div>
                                         </div>
                                     )}
-
                                 </div>
                             </div>
                             <div className={styles.textEditorContainer}>
