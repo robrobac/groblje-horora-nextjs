@@ -26,8 +26,6 @@ export default function EditForm({slug}) {
     const [reviewTitle, setReviewTitle] = useState('')
     const [contentImages, setContentImages] = useState([])
     const [selectedcategory, setSelectedcategory] = useState('')
-    const [selectedTags, setSelectedTags] = useState([])
-    console.log(selectedTags)
     const [movies, setMovies] = useState([
         {
             title: '',
@@ -39,6 +37,7 @@ export default function EditForm({slug}) {
             top25: false,
             worse20: false,
             compressedCoverImage: null,
+            tags: [],
             
         },
         {
@@ -51,6 +50,7 @@ export default function EditForm({slug}) {
             top25: false,
             worse20: false,
             compressedCoverImage: null,
+            tags: [],
             
         },
         {
@@ -63,6 +63,7 @@ export default function EditForm({slug}) {
             top25: false,
             worse20: false,
             compressedCoverImage: null,
+            tags: [],
             
         },
         {
@@ -75,6 +76,7 @@ export default function EditForm({slug}) {
             top25: false,
             worse20: false,
             compressedCoverImage: null,
+            tags: [],
             
         }
     ])
@@ -103,7 +105,6 @@ export default function EditForm({slug}) {
                     setReviewTitle(data.reviewTitle)
                     setContentImages(data.contentImages)
                     setSelectedcategory(data.category)
-                    setSelectedTags(data.tags)
 
                     setMovies(data.movies.map((movie) => {
                         return {
@@ -118,6 +119,7 @@ export default function EditForm({slug}) {
                             top25: movie.top25,
                             worse20: movie.worse20,
                             compressedCoverImage: movie.compressedCoverImage,
+                            tags: movie.tags,
                         }
                     }))
                 } else {
@@ -146,7 +148,6 @@ export default function EditForm({slug}) {
                     worse20: movie.worse20,
                     coverImage: movie.coverImage,
                     coverImagePath: movie.coverImagePath,
-
                 }
             }),
             contentImages: contentImages,
@@ -176,6 +177,27 @@ export default function EditForm({slug}) {
         updatedMovies[index][field] = value;
         setMovies(updatedMovies);
     }
+
+    const handleTagChange = (index, tag) => {
+        const updatedMovies = [...movies];
+        const { tagValue, tagKey } = tag;
+    
+        // Check if the tag is already in the movie's tags array
+        const tagIndex = updatedMovies[index].tags.findIndex(t => t.tagValue === tagValue && t.tagKey === tagKey);
+    
+        if (tagIndex === -1) {
+            // If tag is not in the movie's tags array, add it
+            updatedMovies[index].tags.push(tag);
+        } else {
+            // If tag is in the movie's tags array, remove it
+            updatedMovies[index].tags.splice(tagIndex, 1);
+        }
+        
+        // Sort the tags alphabetically based on tagLabel
+        updatedMovies[index].tags.sort((a, b) => a.tagLabel.localeCompare(b.tagLabel));
+    
+        setMovies(updatedMovies);
+    };
 
     // Handle rich text editor changes
     const handleEditorStateChange = (index, newEditorState) => {
@@ -280,6 +302,7 @@ export default function EditForm({slug}) {
                     coverImagePath: filePath,
                     top25: movie.top25,
                     worse20: movie.worse20,
+                    tags: movie.tags,
                 })
             })
         })
@@ -292,7 +315,6 @@ export default function EditForm({slug}) {
                     movies: resolvedMovieReviews,
                     contentImages: contentImages,
                     selectedcategory: selectedcategory,
-                    selectedTags: selectedTags,
                 }
 
                 // API Call to post a new Review
@@ -317,7 +339,6 @@ export default function EditForm({slug}) {
                     setReviewTitle('')
                     setEmptyFields([])
                     setSelectedcategory('')
-                    setSelectedTags([])
                     setMovies([
                         {
                             title: '',
@@ -329,6 +350,7 @@ export default function EditForm({slug}) {
                             top25: false,
                             worse20: false,
                             compressedCoverImage: null,
+                            tags: [],
                             
                         },
                         {
@@ -341,6 +363,7 @@ export default function EditForm({slug}) {
                             top25: false,
                             worse20: false,
                             compressedCoverImage: null,
+                            tags: [],
                             
                         },
                         {
@@ -353,6 +376,7 @@ export default function EditForm({slug}) {
                             top25: false,
                             worse20: false,
                             compressedCoverImage: null,
+                            tags: [],
                             
                         },
                         {
@@ -365,6 +389,7 @@ export default function EditForm({slug}) {
                             top25: false,
                             worse20: false,
                             compressedCoverImage: null,
+                            tags: [],
                         }
                     ])
 
@@ -394,24 +419,6 @@ export default function EditForm({slug}) {
     }
 
 
-    const handleTag = (tag) => {
-        // Check if the tag is already in the state
-        const tagIndex = selectedTags.findIndex(selectedTag => selectedTag.tagValue === tag.tagValue);
-        
-        if (tagIndex === -1) {
-            // If tag is not in state, add it
-            const newTagsState = [...selectedTags, tag];
-            newTagsState.sort((a, b) => a.tagLabel.localeCompare(b.tagLabel)); // Sort alphabetically
-            setSelectedTags(newTagsState);
-        } else {
-            // If tag is in state, remove it
-            const newTagsState = [...selectedTags];
-            newTagsState.splice(tagIndex, 1);
-            setSelectedTags(newTagsState);
-        }
-    };
-
-
     return (
         <main className={styles.pageContainer}>
             <div className={styles.formSection}>
@@ -432,24 +439,9 @@ export default function EditForm({slug}) {
                                         </div>
                                     ))}
                                 </div>
-                                <p>Oznake:</p>
-                                <div className={styles.tags}>
-                                    {sortedTags.map((tag, index) => (
-                                        <button
-                                            onClick={() => handleTag(tag)}
-                                            key={tag.tagLabel+index}
-                                            className={`${styles.tag} ${selectedTags.some(selectedTag => selectedTag.tagValue === tag.tagValue) ? styles.selected : ''}`}
-                                            type='button'
-                                        >
-                                            {tag.tagLabel}   
-                                        </button>
-                                    ))}
-                                </div>
                             </div>
                         </>
                     ) : (
-                        <div className={styles.categoriesAndTags}>
-                            <p>Kategorije:</p>
                             <div className={styles.categoryContainer}>
                                 {Object.values(FILTERING_OPTIONS.SINGLE.categories).map(category => (
                                     <div key={category.dbValue} className={styles.checkboxWrapper} style={{width: '160px'}}>
@@ -458,20 +450,6 @@ export default function EditForm({slug}) {
                                     </div>
                                 ))}
                             </div>
-                            <p>Oznake:</p>
-                            <div className={styles.tags}>
-                                {sortedTags.map((tag, index) => (
-                                    <button
-                                        onClick={() => handleTag(tag)}
-                                        key={tag.tagLabel+index}
-                                        className={`${styles.tag} ${selectedTags.some(selectedTag => selectedTag.tagValue === tag.tagValue) ? styles.selected : ''}`}
-                                        type='button'
-                                    >
-                                        {tag.tagLabel}   
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
                     )}
                     <div className={styles.tabs}>
                         <div className={styles.tabList}>
@@ -526,6 +504,21 @@ export default function EditForm({slug}) {
                                         </div>
                                     )}
 
+                                </div>
+                            </div>
+                            <div className={styles.tagsContainer}>
+                                <p>Oznake:</p>
+                                <div className={styles.tags}>
+                                    {sortedTags.map((tag) => (
+                                        <button
+                                            onClick={() => handleTagChange(index, tag)}
+                                            key={tag.tagLabel}
+                                            className={`${styles.tag} ${movie.tags.some(selectedTag => selectedTag.tagValue === tag.tagValue && selectedTag.tagKey === tag.tagKey) ? styles.selected : ''}`}
+                                            type='button'
+                                        >
+                                            {tag.tagLabel}   
+                                        </button>
+                                    ))}
                                 </div>
                             </div>
                             <div className={styles.textEditorContainer}>

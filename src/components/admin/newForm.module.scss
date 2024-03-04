@@ -86,6 +86,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    margin-top: 1rem;
 }
 
 .styledForm {
@@ -248,8 +249,8 @@
     transition: 0.25s all ease;
 }
 
-.categoriesAndTags {
-    margin-top: 1rem;
+.tagsContainer {
+    margin: 1rem 0;
     display: flex;
     flex-direction: column;
     gap: 5px;

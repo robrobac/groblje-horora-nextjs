@@ -131,7 +131,7 @@ export const GET = async (request) => {
 export async function POST(request) {
     dbConnect()
     const data = await request.json()
-    const { reviewTitle, movies, comments, likes, contentImages, selectedcategory, selectedTags } = data
+    const { reviewTitle, movies, comments, likes, contentImages, selectedcategory } = data
 
     let slug = ''
 
@@ -195,7 +195,6 @@ export async function POST(request) {
                 contentImages,
                 reviewType: 'single',
                 category: selectedcategory,
-                tags: selectedTags,
             })
         }
         if (movies.length === 4) {
@@ -208,7 +207,6 @@ export async function POST(request) {
                 contentImages,
                 reviewType: 'quad',
                 category: selectedcategory,
-                tags: selectedTags,
             })
         }
         return new NextResponse(JSON.stringify(review), {

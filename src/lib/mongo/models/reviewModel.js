@@ -2,6 +2,19 @@ import mongoose from 'mongoose'
 
 const { Schema } = mongoose
 
+const tagsSchema = new Schema({
+    tagLabel: {
+        type: String,
+        required: true
+    },
+    tagValue: {
+        type: String,
+        required: true
+    },
+}, {
+    timestamps: false
+})
+
 const MovieSchema = new Schema({
     title: {
         type: String,
@@ -38,7 +51,8 @@ const MovieSchema = new Schema({
     worse20: {
         type: Boolean,
         required: false
-    }
+    },
+    tags: [tagsSchema]
 })
 
 const LikeSchema = new Schema({
@@ -75,19 +89,6 @@ const CommentSchema = new Schema({
     timestamps: true
 })
 
-const tagsSchema = new Schema({
-    tagLabel: {
-        type: String,
-        required: true
-    },
-    tagValue: {
-        type: String,
-        required: true
-    },
-}, {
-    timestamps: false
-})
-
 
 const ReviewSchema = new Schema({
     reviewTitle: {
@@ -117,7 +118,6 @@ const ReviewSchema = new Schema({
     },
     likes: [LikeSchema],
     comments: [CommentSchema],
-    tags: [tagsSchema]
 }, {
     timestamps: true
 })

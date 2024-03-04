@@ -62,7 +62,7 @@ export const PATCH = async (request, { params }) => {
     }
 
     const data = await request.json()
-    const { reviewTitle, movies, comments, likes, contentImages, selectedcategory, selectedTags } = data
+    const { reviewTitle, movies, comments, likes, contentImages, selectedcategory } = data
 
     let newSlug = ''
 
@@ -125,7 +125,6 @@ export const PATCH = async (request, { params }) => {
                 contentImages,
                 reviewType: 'single',
                 category: selectedcategory,
-                tags: selectedTags,
             }, { new: true })
         }
         if (movies.length === 4) {
@@ -138,7 +137,6 @@ export const PATCH = async (request, { params }) => {
                 contentImages,
                 reviewType: 'quad',
                 category: selectedcategory,
-                tags: selectedTags,
             }, { new: true })
         }
 

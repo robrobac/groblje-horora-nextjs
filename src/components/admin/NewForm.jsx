@@ -30,8 +30,6 @@ export default function NewForm({ numberOfMovies }) {
     const [movies, setMovies] = useState(Array.from({length: numberOfMovies }, () => getInitialMovieState()));
 
     const [selectedcategory, setSelectedcategory] = useState('')
-    const [selectedTags, setSelectedTags] = useState([])
-    console.log(selectedTags)
 
     const [selectedTab, setSelectedTab] = useState('movie1')
     const [postPreview, setPostPreview] = useState(null);
@@ -46,6 +44,8 @@ export default function NewForm({ numberOfMovies }) {
     const [loading, setLoading] = useState(false)
     
     const router = useRouter()
+
+    console.log(movies[0].tags)
 
     useEffect(() => {
         const handleBeforeUnload = (event) => {
@@ -102,6 +102,28 @@ export default function NewForm({ numberOfMovies }) {
         updatedMovies[index][field] = value;
         setMovies(updatedMovies);
     };
+
+    const handleTagChange = (index, tag) => {
+        const updatedMovies = [...movies];
+        const { tagValue, tagKey } = tag;
+    
+        // Check if the tag is already in the movie's tags array
+        const tagIndex = updatedMovies[index].tags.findIndex(t => t.tagValue === tagValue && t.tagKey === tagKey);
+    
+        if (tagIndex === -1) {
+            // If tag is not in the movie's tags array, add it
+            updatedMovies[index].tags.push(tag);
+        } else {
+            // If tag is in the movie's tags array, remove it
+            updatedMovies[index].tags.splice(tagIndex, 1);
+        }
+        
+        // Sort the tags alphabetically based on tagLabel
+        updatedMovies[index].tags.sort((a, b) => a.tagLabel.localeCompare(b.tagLabel));
+    
+        setMovies(updatedMovies);
+    };
+    
 
     // Handle rich text editor changes
     const handleEditorStateChange = (index, newEditorState) => {
@@ -196,6 +218,7 @@ export default function NewForm({ numberOfMovies }) {
                     coverImagePath: filePath,
                     top25: movie.top25,
                     worse20: movie.worse20,
+                    tags: movie.tags
                 });
             });
         });
@@ -209,7 +232,6 @@ export default function NewForm({ numberOfMovies }) {
                     movies: resolvedMovieReviews,
                     contentImages,
                     selectedcategory: selectedcategory,
-                    selectedTags: selectedTags
                 };
 
                 console.log(review)
@@ -236,7 +258,6 @@ export default function NewForm({ numberOfMovies }) {
                     // If response is OK, restart form states
                     setReviewTitle('');
                     setSelectedcategory('')
-                    setSelectedTags([])
                     setEmptyFields([])
                     setMovies(Array.from({ length: numberOfMovies }, () => getInitialMovieState()));
 
@@ -266,23 +287,6 @@ export default function NewForm({ numberOfMovies }) {
             });
     };
 
-    const handleTag = (tag) => {
-        // Check if the tag is already in the state
-        const tagIndex = selectedTags.findIndex(selectedTag => selectedTag.tagValue === tag.tagValue);
-        
-        if (tagIndex === -1) {
-            // If tag is not in state, add it
-            const newTagsState = [...selectedTags, tag];
-            newTagsState.sort((a, b) => a.tagLabel.localeCompare(b.tagLabel)); // Sort alphabetically
-            setSelectedTags(newTagsState);
-        } else {
-            // If tag is in state, remove it
-            const newTagsState = [...selectedTags];
-            newTagsState.splice(tagIndex, 1);
-            setSelectedTags(newTagsState);
-        }
-    };
-
   return (
         <main className={styles.pageContainer}>
             <div className={styles.formSection}>
@@ -293,57 +297,24 @@ export default function NewForm({ numberOfMovies }) {
                                 <label className='inputLabel' htmlFor='reviewTitle'>Review Title {emptyFields.includes('titleExists') ? <span className='error'>Title already exists</span> : ''}</label>
                                 <input className={`inputField ${emptyFields.includes('reviewTitle') ? 'error' : '' }`} id='reviewTitle' type='text' value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)}/>
                             </div>
-                            <div className={styles.categoriesAndTags}>
-                                <p>Kategorije:</p>
-                                <div className={styles.categoryContainer}>
-                                    {Object.values(FILTERING_OPTIONS.QUAD.categories).map(category => (
-                                        <div key={category.dbValue} className={styles.checkboxWrapper} style={{width: '170px'}}>
-                                            <input id={category.dbValue} type='checkbox' onChange={() => setSelectedcategory(category.dbValue)} checked={selectedcategory === category.dbValue}/>
-                                            <label htmlFor={category.dbValue} className={emptyFields.includes('category') ? styles.error : ''}>{category.label}</label>
-                                        </div>
-                                    ))}
-                                </div>
-                                <p>Oznake:</p>
-                                <div className={styles.tags}>
-                                    {sortedTags.map((tag, index) => (
-                                        <button
-                                            onClick={() => handleTag(tag)}
-                                            key={tag.tagLabel+index}
-                                            className={`${styles.tag} ${selectedTags.some(selectedTag => selectedTag.tagValue === tag.tagValue) ? styles.selected : ''}`}
-                                            type='button'
-                                        >
-                                            {tag.tagLabel}   
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        </>
-                    ) : (
-                        <div className={styles.categoriesAndTags}>
-                            <p>Kategorije:</p>
                             <div className={styles.categoryContainer}>
-                                {Object.values(FILTERING_OPTIONS.SINGLE.categories).map(category => (
-                                    <div key={category.dbValue} className={styles.checkboxWrapper} style={{width: '160px'}}>
+                                {Object.values(FILTERING_OPTIONS.QUAD.categories).map(category => (
+                                    <div key={category.dbValue} className={styles.checkboxWrapper} style={{width: '170px'}}>
                                         <input id={category.dbValue} type='checkbox' onChange={() => setSelectedcategory(category.dbValue)} checked={selectedcategory === category.dbValue}/>
                                         <label htmlFor={category.dbValue} className={emptyFields.includes('category') ? styles.error : ''}>{category.label}</label>
                                     </div>
                                 ))}
                             </div>
-                            <p>Oznake:</p>
-                            <div className={styles.tags}>
-                                {sortedTags.map((tag, index) => (
-                                    <button
-                                        onClick={() => handleTag(tag)}
-                                        key={tag.tagLabel+index}
-                                        className={`${styles.tag} ${selectedTags.some(selectedTag => selectedTag.tagValue === tag.tagValue) ? styles.selected : ''}`}
-                                        type='button'
-                                    >
-                                        {tag.tagLabel}   
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                        
+                        </>
+                    ) : (
+                        <div className={styles.categoryContainer}>
+                            {Object.values(FILTERING_OPTIONS.SINGLE.categories).map(category => (
+                                <div key={category.dbValue} className={styles.checkboxWrapper} style={{width: '160px'}}>
+                                    <input id={category.dbValue} type='checkbox' onChange={() => setSelectedcategory(category.dbValue)} checked={selectedcategory === category.dbValue}/>
+                                    <label htmlFor={category.dbValue} className={emptyFields.includes('category') ? styles.error : ''}>{category.label}</label>
+                                </div>
+                            ))}
+                        </div>  
                     )}
                                        
                     <div className={styles.tabs}>
@@ -400,6 +371,21 @@ export default function NewForm({ numberOfMovies }) {
                                     )}
                                 </div>
                             </div>
+                            <div className={styles.tagsContainer}>
+                                <p>Oznake:</p>
+                                <div className={styles.tags}>
+                                    {sortedTags.map((tag) => (
+                                        <button
+                                            onClick={() => handleTagChange(index, tag)}
+                                            key={tag.tagLabel}
+                                            className={`${styles.tag} ${movie.tags.some(selectedTag => selectedTag.tagValue === tag.tagValue && selectedTag.tagKey === tag.tagKey) ? styles.selected : ''}`}
+                                            type='button'
+                                        >
+                                            {tag.tagLabel}   
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
                             <div className={styles.textEditorContainer}>
                                 <label className='inputLabel'>Post Content</label>
                                 <div className='styledEditor'>
@@ -442,5 +428,6 @@ function getInitialMovieState() {
     top25: false,
     worse20: false,
     compressedCoverImage: null,
+    tags: [],
   };
 }
