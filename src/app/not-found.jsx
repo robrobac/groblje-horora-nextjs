@@ -1,10 +1,14 @@
-const { default: Link } = require("next/link")
+import Link from 'next/link';
+import styles from './not-found.module.scss'
 
 const NotFound = () => {
     return (
-        <div>
-            <h1>Page Not Found</h1>
-            <Link href="/">Go back home</Link>
+        <div className={styles.glitchContainer}>
+            <div title="404" className={styles.glitch} style={{fontSize: '100px'}}>404</div>
+            <div title="404" className={styles.glitch} style={{fontSize: '20px'}}>Stranica nije pronađena</div>
+            <Link href={'/'}>
+            <div title="404" className={`${styles.glitch} ${styles.clickable}`} style={{fontSize: '20px'}}>Povratak na Naslovnu</div>
+            </Link>
         </div>
     )
 }
