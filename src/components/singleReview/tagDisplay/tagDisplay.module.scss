@@ -1,0 +1,33 @@
+.tagDisplaySection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+
+    p {
+        font-size: var(--textS);
+        color: var(--white80);
+    }
+}
+
+
+.tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    cursor: var(--pointerCursor);
+    border: 1px solid var(--red);
+    padding: 3px 6px;
+    border-radius: var(--radiusS);
+    color: white;
+    background-color: var(--red30);
+
+    // &:hover {
+    //     color: white;
+    //     border-color: var(--white);
+    // }
+}
