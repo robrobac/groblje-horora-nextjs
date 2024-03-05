@@ -20,11 +20,21 @@
 
     button,
     .copyLinkButton {
+        cursor: var(--pointerCursor);
+        img {
+            cursor: var(--pointerCursor);
+        }
+        svg {
+            cursor: var(--pointerCursor);
 
+            path, circle {
+                cursor: var(--pointerCursor);
+            }
+        }
         @media (hover: hover) {
             &:hover {
                 transition: all .1s ease-in-out;
-                transform: scale(1.2);
+                transform: scale(1.1);
 
 
             }

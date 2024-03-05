@@ -67,3 +67,18 @@
     border: 1px solid var(--white05);
     margin: 16px 0;
 }
+
+.imdbLink {
+    width: 100%;
+
+    
+    img {
+        cursor: var(--pointerCursor);
+        @media (hover: hover) {
+            &:hover {
+                transition: all .1s ease-in-out;
+                transform: scale(1.1);
+            }
+        }
+    }
+}

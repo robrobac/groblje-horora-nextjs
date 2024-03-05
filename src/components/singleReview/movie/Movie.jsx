@@ -7,6 +7,8 @@ import { getRawContent } from "@/lib/utils";
 import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteButtonsSingle";
 import SocialShare from "../socialShare/SocialShare";
 import TagDisplay from "../tagDisplay/TagDisplay";
+import imdbLogo from '../../../../public/images/imdblogo.png';
+import Link from "next/link";
 
 export const Movie = ({data, movie, id, index}) => {
 
@@ -21,7 +23,6 @@ export const Movie = ({data, movie, id, index}) => {
                     <p className={pageStyles.reviewDate}>
                         {format(new Date(data.createdAt), 'dd.MM.yyyy')}
                     </p>
-                    
                     <h1 className={pageStyles.titleH1}>{movie.title} <span>({movie.year})</span></h1>
                     <Rating rating={movie.rating} detailed={true}/>
                 </div>
@@ -37,6 +38,9 @@ export const Movie = ({data, movie, id, index}) => {
             <div className={styles.readingSection}>
                 <section className={styles.readingContent} dangerouslySetInnerHTML={{__html: getRawContent(movie.reviewContent)}}/>
             </div>
+            <Link className={styles.imdbLink} href={movie.imdbLink} target="_blank">
+                <img src={imdbLogo.src} alt="imdb logo"></img>
+            </Link>
             {movie.tags.length > 0 && <TagDisplay tags={movie.tags}/>}
             <SocialShare slug={data?.slug} reviewType={data?.reviewType} index={index}/>
             <hr className={styles.movieDivider}></hr>
