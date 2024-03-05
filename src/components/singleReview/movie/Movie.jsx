@@ -1,4 +1,4 @@
-'use client'
+'use server'
 import pageStyles from "@/app/recenzije/[slug]/page.module.scss"
 import styles from "@/components/singleReview/movie/movie.module.scss";
 import { format } from "date-fns";
@@ -9,8 +9,6 @@ import SocialShare from "../socialShare/SocialShare";
 import TagDisplay from "../tagDisplay/TagDisplay";
 
 export const Movie = ({data, movie, id, index}) => {
-
-console.log(movie)
 
     return (
         <div className={styles.movieContainer} id={id}>
@@ -32,7 +30,7 @@ console.log(movie)
                     <div className={styles.movieImage}>
                         <img src={movie.coverImage} alt='movie-cover'></img>
                     </div>
-                    <div className={pageStyles.titleH2}>{movie.title} <span>({movie.year})</span></div>
+                    <h2 className={pageStyles.titleH2}>{movie.title} <span>({movie.year})</span></h2>
                     <Rating rating={movie.rating} detailed={true}/>
                 </div>
             )}

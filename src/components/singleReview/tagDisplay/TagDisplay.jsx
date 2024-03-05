@@ -2,7 +2,7 @@
 import styles from './tagDisplay.module.scss'
 
 export default function TagDisplay(tags) {
-    console.log(tags.tags)
+
   return (
     <div className={styles.tagDisplaySection}>
         <p>Oznake:</p>

@@ -1,7 +1,9 @@
 
+
 import styles from "@/app/recenzije/[slug]/page.module.scss";
 import CommentsAndLikes from "@/components/commentsAndLikes/CommentsAndLikes";
 import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteButtonsSingle";
+import ReadingProgress from "@/components/readingProgress/ReadingProgress";
 import MoreLikeThis from "@/components/singleReview/moreLikeThis/MoreLikeThis";
 import { Movie } from "@/components/singleReview/movie/Movie";
 import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeader";
@@ -87,6 +89,7 @@ const SinglePostPage = async ({params}) => {
     return (
         <main className={styles.singlePostContainer}>
             <ScrollToSection />
+            <ReadingProgress />
             {data.reviewType === 'quad' && (
                 <>
                 <ReviewHeader data={data}/>

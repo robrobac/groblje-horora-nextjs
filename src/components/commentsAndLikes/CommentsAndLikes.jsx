@@ -177,7 +177,7 @@ export default function Comments({post, slug}) {
     return (
         <div className={styles.commentsContainer}>
             <div className={styles.commentsHeader}>
-                <div className={`${styles.likeHead} ${liked ? styles.liked : ''}`} onClick={user && mongoUser ? handleSubmitLike : null}>
+                <div id='commentsAndLikes' className={`${styles.likeHead} ${liked ? styles.liked : ''}`} onClick={user && mongoUser ? handleSubmitLike : null}>
                     <LikeIcon/>
                     <p>{numberOfLikes}</p>
                 </div>

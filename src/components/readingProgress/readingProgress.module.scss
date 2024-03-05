@@ -1,0 +1,20 @@
+.readingProgressContainer {
+    position: sticky;
+    top: 87px;
+    width: 100%;
+    z-index: 150;
+}
+
+.progress {
+    background-color: var(--redBright);
+    height: 5px;
+    transition: all .1s;
+}
+
+.dot {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 50px;
+}

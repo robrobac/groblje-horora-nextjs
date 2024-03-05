@@ -40,7 +40,7 @@ export const GET = async (request, { params }) => {
         moreLikeThis = [...moreLikeThis, ...additionalDocuments];
     }
 
-    console.log(moreLikeThis)
+    // console.log(moreLikeThis)
 
     review.moreLikeThis = [...moreLikeThis]
 

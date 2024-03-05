@@ -45,7 +45,7 @@ export default function NewForm({ numberOfMovies }) {
     
     const router = useRouter()
 
-    console.log(movies[0].tags)
+    // console.log(movies[0].tags)
 
     useEffect(() => {
         const handleBeforeUnload = (event) => {
@@ -234,7 +234,7 @@ export default function NewForm({ numberOfMovies }) {
                     selectedcategory: selectedcategory,
                 };
 
-                console.log(review)
+                // console.log(review)
 
                 // API Call to post a new Review
                 const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews`, {
