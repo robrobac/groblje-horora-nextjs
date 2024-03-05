@@ -16,7 +16,7 @@ export default async function MoreLikeThis({data}) {
                         <div key={post._id} className={styles.moreLikeThisPost}>
                             <div className={styles.moreLikeThisPostInfo}>
                                 <PostImage post={post}/>
-                                <Link href={`/recenzije/${post?.slug}`} target='_blank'>
+                                <Link href={`/recenzije/${post?.slug}`}>
                                     <h5>{post.reviewTitle} {post.movies.length === 1 && (<span>({post?.movies[0].year})</span>)}</h5>
                                 </Link>
                                 {post.movies.length === 1 && (<Rating rating={post.movies[0].rating}/>)}
