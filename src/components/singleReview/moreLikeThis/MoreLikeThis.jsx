@@ -15,7 +15,7 @@ export default async function MoreLikeThis({data}) {
                     {data && data.map((post) => (
                         <div key={post._id} className={styles.moreLikeThisPost}>
                             <div className={styles.moreLikeThisPostInfo}>
-                                <PostImage post={post}/>
+                                <PostImage post={post} newTab={false}/>
                                 <Link href={`/recenzije/${post?.slug}`}>
                                     <h5>{post.reviewTitle} {post.movies.length === 1 && (<span>({post?.movies[0].year})</span>)}</h5>
                                 </Link>
@@ -26,7 +26,7 @@ export default async function MoreLikeThis({data}) {
                                     </p>
                                 )}
                             </div>
-                            <StandardBtn path={`/recenzije/${post?.slug}`} content='Pročitaj više →' type='textOnly' newTab={true}/>
+                            <StandardBtn path={`/recenzije/${post?.slug}`} content='Pročitaj više →' type='textOnly' newTab={false}/>
                             
                         </div>
                     ))}

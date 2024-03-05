@@ -8,7 +8,7 @@ export default function PostCard({post, handleRefresh, user, mongoUser}) {
     return (
         <div className={styles.postCardContainer}>
             <div className={styles.postCardDetails}>
-                <PostImage post={post} />
+                <PostImage post={post} newTab={true}/>
                 <EditDeleteButtons post={post} targetBlank={true} handleRefresh={handleRefresh} user={user} mongoUser={mongoUser}/>
                 <PostDescription post={post} mongoUser={mongoUser}/>
             </div>

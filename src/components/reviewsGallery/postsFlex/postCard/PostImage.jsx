@@ -3,9 +3,9 @@ import Link from 'next/link'
 import bloodyBorder from '../../../../../public/images/bloody-border.png'
 
 
-export default function postImage({post}) {
+export default function postImage({post, newTab}) {
     return (
-        <Link href={`/recenzije/${post?.slug}`} target='_blank'>
+        <Link href={`/recenzije/${post?.slug}`} target={newTab ? '_blank' : '_self'}>
             {post?.movies.length === 4 ? (
                 <div className={styles.quadImageContainer}>
                     <div className={styles.quadImage}>
