@@ -46,10 +46,15 @@ export const generateMetadata = async ({params, searchParams}) => {
             title: data?.reviewTitle,
             description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
             openGraph: {
-                images: data?.movies[0].coverImage,
+                images: [
+                    {
+                        url: data?.movies[0].coverImage,
+                        height: 500,
+                        width: 500,
+                    }
+                ],
                 title: data?.reviewTitle,
                 description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
-                type: 'website',
             },
             alternates: {
                 canonical: `https://www.groblje-horora.com/recenzije/${data?.slug}`
