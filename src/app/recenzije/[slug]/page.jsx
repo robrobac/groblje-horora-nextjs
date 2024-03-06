@@ -49,7 +49,12 @@ export const generateMetadata = async ({params, searchParams}) => {
                 images: [
                     {
                         url: data?.movies[0].coverImage,
-                        height: 500,
+                        height: 200,
+                        width: 500,
+                    },
+                    {
+                        url: data?.movies[0].coverImage,
+                        height: 200,
                         width: 500,
                     }
                 ],
