@@ -12,13 +12,12 @@ export const metadata = {
 const RecenzijePage = () => {
     return (
         <main className="reviewsContainer">
-            <div className={styles.reviewsTitleContainer}>
+            <section className={styles.reviewsTitleContainer}>
                 <h1>{metadata.title}</h1>
                 <p>{metadata.description}</p>
-            </div>
+            </section>
             <NewPostButtons />
             <ReviewsGallery />
-            
         </main>
     );
 };

@@ -11,10 +11,10 @@ export const Links = () => {
     ];
 
     return (
-        <div className={styles.navRoutes}>
+        <nav className={styles.navRoutes}>
             {links.map((link => (
                 <NavLink link={link} key={link.name}/>
             )))}
-        </div>
+        </nav>
     );
 }

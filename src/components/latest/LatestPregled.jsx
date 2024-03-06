@@ -17,8 +17,8 @@ export const LatestPregled = async () => {
     return (
         <>
             {/* DESKTOP VERSION */}
-            <div className={`${styles.latestPregledContainer} ${styles.desktopPregled}`}>
-                <div className={styles.latestPregledInfo}>
+            <article className={`${styles.latestPregledContainer} ${styles.desktopPregled}`}>
+                <section className={styles.latestPregledInfo}>
                     <p className={styles.pregledSubTitle}>
                         Najnoviji Kratki Pregled <span>{formatMongoDate(data[0].createdAt)}</span>
                     </p>
@@ -30,51 +30,50 @@ export const LatestPregled = async () => {
                     <p className={styles.pregledDescription}>
                         {data[0].movies[0].title} <span>({data[0].movies[0].year})</span>, {data[0].movies[1].title} <span>({data[0].movies[1].year})</span>, {data[0].movies[2].title} <span>({data[0].movies[2].year})</span>, {data[0].movies[3].title} <span>({data[0].movies[3].year})</span>
                     </p>
-                </div>
+                </section>
                 <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
-                    <div className={styles.quadCoverContainer}>
+                    <section className={styles.quadCoverContainer}>
                         {data[0].movies.map((movie, index) => (
-                            <div className={styles.quadCoverImageContainer} key={movie._id}>
-                                <img className={styles[`image${index}`]} src={movie.coverImage} alt='movie-cover'></img>
-                            </div>
+                            <figure className={styles.quadCoverImageContainer} key={movie._id}>
+                                <img className={styles[`image${index}`]} src={movie.coverImage} alt={`${movie.title} cover image`}></img>
+                            </figure>
                         ))}
-                    </div>
+                    </section>
                 </Link>
                 <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={true}/>
-            </div>
+            </article>
 
 
             {/* MOBILE VERSION, component reordered only. */}
-            <div className={`${styles.latestPregledContainer} ${styles.mobilePregled}`}>
+            <article className={`${styles.latestPregledContainer} ${styles.mobilePregled}`}>
                 <div className={styles.subtitleContainer}>
                     <p className={styles.pregledSubTitle}>
                         Najnoviji Kratki Pregled <span>{formatMongoDate(data[0].createdAt)}</span>
                     </p>
                 </div>
                 <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
-                    <div className={styles.quadCoverContainer}>
+                    <section className={styles.quadCoverContainer}>
                         {data[0].movies.map((movie, index) => (
-                            <div className={styles.quadCoverImageContainer} key={movie._id}>
-                                <img className={styles[`image${index}`]} src={movie.coverImage} alt='movie-cover'></img>
-                            </div>
+                            <figure className={styles.quadCoverImageContainer} key={movie._id}>
+                                <img className={styles[`image${index}`]} src={movie.coverImage} alt={`${movie.title} cover image`}></img>
+                            </figure>
                         ))}
-                    </div>
+                    </section>
                 </Link>
-                <div className={styles.latestPregledInfo}>
+                <section className={styles.latestPregledInfo}>
                     <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
                         <h2 className={styles.pregledTitle}>
                             {data[0].reviewTitle}
                         </h2>
                     </Link>
-                    
                     <p className={styles.pregledDescription}>
                         {data[0].movies[0].title} <span>({data[0].movies[0].year})</span>, {data[0].movies[1].title} <span>({data[0].movies[1].year})</span>, {data[0].movies[2].title} <span>({data[0].movies[2].year})</span>, {data[0].movies[3].title} <span>({data[0].movies[3].year})</span>
                     </p>
-                </div>
+                </section>
                 <div className={styles.buttonContainer}>
                     <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={true}/>
                 </div>
-            </div>
+            </article>
         </>
     )
 }

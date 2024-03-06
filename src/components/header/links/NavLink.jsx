@@ -1,4 +1,4 @@
-"use client"
+
 
 import Link from "next/link";
 import styles from '@/components/header/header.module.scss';

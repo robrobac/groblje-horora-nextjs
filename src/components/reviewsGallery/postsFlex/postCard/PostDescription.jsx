@@ -18,7 +18,7 @@ export default function PostDescription({post, mongoUser}) {
         setLiked(hasLiked);
     }, [mongoUser, post]);
     return (
-        <div className={styles.previewDetails}>
+        <section className={styles.previewDetails}>
             {post.movies.length === 1 ? (
                 <>
                     <div className={styles.commentsAndLikesWrap}>
@@ -54,6 +54,6 @@ export default function PostDescription({post, mongoUser}) {
                     </p>
                 </>
             )}
-        </div>
+        </section>
     )
 }

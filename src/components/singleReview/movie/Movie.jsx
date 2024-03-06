@@ -13,12 +13,12 @@ import Link from "next/link";
 export const Movie = ({data, movie, id, index}) => {
 
     return (
-        <div className={styles.movieContainer} id={id}>
+        <article className={styles.movieContainer} id={id}>
             {data.reviewType === 'single' ? (
                 <div className={styles.movieInfo}>
-                    <div className={styles.movieImage}>
-                        <img src={movie.coverImage} alt='movie-cover'></img>
-                    </div>
+                    <figure className={styles.movieImage}>
+                        <img src={movie.coverImage} alt={`${movie.title} cover image`}></img>
+                    </figure>
                     <EditDeleteButtonsSingle post={data}/>
                     <p className={pageStyles.reviewDate}>
                         {format(new Date(data.createdAt), 'dd.MM.yyyy')}
@@ -28,9 +28,9 @@ export const Movie = ({data, movie, id, index}) => {
                 </div>
             ) : (
                 <div className={styles.movieInfo}>
-                    <div className={styles.movieImage}>
-                        <img src={movie.coverImage} alt='movie-cover'></img>
-                    </div>
+                    <figure className={styles.movieImage}>
+                        <img src={movie.coverImage} alt={`${movie.title} cover image`}></img>
+                    </figure>
                     <h2 className={pageStyles.titleH2}>{movie.title} <span>({movie.year})</span></h2>
                     <Rating rating={movie.rating} detailed={true}/>
                 </div>
@@ -44,6 +44,6 @@ export const Movie = ({data, movie, id, index}) => {
             {movie.tags.length > 0 && <TagDisplay tags={movie.tags}/>}
             <SocialShare slug={data?.slug} reviewType={data?.reviewType} index={index}/>
             <hr className={styles.movieDivider}></hr>
-        </div>
+        </article>
     )
 }

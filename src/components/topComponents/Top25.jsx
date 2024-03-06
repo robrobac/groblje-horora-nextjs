@@ -7,13 +7,13 @@ export default async function Top25() {
     
 
     return (
-        <div className={styles.topContainer}>
-            <div className={styles.topImage}>
+        <article className={styles.topContainer}>
+            <figure className={styles.topImage}>
                 <Link href={`/top25`} target='_blank'>
-                    <img src={topImage.src} alt='top 25 preporuka image'></img>
+                    <img src={topImage.src} alt='top 25 preporuka, izrezbarena bundeva u mraku'></img>
                 </Link>
-            </div>
-            <div className={styles.topInfo}>
+            </figure>
+            <section className={styles.topInfo}>
                 <Link href={`/top25`} target='_blank'>
                     <h2 className={styles.topTitle}>Top 25 preporuka</h2>
                 </Link>
@@ -21,7 +21,7 @@ export default async function Top25() {
                     Filmovi na ovoj top listi mijenjaju se kako dođe neki novi naslov na blogu koji zaslužuje jednaku pažnju ili ocjenu. Linkove na recenzije možete pronaći na Top 25 popisu.
                 </p>
                 <StandardBtn path={`/top25`} content='Pročitaj više' newTab={true}/>
-            </div>
-        </div>
+            </section>
+        </article>
     )
 }

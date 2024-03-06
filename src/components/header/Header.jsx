@@ -19,7 +19,6 @@ export const Header = () => {
     }, [currentPath])
 
     return (
-        <>
         <header className={styles.header}>
             <div className={styles.headerWrap}>
                 <div className={styles.navLogo}>
@@ -27,12 +26,12 @@ export const Header = () => {
                         <Logo />
                     </Link>
                 </div>
-                <nav className={`${styles.mainNav} ${isMenuOpen && styles.isOpen}`}>
+                <div className={`${styles.mainNav} ${isMenuOpen && styles.isOpen}`}>
                     <Links />
                     <Suspense>
                         <HeaderAuth />
                     </Suspense>
-                </nav>
+                </div>
                 <div className={`${styles.menuIcon} ${isMenuOpen && styles.isOpen}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     {isMenuOpen ? (
                         <XIcon/>
@@ -42,7 +41,6 @@ export const Header = () => {
                 </div>
             </div>
         </header>
-        </>
     )
 }
 

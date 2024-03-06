@@ -8,16 +8,16 @@ import Link from 'next/link';
 
 export default async function MoreLikeThis({data}) {
     return (
-        <div className={styles.moreLikeThis}>
+        <section className={styles.moreLikeThis}>
             <hr className={styles.divider}></hr>
-            <h4>Moglo bi vas zanimati...</h4>
+            <h3>Moglo bi vas zanimati...</h3>
             <div className={styles.moreLikeThisFlexRow}>
                     {data && data.map((post) => (
-                        <div key={post._id} className={styles.moreLikeThisPost}>
+                        <article key={post._id} className={styles.moreLikeThisPost}>
                             <div className={styles.moreLikeThisPostInfo}>
                                 <PostImage post={post} newTab={false}/>
                                 <Link href={`/recenzije/${post?.slug}`}>
-                                    <h5>{post.reviewTitle} {post.movies.length === 1 && (<span>({post?.movies[0].year})</span>)}</h5>
+                                    <h4>{post.reviewTitle} {post.movies.length === 1 && (<span>({post?.movies[0].year})</span>)}</h4>
                                 </Link>
                                 {post.movies.length === 1 && (<Rating rating={post.movies[0].rating}/>)}
                                 {post.movies.length === 4 && (
@@ -28,10 +28,10 @@ export default async function MoreLikeThis({data}) {
                             </div>
                             <StandardBtn path={`/recenzije/${post?.slug}`} content='Pročitaj više →' type='textOnly' newTab={false}/>
                             
-                        </div>
+                        </article>
                     ))}
             </div>
 
-        </div>
+        </section>
     )
 }

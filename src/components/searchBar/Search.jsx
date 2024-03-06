@@ -40,7 +40,7 @@ export default function Search() {
     };
 
     return (
-        <div className={styles.searchComp}>
+        <section className={styles.searchComp}>
             <div className={styles.searchContainer}>
                 <label className={styles.searchIcon} htmlFor='adminSearch'>
                     <SearchIcon />
@@ -59,6 +59,6 @@ export default function Search() {
                 <div className={styles.searchControls}>
                     <FilterAndSort/>
                 </div>
-        </div>
+        </section>
     )
 }

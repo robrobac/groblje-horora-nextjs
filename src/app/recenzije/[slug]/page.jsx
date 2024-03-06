@@ -93,13 +93,13 @@ const SinglePostPage = async ({params}) => {
             {data.reviewType === 'quad' && (
                 <>
                 <ReviewHeader data={data}/>
-                <div className={styles.movieAndDate}>
+                <section className={styles.movieAndDate}>
                     <EditDeleteButtonsSingle post={data}/>
                     <p className={styles.reviewDate}>
                         {format(new Date(data?.createdAt), 'dd.MM.yyyy')}
                     </p>
                     <h1 className={`${styles.titleH1} ${styles.h1Margin}`}>{data.reviewTitle}</h1>
-                </div>
+                </section>
                 </>
             )}
             

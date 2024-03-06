@@ -175,7 +175,7 @@ export default function Comments({post, slug}) {
     }
 
     return (
-        <div className={styles.commentsContainer}>
+        <section className={styles.commentsContainer}>
             <div className={styles.commentsHeader}>
                 <div id='commentsAndLikes' className={`${styles.likeHead} ${liked ? styles.liked : ''}`} onClick={user && mongoUser ? handleSubmitLike : null}>
                     <LikeIcon/>
@@ -218,6 +218,6 @@ export default function Comments({post, slug}) {
                     <LoadingBtn loading={postingComment} type={postingComment ? 'button' : 'submit'} content='Pošalji' disabled={mongoUser && socketConnected ? false : true} customClass={mongoUser ? '' : 'disabled'} size={20} width={100}/>
                 </form>
             </div>
-        </div>
+        </section>
     )
 }

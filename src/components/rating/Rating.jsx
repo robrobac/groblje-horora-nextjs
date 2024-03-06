@@ -16,7 +16,6 @@ export const Rating = ({rating, detailed}) => {
         <div className={styles.ratingContainer}>
             <img src={`/images/rating/${formatRating(rating)}.png`} alt={`rating: ${rating}/5`}/>
             {detailed ? <span>{rating} / 5</span> : ''}
-            
         </div>
     )
 }
