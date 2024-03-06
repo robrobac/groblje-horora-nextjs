@@ -46,7 +46,18 @@ export const generateMetadata = async ({params, searchParams}) => {
             title: data?.reviewTitle,
             description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
             openGraph: {
-                images: data?.movies[0].coverImage,
+                images: [
+                    {
+                        url: data?.movies[0].coverImage,
+                        width: 1600,
+                        height: 500,
+                    },
+                    {
+                        url: data?.movies[0].coverImage,
+                        width: 500,
+                        height: 1800,
+                    },
+                ],
                 title: data?.reviewTitle,
                 description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
             },
