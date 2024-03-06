@@ -49,6 +49,7 @@ export const generateMetadata = async ({params, searchParams}) => {
                 images: data?.movies[0].coverImage,
                 title: data?.reviewTitle,
                 description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
+                type: 'website',
             },
             alternates: {
                 canonical: `https://www.groblje-horora.com/recenzije/${data?.slug}`
