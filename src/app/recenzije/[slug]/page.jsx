@@ -53,11 +53,12 @@ export const generateMetadata = async ({params, searchParams}) => {
                         width: 500,
                     },
                     {
-                        url: data?.movies[0].coverImage,
+                        url: data?.contentImages[0].url,
                         height: 200,
                         width: 500,
                     }
                 ],
+                type: 'article',
                 title: data?.reviewTitle,
                 description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
             },
