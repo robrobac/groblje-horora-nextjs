@@ -67,7 +67,7 @@ export const generateMetadata = async ({params, searchParams}) => {
                     description: shortenStringTo30Words(getRawContent(data?.movies[movieNumber].reviewContent)),
                 },
                 alternates: {
-                    canonical: `https://www.groblje-horora.com/recenzije/${data?.slug}`
+                    canonical: `https://www.groblje-horora.com/recenzije/${data?.slug}?movie=${movie}`
                 }
             }
         } if (!movie) {
