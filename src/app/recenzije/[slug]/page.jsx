@@ -46,17 +46,7 @@ export const generateMetadata = async ({params, searchParams}) => {
             title: data?.reviewTitle,
             description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
             openGraph: {
-                images: [
-                    {
-                        url: data?.movies[0].coverImage,
-                        width: 1600,
-                        height: 500,
-                    },
-                    {
-                        url: 'https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/groblje-horora-og-image.webp?alt=media&token=9505221c-7713-4907-8a95-78047f2cd1b7',
-                        
-                    },
-                ],
+                images: data?.movies[0].coverImage,
                 title: data?.reviewTitle,
                 description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
             },
