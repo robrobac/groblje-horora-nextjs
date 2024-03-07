@@ -7,7 +7,7 @@ export const compressImage = (image, successCallback) => {
             quality: 0.8,
             height: 770,
             convertSize: Infinity,
-            mimeType: 'image/webp',
+            mimeType: 'image/jpeg',
             success: successCallback,
         });
     } else {

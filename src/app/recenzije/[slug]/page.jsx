@@ -52,11 +52,6 @@ export const generateMetadata = async ({params, searchParams}) => {
                         height: 200,
                         width: 500,
                     },
-                    {
-                        url: data?.contentImages[0].url,
-                        height: 200,
-                        width: 500,
-                    }
                 ],
                 type: 'article',
                 title: data?.reviewTitle,
