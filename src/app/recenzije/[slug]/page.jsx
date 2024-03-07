@@ -34,19 +34,35 @@ const getData = async (slug) => {
 }
 
 
-export const generateMetadata = async ({params, searchParams}) => {
+export const generateMetadata = async ({params, searchParams, req}) => {
     const {slug} = params;
     const {movie} = searchParams;
     const data = await getData(slug);
     const movieNumber = movie - 1
     // console.log(movie)
 
+
+
+    let ogImages = ''; // Initialize an empty string for Open Graph images
+
+    // Define Open Graph images based on device types
+    if (req.headers['user-agent'].includes('Mobile')) {
+        ogImages = "https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/groblje-horora-og-image.webp?alt=media&token=9505221c-7713-4907-8a95-78047f2cd1b7";
+    } else if (req.headers['user-agent'].includes('Tablet')) {
+        ogImages = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?slug=${slug}&type=tablet`;
+    } else {
+        ogImages = "https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/coverImages%2F100-Feet-cover-image-1706829174671?alt=media&token=fb2c1a2a-c5ac-44ba-ae3d-2b2a013ae7e8";
+    }
+
+
+
     if (data.movies.length === 1) {
         return {
             title: data?.reviewTitle,
             description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
             openGraph: {
-                images: 'https://m.media-amazon.com/images/M/MV5BZjNjYzY3MGQtY2NlYS00ZDllLWFkMTgtMmE4NjAyMmJkZWQzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UX1000_.jpg',
+                // images: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?slug=${slug}`,
+                images: ogImages,
                 type: 'article',
                 title: data?.reviewTitle,
                 description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
