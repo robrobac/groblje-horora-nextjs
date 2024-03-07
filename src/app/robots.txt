@@ -4,5 +4,6 @@ Disallow: /prijava
 Disallow: /registracija
 Disallow: /nova-recenzija
 Disallow: /novi-kratki-pregled
-
+Allow: /api/og/*
 Sitemap: https://www.groblje-horora.com/sitemap.xml
+
