@@ -46,7 +46,7 @@ export const generateMetadata = async ({params, searchParams}) => {
             title: data?.reviewTitle,
             description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
             openGraph: {
-                images: 'https://www.groblje-horora.com/api/og?slug=test11-1234',
+                images: 'https://m.media-amazon.com/images/M/MV5BZjNjYzY3MGQtY2NlYS00ZDllLWFkMTgtMmE4NjAyMmJkZWQzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UX1000_.jpg',
                 type: 'article',
                 title: data?.reviewTitle,
                 description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
