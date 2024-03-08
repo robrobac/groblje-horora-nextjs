@@ -13,7 +13,7 @@ const Editor = dynamic(() => import('react-draft-wysiwyg').then(mod => mod.Edito
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./editor.scss";
 
-import { stringFormatting } from '@/lib/utils';
+import { slugify, stringFormatting } from '@/lib/utils';
 import { uploadImageToFirebaseStorage } from '@/lib/firebase/firebaseUtils';
 import { compressImage } from '@/lib/compressImage';
 import { useRouter } from 'next/navigation';
@@ -190,8 +190,7 @@ export default function NewForm({ numberOfMovies }) {
                 // if cover image is uploaded and compressed upload it to firebase storage
                 if (movie.compressedCoverImage) {
                     // create firebase storage path
-                    const sanitizedMovieTitle = movie.title.replace(/\//g, '-')
-                    const path = `coverImages/${stringFormatting(sanitizedMovieTitle, `-cover-image-${Date.now()}.jpg`)}`;
+                    const path = `coverImages/${slugify(movie.title, movie.year)}-coverImage-${Date.now()}.jpg`
 
                     try {
                         // requiredInputs handles checking if there's empty fields in the form, if there is then don't upload cover images to firebase

@@ -1,7 +1,7 @@
 'use client'
 import { compressImage } from '@/lib/compressImage'
 import { deleteImageFromFirebaseStorage, uploadImageToFirebaseStorage } from '@/lib/firebase/firebaseUtils'
-import { stringFormatting } from '@/lib/utils'
+import { slugify, stringFormatting } from '@/lib/utils'
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -268,8 +268,7 @@ export default function EditForm({slug}) {
                 if (movie.compressedCoverImage) {
                     console.log("ima compressedCoverImage")
                     // create firebase storage path
-                    const sanitizedMovieTitle = movie.title.replace(/\//g, '-')
-                    const path = `coverImages/${stringFormatting(sanitizedMovieTitle, `-coverImage-${Date.now()}.jpg`)}`
+                    const path = `coverImages/${slugify(movie.title, movie.year)}-coverImage-${Date.now()}.jpg`
 
                     try {
                         // requiredInputs handles checking if there's empty fields in the form, if there is then don't upload cover images to firebase

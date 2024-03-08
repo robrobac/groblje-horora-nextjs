@@ -1,6 +1,8 @@
 import { formatRating } from '@/components/rating/Rating';
 import { getRawContent } from '@/lib/utils';
 import { ImageResponse } from 'next/og';
+
+export const revalidate = 0
  
 export const runtime = 'edge';
 
