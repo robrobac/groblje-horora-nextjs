@@ -1,8 +1,6 @@
 import { formatRating } from '@/components/rating/Rating';
 import { getRawContent } from '@/lib/utils';
 import { ImageResponse } from 'next/og';
-
-export const revalidate = 0
  
 export const runtime = 'edge';
 
@@ -17,7 +15,7 @@ export function shortenString(str) {
 
 const getData = async (slug) => {
     // console.log(slug)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${slug}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${slug}`, { next: { revalidate: 0 } });
     if (!res.ok) {
         notFound()
         // throw new Error('Failed to fetch Single Post data');
@@ -101,8 +99,12 @@ export async function GET(request) {
                         data: LexendNormal,
                         style: 'normal',
                         weight: 400,
-                      },
-                  ],
+                    },
+                ],
+                headers: {
+                    "Cache-Control":
+                      "no-cache",
+                },
             },
         );
     }
