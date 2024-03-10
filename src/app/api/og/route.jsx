@@ -1,89 +1,43 @@
+import OpenGraphQuad from '@/components/openGraph/OpenGraphQuad';
+import OpenGraphSingle from '@/components/openGraph/OpenGraphSingle';
 import { formatRating } from '@/components/rating/Rating';
 import { getRawContent } from '@/lib/utils';
 import { ImageResponse } from 'next/og';
  
 export const runtime = 'edge';
 
-export function shortenString(str) {
-    const cleanedString = str.replace(/<\/?[^>]+(>|$)/g, "");
-    const cleanedStringWithoutTags = cleanedString.replace(/<\/?(p|b|strong|em|i|u|strike)>/g, "");
-    const words = cleanedStringWithoutTags.split(' ');
-    const shortenedWords = words.slice(0, 40);
-    const shortenedString = shortenedWords.join(' ');
-    return shortenedString;
-}
-
-const getData = async (slug) => {
-    // console.log(slug)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${slug}`, { next: { revalidate: 0 } });
-    if (!res.ok) {
-        notFound()
-        // throw new Error('Failed to fetch Single Post data');
-    }
-    return res.json();
-}
-
 const fetchLexendBold = fetch(
-    new URL('../../../../public/Lexend-Bold.ttf', import.meta.url).href
-).then(res => res.arrayBuffer());
+        new URL('../../../../public/Lexend-Bold.ttf', import.meta.url).href
+    ).then(res => res.arrayBuffer());
+
 const fetchLexendNormal = fetch(
-    new URL('../../../../public/Lexend-Medium.ttf', import.meta.url).href
-).then(res => res.arrayBuffer());
+        new URL('../../../../public/Lexend-Medium.ttf', import.meta.url).href
+    ).then(res => res.arrayBuffer());
  
 export async function GET(request) {
-    const slug = request.nextUrl.searchParams.get('slug');
-    const data = await getData(slug)
-    console.log(data.movies[0].coverImage)
+    const encodedData = request.nextUrl.searchParams.get('data');
+    const encodedImages = request.nextUrl.searchParams.get('images');
+    const images = JSON.parse(encodedImages)
+    const movieNumber = request.nextUrl.searchParams.get('movieNumber');
+
+    const decodedData = decodeURIComponent(encodedData)
+    const data = JSON.parse(decodedData)
 
     const LexendBold = await fetchLexendBold;
     const LexendNormal = await fetchLexendNormal;
-    
+
+    const toRender = data.movies.length === 1 ? (
+        <OpenGraphSingle coverImage={images[0]} title={data.movies[0].title} content={data.movies[0].reviewContent} rating={data?.movies[0].rating} year={data.movies[0].year}/>
+    ) : (
+        movieNumber ? (
+            <OpenGraphSingle coverImage={images[movieNumber]} title={data.movies[movieNumber].title} content={data.movies[movieNumber].reviewContent} rating={data?.movies[movieNumber].rating} year={data.movies[movieNumber].year}/>
+        ) : (
+            <OpenGraphQuad data={data} images={images} />
+        )
+    );
 
     return new ImageResponse(
-        (
-            <div
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    color: 'black',
-                    backgroundColor: '#141414',
-                    padding: '24px',
-                    display: 'flex',
-                    gap: '32px',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}
-            >
-
-                <div style={{display: 'flex'}}>
-                    <img
-                        alt='dadada'
-                        itemType='image/jpeg'
-                        height='100%'
-                        src={`${data.movies[0].coverImage}`}
-                        style={{borderRadius: '24px', boxShadow: '0px 0px 21px 1px #000000'}}
-                    />
-                </div>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        height: '100%',
-                        flex: '1',
-                    }}
-                >
-                    <h1 style={{color: 'rgba(237, 222, 222, 1)', fontSize: 60, fontWeight: 700, lineHeight: '80px', marginTop: '-10px'}}>{data.movies[0].title}</h1>
-                    <p style={{color: 'rgba(237, 222, 222, 1)', fontSize: 30, fontWeight: 400, marginTop: '-10px'}}>{shortenString(getRawContent(data?.movies[0].reviewContent))}...</p>
-                    <div style={{display: 'flex', gap: '16px', color: 'rgba(237, 222, 222, 0.8)'}}>
-                        <img height='20' src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/images/rating/${formatRating(data.movies[0].rating)}.png`} alt={`rating: ${data.movies[0].rating}/5`}/>
-                        <span>{data.movies[0].rating} / 5</span>
-                    </div>
-                </div>
-        
-            </div>
-        ),
+        toRender,
             {
                 width: 1200,
                 height: 630,
@@ -108,3 +62,18 @@ export async function GET(request) {
             },
         );
     }
+
+
+
+//     <div style={{display: 'flex', height: '400px', overflow: 'hidden', borderRadius: '24px', alignContent: 'center', justifyContent: 'center'}}>
+//     <img
+//         alt='dadada'
+//         itemType='image/jpeg'
+//         src={images[0]}
+//         style={{boxShadow: '0px 0px 21px 1px #000000', height: '100%'}}
+//     />
+// </div>
+// <h1 style={{color: 'rgba(237, 222, 222, 1)', fontSize: 30, fontWeight: 700, marginTop: '-10px', textAlign: 'center'}}>{data.movies[0].title}</h1>
+// <div style={{display: 'flex', justifyContent: 'center', gap: '16px', color: 'rgba(237, 222, 222, 0.8)'}}>
+//     <img height='30' style={{height: '30px'}} src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/images/rating/big${formatRating(data.movies[0].rating)}.png`} alt={`rating: ${data.movies[0].rating}/5`}/>
+// </div>

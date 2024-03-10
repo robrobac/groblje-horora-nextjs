@@ -41,13 +41,28 @@ export const generateMetadata = async ({params, searchParams}) => {
     const movieNumber = movie - 1
     // console.log(movie)
 
+    const singleOpenGraphImageData = {
+        reviewTitle: data.reviewTitle,
+        movies: data.movies.map(movie => ({
+            title: movie.title,
+            year: movie.year,
+            rating: movie.rating,
+            reviewContent: shortenStringTo30Words(getRawContent(movie.reviewContent)),
+        }))
+    };
+    const images = data.movies.map(movie => movie.coverImage)
+
+    const encodedData = encodeURIComponent(JSON.stringify(singleOpenGraphImageData))
+    const encodedImages = encodeURIComponent(JSON.stringify(images))
+    
 
     if (data.movies.length === 1) {
+        const image1 = encodeURIComponent(data.movies[0].coverImage)
         return {
             title: data?.reviewTitle,
             description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
             openGraph: {
-                images: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?slug=${slug}`,
+                images: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?movieNumber=${movieNumber}&images=${encodedImages}&data=${encodedData}`,
                 type: 'article',
                 title: data?.reviewTitle,
                 description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
@@ -64,7 +79,7 @@ export const generateMetadata = async ({params, searchParams}) => {
                 title: data?.movies[movieNumber].title,
                 description: shortenStringTo30Words(getRawContent(data?.movies[movieNumber].reviewContent)),
                 openGraph: {
-                    images: data?.movies[movieNumber].coverImage,
+                    images: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?movieNumber=${movieNumber}&images=${encodedImages}&data=${encodedData}`,
                     title: data?.movies[movieNumber].title,
                     description: shortenStringTo30Words(getRawContent(data?.movies[movieNumber].reviewContent)),
                 },
@@ -77,7 +92,7 @@ export const generateMetadata = async ({params, searchParams}) => {
                 title: data?.reviewTitle,
                 description: `${data.movies[0].title}(${data.movies[0].year}), ${data.movies[1].title}(${data.movies[1].year}), ${data.movies[2].title}(${data.movies[2].year}), ${data.movies[3].title}(${data.movies[3].year})`,
                 openGraph: {
-                    images: 'https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/groblje-horora-og-image.webp?alt=media&amp;token=9505221c-7713-4907-8a95-78047f2cd1b7',
+                    images: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?images=${encodedImages}&data=${encodedData}`,
                     title: data?.reviewTitle,
                     description: `${data.movies[0].title}(${data.movies[0].year}), ${data.movies[1].title}(${data.movies[1].year}), ${data.movies[2].title}(${data.movies[2].year}), ${data.movies[3].title}(${data.movies[3].year})`,
                 },
@@ -92,7 +107,7 @@ export const generateMetadata = async ({params, searchParams}) => {
 const SinglePostPage = async ({params}) => {
     const {slug} = params;
     const data = await getData(slug);
-    console.log(data.moreLikeThis)
+    // console.log(data.moreLikeThis)
 
     return (
         <main className={styles.singlePostContainer}>
