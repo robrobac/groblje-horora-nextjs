@@ -56,24 +56,8 @@ export async function GET(request) {
                     },
                 ],
                 headers: {
-                    "Cache-Control":
-                      "no-cache",
+                    "Cache-Control": "public, max-age=86400", // 86400 seconds = 24 hours
                 },
             },
         );
     }
-
-
-
-//     <div style={{display: 'flex', height: '400px', overflow: 'hidden', borderRadius: '24px', alignContent: 'center', justifyContent: 'center'}}>
-//     <img
-//         alt='dadada'
-//         itemType='image/jpeg'
-//         src={images[0]}
-//         style={{boxShadow: '0px 0px 21px 1px #000000', height: '100%'}}
-//     />
-// </div>
-// <h1 style={{color: 'rgba(237, 222, 222, 1)', fontSize: 30, fontWeight: 700, marginTop: '-10px', textAlign: 'center'}}>{data.movies[0].title}</h1>
-// <div style={{display: 'flex', justifyContent: 'center', gap: '16px', color: 'rgba(237, 222, 222, 0.8)'}}>
-//     <img height='30' style={{height: '30px'}} src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/images/rating/big${formatRating(data.movies[0].rating)}.png`} alt={`rating: ${data.movies[0].rating}/5`}/>
-// </div>
