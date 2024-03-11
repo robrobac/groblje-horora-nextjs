@@ -71,3 +71,12 @@ export const scrollToTop = () => {
         behavior: "smooth"
     });
 };
+
+export function shortenStringTo30Words(str) {
+    const cleanedString = str.replace(/<\/?[^>]+(>|$)/g, "");
+    const cleanedStringWithoutTags = cleanedString.replace(/<\/?(p|b|strong|em|i|u|strike)>/g, "");
+    const words = cleanedStringWithoutTags.split(' ');
+    const shortenedWords = words.slice(0, 30);
+    const shortenedString = shortenedWords.join(' ');
+    return shortenedString;
+}

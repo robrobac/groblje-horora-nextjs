@@ -13,9 +13,9 @@ const Editor = dynamic(() => import('react-draft-wysiwyg').then(mod => mod.Edito
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./editor.scss";
 
-import { slugify, stringFormatting } from '@/lib/utils';
-import { uploadImageToFirebaseStorage } from '@/lib/firebase/firebaseUtils';
-import { compressImage } from '@/lib/compressImage';
+import { getRawContent, shortenStringTo30Words, slugify, stringFormatting } from '@/lib/utils';
+import { deleteImageFromFirebaseStorage, uploadImageToFirebaseStorage } from '@/lib/firebase/firebaseUtils';
+import { compressImage, compressOgImage } from '@/lib/compressImage';
 import { useRouter } from 'next/navigation';
 import PreviewDialog from './PreviewDialog';
 import ImageRepo from './ImageRepo';
@@ -150,6 +150,8 @@ export default function NewForm({ numberOfMovies }) {
         }
     }
 
+
+
     // Function to handle all logic behind Form Submit.
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -207,18 +209,52 @@ export default function NewForm({ numberOfMovies }) {
                         setLoading(false)
                     }
                 }
-                resolve({
+
+                const ogImageData = {
                     title: movie.title,
                     year: movie.year,
+                    reviewContent: shortenStringTo30Words(getRawContent(movie.reviewContent)),
                     rating: movie.rating,
-                    reviewContent: movie.reviewContent,
-                    imdbLink: movie.imdbLink,
-                    coverImage: url,
-                    coverImagePath: filePath,
-                    top25: movie.top25,
-                    worse20: movie.worse20,
-                    tags: movie.tags
+                }
+                console.log('ogImageData: ', ogImageData)
+                const ogImageDataCoverUrl = [url];
+                console.log('ogImageDataCoverUrl', ogImageDataCoverUrl)
+
+                const encodedogImageData = encodeURIComponent(JSON.stringify(ogImageData))
+                const encodedogImageDataCoverUrl = encodeURIComponent(JSON.stringify(ogImageDataCoverUrl))
+                console.log('encoded', [encodedogImageData, encodedogImageDataCoverUrl])
+
+                const ogImageRequestUrl = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?images=${encodedogImageDataCoverUrl}&data=${encodedogImageData}`
+                console.log('ogImageRequestUrl: ', ogImageRequestUrl)
+
+                const ogImageResponse = await fetch(ogImageRequestUrl)
+                const ogImageBlob = await ogImageResponse.blob();
+                console.log('og image blob: ', ogImageBlob);
+
+                compressOgImage (ogImageBlob, async (compressedResult) => {
+                    const ogUploadPath = `ogImages/${slugify(movie.title, movie.year)}-coverImage-${Date.now()}.jpg`;
+                    const ogUploadResult = await uploadImageToFirebaseStorage(compressedResult, ogUploadPath);
+                    console.log('ogUploadResult', ogUploadResult)
+
+                    const ogUrl = ogUploadResult.url
+                    const ogPath = ogUploadResult.path
+
+                    resolve({
+                        title: movie.title,
+                        year: movie.year,
+                        rating: movie.rating,
+                        reviewContent: movie.reviewContent,
+                        imdbLink: movie.imdbLink,
+                        coverImage: url,
+                        coverImagePath: filePath,
+                        top25: movie.top25,
+                        worse20: movie.worse20,
+                        tags: movie.tags,
+                        singleOgImage: ogUrl,
+                        singleOgImagePath: ogPath,
+                    });
                 });
+                
             });
         });
 
@@ -250,6 +286,9 @@ export default function NewForm({ numberOfMovies }) {
                     setFormFailed(!formFailed)
                     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
                     console.log(json)
+
+
+                    
                     setLoading(false)
                 }
 
@@ -274,8 +313,6 @@ export default function NewForm({ numberOfMovies }) {
                             console.log('deleted from tempImages', deleteJson);
                         }
                     });
-
-                    setLoading(false)
 
                     // Clear ContentImages state
                     setContentImages([]);
@@ -428,5 +465,6 @@ function getInitialMovieState() {
     worse20: false,
     compressedCoverImage: null,
     tags: [],
+    compressedOgImage: null,
   };
 }

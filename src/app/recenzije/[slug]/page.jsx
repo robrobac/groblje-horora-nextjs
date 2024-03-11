@@ -57,12 +57,11 @@ export const generateMetadata = async ({params, searchParams}) => {
     
 
     if (data.movies.length === 1) {
-        const image1 = encodeURIComponent(data.movies[0].coverImage)
         return {
             title: data?.reviewTitle,
             description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
             openGraph: {
-                images: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?movieNumber=${movieNumber}&images=${encodedImages}&data=${encodedData}`,
+                images: data.movies[0].singleOgImage,
                 type: 'article',
                 title: data?.reviewTitle,
                 description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
@@ -79,7 +78,7 @@ export const generateMetadata = async ({params, searchParams}) => {
                 title: data?.movies[movieNumber].title,
                 description: shortenStringTo30Words(getRawContent(data?.movies[movieNumber].reviewContent)),
                 openGraph: {
-                    images: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?movieNumber=${movieNumber}&images=${encodedImages}&data=${encodedData}`,
+                    images: data.movies[movieNumber].singleOgImage,
                     title: data?.movies[movieNumber].title,
                     description: shortenStringTo30Words(getRawContent(data?.movies[movieNumber].reviewContent)),
                 },

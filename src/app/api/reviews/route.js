@@ -132,6 +132,7 @@ export async function POST(request) {
     dbConnect()
     const data = await request.json()
     const { reviewTitle, movies, comments, likes, contentImages, selectedcategory } = data
+    console.log(movies)
 
     let slug = ''
 

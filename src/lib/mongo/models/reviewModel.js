@@ -52,7 +52,15 @@ const MovieSchema = new Schema({
         type: Boolean,
         required: false
     },
-    tags: [tagsSchema]
+    tags: [tagsSchema],
+    singleOgImage: {
+        type: String,
+        required: false,
+    },
+    singleOgImagePath: {
+        type: String,
+        required: false,
+    },
 })
 
 const LikeSchema = new Schema({
@@ -118,6 +126,14 @@ const ReviewSchema = new Schema({
     },
     likes: [LikeSchema],
     comments: [CommentSchema],
+    quadOgImage: {
+        type: String,
+        required: false,
+    },
+    quadOgImagePath: {
+        type: String,
+        required: false,
+    }
 }, {
     timestamps: true
 })
