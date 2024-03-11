@@ -17,26 +17,22 @@ const fetchLexendNormal = fetch(
 export async function GET(request) {
     const encodedData = request.nextUrl.searchParams.get('data');
     const encodedImages = request.nextUrl.searchParams.get('images');
+    const type = request.nextUrl.searchParams.get('type');
     const images = JSON.parse(encodedImages)
-
     const decodedData = decodeURIComponent(encodedData)
     const data = JSON.parse(decodedData)
 
     const LexendBold = await fetchLexendBold;
     const LexendNormal = await fetchLexendNormal;
 
-    // const toRender = data.movies.length === 1 ? (
-    //     <OpenGraphSingle coverImage={images[0]} title={data.movies[0].title} content={data.movies[0].reviewContent} rating={data?.movies[0].rating} year={data.movies[0].year}/>
-    // ) : (
-    //     movieNumber ? (
-    //         <OpenGraphSingle coverImage={images[movieNumber]} title={data.movies[movieNumber].title} content={data.movies[movieNumber].reviewContent} rating={data?.movies[movieNumber].rating} year={data.movies[movieNumber].year}/>
-    //     ) : (
-    //         <OpenGraphQuad data={data} images={images} />
-    //     )
-    // );
+    const toRender = type === 'single' ? (
+        <OpenGraphSingle coverImage={images[0]} title={data.title} content={data.reviewContent} rating={data.rating} year={data.year}/>
+    ) : (
+        <OpenGraphQuad data={data} images={images} />
+    );
 
     return new ImageResponse(
-       (<OpenGraphSingle coverImage={images[0]} title={data.title} content={data.reviewContent} rating={data.rating} year={data.year}/>),
+       toRender,
             {
                 width: 1200,
                 height: 630,

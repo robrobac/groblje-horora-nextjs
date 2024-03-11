@@ -25,8 +25,8 @@ export default function OpenGraphQuad({data, images}) {
                         style={{boxShadow: '0px 0px 21px 1px #000000', width: '100%', height: '100%', objectFit: 'cover'}}
                     />
                 </div>
-                <h1 style={{color: 'rgba(237, 222, 222, 1)', fontSize: 30, fontWeight: 700, marginTop: '-10px', textAlign: 'center', height: '100%', marginTop: '24px'}}>{data.movies[0].title}</h1>
-                <img height='30' style={{height: '30px'}} src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/images/rating/big${formatRating(data.movies[0].rating)}.png`} alt={`rating: ${data.movies[0].rating}/5`}/>
+                <h1 style={{color: 'rgba(237, 222, 222, 1)', fontSize: 30, fontWeight: 700, marginTop: '-10px', textAlign: 'center', height: '100%', marginTop: '24px'}}>{data[0].title}</h1>
+                <img height='30' style={{height: '30px'}} src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/images/rating/big${formatRating(data[0].rating)}.png`} alt={`rating: ${data[0].rating}/5`}/>
             </div>
             <div style={{display: 'flex', width: '25%', height: '100%', padding: '12px', overflow: 'hidden', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between'}}>
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px', width: '100%', overflow: 'hidden', borderRadius: 20}}>
@@ -37,8 +37,8 @@ export default function OpenGraphQuad({data, images}) {
                         style={{boxShadow: '0px 0px 21px 1px #000000', width: '100%', height: '100%', objectFit: 'cover'}}
                     />
                 </div>
-                <h1 style={{color: 'rgba(237, 222, 222, 1)', fontSize: 30, fontWeight: 700, marginTop: '-10px', textAlign: 'center', height: '100%', marginTop: '24px'}}>{data.movies[1].title}</h1>
-                <img height='30' style={{height: '30px'}} src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/images/rating/big${formatRating(data.movies[1].rating)}.png`} alt={`rating: ${data.movies[1].rating}/5`}/>
+                <h1 style={{color: 'rgba(237, 222, 222, 1)', fontSize: 30, fontWeight: 700, marginTop: '-10px', textAlign: 'center', height: '100%', marginTop: '24px'}}>{data[1].title}</h1>
+                <img height='30' style={{height: '30px'}} src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/images/rating/big${formatRating(data[1].rating)}.png`} alt={`rating: ${data[1].rating}/5`}/>
             </div>
             <div style={{display: 'flex', width: '25%', height: '100%', padding: '12px', overflow: 'hidden', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between'}}>
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px', width: '100%', overflow: 'hidden', borderRadius: 20}}>
@@ -49,8 +49,8 @@ export default function OpenGraphQuad({data, images}) {
                         style={{boxShadow: '0px 0px 21px 1px #000000', width: '100%', height: '100%', objectFit: 'cover'}}
                     />
                 </div>
-                <h1 style={{color: 'rgba(237, 222, 222, 1)', fontSize: 30, fontWeight: 700, marginTop: '-10px', textAlign: 'center', height: '100%', marginTop: '24px'}}>{data.movies[2].title}</h1>
-                <img height='30' style={{height: '30px'}} src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/images/rating/big${formatRating(data.movies[2].rating)}.png`} alt={`rating: ${data.movies[2].rating}/5`}/>
+                <h1 style={{color: 'rgba(237, 222, 222, 1)', fontSize: 30, fontWeight: 700, marginTop: '-10px', textAlign: 'center', height: '100%', marginTop: '24px'}}>{data[2].title}</h1>
+                <img height='30' style={{height: '30px'}} src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/images/rating/big${formatRating(data[2].rating)}.png`} alt={`rating: ${data[2].rating}/5`}/>
             </div>
             <div style={{display: 'flex', width: '25%', height: '100%', padding: '12px', overflow: 'hidden', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between'}}>
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px', width: '100%', overflow: 'hidden', borderRadius: 20}}>
@@ -61,8 +61,8 @@ export default function OpenGraphQuad({data, images}) {
                         style={{boxShadow: '0px 0px 21px 1px #000000', width: '100%', height: '100%', objectFit: 'cover'}}
                     />
                 </div>
-                <h1 style={{color: 'rgba(237, 222, 222, 1)', fontSize: 30, fontWeight: 700, marginTop: '-10px', textAlign: 'center', height: '100%', marginTop: '24px'}}>{data.movies[3].title}</h1>
-                <img height='30' style={{height: '30px'}} src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/images/rating/big${formatRating(data.movies[3].rating)}.png`} alt={`rating: ${data.movies[3].rating}/5`}/>
+                <h1 style={{color: 'rgba(237, 222, 222, 1)', fontSize: 30, fontWeight: 700, marginTop: '-10px', textAlign: 'center', height: '100%', marginTop: '24px'}}>{data[3].title}</h1>
+                <img height='30' style={{height: '30px'}} src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/images/rating/big${formatRating(data[3].rating)}.png`} alt={`rating: ${data[3].rating}/5`}/>
             </div>
         </div>
     )

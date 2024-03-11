@@ -210,6 +210,7 @@ export default function NewForm({ numberOfMovies }) {
                     }
                 }
 
+                console.log('--------- OG IMAGE UPLOADING -----------')
                 const ogImageData = {
                     title: movie.title,
                     year: movie.year,
@@ -224,7 +225,7 @@ export default function NewForm({ numberOfMovies }) {
                 const encodedogImageDataCoverUrl = encodeURIComponent(JSON.stringify(ogImageDataCoverUrl))
                 console.log('encoded', [encodedogImageData, encodedogImageDataCoverUrl])
 
-                const ogImageRequestUrl = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?images=${encodedogImageDataCoverUrl}&data=${encodedogImageData}`
+                const ogImageRequestUrl = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?images=${encodedogImageDataCoverUrl}&data=${encodedogImageData}&type=single`
                 console.log('ogImageRequestUrl: ', ogImageRequestUrl)
 
                 const ogImageResponse = await fetch(ogImageRequestUrl)
@@ -232,7 +233,7 @@ export default function NewForm({ numberOfMovies }) {
                 console.log('og image blob: ', ogImageBlob);
 
                 compressOgImage (ogImageBlob, async (compressedResult) => {
-                    const ogUploadPath = `ogImages/${slugify(movie.title, movie.year)}-coverImage-${Date.now()}.jpg`;
+                    const ogUploadPath = `ogImages/${slugify(movie.title, movie.year)}-ogImage-${Date.now()}.jpg`;
                     const ogUploadResult = await uploadImageToFirebaseStorage(compressedResult, ogUploadPath);
                     console.log('ogUploadResult', ogUploadResult)
 
@@ -267,9 +268,53 @@ export default function NewForm({ numberOfMovies }) {
                     movies: resolvedMovieReviews,
                     contentImages,
                     selectedcategory: selectedcategory,
+                    quadOgImage: '',
+                    quadOgImagePath: '',
                 };
 
-                // console.log(review)
+                console.log('---------QUAD OG IMAGE UPLOADING -----------')
+                const quadOgImageData = review.movies.map((movie, index) => {
+                    return {
+                        title: movie.title,
+                        rating: movie.rating
+                    };
+                })
+                console.log('quadOgImageData: ', quadOgImageData)
+
+                const quadOgImageDataCoverUrls = review.movies.map((movie, index) => {
+                    return movie.coverImage
+                })
+                console.log('quadOgImageDataCoverUrls', quadOgImageDataCoverUrls)
+                
+                const encodedQuadOgImageData = encodeURIComponent(JSON.stringify(quadOgImageData))
+                const encodedQuadOgImageDataCoverUrls = encodeURIComponent(JSON.stringify(quadOgImageDataCoverUrls))
+                console.log('encoded', [encodedQuadOgImageData, encodedQuadOgImageDataCoverUrls])
+
+                const quadOgImageRequestUrl = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?images=${encodedQuadOgImageDataCoverUrls}&data=${encodedQuadOgImageData}&type=quad`
+                console.log('quadOgImageRequestUrl: ', quadOgImageRequestUrl)
+
+
+                const quadOgImageResponse = await fetch(quadOgImageRequestUrl)
+                const quadOgImageBlob = await quadOgImageResponse.blob();
+                console.log('quad og image blob: ', quadOgImageBlob);
+
+                const quadOgUploadResult = await new Promise(resolve => {
+                    compressOgImage(quadOgImageBlob, async (compressedResult) => {
+                        const quadOgUploadPath = `ogImages/${slugify(review.reviewTitle)}-ogImage-${Date.now()}.jpg`;
+                        const quadOgUploadResult = await uploadImageToFirebaseStorage(compressedResult, quadOgUploadPath);
+                        console.log('ogUploadResult', quadOgUploadResult)
+
+                        resolve(quadOgUploadResult)
+                    })
+                })
+
+                const quadOgUrl = quadOgUploadResult.url
+                const quadOgPath = quadOgUploadResult.path
+
+                review.quadOgImage = quadOgUrl;
+                review.quadOgImagePath = quadOgPath;
+
+                console.log('PREPARED REVIEW', review)
 
                 // API Call to post a new Review
                 const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews`, {

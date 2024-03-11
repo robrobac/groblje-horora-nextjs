@@ -131,8 +131,9 @@ export const GET = async (request) => {
 export async function POST(request) {
     dbConnect()
     const data = await request.json()
-    const { reviewTitle, movies, comments, likes, contentImages, selectedcategory } = data
+    const { reviewTitle, movies, comments, likes, contentImages, selectedcategory, quadOgImage, quadOgImagePath } = data
     console.log(movies)
+    console.log('links: ', [quadOgImage, quadOgImagePath])
 
     let slug = ''
 
@@ -208,6 +209,8 @@ export async function POST(request) {
                 contentImages,
                 reviewType: 'quad',
                 category: selectedcategory,
+                quadOgImage: quadOgImage,
+                quadOgImagePath: quadOgImagePath,
             })
         }
         return new NextResponse(JSON.stringify(review), {
