@@ -650,7 +650,7 @@ export default function EditForm({slug}) {
                     ))}
                     {postPreview ? <PreviewDialog loading={loading} postPreview={postPreview} formFailed={formFailed}/> : ''}
                 </form>
-                <ImageRepo handleContentImages={handleContentImages} contentImages={contentImages} formSubmitted={formSubmitted}/>
+                <ImageRepo handleContentImages={handleContentImages} contentImages={contentImages} formSubmitted={formSubmitted} isEditing={true}/>
             </div>
         </main>
     )

@@ -6,7 +6,7 @@ import { deleteImageFromFirebaseStorage, uploadImageToFirebaseStorage } from '@/
 import styles from './imageRepo.module.scss';
 import { LoadingBtn } from '../buttons/loadingBtn';
 
-export default function ImageRepo({handleContentImages, contentImages, formSubmitted}) {
+export default function ImageRepo({handleContentImages, contentImages, formSubmitted, isEditing}) {
     // State that holds compressed images that are later uploaded to Firebase Storage, once upload is successful clear the state.
     const [compressedImages, setCompressedImages] = useState([])
     const imagesInputRef = useRef(null);
@@ -142,7 +142,6 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
                 <LoadingBtn loading={uploadingImages} content="Odaberi slike" size={'20px'} label={true} htmlFor='contentImage' width='200px'/>
                 <input className={styles.repoFile} multiple={true} ref={imagesInputRef} id='contentImage' type='file' accept='image/' onChange={handleCompressImage}/>
             </div>
-
             <div className={styles.repoImages}>
                 {compressedImages.map((image, index) => (
                     
@@ -156,11 +155,15 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
                 </div>
             ) : ''}
             {contentImages.length !== 0 ? (
-                <div className={styles.repoImages}>
-                {contentImages.map((image, index) => (
-                    <UploadedImage key={`uploadedimage${index}`} image={image} index={index} handleDeleteUploaded={handleDeleteUploaded}/>
-                ))}
-                </div>
+                <>
+                    {isEditing && <p style={{color: 'red', textAlign: 'center'}}>Koja brate ovo je upozorenje!<br></br><br></br>Znam da uredjujes post pa te molim da kad obrises jednu ili vise slika ispod ovog teksta, OBAVEZNO spremis promjene kako bi se URLovi obrisanih slika maknuli iz baze.<br></br><br></br><i>(trenutno je ovako, sredit cemo nekad mf)</i></p>}
+                    
+                    <div className={styles.repoImages}>
+                    {contentImages.map((image, index) => (
+                        <UploadedImage key={`uploadedimage${index}`} image={image} index={index} handleDeleteUploaded={handleDeleteUploaded}/>
+                    ))}
+                    </div>
+                </>
             ) : ''}
             
         </div>
