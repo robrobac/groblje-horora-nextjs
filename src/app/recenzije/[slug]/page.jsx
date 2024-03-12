@@ -12,7 +12,6 @@ import ScrollToSection from "@/components/singleReview/scrollToSection/ScrollToS
 import SocialShare from "@/components/singleReview/socialShare/SocialShare";
 import { getRawContent } from "@/lib/utils";
 import { format } from "date-fns";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export const dynamic = 'force-dynamic';
@@ -121,7 +120,7 @@ const SinglePostPage = async ({params}) => {
             ))}
             <CommentsAndLikes post={data} slug={slug}/>
             <SocialShare slug={slug} reviewType='single' title={data.reviewTitle} additionalPadding={true}/>
-            <OgImageLink link={data.quadOgImage} title={data.reviewTitle} additionalPadding={true}/>
+            {data.reviewType === 'quad' && <OgImageLink link={data.quadOgImage} title={data.reviewTitle} additionalPadding={true}/>}
             <MoreLikeThis data={data.moreLikeThis}/>
         </main>
     );
