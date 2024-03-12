@@ -7,8 +7,10 @@ import reviewHeaderStyles from '@/components/singleReview/reviewHeader/reviewHea
 import { XIcon } from '../header/svg/XIcon'
 import { LoadingBtn } from '../buttons/loadingBtn'
 import { Rating } from '../rating/Rating';
-import { getRawContent } from '@/lib/utils';
+import imdbLogo from '../../../public/images/imdblogo.png';
 import draftToHtml from 'draftjs-to-html';
+import Link from 'next/link';
+import TagDisplay from '../singleReview/tagDisplay/TagDisplay';
 
 
 
@@ -117,6 +119,11 @@ export default function PreviewDialog({postPreview, formFailed, loading}) {
                             <div className={movieStyles.readingSection}>
                                 <section className={movieStyles.readingContent} dangerouslySetInnerHTML={{__html: draftToHtml(movie.reviewContent)}}/>
                             </div>
+                            <Link className={movieStyles.imdbLink} href={movie.imdbLink} target="_blank">
+                                <img src={imdbLogo.src} alt="imdb logo"></img>
+                            </Link>
+                            {movie?.tags.length > 0 && <TagDisplay tags={movie.tags}/>}
+                            {post.movies.length === 4 && <hr className={movieStyles.movieDivider}></hr>}
                         </div>
                     </React.Fragment>
                 ))}

@@ -160,6 +160,7 @@ export default function EditForm({slug}) {
                     worse20: movie.worse20,
                     coverImage: movie.coverImage,
                     coverImagePath: movie.coverImagePath,
+                    tags: movie.tags
                 }
             }),
             contentImages: contentImages,

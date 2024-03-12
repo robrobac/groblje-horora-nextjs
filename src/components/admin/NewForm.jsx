@@ -74,6 +74,7 @@ export default function NewForm({ numberOfMovies }) {
                 imdbLink: movie.imdbLink,
                 top25: movie.top25,
                 worse20: movie.worse20,
+                tags: movie.tags
             })),
             contentImages,
         };
