@@ -1,5 +1,6 @@
 .socialShareSection {
     width: 100%;
+    max-width: var(--widthDefault);
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -8,6 +9,11 @@
     p {
         font-size: var(--textS);
         color: var(--white80);
+
+        span {
+            font-size: inherit;
+            color: inherit;
+        }
     }
 }
 
@@ -78,4 +84,8 @@
         }
     }
 
+}
+
+.additionalPadding {
+    padding: 0 var(--paddingM);
 }

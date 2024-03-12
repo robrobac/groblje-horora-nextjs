@@ -10,6 +10,7 @@ export default function NewPostButtons() {
 
     if (user && mongoUser?.role === 'admin') {
         return (
+            <div className={styles.newPostButtonsContainer}>
             <div className={styles.buttonsWrap}>
                 <Link href={'/nova-recenzija'} target='_blank'>
                     <button className={`${buttonStyles.button} ${buttonStyles.smallButton}`}>Nova Recenzija</button>
@@ -17,6 +18,7 @@ export default function NewPostButtons() {
                 <Link href={'/novi-kratki-pregled'} target='_blank'>
                     <button className={`${buttonStyles.button} ${buttonStyles.smallButton}`}>Novi Kratki Pregled</button>
                 </Link>
+            </div>
             </div>
         )
     } else return null

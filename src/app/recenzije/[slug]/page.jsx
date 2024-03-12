@@ -6,10 +6,13 @@ import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteBut
 import ReadingProgress from "@/components/readingProgress/ReadingProgress";
 import MoreLikeThis from "@/components/singleReview/moreLikeThis/MoreLikeThis";
 import { Movie } from "@/components/singleReview/movie/Movie";
+import OgImageLink from "@/components/singleReview/ogImageLink/OgImageLink";
 import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeader";
 import ScrollToSection from "@/components/singleReview/scrollToSection/ScrollToSection";
+import SocialShare from "@/components/singleReview/socialShare/SocialShare";
 import { getRawContent } from "@/lib/utils";
 import { format } from "date-fns";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export const dynamic = 'force-dynamic';
@@ -100,11 +103,15 @@ const SinglePostPage = async ({params}) => {
                 <>
                 <ReviewHeader data={data}/>
                 <section className={styles.movieAndDate}>
+                
                     <EditDeleteButtonsSingle post={data}/>
                     <p className={styles.reviewDate}>
                         {format(new Date(data?.createdAt), 'dd.MM.yyyy')}
                     </p>
-                    <h1 className={`${styles.titleH1} ${styles.h1Margin}`}>{data.reviewTitle}</h1>
+                    
+                    <h1 className={`${styles.titleH1} ${styles.h1Margin}`}>
+                        {data.reviewTitle}
+                    </h1>
                 </section>
                 </>
             )}
@@ -113,7 +120,9 @@ const SinglePostPage = async ({params}) => {
                 <Movie key={movie._id} data={data} movie={movie} id={`movie${index + 1}`} index={index}/>
             ))}
             <CommentsAndLikes post={data} slug={slug}/>
-            <MoreLikeThis data={data.moreLikeThis} />
+            <SocialShare slug={slug} reviewType='single' title={data.reviewTitle} additionalPadding={true}/>
+            <OgImageLink link={data.quadOgImage} title={data.reviewTitle} additionalPadding={true}/>
+            <MoreLikeThis data={data.moreLikeThis}/>
         </main>
     );
 };

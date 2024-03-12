@@ -15,7 +15,7 @@ import {
   } from 'next-share'
 import CopyToClipboard from 'react-copy-to-clipboard';
 
-export default function SocialShare({slug, reviewType, index}) {
+export default function SocialShare({slug, reviewType, index, title, additionalPadding}) {
     const [copied, setCopied] = useState(false)
 
     const handleCopy = () => {
@@ -27,8 +27,8 @@ export default function SocialShare({slug, reviewType, index}) {
     }
 
     return (
-        <div className={styles.socialShareSection}>
-            <p>Share: </p>
+        <div className={`${styles.socialShareSection} ${additionalPadding && styles.additionalPadding}`}>
+            <p>Podijeli <span>{`"${title}"`}</span></p>
             <div className={styles.socialShareIcons}>
                 <FacebookShareButton
                     url={ reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`}
@@ -62,35 +62,4 @@ export default function SocialShare({slug, reviewType, index}) {
             </div>
         </div>
     )
-
-    // return (
-    //     <div>
-    //         {reviewType === 'single' && (
-    //             <FacebookShareButton
-    //                 url={`https://groblje-horora-nextjs.vercel.app/recenzije/${slug}`}
-    //                 quote={'next-share is a social share buttons for your next React apps.'}
-    //                 hashtag={'#nextshare'}
-    //             >
-    //             <FacebookIcon size={32} round/>
-    //             </FacebookShareButton>
-    //         )}
-    //         {reviewType === 'quad' && (
-    //             <>
-    //                 <FacebookShareButton
-    //                     url={`https://groblje-horora-nextjs.vercel.app/recenzije/${slug}?movie=${index + 1}`}
-    //                     quote={'next-share is a social share buttons for your next React apps.'}
-    //                     hashtag={'#nextshare'}
-    //                 >
-    //                     <FacebookIcon size={32} round/>
-    //                 </FacebookShareButton>
-    //                 <ViberShareButton
-    //                     url={`https://groblje-horora-nextjs.vercel.app/recenzije/${slug}?movie=${index + 1}`}
-    //                     title={'next-share is a social share buttons for your next React apps.'}
-    //                 >
-    //                     <ViberIcon size={32} round />
-    //                 </ViberShareButton>
-    //             </>
-    //         )}
-    //     </div>
-    // )
 }

@@ -9,6 +9,7 @@ import SocialShare from "../socialShare/SocialShare";
 import TagDisplay from "../tagDisplay/TagDisplay";
 import imdbLogo from '../../../../public/images/imdblogo.png';
 import Link from "next/link";
+import OgImageLink from "../ogImageLink/OgImageLink";
 
 export const Movie = ({data, movie, id, index}) => {
 
@@ -42,7 +43,8 @@ export const Movie = ({data, movie, id, index}) => {
                 <img src={imdbLogo.src} alt="imdb logo"></img>
             </Link>
             {movie.tags.length > 0 && <TagDisplay tags={movie.tags}/>}
-            <SocialShare slug={data?.slug} reviewType={data?.reviewType} index={index}/>
+            <SocialShare slug={data?.slug} reviewType={data?.reviewType} index={index} title={movie.title}/>
+            <OgImageLink link={movie.singleOgImage} title={movie.title} />
             <hr className={styles.movieDivider}></hr>
         </article>
     )
