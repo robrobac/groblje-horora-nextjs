@@ -25,8 +25,15 @@ export default function EditDeleteButtons({post, targetBlank, handleRefresh, use
             if (review.movies) {
                 review.movies.forEach((movie) => {
                     imagesToDelete.push(movie.coverImagePath)
+                    imagesToDelete.push(movie.singleOgImagePath)
                 })
             }
+
+            if (review.quadOgImagePath) {
+                imagesToDelete.push(review.quadOgImagePath)
+            }
+
+            console.log('images to delete: ', imagesToDelete)
 
             try {
                 const deleteResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${review._id}`, {
@@ -35,6 +42,8 @@ export default function EditDeleteButtons({post, targetBlank, handleRefresh, use
                 const deleteJson = await deleteResponse.json();
                 if (deleteResponse.ok) {
                     console.log('Review Deleted', deleteJson);
+
+                    console.log('images to delete: ', imagesToDelete)
 
                     imagesToDelete.forEach(async (image) => {
                         await deleteImageFromFirebaseStorage(image)
@@ -48,6 +57,8 @@ export default function EditDeleteButtons({post, targetBlank, handleRefresh, use
                 setLoading(false);
                 handleRefresh()
             }
+        } else {
+            setLoading(false)
         }
     }
 
