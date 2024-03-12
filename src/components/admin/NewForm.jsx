@@ -272,13 +272,14 @@ export default function NewForm({ numberOfMovies }) {
                     quadOgImagePath: '',
                 };
 
-                console.log('---------QUAD OG IMAGE UPLOADING -----------')
-                const quadOgImageData = review.movies.map((movie, index) => {
-                    return {
-                        title: movie.title,
-                        rating: movie.rating
-                    };
-                })
+                if (resolvedMovieReviews.length === 4) {
+                    console.log('---------QUAD OG IMAGE UPLOADING -----------')
+                    const quadOgImageData = review.movies.map((movie, index) => {
+                        return {
+                            title: movie.title,
+                            rating: movie.rating
+                        };
+                    })
                 console.log('quadOgImageData: ', quadOgImageData)
 
                 const quadOgImageDataCoverUrls = review.movies.map((movie, index) => {
@@ -315,6 +316,7 @@ export default function NewForm({ numberOfMovies }) {
                 review.quadOgImagePath = quadOgPath;
 
                 console.log('PREPARED REVIEW', review)
+                }
 
                 // API Call to post a new Review
                 const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews`, {

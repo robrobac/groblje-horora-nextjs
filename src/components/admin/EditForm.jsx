@@ -1,7 +1,7 @@
 'use client'
-import { compressImage } from '@/lib/compressImage'
+import { compressImage, compressOgImage } from '@/lib/compressImage'
 import { deleteImageFromFirebaseStorage, uploadImageToFirebaseStorage } from '@/lib/firebase/firebaseUtils'
-import { slugify, stringFormatting } from '@/lib/utils'
+import { getRawContent, shortenStringTo30Words, slugify, stringFormatting } from '@/lib/utils'
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -26,6 +26,9 @@ export default function EditForm({slug}) {
     const [reviewTitle, setReviewTitle] = useState('')
     const [contentImages, setContentImages] = useState([])
     const [selectedcategory, setSelectedcategory] = useState('')
+    const [quadOgImage, setQuadOgImage] = useState('')
+    const [quadOgImagePath, setQuadOgImagePath] = useState('')
+
     const [movies, setMovies] = useState([
         {
             title: '',
@@ -105,6 +108,8 @@ export default function EditForm({slug}) {
                     setReviewTitle(data.reviewTitle)
                     setContentImages(data.contentImages)
                     setSelectedcategory(data.category)
+                    setQuadOgImage(data.quadOgImage)
+                    setQuadOgImagePath(data.quadOgImagePath)
 
                     setMovies(data.movies.map((movie) => {
                         return {
@@ -120,6 +125,8 @@ export default function EditForm({slug}) {
                             worse20: movie.worse20,
                             compressedCoverImage: movie.compressedCoverImage,
                             tags: movie.tags,
+                            singleOgImage: movie.singleOgImage,
+                            singleOgImagePath: movie.singleOgImagePath,
                         }
                     }))
                 } else {
@@ -291,18 +298,56 @@ export default function EditForm({slug}) {
                     }
                 }
 
-                resolve({
+                console.log('--------- OG IMAGE UPLOADING -----------')
+                const ogImageData = {
                     title: movie.title,
                     year: movie.year,
+                    reviewContent: shortenStringTo30Words(getRawContent(movie.reviewContent)),
                     rating: movie.rating,
-                    reviewContent: movie.reviewContent,
-                    imdbLink: movie.imdbLink,
-                    coverImage: url,
-                    coverImagePath: filePath,
-                    top25: movie.top25,
-                    worse20: movie.worse20,
-                    tags: movie.tags,
-                })
+                }
+                console.log('ogImageData: ', ogImageData)
+                const ogImageDataCoverUrl = [url];
+                console.log('ogImageDataCoverUrl', ogImageDataCoverUrl)
+
+                const encodedogImageData = encodeURIComponent(JSON.stringify(ogImageData))
+                const encodedogImageDataCoverUrl = encodeURIComponent(JSON.stringify(ogImageDataCoverUrl))
+                console.log('encoded', [encodedogImageData, encodedogImageDataCoverUrl])
+
+                const ogImageRequestUrl = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?images=${encodedogImageDataCoverUrl}&data=${encodedogImageData}&type=single`
+                console.log('ogImageRequestUrl: ', ogImageRequestUrl)
+
+                const ogImageResponse = await fetch(ogImageRequestUrl)
+                const ogImageBlob = await ogImageResponse.blob();
+                console.log('og image blob: ', ogImageBlob);
+
+                compressOgImage (ogImageBlob, async (compressedResult) => {
+                    const oldOgImagePath = movie.singleOgImagePath
+                    const ogUploadPath = `ogImages/${slugify(movie.title, movie.year)}-ogImage-${Date.now()}.jpg`;
+                    const ogUploadResult = await uploadImageToFirebaseStorage(compressedResult, ogUploadPath);
+                    console.log('ogUploadResult', ogUploadResult)
+
+                    const ogUrl = ogUploadResult.url
+                    const ogPath = ogUploadResult.path
+
+                    console.log("Deleting old single og image from storage")
+                    await deleteImageFromFirebaseStorage(oldOgImagePath)
+                    console.log("Old single og image deleted from storage")
+
+                    resolve({
+                        title: movie.title,
+                        year: movie.year,
+                        rating: movie.rating,
+                        reviewContent: movie.reviewContent,
+                        imdbLink: movie.imdbLink,
+                        coverImage: url,
+                        coverImagePath: filePath,
+                        top25: movie.top25,
+                        worse20: movie.worse20,
+                        tags: movie.tags,
+                        singleOgImage: ogUrl,
+                        singleOgImagePath: ogPath,
+                    });
+                });
             })
         })
         
@@ -314,7 +359,62 @@ export default function EditForm({slug}) {
                     movies: resolvedMovieReviews,
                     contentImages: contentImages,
                     selectedcategory: selectedcategory,
+                    quadOgImage: '',
+                    quadOgImagePath: '',
                 }
+
+                if (resolvedMovieReviews.length === 4) {
+                    console.log('---------QUAD OG IMAGE UPLOADING -----------')
+                    const quadOgImageData = review.movies.map((movie, index) => {
+                        return {
+                            title: movie.title,
+                            rating: movie.rating
+                        };
+                    })
+                console.log('quadOgImageData: ', quadOgImageData)
+
+                const quadOgImageDataCoverUrls = review.movies.map((movie, index) => {
+                    return movie.coverImage
+                })
+                console.log('quadOgImageDataCoverUrls', quadOgImageDataCoverUrls)
+                
+                const encodedQuadOgImageData = encodeURIComponent(JSON.stringify(quadOgImageData))
+                const encodedQuadOgImageDataCoverUrls = encodeURIComponent(JSON.stringify(quadOgImageDataCoverUrls))
+                console.log('encoded', [encodedQuadOgImageData, encodedQuadOgImageDataCoverUrls])
+
+                const quadOgImageRequestUrl = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?images=${encodedQuadOgImageDataCoverUrls}&data=${encodedQuadOgImageData}&type=quad`
+                console.log('quadOgImageRequestUrl: ', quadOgImageRequestUrl)
+
+
+                const quadOgImageResponse = await fetch(quadOgImageRequestUrl)
+                const quadOgImageBlob = await quadOgImageResponse.blob();
+                console.log('quad og image blob: ', quadOgImageBlob);
+
+                const quadOgUploadResult = await new Promise(resolve => {
+                    compressOgImage(quadOgImageBlob, async (compressedResult) => {
+                        const oldQuadOgImagePath = quadOgImagePath
+                        const quadOgUploadPath = `ogImages/${slugify(review.reviewTitle)}-ogImage-${Date.now()}.jpg`;
+
+                        const quadOgUploadResult = await uploadImageToFirebaseStorage(compressedResult, quadOgUploadPath);
+                        console.log('ogUploadResult', quadOgUploadResult)
+
+                        console.log("Deleting old quad og image from storage")
+                        await deleteImageFromFirebaseStorage(oldQuadOgImagePath)
+                        console.log("Old quad og image deleted from storage")
+
+                        resolve(quadOgUploadResult)
+                    })
+                })
+
+                const quadOgUrl = quadOgUploadResult.url
+                const quadOgPath = quadOgUploadResult.path
+
+                review.quadOgImage = quadOgUrl;
+                review.quadOgImagePath = quadOgPath;
+
+                console.log('PREPARED REVIEW', review)
+                }
+
 
                 // API Call to post a new Review
                 const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${post.slug}?id=${post._id}`, {
@@ -409,7 +509,6 @@ export default function EditForm({slug}) {
                     })
                     // Clear ContentImages state
                     setContentImages([])
-                    setLoading(false)
 
                     // Navigate to edited post
                     router.push(`/recenzije/${json.slug}`)

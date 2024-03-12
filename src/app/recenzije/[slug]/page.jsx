@@ -39,22 +39,6 @@ export const generateMetadata = async ({params, searchParams}) => {
     const {movie} = searchParams;
     const data = await getData(slug);
     const movieNumber = movie - 1
-    // console.log(movie)
-
-    const singleOpenGraphImageData = {
-        reviewTitle: data.reviewTitle,
-        movies: data.movies.map(movie => ({
-            title: movie.title,
-            year: movie.year,
-            rating: movie.rating,
-            reviewContent: shortenStringTo30Words(getRawContent(movie.reviewContent)),
-        }))
-    };
-    const images = data.movies.map(movie => movie.coverImage)
-
-    const encodedData = encodeURIComponent(JSON.stringify(singleOpenGraphImageData))
-    const encodedImages = encodeURIComponent(JSON.stringify(images))
-    
 
     if (data.movies.length === 1) {
         return {

@@ -1,7 +1,5 @@
 import OpenGraphQuad from '@/components/openGraph/OpenGraphQuad';
 import OpenGraphSingle from '@/components/openGraph/OpenGraphSingle';
-import { formatRating } from '@/components/rating/Rating';
-import { getRawContent } from '@/lib/utils';
 import { ImageResponse } from 'next/og';
  
 export const runtime = 'edge';

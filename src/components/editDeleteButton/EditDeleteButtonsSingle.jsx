@@ -30,8 +30,14 @@ export default function EditDeleteButtonsSingle({post}) {
             if (review.movies) {
                 review.movies.forEach((movie) => {
                     imagesToDelete.push(movie.coverImagePath)
+                    imagesToDelete.push(movie.singleOgImagePath)
                 })
             }
+            if (review.quadOgImagePath) {
+                imagesToDelete.push(review.quadOgImagePath)
+            }
+
+            console.log('images to delete: ', imagesToDelete)
 
             try {
                 const deleteResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${review._id}`, {
@@ -40,6 +46,8 @@ export default function EditDeleteButtonsSingle({post}) {
                 const deleteJson = await deleteResponse.json();
                 if (deleteResponse.ok) {
                     console.log('Review Deleted', deleteJson);
+
+                    console.log('images to delete: ', imagesToDelete)
 
                     imagesToDelete.forEach(async (image) => {
                         await deleteImageFromFirebaseStorage(image)
@@ -53,6 +61,8 @@ export default function EditDeleteButtonsSingle({post}) {
                 setLoading(false);
                 router.push('/recenzije?page=1&sort=createdAt&order=desc');
             }
+        } else {
+            setLoading(false);
         }
     }
 
