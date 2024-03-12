@@ -17,6 +17,7 @@ import "./editor.scss";
 import styles from './newForm.module.scss';
 import { FILTERING_OPTIONS } from '@/lib/sortOptions'
 import { sortedTags } from '@/lib/tags'
+import GhostSpinner from '../ghostSpinner/GhostSpinner'
 
 export default function EditForm({slug}) {
     const [postPreview, setPostPreview] = useState(null)
@@ -93,11 +94,13 @@ export default function EditForm({slug}) {
     const [emptyFields, setEmptyFields] = useState([])
 
     const [loading, setLoading] = useState(false)
+    const [loadingDocument, setLoadingDocument] = useState(true)
 
     const router = useRouter();
 
     // Fetching editing document by ID
     useEffect(() => {
+        
         const fetchPost = async () => {
             try {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${slug}`)
@@ -134,7 +137,9 @@ export default function EditForm({slug}) {
                 }
             } catch (err) {
                 console.log(err)
-            }   
+            } finally {
+                setLoadingDocument(false)
+            }
         }
         fetchPost()
     }, [slug])
@@ -519,6 +524,7 @@ export default function EditForm({slug}) {
 
     return (
         <main className={styles.pageContainer}>
+            {loadingDocument && <div style={{ width: '100vw', height: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><GhostSpinner size={50} /></div>}
             <div className={styles.formSection}>
                 <form className={styles.styledForm} onSubmit={handleSubmit}>
                     {movies.length === 4 ? (
