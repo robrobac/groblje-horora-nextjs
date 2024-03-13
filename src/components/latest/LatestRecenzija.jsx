@@ -3,6 +3,7 @@ import styles from '@/components/latest/latest.module.scss';
 import { Rating } from "../rating/Rating";
 import { StandardBtn } from "../buttons/standardBtn/StandardBtn";
 import { formatMongoDate, getRawContent } from "@/lib/utils";
+import Image from "next/image";
 
 const getData = async () => {
     const res = await fetch(`${process.env.DOMAIN_URL}/api/latestRecenzija`, { cache: 'no-store' });
@@ -36,7 +37,7 @@ export const LatestRecenzija = async () => {
                 </div>
                 <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
                     <figure className={styles.latestSingleImage}>
-                        <img src={data[0].movies[0].coverImage} alt={`${data[0].movies[0].title} cover image`}></img>
+                        <Image width={300} height={440} src={data[0].movies[0].coverImage} alt={`${data[0].movies[0].title} cover image`}></Image>
                     </figure>
                 </Link>
             </article>
@@ -50,7 +51,7 @@ export const LatestRecenzija = async () => {
                 <div className={styles.latestSingleInfo}>
                     <Link href={`/recenzije/${data[0].slug}`} style={{display: 'flex'}} target='_blank'>
                         <figure className={styles.latestSingleImage}>
-                            <img src={data[0].movies[0].coverImage} alt={`${data[0].movies[0].title} cover image`} ></img>
+                            <Image width={425} height={623} src={data[0].movies[0].coverImage} alt={`${data[0].movies[0].title} cover image`} ></Image>
                         </figure>
                     </Link>
                     <section className={styles.titleAndRating}>

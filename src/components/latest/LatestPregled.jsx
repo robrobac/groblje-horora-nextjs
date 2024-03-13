@@ -2,6 +2,7 @@ import styles from '@/components/latest/latest.module.scss';
 import { formatMongoDate } from '@/lib/utils';
 import Link from 'next/link';
 import { StandardBtn } from '../buttons/standardBtn/StandardBtn';
+import Image from 'next/image';
 
 const getData = async () => {
     const res = await fetch(`${process.env.DOMAIN_URL}/api/latestPregled`, { next: { revalidate: 5 } });
@@ -35,7 +36,7 @@ export const LatestPregled = async () => {
                     <section className={styles.quadCoverContainer}>
                         {data[0].movies.map((movie, index) => (
                             <figure className={styles.quadCoverImageContainer} key={movie._id}>
-                                <img className={styles[`image${index}`]} src={movie.coverImage} alt={`${movie.title} cover image`}></img>
+                                <Image width={300} height={472.5} className={styles[`image${index}`]} src={movie.coverImage} alt={`${movie.title} cover image`}></Image>
                             </figure>
                         ))}
                     </section>
@@ -55,7 +56,7 @@ export const LatestPregled = async () => {
                     <section className={styles.quadCoverContainer}>
                         {data[0].movies.map((movie, index) => (
                             <figure className={styles.quadCoverImageContainer} key={movie._id}>
-                                <img className={styles[`image${index}`]} src={movie.coverImage} alt={`${movie.title} cover image`}></img>
+                                <Image width={212.5} height={324.3} className={styles[`image${index}`]} src={movie.coverImage} alt={`${movie.title} cover image`}></Image>
                             </figure>
                         ))}
                     </section>
