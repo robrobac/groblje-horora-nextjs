@@ -1,7 +1,6 @@
 import styles from '@/components/homepageCover/homepageCover.module.scss';
 import Image from 'next/image';
 import cover from '../../../public/images/1920-groblje-horora-home-page-cover.jpg'
-import CoverImage from './CoverImage';
 
 export const HomepageCover = () => {
     
