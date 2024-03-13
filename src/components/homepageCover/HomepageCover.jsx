@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 export const HomepageCover = () => {
 
     const [windowWidth, setWindowWidth] = useState(0);
+
     console.log(windowWidth)
     useEffect(() => {
         const handleResize = () => {
@@ -54,15 +55,14 @@ export const HomepageCover = () => {
         }
     }
 
-
     return (
         <div className={styles.coverImage}>
-            <Image loading='eager' priority={true} width={coverImage().width} height={coverImage().height} src={coverImage().src} alt='main background, a graveyard silhouette'/>
+            <Image priority={true} width={coverImage().width} height={coverImage().height} src={coverImage().src} alt='main background, a graveyard silhouette'/>
 
             <div className={styles.coverImageTrees}>
-                {windowWidth === 0 && <div className={styles.blurOverlay}></div>}
-                <Image loading='eager' className={styles.leftTree} priority={true} width={428} height={800} src={'/images/groblje-horora-cover-left-tree.svg'} alt='tree silhouette on the left side of the screen'/>
-                <Image loading='eager' className={styles.rightTree} priority={true} width={428} height={800} src={'/images/groblje-horora-cover-left-tree.svg'} alt='tree silhouette on the right side of the screen'/>
+                {/* {windowWidth === 0 && <div className={styles.blurOverlay}></div>} */}
+                <Image className={styles.leftTree} priority={true} width={428} height={800} src={'/images/groblje-horora-cover-left-tree.svg'} alt='tree silhouette on the left side of the screen'/>
+                <Image className={styles.rightTree} priority={true} width={428} height={800} src={'/images/groblje-horora-cover-left-tree.svg'} alt='tree silhouette on the right side of the screen'/>
                 
             </div>
         </div>
