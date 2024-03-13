@@ -7,7 +7,7 @@ export const HomepageCover = () => {
 
     return (
         <div className={styles.coverImage}>
-            <Image priority={true} src={cover} sizes="(max-width: 768px) 1024px, 2240px" alt='main background, a graveyard silhouette'/>
+            <Image priority={true} src={cover} sizes="(max-width: 425px) 100vw, 2240px" alt='main background, a graveyard silhouette'/>
             {/* <Image priority={true} src={cover} alt='main background, a graveyard silhouette'/> */}
             <div className={styles.coverImageTrees}>
                 <Image className={styles.leftTree} priority={true} width={428} height={800} src={'/images/groblje-horora-cover-left-tree.svg'} alt='tree silhouette on the left side of the screen'/>
