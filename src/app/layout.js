@@ -32,13 +32,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="hr">
-<Head> 
-  <link
-    rel="preload"
-    href='/images/425-groblje-horora-home-page-cover.webp'
-    as="image"
-  />
-</Head>
             <body suppressHydrationWarning={true} className={lexend.className}>
                 <SpeedInsights />
                 <Analytics />
