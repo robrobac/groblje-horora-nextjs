@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 export default function Naslovna() {
     return (
         <main>
-            {/* <HomepageCover /> */}
+            <HomepageCover />
             <Introduction />
             <LatestPregled />
             <LatestRecenzija />
