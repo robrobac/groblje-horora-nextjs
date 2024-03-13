@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 export const HomepageCover = () => {
-
     const [windowWidth, setWindowWidth] = useState(0);
 
     console.log(windowWidth)
