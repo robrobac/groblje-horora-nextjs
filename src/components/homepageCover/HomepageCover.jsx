@@ -6,7 +6,7 @@ export const HomepageCover = () => {
 
     return (
         <div className={styles.coverImage}>
-            <Image priority={true} width={2560} height={800} src={'https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/1920-groblje-horora-home-page-cover.jpg?alt=media&token=254acbb0-202d-4478-892e-87909a68ec20'} alt='main background, a graveyard silhouette'/>
+            <Image priority={true} width={2560} height={800} src={'/images/1920-groblje-horora-home-page-cover.webp'} alt='main background, a graveyard silhouette'/>
 
             <div className={styles.coverImageTrees}>
                 <Image className={styles.leftTree} priority={true} width={428} height={800} src={'/images/groblje-horora-cover-left-tree.svg'} alt='tree silhouette on the left side of the screen'/>
