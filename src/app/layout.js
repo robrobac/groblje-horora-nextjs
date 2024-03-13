@@ -6,6 +6,7 @@ import Footer from "../components/footer/footer";
 import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
+import Head from "next/head";
 
 const lexend = Lexend({ subsets: ["latin"] });
 
@@ -31,7 +32,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="hr">
-
+<Head> 
+  <link
+    rel="preload"
+    href='/images/425-groblje-horora-home-page-cover.webp'
+    as="image"
+  />
+</Head>
             <body suppressHydrationWarning={true} className={lexend.className}>
                 <SpeedInsights />
                 <Analytics />
