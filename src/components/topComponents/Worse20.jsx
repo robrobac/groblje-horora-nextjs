@@ -1,7 +1,8 @@
 import styles from '@/components/topComponents/top.module.scss'
 import { StandardBtn } from '../buttons/standardBtn/StandardBtn'
-import topImage from '../../../public/images/groblje-horora-top20-smeca-image.webp';
+import topImage from '../../../public/images/groblje-horora-top20-smeca-image.jpg';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Worse20() {
     return (
@@ -17,7 +18,7 @@ export default function Worse20() {
             </section>
             <figure className={styles.topImage}>
                 <Link href={`/top20smeca`} target='_blank'>
-                    <img src={topImage.src} alt='movie-cover'></img>
+                    <Image src={topImage} alt='movie-cover'></Image>
                 </Link>
             </figure>
         </article>

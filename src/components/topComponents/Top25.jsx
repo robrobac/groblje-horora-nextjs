@@ -1,7 +1,8 @@
 import styles from '@/components/topComponents/top.module.scss'
 import { StandardBtn } from '../buttons/standardBtn/StandardBtn'
-import topImage from '../../../public/images/groblje-horora-top25-image.webp';
+import topImage from '../../../public/images/groblje-horora-top25-image.jpg';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default async function Top25() {
     
@@ -10,7 +11,7 @@ export default async function Top25() {
         <article className={styles.topContainer}>
             <figure className={styles.topImage}>
                 <Link href={`/top25`} target='_blank'>
-                    <img src={topImage.src} alt='top 25 preporuka, izrezbarena bundeva u mraku'></img>
+                    <Image src={topImage} alt='top 25 preporuka, izrezbarena bundeva u mraku'></Image>
                 </Link>
             </figure>
             <section className={styles.topInfo}>
