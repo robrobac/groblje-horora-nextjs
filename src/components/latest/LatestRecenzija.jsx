@@ -26,9 +26,9 @@ export const LatestRecenzija = async () => {
                     </p>
                     <section className={styles.titleAndRating}>
                         <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
-                            <h2 className={styles.recenzijaTitle}>
+                            <h3 className={styles.recenzijaTitle}>
                                 {data[0].movies[0].title} <span>({data[0].movies[0].year})</span>
-                            </h2>
+                            </h3>
                         </Link>
                         <Rating rating={data[0].movies[0].rating} detailed={true} />
                         <p className={styles.recenzijaDescription}>{data[0].shortDescription}</p>
@@ -56,9 +56,9 @@ export const LatestRecenzija = async () => {
                     </Link>
                     <section className={styles.titleAndRating}>
                         <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
-                            <h2 className={styles.recenzijaTitle}>
+                            <h3 className={styles.recenzijaTitle}>
                                 {data[0].movies[0].title} <span>({data[0].movies[0].year})</span>
-                            </h2>
+                            </h3>
                         </Link>
                         <Rating rating={data[0].movies[0].rating} detailed={true} />
                         <p className={styles.recenzijaDescription}>{data[0].shortDescription}</p>

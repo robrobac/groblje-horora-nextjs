@@ -16,7 +16,7 @@ export const RecenzijeComponent = async () => {
             </div>
             <section className={styles.coverContent}>
                 <Link href={`/recenzije?page=1&sort=createdAt&order=desc`} target='_blank'>
-                    <h2>Recenzije</h2>
+                    <h3>Recenzije</h3>
                 </Link>
                 <StandardBtn type='right' path={`/recenzije?page=1&sort=createdAt&order=desc`} content='Pogledaj sve' span={`(${count.numberOfMovies})`} newTab={true}/>
             </section>

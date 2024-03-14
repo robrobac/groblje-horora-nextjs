@@ -9,7 +9,7 @@ export default function Worse20() {
         <article className={`${styles.topContainer} ${styles.reverse}`}>
             <section className={styles.topInfo}>
                 <Link href={`/top20smeca`} target='_blank'>
-                    <h2 className={styles.topTitle}>Top 20 smeća</h2>
+                    <h3 className={styles.topTitle}>Top 20 smeća</h3>
                 </Link>
                 <p className={styles.topDescription}>
                     Filmovi na ovoj top listi su najveće smeće ikada. Linkove na recenzije možete pronaći na Top 20 smeća popisu.

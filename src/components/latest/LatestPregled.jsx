@@ -24,9 +24,9 @@ export const LatestPregled = async () => {
                         Najnoviji Kratki Pregled <span>{formatMongoDate(data[0].createdAt)}</span>
                     </p>
                     <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
-                        <h2 className={styles.pregledTitle}>
+                        <h3 className={styles.pregledTitle}>
                             {data[0].reviewTitle}
-                        </h2>
+                        </h3>
                     </Link>
                     <p className={styles.pregledDescription}>
                         {data[0].movies[0].title} <span>({data[0].movies[0].year})</span>, {data[0].movies[1].title} <span>({data[0].movies[1].year})</span>, {data[0].movies[2].title} <span>({data[0].movies[2].year})</span>, {data[0].movies[3].title} <span>({data[0].movies[3].year})</span>
@@ -63,9 +63,9 @@ export const LatestPregled = async () => {
                 </Link>
                 <section className={styles.latestPregledInfo}>
                     <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
-                        <h2 className={styles.pregledTitle}>
+                        <h3 className={styles.pregledTitle}>
                             {data[0].reviewTitle}
-                        </h2>
+                        </h3>
                     </Link>
                     <p className={styles.pregledDescription}>
                         {data[0].movies[0].title} <span>({data[0].movies[0].year})</span>, {data[0].movies[1].title} <span>({data[0].movies[1].year})</span>, {data[0].movies[2].title} <span>({data[0].movies[2].year})</span>, {data[0].movies[3].title} <span>({data[0].movies[3].year})</span>
