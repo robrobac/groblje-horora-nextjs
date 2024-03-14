@@ -11,9 +11,12 @@
 
     @media (max-width: 768px) {
         margin-bottom: 50px;
+        margin-top: 50px;
     }
 
-    .subTitle {
+
+
+    .subTitleParagraph {
         max-width: 750px;
         font-size: var(--textL);
         line-height: calc(var(--textL) * 1.5);
@@ -41,7 +44,42 @@
 
         @media (max-width: 425px) {
             max-width: 425px;
-            text-align: left;
+            // text-align: left;
         }
     }
+}
+
+.coverTitleMobile {
+    display: none;
+    width: 100%;
+    text-align: center;
+    font-size: var(--textXLtitle);
+    line-height: calc(var(--textXLtitle) * 1);
+    color: var(--white);
+    padding: 0 25px;
+
+    @media (max-width: 768px) {
+        display: block;
+    }  
+
+    @media (max-width: 320px) {
+        font-size: var(--textLtitle);
+        line-height: calc(var(--textLtitle) * 1);
+    }
+
+    @media (max-width: 250px) {
+        font-size: var(--textMtitle);
+        line-height: calc(var(--textMtitle) * 1);
+    } 
+}
+
+.coverSubtitleMobile {
+    display: none;
+    text-align: center;
+    font-size: var(--textL);
+    line-height: calc(var(--textL) * 1.5);
+
+    @media (max-width: 768px) {
+        display: block;
+    }  
 }

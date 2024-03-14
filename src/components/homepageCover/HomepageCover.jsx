@@ -15,13 +15,13 @@ export const HomepageCover = () => {
                 <Image className={styles.leftTree} priority={true} width={428} height={800} src={'/images/groblje-horora-cover-left-tree.svg'} alt='tree silhouette on the left side of the screen'/>
                 <div className={styles.coverTitleDesktopWrap}>
                     <h1 className={`${creepster.className} ${styles.coverTitleDesktop}`}>Groblje Horora</h1>
+                    <h2 className={styles.coverSubtitleDesktop}>Recenzije Horor Filmova i Serija</h2>
                 </div>
                 
                 <Image className={styles.rightTree} priority={true} width={428} height={800} src={'/images/groblje-horora-cover-left-tree.svg'} alt='tree silhouette on the right side of the screen'/>
             </div>
-            
         </div>
-        <h1 className={`${creepster.className} ${styles.coverTitleMobile}`}>Groblje Horora</h1>
+            
         </>
     )
 }

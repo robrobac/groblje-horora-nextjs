@@ -80,8 +80,28 @@
 
 .coverTitleDesktopWrap {
     position: absolute;
-    width: 100%;
     top: 150px;
+}
+
+.coverSubtitleDesktop {
+    margin: 0 auto;
+    margin-top: -5px;
+    padding: 10px 30px;
+    font-size: var(--textXL);
+    background-color: var(--black);
+    width: fit-content;
+
+    @media (max-width: 1200px) {
+        font-size: var(--textL);
+        line-height: calc(var(--textL) * 1.1);
+    }
+    @media (max-width: 1024px) {
+        font-size: var(--textM);
+        line-height: calc(var(--textM) * 1.1);
+    }
+    @media (max-width: 768px) {
+        display: none;
+    }
 }
 
 .coverTitleDesktop {
@@ -114,23 +134,4 @@
     }
 
     
-}
-
-.coverTitleMobile {
-    display: none;
-    margin-bottom: -75px;
-    width: 100%;
-    text-align: center;
-    font-size: var(--textXLtitle);
-    line-height: calc(var(--textXLtitle) * 1);
-    color: var(--white);
-    padding: 0 25px;
-    @media (max-width: 768px) {
-        display: block;
-    }  
-
-    @media (max-width: 320px) {
-        font-size: var(--textLtitle);
-        line-height: calc(var(--textLtitle) * 1);
-    }  
 }
