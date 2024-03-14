@@ -49,7 +49,7 @@ export const LatestRecenzija = async () => {
                     Najnovija Recenzija <span>{formatMongoDate(data[0].createdAt)}</span>
                 </p>
                 <div className={styles.latestSingleInfo}>
-                    <Link href={`/recenzije/${data[0].slug}`} style={{display: 'flex'}} target='_blank'>
+                    <Link href={`/recenzije/${data[0].slug}`} className={styles.latestRecenzijaLink} target='_blank'>
                         <figure className={styles.latestSingleImage}>
                             <Image width={425} height={623} src={data[0].movies[0].coverImage} alt={`${data[0].movies[0].title} cover image`} ></Image>
                         </figure>
