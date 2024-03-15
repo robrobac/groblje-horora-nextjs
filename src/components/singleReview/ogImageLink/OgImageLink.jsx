@@ -11,7 +11,7 @@ export default function OgImageLink({link, title, additionalPadding}) {
         return (
             <div className={`${styles.ogImageLinkContainer} ${additionalPadding && styles.additionalPadding}`}>
                 <div className={styles.ogImageLinkWrap}>
-                    <Link className={styles.ogImageLink} href={link} target="_blank">
+                    <Link className={styles.ogImageLink} href={link || '#'} target="_blank">
                         <img src={link} alt={`${title} Open Graph Image`} />
                     </Link>
                 </div>
