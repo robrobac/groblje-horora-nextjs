@@ -14,6 +14,7 @@ import {
     ViberIcon,
   } from 'next-share'
 import CopyToClipboard from 'react-copy-to-clipboard';
+import Image from 'next/image';
 
 export default function SocialShare({slug, reviewType, index, title, additionalPadding}) {
     const [copied, setCopied] = useState(false)
@@ -51,7 +52,7 @@ export default function SocialShare({slug, reviewType, index, title, additionalP
                 </ViberShareButton>
                 <CopyToClipboard text={reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`} onCopy={handleCopy}>
                     <div className={styles.copyLinkButton}>
-                        <img src={copyLinkIcon.src} alt="copy link icon" />
+                        <Image width={36} height={36} src={copyLinkIcon.src} alt="copy link icon" />
                     </div>
                 </CopyToClipboard>
                 {copied && (

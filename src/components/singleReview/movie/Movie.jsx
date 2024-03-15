@@ -10,6 +10,7 @@ import TagDisplay from "../tagDisplay/TagDisplay";
 import imdbLogo from '../../../../public/images/imdblogo.png';
 import Link from "next/link";
 import OgImageLink from "../ogImageLink/OgImageLink";
+import Image from "next/image";
 
 export const Movie = ({data, movie, id, index}) => {
 
@@ -18,7 +19,7 @@ export const Movie = ({data, movie, id, index}) => {
             {data.reviewType === 'single' ? (
                 <div className={styles.movieInfo}>
                     <figure className={styles.movieImage}>
-                        <img src={movie.coverImage} alt={`${movie.title} cover image`}></img>
+                        <Image priority={true} width={400} height={579.5} src={movie.coverImage} alt={`${movie.title} cover image`}></Image>
                     </figure>
                     <EditDeleteButtonsSingle post={data}/>
                     <p className={pageStyles.reviewDate}>
@@ -30,7 +31,7 @@ export const Movie = ({data, movie, id, index}) => {
             ) : (
                 <div className={styles.movieInfo}>
                     <figure className={styles.movieImage}>
-                        <img src={movie.coverImage} alt={`${movie.title} cover image`}></img>
+                        <Image width={400} height={579.5} src={movie.coverImage} alt={`${movie.title} cover image`}></Image>
                     </figure>
                     <h2 className={pageStyles.titleH2}>{movie.title} <span>({movie.year})</span></h2>
                     <Rating rating={movie.rating} detailed={true}/>
@@ -40,7 +41,7 @@ export const Movie = ({data, movie, id, index}) => {
                 <section className={styles.readingContent} dangerouslySetInnerHTML={{__html: getRawContent(movie.reviewContent)}}/>
             </div>
             <Link className={styles.imdbLink} href={movie.imdbLink} target="_blank">
-                <img src={imdbLogo.src} alt="imdb logo"></img>
+                <Image width={59} height={30} src={imdbLogo.src} alt="imdb logo"></Image>
             </Link>
             {movie.tags.length > 0 && <TagDisplay tags={movie.tags}/>}
             <SocialShare slug={data?.slug} reviewType={data?.reviewType} index={index} title={movie.title}/>

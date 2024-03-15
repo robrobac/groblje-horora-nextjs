@@ -10,7 +10,7 @@ export default async function MoreLikeThis({data}) {
     return (
         <section className={styles.moreLikeThis}>
             <hr className={styles.divider}></hr>
-            <h3>Moglo bi vas zanimati...</h3>
+            <p className={styles.moreLikeThisTitle}>Moglo bi vas zanimati...</p>
             <div className={styles.moreLikeThisFlexRow}>
                     {data && data.map((post) => (
                         <article key={post._id} className={styles.moreLikeThisPost}>
