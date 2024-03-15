@@ -121,7 +121,7 @@ const SinglePostPage = async ({params}) => {
             <CommentsAndLikes post={data} slug={slug}/>
             <SocialShare slug={slug} reviewType='single' title={data.reviewTitle} additionalPadding={true}/>
             {data.reviewType === 'quad' && <OgImageLink link={data.quadOgImage} title={data.reviewTitle} additionalPadding={true}/>}
-            <MoreLikeThis data={data.moreLikeThis}/>
+            <MoreLikeThis data={data.moreLikeThis} postType={data.reviewType}/>
         </main>
     );
 };

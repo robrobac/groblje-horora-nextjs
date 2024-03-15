@@ -6,7 +6,7 @@ import { Rating } from '@/components/rating/Rating';
 import { StandardBtn } from '@/components/buttons/standardBtn/StandardBtn';
 import Link from 'next/link';
 
-export default async function MoreLikeThis({data}) {
+export default async function MoreLikeThis({data, postType}) {
     return (
         <section className={styles.moreLikeThis}>
             <hr className={styles.divider}></hr>
@@ -17,7 +17,11 @@ export default async function MoreLikeThis({data}) {
                             <div className={styles.moreLikeThisPostInfo}>
                                 <PostImage post={post} newTab={false}/>
                                 <Link href={`/recenzije/${post?.slug}`}>
-                                    <h4>{post.reviewTitle} {post.movies.length === 1 && (<span>({post?.movies[0].year})</span>)}</h4>
+                                    {postType === 'single' ? (
+                                        <h2>{post.reviewTitle} {post.movies.length === 1 && (<span>({post?.movies[0].year})</span>)}</h2>
+                                    ) : (
+                                        <h3>{post.reviewTitle} {post.movies.length === 1 && (<span>({post?.movies[0].year})</span>)}</h3>
+                                    )}
                                 </Link>
                                 {post.movies.length === 1 && (<Rating rating={post.movies[0].rating}/>)}
                                 {post.movies.length === 4 && (
