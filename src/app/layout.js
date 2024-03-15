@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
             <head>
                 <Script
                     async
-                    src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+                    src={`https://www.googletagmanager.com/gtag/js?id=G-V2JZKHZKN0`}
                 />
                 <Script id="google-analytics">
                     {`
