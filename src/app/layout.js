@@ -5,7 +5,6 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/footer";
 import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Analytics } from "@vercel/analytics/react"
 import Head from "next/head";
 import Script from "next/script";
 import GoogleAnalytics from "@/GoogleAnalytics";
@@ -39,9 +38,8 @@ export default function RootLayout({ children }) {
                     <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}
                 />
                 ) : null}
-                
+
                 <SpeedInsights />
-                <Analytics />
 
                 <Header />
                 {children}
