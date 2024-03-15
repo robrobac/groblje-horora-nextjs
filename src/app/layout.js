@@ -7,6 +7,7 @@ import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
 import Head from "next/head";
+import Script from "next/script";
 
 const lexend = Lexend({ subsets: ["latin"] });
 
@@ -32,6 +33,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="hr">
+            <head>
+                <Script
+                    async
+                    src="https://www.googletagmanager.com/gtag/js?id=G-E7NY2W59JZ"
+                />
+                <Script id="google-analytics">
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
+                    `}
+                </Script>
+            </head>
             <body suppressHydrationWarning={true} className={lexend.className}>
                 <SpeedInsights />
                 <Analytics />
