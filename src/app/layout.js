@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
 import Head from "next/head";
 import Script from "next/script";
+import GoogleAnalytics from "@/GoogleAnalytics";
 
 const lexend = Lexend({ subsets: ["latin"] });
 
@@ -33,21 +34,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="hr">
-            <head>
-                <Script
-                    async
-                    src={`https://www.googletagmanager.com/gtag/js?id=G-V2JZKHZKN0`}
-                />
-                <Script id="google-analytics">
-                    {`
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
-                    `}
-                </Script>
-            </head>
             <body suppressHydrationWarning={true} className={lexend.className}>
+                {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+                    <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}
+                />
+                ) : null}
+                
                 <SpeedInsights />
                 <Analytics />
 
