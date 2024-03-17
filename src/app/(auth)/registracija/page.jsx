@@ -138,12 +138,12 @@ const RegistracijaPage = () => {
                     <p className={styles.error}>{errors?.join(', ')}</p>
                     <form className={styles.authForm} onSubmit={handleRegister}>
                         <div className='inputContainer'>
-                            <label className='inputLabel' htmlFor='email'>Email</label>
-                            <input className='inputField' id='email' name='email' type='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+                            <label className='inputLabel' htmlFor='username'>Email</label>
+                            <input className='inputField' id='email' name='username' type='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
                         </div>
                         <div className='inputContainer'>
-                            <label className='inputLabel' htmlFor='username'>Username</label>
-                            <input className='inputField' id='username' name='username' type='text' maxLength="15" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                            <label className='inputLabel' htmlFor='displayName'>Username</label>
+                            <input className='inputField' id='username' name='displayName' type='text' maxLength="15" value={username} onChange={(e) => setUsername(e.target.value)}/>
                         </div>
                         <div className='inputContainer'>
                             <label className='inputLabel' htmlFor='password'>Password</label>

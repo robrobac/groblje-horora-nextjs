@@ -119,7 +119,7 @@ const SinglePostPage = async ({params}) => {
                 <Movie key={movie._id} data={data} movie={movie} id={`movie${index + 1}`} index={index}/>
             ))}
             <CommentsAndLikes post={data} slug={slug}/>
-            <SocialShare slug={slug} reviewType='single' title={data.reviewTitle} additionalPadding={true}/>
+            {data.reviewType === 'quad' && <SocialShare slug={slug} reviewType='single' title={data.reviewTitle} additionalPadding={true}/>}
             {data.reviewType === 'quad' && <OgImageLink link={data.quadOgImage} title={data.reviewTitle} additionalPadding={true}/>}
             <MoreLikeThis data={data.moreLikeThis} postType={data.reviewType}/>
         </main>

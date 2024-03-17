@@ -24,7 +24,7 @@ export default function postImage({post, newTab}) {
                 </div>
             ) : (
                 <figure className={`${styles.previewImage} ${post.movies[0].top25 && styles.top25}`}>
-                    <Image width={393} height={576.5} className={styles.singleMovieImage} sizes="(max-width: 425px) 300px, (max-width: 768px) 200px, (max-width: 1024px) 160px, 150px" src={post.movies[0].coverImage} alt={`${post.movies[0].title} cover image`}></Image>
+                    <Image placeholder='blur' blurDataURL={post.movies[0].coverImage} width={393} height={576.5} className={styles.singleMovieImage} sizes="(max-width: 425px) 300px, (max-width: 768px) 200px, (max-width: 1024px) 160px, 150px" src={post.movies[0].coverImage} alt={`${post.movies[0].title} cover image`}></Image>
                     {post.movies[0].top25 && (<Image className={styles.bloodyBorder} src={bloodyBorder} alt='bloody border representing top 25'></Image>)}
                 </figure>
             )}
