@@ -6,8 +6,6 @@ import { RecenzijeComponent } from "@/components/recenzijeComponent/RecenzijeCom
 import Top25 from "@/components/topComponents/Top25";
 import Worse20 from "@/components/topComponents/Worse20";
 
-export const dynamic = 'force-dynamic';
-
 export default function Naslovna() {
 
     const jsonLd = {
@@ -28,10 +26,11 @@ export default function Naslovna() {
             <HomepageCover />
             <Introduction />
             <LatestPregled />
+            {/* 
             <LatestRecenzija />
             <Top25 />
             <RecenzijeComponent />
-            <Worse20 />
+            <Worse20 /> */}
         </main>
     );
 }

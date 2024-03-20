@@ -1,5 +1,6 @@
 import { dbConnect } from "@/lib/mongo/dbConnect"
 import reviewModel from "@/lib/mongo/models/reviewModel"
+import revalidatePathAction from "@/lib/revalidatePathAction"
 import { slugify } from "@/lib/utils"
 import mongoose, { Mongoose } from "mongoose"
 import { NextResponse } from "next/server"
@@ -151,6 +152,8 @@ export const PATCH = async (request, { params }) => {
                 status: 404
             })
         }
+
+        await revalidatePathAction('/')
 
         return new NextResponse(JSON.stringify(review), {
             status: 200

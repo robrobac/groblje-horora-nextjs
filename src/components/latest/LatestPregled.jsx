@@ -5,7 +5,7 @@ import { StandardBtn } from '../buttons/standardBtn/StandardBtn';
 import Image from 'next/image';
 
 const getData = async () => {
-    const res = await fetch(`${process.env.DOMAIN_URL}/api/latestPregled`, { next: { revalidate: 5 } });
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/latestPregled`);
     if (!res.ok) {
         throw new Error('Failed to fetch LatestQuad data');
     }
