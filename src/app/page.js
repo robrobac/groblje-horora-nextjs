@@ -26,10 +26,11 @@ export default function Naslovna() {
             <HomepageCover />
             <Introduction />
             <LatestPregled />
+            {/* 
             <LatestRecenzija />
             <Top25 />
             <RecenzijeComponent />
-            <Worse20 />
+            <Worse20 /> */}
         </main>
     );
 }
