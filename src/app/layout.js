@@ -6,7 +6,6 @@ import Footer from "../components/footer/footer";
 import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
-import Head from "next/head";
 
 const lexend = Lexend({ subsets: ["latin"] });
 

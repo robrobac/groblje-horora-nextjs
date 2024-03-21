@@ -151,7 +151,6 @@ export const PATCH = async (request, { params }) => {
                 status: 404
             })
         }
-
         return new NextResponse(JSON.stringify(review), {
             status: 200
         })

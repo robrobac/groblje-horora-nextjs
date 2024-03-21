@@ -6,7 +6,7 @@ import { formatMongoDate, getRawContent } from "@/lib/utils";
 import Image from "next/image";
 
 const getData = async () => {
-    const res = await fetch(`${process.env.DOMAIN_URL}/api/latestRecenzija`, { cache: 'no-store' });
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/latestRecenzija`, { next: { revalidate: 5 } });
     if (!res.ok) {
         throw new Error('Failed to fetch LatestSingle data');
     }
