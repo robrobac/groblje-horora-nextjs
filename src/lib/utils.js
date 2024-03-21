@@ -17,7 +17,7 @@ export const formatMongoDate = (date) => {
 }
 
 export const getCountAll = async (env) => {
-    const res = await fetch(`${process.env.DOMAIN_URL}/api/countAllReviews`);
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/countAllReviews`, { next: { revalidate: 5 } });
     if (!res.ok) {
         throw new Error('Failed to fetch countAllReviews data');
     }

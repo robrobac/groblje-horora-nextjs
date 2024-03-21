@@ -3,8 +3,6 @@ import reviewModel from "@/lib/mongo/models/reviewModel"
 import { getRawContent } from "@/lib/utils";
 import { NextResponse } from "next/server"
 
-export const dynamic = 'force-dynamic';
-
 const shortenDescription = async (description) => {
     const formattedDescription = getRawContent(description);
     const descriptionWithoutImages = formattedDescription.replace(/<img[^>]*>/g, '');
