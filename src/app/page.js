@@ -5,6 +5,7 @@ import { LatestRecenzija } from "@/components/latest/LatestRecenzija";
 import { RecenzijeComponent } from "@/components/recenzijeComponent/RecenzijeComponent";
 import Top25 from "@/components/topComponents/Top25";
 import Worse20 from "@/components/topComponents/Worse20";
+import Script from "next/script";
 
 export const dynamic = 'force-dynamic';
 
@@ -21,7 +22,9 @@ export default function Naslovna() {
 
     return (
         <main>
-            <script
+            <Script
+            id="homeStructuredData"
+            strategy="beforeInteractive"
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
