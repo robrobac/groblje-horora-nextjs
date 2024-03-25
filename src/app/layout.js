@@ -6,6 +6,8 @@ import Footer from "../components/footer/footer";
 import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
+import Head from "next/head";
+import Script from "next/script";
 
 const lexend = Lexend({ subsets: ["latin"] });
 
@@ -28,9 +30,26 @@ export const metadata = {
     }
 };
 
+const jsonLd = {
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    image: {
+        "@type": "ImageObject",
+        url: "https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/groblje-horora-og-image.webp?alt=media&token=9505221c-7713-4907-8a95-78047f2cd1b7"
+    }
+}
+
 export default function RootLayout({ children }) {
     return (
         <html lang="hr">
+            <head>
+            <Script
+            id="homeStructuredData"
+            strategy="beforeInteractive"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+            </head>
             <body suppressHydrationWarning={true} className={lexend.className}>
                 <SpeedInsights />
                 <Analytics />
