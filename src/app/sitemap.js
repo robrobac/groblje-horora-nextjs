@@ -1,7 +1,7 @@
 export default async function sitemap() {
     const baseUrl = "https://www.groblje-horora.com"
 
-    const res = await fetch(`${baseUrl}/api/reviews`, { next: { revalidate: 86400 } });
+    const res = await fetch(`${baseUrl}/api/reviews`, { next: { revalidate: 0 } });
 
     const posts = await res.json()
 
