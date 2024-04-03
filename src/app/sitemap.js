@@ -1,5 +1,5 @@
 export default async function sitemap() {
-    const res = await fetch(`${process.env.DOMAIN_URL}/api/generateSitemap`, { next: { revalidate: 3600 } });
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/generateSitemap`);
 
     const posts = await res.json()
 
