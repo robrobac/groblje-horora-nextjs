@@ -1,36 +1,38 @@
 export default async function sitemap() {
-    const res = await fetch(`${process.env.DOMAIN_URL}/api/generateSitemap`, { next: { revalidate: 3600 } });
+    const baseUrl = "https://www.groblje-horora.com"
 
-    const posts = await res.json()
+    // const res = await fetch(`${baseUrl}/api/generateSitemap`, { next: { revalidate: 3600 } });
 
-    const postsUrls = posts.map((review) => {
-        return {
-            url: `${process.env.DOMAIN_URL}/recenzije/${review.slug}`,
-            lastModified: new Date(review.updatedAt)
-        };
-    }) ?? [];
+    // const posts = await res.json()
+
+    // const postsUrls = posts.map((review) => {
+    //     return {
+    //         url: `${baseUrl}/recenzije/${review.slug}`,
+    //         lastModified: new Date(review.updatedAt)
+    //     };
+    // }) ?? [];
 
     return [
         {
-            url: process.env.DOMAIN_URL,
+            url: baseUrl,
             lastModified: new Date()
         },
         {
-            url: `${process.env.DOMAIN_URL}/top25`,
+            url: `${baseUrl}/top25`,
             lastModified: new Date()
         },
         {
-            url: `${process.env.DOMAIN_URL}/recenzije`,
+            url: `${baseUrl}/recenzije`,
             lastModified: new Date()
         },
         {
-            url: `${process.env.DOMAIN_URL}/top20smeca`,
+            url: `${baseUrl}/top20smeca`,
             lastModified: new Date()
         },
         {
-            url: `${process.env.DOMAIN_URL}/0-blogu`,
+            url: `${baseUrl}/0-blogu`,
             lastModified: new Date()
         },
-        ...postsUrls,
+        // ...postsUrls,
     ]
 }
