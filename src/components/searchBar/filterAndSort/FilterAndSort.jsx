@@ -5,7 +5,6 @@ import styles from './filterAndSort.module.scss'
 import Filter from '../Filter'
 import { FILTERING_OPTIONS, SORTING_OPTIONS } from '@/lib/sortOptions'
 import Sort from '../Sort'
-import useCountReviews from '@/hooks/useCountReviews'
 import { ReviewsGalleryContext } from '@/components/reviewsGallery/ReviewsGallery'
 
 export default function FilterAndSort() {
@@ -23,8 +22,6 @@ export default function FilterAndSort() {
         totalItems,
         loading,
     } = useContext(ReviewsGalleryContext)
-    
-    // const { count } = useCountReviews()
 
     useEffect(() => {
         function handleClickOutside(event) {

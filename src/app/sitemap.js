@@ -1,20 +1,18 @@
 export default async function sitemap() {
-    const baseUrl = "https://www.groblje-horora.com"
-
-    const res = await fetch(`${baseUrl}/api/reviews`, { next: { revalidate: 86400 } });
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/generateSitemap`, { next: { revalidate: 3600 } });
 
     const posts = await res.json()
 
-    const postsUrls = posts.reviews?.map((review) => {
+    const postsUrls = posts.map((review) => {
         return {
-            url: `${baseUrl}/recenzije/${review.slug}`,
+            url: `${process.env.DOMAIN_URL}/recenzije/${review.slug}`,
             lastModified: new Date(review.updatedAt)
         };
     }) ?? [];
 
     return [
         {
-            url: baseUrl,
+            url: process.env.DOMAIN_URL,
             lastModified: new Date()
         },
         {

@@ -1,5 +1,7 @@
 'use client'
 
+import useAuth from "@/hooks/useAuth";
+import useCountReviews from "@/hooks/useCountReviews";
 import { compareStorageAndDb } from "@/lib/compareStorageAndDb";
 
 // export const metadata = {
@@ -8,11 +10,16 @@ import { compareStorageAndDb } from "@/lib/compareStorageAndDb";
 // };
 
 const OBloguPage = () => {
+    const {count} = useCountReviews()
+    const { mongoUser } = useAuth()
+
     return (
-        <>
-        <h1>O Blogu</h1>
-        <button onClick={compareStorageAndDb}>Check</button>
-        </>
+        <div style={{height: "80vh"}}>
+            <h1>O Blogu</h1>
+            <p>{count.numberOfReviews} objava</p>
+            <p>{count.numberOfMovies} filmova</p>
+            {mongoUser?._id === process.env.NEXT_PUBLIC_MAINADMIN_EMAIL && <button onClick={compareStorageAndDb}>Check</button>}
+        </div>
     );
 };
 
