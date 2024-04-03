@@ -10,7 +10,7 @@ import { compareStorageAndDb } from "@/lib/compareStorageAndDb";
 // };
 
 const OBloguPage = () => {
-    const {count} = useCountReviews()
+    const { count } = useCountReviews()
     const { mongoUser } = useAuth()
 
     return (

@@ -16,19 +16,19 @@ export default async function sitemap() {
             lastModified: new Date()
         },
         {
-            url: `${baseUrl}/top25`,
+            url: `${process.env.DOMAIN_URL}/top25`,
             lastModified: new Date()
         },
         {
-            url: `${baseUrl}/recenzije`,
+            url: `${process.env.DOMAIN_URL}/recenzije`,
             lastModified: new Date()
         },
         {
-            url: `${baseUrl}/top20smeca`,
+            url: `${process.env.DOMAIN_URL}/top20smeca`,
             lastModified: new Date()
         },
         {
-            url: `${baseUrl}/0-blogu`,
+            url: `${process.env.DOMAIN_URL}/0-blogu`,
             lastModified: new Date()
         },
         ...postsUrls,
