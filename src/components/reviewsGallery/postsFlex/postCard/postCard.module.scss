@@ -8,16 +8,22 @@
     gap: 16px;
 
     @media(max-width: 1024px) {
-        flex-basis: 33.33%;
+        flex-basis: 25%; // POST FLEX LAST EDIT - iz 33.33% u 25%
     }
 
     @media(max-width: 768px) {
         flex-basis: 50%;
     }
 
-    @media(max-width: 425px) {
+
+    // @media(max-width: 425px) { // POST FLEX LAST EDIT - ovo je maknuto
+    //     flex-basis: 100%;
+    // }
+
+    @media (max-width: 320px) { // POST FLEX LAST EDIT - ovo je dodano
         flex-basis: 100%;
     }
+    
 }
 
 .postCardDetails {
@@ -66,9 +72,14 @@
         cursor: inherit;
     }
 
-    @media (max-width: 425px) {
-        font-size: var(--textXXL);
-        line-height: calc(var(--textXXL) * 1.5);
+    // @media (max-width: 425px) { // POST FLEX LAST EDIT - ovo je maknuto
+    //     font-size: var(--textXXL);
+    //     line-height: calc(var(--textXXL) * 1.5);
+    // }
+
+    @media (max-width: 375px) { // POST FLEX LAST EDIT - ovo je dodano
+        font-size: var(--textM);
+        line-height: calc(var(--textM) * 1.5);
     }
 
     @media (max-width: 320px) {
@@ -87,6 +98,11 @@
         font-size: inherit;
         line-height: inherit;
     }
+
+    @media (max-width: 425px) { // POST FLEX LAST EDIT - ovo je dodano
+        font-size: var(--textXS);
+        line-height: calc(var(--textXS) * 1.5); 
+    }
 }
 
 .postDate {
@@ -96,6 +112,23 @@
     position: absolute;
     top: 8px;
     right: 0;
+
+    @media (max-width: 425px) { // POST FLEX LAST EDIT - ovo je dodano
+        font-size: var(--textXS);
+        line-height: calc(var(--textXS) * 1.5);
+        top: 9px;
+    }
+    @media (max-width: 375px) { // POST FLEX LAST EDIT - ovo je dodano
+        font-size: var(--textXXS);
+        line-height: calc(var(--textXXS) * 1.5);
+        top: 11px;
+    }
+    
+    @media (max-width: 320px) { // POST FLEX LAST EDIT - ovo je dodano
+        font-size: var(--textS);
+        line-height: calc(var(--textS) * 1.5);
+        top: 8px;
+    }
 }
 
 // POST IMAGE STYLES
@@ -218,12 +251,20 @@
     display: flex;
     gap: 10px;
 
+    @media (max-width: 375px) { // POST FLEX LAST EDIT - ovo je dodano
+        gap: 5px;
+    }
+
 }
 
 .commentIconContainer {
     display: flex;
     align-items: flex-end;
     gap: 5px;
+
+    @media (max-width: 375px) { // POST FLEX LAST EDIT - ovo je dodano
+        gap: 2px;
+    }
 
     p {
         color: var(--white80);

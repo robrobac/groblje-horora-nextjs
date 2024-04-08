@@ -1,13 +1,7 @@
-"use client"
-
 import { listAll, ref } from "firebase/storage";
 import { storage } from "./firebase/config";
 
-const getAllMovieCoverImagePaths = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews`);
-    const resJSON = await res.json();
-    const reviews = resJSON.reviews;
-    
+export const getAllMovieCoverImagePaths = async (reviews) => {
     let coverImagePaths = [];
     reviews.forEach((review) => {
         review.movies.forEach((movie) => {
@@ -18,7 +12,7 @@ const getAllMovieCoverImagePaths = async () => {
     return coverImagePaths;
 };
 
-const getAllCoverImagePaths = async () => {
+export const getAllCoverImagePaths = async () => {
     const coverImagesListRef = ref(storage, '/coverImages');
     try {
         const res = await listAll(coverImagesListRef);
@@ -30,11 +24,7 @@ const getAllCoverImagePaths = async () => {
     }
 };
 
-const getAllPostContentImagePaths = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews`);
-    const resJSON = await res.json();
-    const reviews = resJSON.reviews;
-    
+export const getAllPostContentImagePaths = async (reviews) => {
     let contentImagePaths = [];
     reviews.forEach((review) => {
         review.contentImages.forEach((contentImage) => {
@@ -45,7 +35,7 @@ const getAllPostContentImagePaths = async () => {
     return contentImagePaths;
 };
 
-const getAllContentImagePaths = async () => {
+export const getAllContentImagePaths = async () => {
     const contentImagesListRef = ref(storage, '/postImages');
     try {
         const res = await listAll(contentImagesListRef);
@@ -57,11 +47,7 @@ const getAllContentImagePaths = async () => {
     }
 };
 
-const getAllPostOgImagePaths = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews`);
-    const resJSON = await res.json();
-    const reviews = resJSON.reviews;
-    
+export const getAllPostOgImagePaths = async (reviews) => {
     let ogImagePaths = [];
     reviews.forEach((review) => {
         ogImagePaths.push(review.quadOgImagePath)
@@ -75,7 +61,7 @@ const getAllPostOgImagePaths = async () => {
     return ogImagePaths;
 };
 
-const getAllOgImagePaths = async () => {
+export const getAllOgImagePaths = async () => {
     const ogImagesListRef = ref(storage, '/ogImages');
     try {
         const res = await listAll(ogImagesListRef);
@@ -87,11 +73,7 @@ const getAllOgImagePaths = async () => {
     }
 };
 
-const getAllPostsWithoutOGImage = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews`);
-    const resJSON = await res.json();
-    const reviews = resJSON.reviews;
-
+export const getAllPostsWithoutOGImage = async (reviews) => {
     const singleReviews = reviews.filter((review) => review.reviewType === "single" )
     const quadReviews = reviews.filter((review) => review.reviewType === "quad" )
 
@@ -115,70 +97,61 @@ const getAllPostsWithoutOGImage = async () => {
             }
         })
     })
-
-    console.log(noOgSingle)
-    console.log(noOgQuad)
     
-    return true;
+    return [...noOgSingle, ...noOgQuad];
 }
 
-export const compareStorageAndDb = async () => {
-    console.log("Gathering data...");
+export const getAllMoviesWithoutTag = async (reviews) => {
+    let noTagMovies = []
+
+    reviews.forEach((review) => {
+        review.movies.forEach((movie) => {
+            if (movie.tags.length === 0) {
+                noTagMovies.push(movie.title)
+            }
+        })
+    })
+    
+    return noTagMovies;
+}
+
+export const getAllMoviesWithoutImdbLink = async (reviews) => {
+    let noLinkMovies = []
+
+    reviews.forEach((review) => {
+        review.movies.forEach((movie) => {
+            if (!movie.imdbLink) {
+                noLinkMovies.push(movie.title)
+            }
+        })
+    })
+    
+    return noLinkMovies;
+}
+
+export const checkLongestTitle = async (reviews) => {
     try {
-        let coverImagePaths = await getAllCoverImagePaths();
-        console.log("Firebase ALL Cover Image Paths:", coverImagePaths);
-        let movieCoverImagePaths = await getAllMovieCoverImagePaths();
-        console.log("MongoDB ALL Movies Cover Image Paths:", movieCoverImagePaths);
+        let longestTitle = "";
+        let longestWord = "";
 
-        let contentImagePaths = await getAllContentImagePaths()
-        console.log("Firebase ALL Content Image Paths:", contentImagePaths)
-        let reviewContentImagePaths = await getAllPostContentImagePaths()
-        console.log("MongoDB ALL Content Image Paths:", reviewContentImagePaths)
+        for (const review of reviews) {
+            if (review.reviewTitle.length > longestTitle.length) {
+                longestTitle = review.reviewTitle;
+            }
+            
+            const words = review.reviewTitle.split(' ');
+            for (const word of words) {
+                if (word.length > longestWord.length) {
+                    longestWord = word;
+                }
+            }
+        }
 
-        let ogImagePaths = await getAllOgImagePaths()
-        console.log("Firebase ALL OG Image Paths:", ogImagePaths)
-        let reviewOgImagePaths = await getAllPostOgImagePaths()
-        console.log("MongoDB ALL OG Image Paths:", reviewOgImagePaths)
-        
-
-        let remainingCoverImagePaths = []
-        let remainingMovieCoverImagePaths = []
-
-        let remainingContentImagePaths = []
-        let remainingReviewContentImagePaths = []
-
-        let remainingOgImagePaths = []
-        let remainingReviewOgImagePaths = []
-
-        // Finding paths unique to coverImagePaths
-        remainingCoverImagePaths = coverImagePaths.filter(path => !movieCoverImagePaths.includes(path));
-        // Finding paths unique to movieCoverImagePaths
-        remainingMovieCoverImagePaths = movieCoverImagePaths.filter(path => !coverImagePaths.includes(path));
-
-        // Finding paths unique to contentImagePaths
-        remainingContentImagePaths = contentImagePaths.filter(path => !reviewContentImagePaths.includes(path));
-        // Finding paths unique to movieCoverImagePaths
-        remainingReviewContentImagePaths = reviewContentImagePaths.filter(path => !contentImagePaths.includes(path));
-
-        // Finding paths unique to contentImagePaths
-        remainingOgImagePaths = ogImagePaths.filter(path => !reviewOgImagePaths.includes(path));
-        // Finding paths unique to movieCoverImagePaths
-        remainingReviewOgImagePaths = reviewOgImagePaths.filter(path => !ogImagePaths.includes(path));
-
-        console.log("Cover Image Paths unique to Firebase:", remainingCoverImagePaths);
-        console.log("Cover Image Paths unique to MongoDB:", remainingMovieCoverImagePaths);
-
-        console.log("Content Image Paths unique to Firebase:", remainingContentImagePaths);
-        console.log("Content Image Paths unique to MongoDB:", remainingReviewContentImagePaths);
-
-        console.log("OG Image Paths unique to Firebase:", remainingOgImagePaths);
-        console.log("OG Image Paths unique to MongoDB:", remainingReviewOgImagePaths);
-
-        console.log(await getAllPostsWithoutOGImage())
-
-
-
+        return {
+            longestTitle,
+            longestWord
+        }
     } catch (error) {
-        console.error("Error comparing storage and DB:", error);
+        console.error("Error:", error);
     }
-};
+}

@@ -9,6 +9,13 @@
     border-radius: var(--radiusM);
     padding: 10px;
 
+    @media (max-width: 425px) { // POST FLEX LAST EDIT - ovo je dodano
+        gap: 1rem;
+    }
+    @media (max-width: 375px) { // POST FLEX LAST EDIT - ovo je dodano
+        gap: 6px;
+    }
+
     &::before {
         content: 'ADMIN BRT';
         font-size: var(--textXXS);

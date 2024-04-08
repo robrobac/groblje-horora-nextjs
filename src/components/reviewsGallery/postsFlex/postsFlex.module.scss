@@ -18,7 +18,11 @@
         width: 100vw;
     }
 
-    @media(max-width: 425px) {
-        gap: 60px;
+    // @media(max-width: 425px) { // POST FLEX LAST EDIT - ovo je maknuto
+    //     gap: 60px;
+    // }
+
+    @media (max-width: 320px) { // POST FLEX LAST EDIT - ovo je dodano
+        gap: 40px;
     }
 }

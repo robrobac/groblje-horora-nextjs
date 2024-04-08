@@ -29,7 +29,7 @@ export default function ReviewsGallery() {
         loading,
         handleRefresh,
         totalItems,
-    } = useFetchReviewsWithParams(SORTING_OPTIONS.CREATED.dbKey, 'desc', 30)
+    } = useFetchReviewsWithParams(SORTING_OPTIONS.CREATED.dbKey, 'desc', 20) // POST FLEX LAST EDIT - zadnji parametar 30 u 20
 
 
     return (

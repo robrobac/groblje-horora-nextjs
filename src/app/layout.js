@@ -39,6 +39,8 @@ const jsonLd = {
     }
 }
 
+
+
 export default function RootLayout({ children }) {
     return (
         <html lang="hr">
@@ -51,8 +53,8 @@ export default function RootLayout({ children }) {
             />
             </head>
             <body suppressHydrationWarning={true} className={lexend.className}>
-                <SpeedInsights />
-                <Analytics />
+                {/* <SpeedInsights /> */}
+                {/* <Analytics /> */}
                 <Header />
                 {children}
                 <Footer />
