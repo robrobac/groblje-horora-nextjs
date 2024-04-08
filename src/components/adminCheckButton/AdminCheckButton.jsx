@@ -235,7 +235,7 @@ export default function AdminCheckButton() {
             <p>{count.numberOfReviews} objava</p>
             <p>{count.numberOfMovies} filmova</p>
             {
-                mongoUser?._id === process.env.NEXT_PUBLIC_MAINADMIN_EMAIL &&
+                mongoUser?.role === "admin" &&
                 (
                     <div>
                         <button onClick={compareStorageAndDb}>Check</button>
