@@ -134,6 +134,11 @@ a {
     min-height: 200vh;
 }
 
+/* used for when there's no filter and sort. Tag page for example */
+.smallerContainerHeight {
+    min-height: 80vh;
+}
+
 .authContainer {
     display: flex;
     flex-direction: column;

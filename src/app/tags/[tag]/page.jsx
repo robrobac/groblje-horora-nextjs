@@ -55,7 +55,7 @@ const SingleTagPage = async ({params, searchParams}) => {
     
 
     return (
-        <main className="reviewsContainer">
+        <main className="reviewsContainer smallerContainerHeight">
             <TitleSubtitle
                 title={`${currentTag} (${reviews.reviewsCount})`}
                 subtitle={`Recenzije oznacene s oznakom ${currentTag}`}
