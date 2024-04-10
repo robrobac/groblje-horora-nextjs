@@ -6,7 +6,7 @@ import TitleSubtitle from "@/components/reviewsGallery/titleSubtitle/TitleSubtit
 const tags = sortedTags;
 
 export const metadata = {
-    title: "Oznake",
+    title: "Oznake | Groblje Horora",
     description: tags.map(singleTag => singleTag.tagLabel).join(', '),
 };
 

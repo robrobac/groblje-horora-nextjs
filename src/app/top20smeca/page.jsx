@@ -4,10 +4,10 @@ import TitleSubtitle from "@/components/reviewsGallery/titleSubtitle/TitleSubtit
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-    title: "Top 20 smeća",
+    title: "Top 20 smeća | Groblje Horora",
     description: "Filmovi na ovoj top listi su najveće smeće ikada.",
     openGraph: {
-        title: "Top 20 smeća",
+        title: "Top 20 smeća | Groblje Horora",
         description: "Filmovi na ovoj top listi su najveće smeće ikada.",
         images: "https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/openGraph%2Ftop20smeca-open-graph-image.jpg?alt=media&token=003f3a59-dc85-4542-9477-b6a67a29cc9d",
     },
