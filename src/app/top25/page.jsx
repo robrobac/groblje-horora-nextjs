@@ -6,6 +6,20 @@ export const dynamic = 'force-dynamic';
 export const metadata = {
     title: "Top 25 Preporuka",
     description: "Filmovi na ovoj top listi mijenjaju se kako dođe neki novi naslov na blogu koji zaslužuje jednaku pažnju ili ocjenu. Linkove na recenzije možete pronaći na Top 25 popisu.",
+    openGraph: {
+        title: "Top 25 Preporuka",
+        description: "Filmovi na ovoj top listi mijenjaju se kako dođe neki novi naslov na blogu koji zaslužuje jednaku pažnju ili ocjenu. Linkove na recenzije možete pronaći na Top 25 popisu.",
+        images: [
+            {
+                url: "public/images/openGraph/top25-open-graph-image.jpg",
+                width: 1200,
+                height: 630,
+            }
+        ],
+    },
+    alternates: {
+        canonical: 'https://www.groblje-horora.com/top25'
+    }
 };
 
 const getData = async () => {

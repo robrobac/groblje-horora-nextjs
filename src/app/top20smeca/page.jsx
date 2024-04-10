@@ -6,6 +6,20 @@ export const dynamic = 'force-dynamic';
 export const metadata = {
     title: "Top 20 smeća",
     description: "Filmovi na ovoj top listi su najveće smeće ikada.",
+    openGraph: {
+        title: "Top 20 smeća",
+        description: "Filmovi na ovoj top listi su najveće smeće ikada.",
+        images: [
+            {
+                url: "public/images/openGraph/top20smeca-open-graph-image.jpg",
+                width: 1200,
+                height: 630,
+            }
+        ],
+    },
+    alternates: {
+        canonical: 'https://www.groblje-horora.com/top20smeca'
+    }
 };
 
 const getData = async () => {
