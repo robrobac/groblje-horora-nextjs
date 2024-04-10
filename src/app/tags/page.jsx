@@ -26,7 +26,7 @@ const TagsPage = async () => {
     return (
         <main style={{minHeight: "80vh"}}>
             <TitleSubtitle
-                title={metadata.title}
+                title={"Oznake"}
                 // subtitle={metadata.description}
             />
             <div className={styles.tagDisplaySection}>
