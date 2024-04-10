@@ -12,7 +12,7 @@ export const metadata = {
         images: "https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/openGraph%2Ftop25-open-graph-image.jpg?alt=media&token=85db0be7-da7d-4f81-bee7-22934ca6909d",
     },
     alternates: {
-        canonical: 'https://www.groblje-horora.com/top25'
+        canonical: `${process.env.DOMAIN_URL}/top25`
     }
 };
 

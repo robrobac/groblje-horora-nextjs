@@ -3,12 +3,22 @@ import styles from '../../components/singleReview/tagDisplay/tagDisplay.module.s
 import Link from "next/link";
 import TitleSubtitle from "@/components/reviewsGallery/titleSubtitle/TitleSubtitle";
 
-const tags = sortedTags;
+export const generateMetadata = async () => {
+    const tags = sortedTags;
 
-export const metadata = {
-    title: "Oznake | Groblje Horora",
-    description: tags.map(singleTag => singleTag.tagLabel).join(', '),
-};
+    return {
+        title: "Oznake | Groblje Horora",
+        description: `Oznake: ${tags.map(singleTag => singleTag.tagLabel).join(', ')}`,
+        openGraph: {
+            title: "Oznake | Groblje Horora",
+            description: `Oznake: ${tags.map(singleTag => singleTag.tagLabel).join(', ')}`,
+            images: "https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/openGraph%2Fnaslovna-open-graph-image.jpg?alt=media&token=f3353588-ef68-4322-9b07-81deece6b70d",
+        },
+        alternates: {
+            canonical: `${process.env.DOMAIN_URL}/tags`
+        }
+    }
+}
 
 const TagsPage = async () => {
     const tags = sortedTags;

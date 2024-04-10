@@ -28,17 +28,16 @@ export const generateMetadata = async ({params, searchParams}) => {
     const currentTag = filteredTag[0].tagLabel
 
     return {
-        title: currentTag,
-        description: `Recenzije oznacene s oznakom ${currentTag}: ${data.reviews.map(review => review.reviewTitle).join(', ')}`,
+        title: `Oznaka: ${currentTag} | Groblje Horora`,
+        description: `Recenzije označene s oznakom ${currentTag}(${data.reviews.reviewsCount})`,
         openGraph: {
-        //     images: data.movies[0].singleOgImage,
-        //     type: 'article',
-        //     title: data?.reviewTitle,
-            description: data.reviews.map(review => review.reviewTitle).join(', '),
+            title: `Oznaka: ${currentTag} | Groblje Horora`,
+            description: `Recenzije označene s oznakom ${currentTag}(${data.reviews.reviewsCount})`,
+            images: "https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/openGraph%2Fnaslovna-open-graph-image.jpg?alt=media&token=f3353588-ef68-4322-9b07-81deece6b70d",
         },
-        // alternates: {
-        //     canonical: `https://www.groblje-horora.com/recenzije/${data?.slug}`
-        // }
+        alternates: {
+            canonical: `${process.env.DOMAIN_URL}/tags/${tag}`
+        }
     }
 }
 
@@ -58,7 +57,7 @@ const SingleTagPage = async ({params, searchParams}) => {
         <main className="reviewsContainer smallerContainerHeight">
             <TitleSubtitle
                 title={`${currentTag} (${reviews.reviewsCount})`}
-                subtitle={`Recenzije oznacene s oznakom ${currentTag}`}
+                subtitle={`Recenzije označene s oznakom ${currentTag}`}
             />
             <PostsFlex posts={reviews.reviews} />
             {reviews.reviews.length !== 0 ? 

@@ -13,7 +13,7 @@ export const metadata = {
         images: "https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/openGraph%2Frecenzije-open-graph-image.jpg?alt=media&token=dbc97be8-c43a-4fc2-b8a8-61681c1762fe",
     },
     alternates: {
-        canonical: 'https://www.groblje-horora.com/recenzije'
+        canonical: `${process.env.DOMAIN_URL}/recenzije`,
     }
 };
 

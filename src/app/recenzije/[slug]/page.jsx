@@ -53,7 +53,7 @@ export const generateMetadata = async ({params, searchParams}) => {
                 description: shortenStringTo30Words(getRawContent(data?.movies[0].reviewContent)),
             },
             alternates: {
-                canonical: `https://www.groblje-horora.com/recenzije/${data?.slug}`
+                canonical: `${process.env.DOMAIN_URL}/recenzije/${data?.slug}`
             }
         }
     }
@@ -69,7 +69,7 @@ export const generateMetadata = async ({params, searchParams}) => {
                     description: shortenStringTo30Words(getRawContent(data?.movies[movieNumber].reviewContent)),
                 },
                 alternates: {
-                    canonical: `https://www.groblje-horora.com/recenzije/${data?.slug}?movie=${movie}`
+                    canonical: `${process.env.DOMAIN_URL}/recenzije/${data?.slug}?movie=${movie}`
                 }
             }
         } if (!movie) {
@@ -82,7 +82,7 @@ export const generateMetadata = async ({params, searchParams}) => {
                     description: `${data.movies[0].title}(${data.movies[0].year}), ${data.movies[1].title}(${data.movies[1].year}), ${data.movies[2].title}(${data.movies[2].year}), ${data.movies[3].title}(${data.movies[3].year})`,
                 },
                 alternates: {
-                    canonical: `https://www.groblje-horora.com/recenzije/${data?.slug}`
+                    canonical: `${process.env.DOMAIN_URL}/recenzije/${data?.slug}`
                 }
             }
         }

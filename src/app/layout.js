@@ -4,7 +4,6 @@ import "./globals.css";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/footer";
 import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
-import Script from "next/script";
 
 const lexend = Lexend({ subsets: ["latin"] });
 

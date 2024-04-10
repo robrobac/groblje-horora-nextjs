@@ -12,7 +12,7 @@ export const metadata = {
         images: "https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/openGraph%2Ftop20smeca-open-graph-image.jpg?alt=media&token=003f3a59-dc85-4542-9477-b6a67a29cc9d",
     },
     alternates: {
-        canonical: 'https://www.groblje-horora.com/top20smeca'
+        canonical: `${process.env.DOMAIN_URL}/top20smeca`,
     }
 };
 

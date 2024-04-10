@@ -17,7 +17,7 @@ export const metadata = {
         images: "https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/openGraph%2Fnaslovna-open-graph-image.jpg?alt=media&token=f3353588-ef68-4322-9b07-81deece6b70d",
     },
     alternates: {
-        canonical: 'https://www.groblje-horora.com'
+        canonical: `${process.env.DOMAIN_URL}`,
     }
 };
 
