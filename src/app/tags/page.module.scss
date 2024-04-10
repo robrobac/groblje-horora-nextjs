@@ -1,27 +1,23 @@
-.tagDisplaySection {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 16px;
-
-    p {
-        font-size: var(--textS);
-        color: var(--white80);
-    }
+.tagsPageContainer {
+    min-height: 80vh;
+    gap: 50px;
 }
 
-
-.tags {
+.tagsList {
+    width: 100%;
+    max-width: var(--widthDefault);
+    padding: 0 var(--paddingM);
+    margin: 0 auto;
     display: flex;
-    gap: 8px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
 .tag {
+    
     cursor: var(--pointerCursor);
     border: 1px solid var(--red);
-    padding: 3px 6px;
+    padding: 6px 12px;
     border-radius: var(--radiusS);
     color: white;
     background-color: var(--red30);

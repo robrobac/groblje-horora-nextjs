@@ -2,7 +2,6 @@ import styles from './tagDisplay.module.scss'
 import Link from 'next/link';
 
 export default function TagDisplay(tags) {
-  console.log(tags)
 
   return (
     <div className={styles.tagDisplaySection}>

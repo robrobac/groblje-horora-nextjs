@@ -1,5 +1,5 @@
 import { sortedTags } from "@/lib/tags";
-import styles from '../../components/singleReview/tagDisplay/tagDisplay.module.scss'
+import styles from './page.module.scss'
 import Link from "next/link";
 import TitleSubtitle from "@/components/reviewsGallery/titleSubtitle/TitleSubtitle";
 
@@ -24,21 +24,18 @@ const TagsPage = async () => {
     const tags = sortedTags;
 
     return (
-        <main style={{minHeight: "80vh"}}>
+        <main className={styles.tagsPageContainer}>
             <TitleSubtitle
                 title={"Oznake"}
-                // subtitle={metadata.description}
+                subtitle={"Ovdje možeš pogledati sve oznake koje koristim. Klikni na bilo koju oznaku da vidiš sve recenzije označene tom oznakom"}
             />
-            <div className={styles.tagDisplaySection}>
-                <div className={styles.tags}>
-                    {tags.map(tag =>
-                        <Link href={`${process.env.DOMAIN_URL}/tags/${tag.tagValue}`} target="_blank" key={tag.tagValue}>
-                            <p className={`${styles.tag} ${styles.selected}`}>{tag.tagLabel}</p>
-                        </Link>
-                    )}
-                </div>
-                    
-            </div>
+            <div className={styles.tagsList}>
+                {tags.map(tag =>
+                    <Link href={`${process.env.DOMAIN_URL}/tags/${tag.tagValue}`} key={tag.tagValue}>
+                        <p className={`${styles.tag}`}>{tag.tagLabel}</p>
+                    </Link>
+                )}
+            </div>          
         </main>
     );
 };

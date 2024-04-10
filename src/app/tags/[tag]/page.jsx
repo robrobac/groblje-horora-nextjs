@@ -62,7 +62,7 @@ const SingleTagPage = async ({params, searchParams}) => {
             <PostsFlex posts={reviews.reviews} />
             {reviews.reviews.length !== 0 ? 
                 <PaginationSSR tag={tag} page={page == undefined ? 1 : parseInt(page)} totalPages={reviews.totalPages}/>
-            : ""} 
+            : ""}
         </main>
     );
 };
