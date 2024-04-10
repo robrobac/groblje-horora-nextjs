@@ -8,7 +8,7 @@ export const metadata = {
         description: "Opis i stranica dolazi uskoro",
         images: [
             {
-                url: "/public/images/openGraph/oblogu-open-graph-image.jpg",
+                url: "/openGraph/oblogu-open-graph-image.jpg",
                 width: 1200,
                 height: 630,
             }

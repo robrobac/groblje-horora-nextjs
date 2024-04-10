@@ -11,7 +11,7 @@ export const metadata = {
         description: "Filmovi na ovoj top listi su najveće smeće ikada.",
         images: [
             {
-                url: "/public/images/openGraph/top20smeca-open-graph-image.jpg",
+                url: "/openGraph/top20smeca-open-graph-image.jpg",
                 width: 1200,
                 height: 630,
             }
