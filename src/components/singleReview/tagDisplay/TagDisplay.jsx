@@ -1,4 +1,3 @@
-'use client'
 import styles from './tagDisplay.module.scss'
 import Link from 'next/link';
 

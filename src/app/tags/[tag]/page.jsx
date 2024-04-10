@@ -29,10 +29,10 @@ export const generateMetadata = async ({params, searchParams}) => {
 
     return {
         title: `Oznaka: ${currentTag} | Groblje Horora`,
-        description: `Recenzije označene s oznakom ${currentTag}(${data.reviewsCount})`,
+        description: `Recenzije označene s oznakom ${currentTag} (${data.reviewsCount})`,
         openGraph: {
             title: `Oznaka: ${currentTag} | Groblje Horora`,
-            description: `Recenzije označene s oznakom ${currentTag}(${data.reviewsCount})`,
+            description: `Recenzije označene s oznakom ${currentTag} (${data.reviewsCount})`,
             images: "https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/openGraph%2Fnaslovna-open-graph-image.jpg?alt=media&token=f3353588-ef68-4322-9b07-81deece6b70d",
         },
         alternates: {
