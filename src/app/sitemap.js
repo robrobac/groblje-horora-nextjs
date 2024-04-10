@@ -1,9 +1,11 @@
+import { sortedTags } from "@/lib/tags";
+
 export const dynamic = 'force-dynamic';
 
 
 export default async function sitemap() {
     const res = await fetch(`${process.env.DOMAIN_URL}/api/generateSitemap`, {next: {revalidate: 20}});
-
+    const tags = sortedTags;
     const posts = await res.json()
 
     const postsUrls = posts.map((review) => {
@@ -11,6 +13,13 @@ export default async function sitemap() {
             url: `${process.env.DOMAIN_URL}/recenzije/${review.slug}`,
             lastModified: new Date(review.updatedAt)
         };
+    }) ?? [];
+
+    const tagUrls = tags.map((tag) => {
+        return {
+            url: `${process.env.DOMAIN_URL}/oznake/${tag.tagValue}`,
+            lastModified: new Date(),
+        }
     }) ?? [];
 
     return [
@@ -35,5 +44,10 @@ export default async function sitemap() {
             lastModified: new Date()
         },
         ...postsUrls,
+        {
+            url: `${process.env.DOMAIN_URL}/tags`,
+            lastModified: new Date()
+        },
+        ...tagUrls,
     ]
 }
