@@ -13,4 +13,21 @@
     p {
         max-width: var(--widthReading);
     }
+
+    a {
+        font-size: var(--textM);
+        line-height: calc(var(--textM) * 3);
+        color: var(--white);
+        cursor: var(--pointerCursor);
+
+        @media (hover: hover) {
+            &:hover {
+                color: var(--red);
+            }
+        }
+
+        @media (hover: none) {
+            text-decoration: underline;
+        }
+    }
 }
