@@ -30,6 +30,7 @@ const tagList =  [
     {tagLabel: "Vampiri", tagValue: "vampiri"},
     {tagLabel: "Vukodlaci", tagValue: "vukodlaci"},
     {tagLabel: "Zombiji", tagValue: "zombiji"},
+    {tagLabel: "Demoni", tagValue: "demoni"},
 ];
 
 // Remove duplicates by creating a new Set with unique tag labels
