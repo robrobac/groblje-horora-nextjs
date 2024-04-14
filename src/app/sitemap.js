@@ -17,7 +17,7 @@ export default async function sitemap() {
 
     const tagUrls = tags.map((tag) => {
         return {
-            url: `${process.env.DOMAIN_URL}/oznake/${tag.tagValue}`,
+            url: `${process.env.DOMAIN_URL}/tags/${tag.tagValue}`,
             lastModified: new Date(),
         }
     }) ?? [];
