@@ -1,10 +1,23 @@
-import { sortedTags } from "@/lib/tags";
 import styles from './page.module.scss'
 import Link from "next/link";
 import TitleSubtitle from "@/components/reviewsGallery/titleSubtitle/TitleSubtitle";
 
+export const dynamic = 'force-dynamic';
+
+const getData = async () => {
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/tags`);
+    console.log(`Tags counted`)
+    
+    if (!res.ok) {
+        throw new Error(`Failed to count tags`);
+    }
+    return res.json();
+}
+
 export const generateMetadata = async () => {
-    const tags = sortedTags;
+    const tags = await getData();
+
+    console.log(`Oznake: ${tags.map(singleTag => singleTag.tagLabel).join(', ')}`)
 
     return {
         title: "Oznake | Groblje Horora",
@@ -21,7 +34,7 @@ export const generateMetadata = async () => {
 }
 
 const TagsPage = async () => {
-    const tags = sortedTags;
+    const tags = await getData();
 
     return (
         <main className={styles.tagsPageContainer}>
@@ -32,7 +45,7 @@ const TagsPage = async () => {
             <div className={styles.tagsList}>
                 {tags.map(tag =>
                     <Link href={`${process.env.DOMAIN_URL}/tags/${tag.tagValue}`} key={tag.tagValue}>
-                        <p className={`${styles.tag}`}>{tag.tagLabel}</p>
+                        <p className={`${styles.tag}`}>{tag.tagLabel} <span>({tag.tagCount})</span></p>
                     </Link>
                 )}
             </div>          

@@ -3,8 +3,10 @@ import PostImage from '@/components/reviewsGallery/postsFlex/postCard/PostImage'
 import { Rating } from '@/components/rating/Rating';
 import { StandardBtn } from '@/components/buttons/standardBtn/StandardBtn';
 import Link from 'next/link';
+import PrivremeniTagovi from './PrivremeniTagovi';
 
-export default async function MoreLikeThis({data, postType}) {
+export default function MoreLikeThis({data, postType}) {
+
     return (
         <section className={styles.moreLikeThis}>
             <hr className={styles.divider}></hr>
@@ -13,6 +15,7 @@ export default async function MoreLikeThis({data, postType}) {
                     {data && data.map((post) => (
                         <article key={post._id} className={styles.moreLikeThisPost}>
                             <div className={styles.moreLikeThisPostInfo}>
+                                <PrivremeniTagovi post={post} />
                                 <PostImage post={post} newTab={false}/>
                                 <Link href={`/recenzije/${post?.slug}`}>
                                     {postType === 'single' ? (

@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 
 export default function ReadingProgress() {
     const completion = useReadingProgress();
-    console.log(completion)
+    // console.log(completion)
 
     if (completion > 0) {
         return (

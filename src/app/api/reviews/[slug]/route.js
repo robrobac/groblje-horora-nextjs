@@ -22,27 +22,103 @@ export const GET = async (request, { params }) => {
         })
     }
 
-    let moreLikeThis = await reviewModel.find({ slug: { $ne: slug }, $text: { $search: review.reviewTitle } })
-        .sort({ score: { $meta: "textScore" } })
-        .limit(8) // Limit the number of results
-        .skip(0)   // Optionally skip some documents
+    var tagArray = []
 
+    review.movies.forEach((movie) => {
+        movie.tags.forEach((tag) => {
+            tagArray.push(tag.tagValue)
+        })
+    })
 
-    if (moreLikeThis.length !== 8) {
-        const count = await reviewModel.countDocuments()
-        var random = Math.floor(Math.random() * count)
+    var pipeline = [ // sorted by number of matched tags
+        {
+            "$match": {
+                "movies.tags.tagValue": {
+                    "$in": tagArray
+                }
+            }
+        }, 
+        {
+            "$addFields": {
+                "tagsMatched": {
+                    "$map": {
+                        "input": "$movies",
+                        "as": "movie",
+                        "in": {
+                            "$reduce": {
+                                "input": "$$movie.tags",
+                                "initialValue": [],
+                                "in": {
+                                    "$cond": {
+                                        "if": {
+                                            "$in": [
+                                                "$$this.tagValue",
+                                                tagArray
+                                            ]
+                                        },
+                                        "then": {
+                                            "$concatArrays": [
+                                                "$$value",
+                                                [
+                                                    "$$this.tagValue"
+                                                ]
+                                            ]
+                                        },
+                                        "else": "$$value"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }, 
+        {
+            "$unwind": {
+                "path": "$tagsMatched",
+                "preserveNullAndEmptyArrays": false
+            }
+        }, 
+        {
+            "$addFields": {
+                "countTagsMatched": {
+                    "$size": "$tagsMatched"
+                }
+            }
+        }, 
+        {
+            "$group": {
+                "_id": "$_id",
+                "reviewTitle": {"$first": "$reviewTitle"},
+                "slug": {"$first": "$slug"},
+                "contentImages": {"$first": "$contentImages"},
+                "movies": {"$first": "$movies"},
+                "reviewType": {"$first": "$reviewType"},
+                "likes": {"$first": "$likes"},
+                "comments": {"$first": "$comments"},
+                "createdAt": {"$first": "$createdAt"},
+                "updatedAt": {"$first": "$updatedAt"},
+                "category": {"$first": "$category"},
+                "quadOgImage": {"$first": "$quadOgImage"},
+                "quadOgImagePath": {"$first": "$quadOgImagePath"},
+                "tagsMatched": { "$first": "$tagsMatched" },
+                "countTagsMatched" : {"$sum": "$countTagsMatched"}
+            }
+        }, 
+        {
+            "$sort": {
+                "countTagsMatched": -1
+            }
+        },
+        {
+            "$limit": 8
+        }
+    ];
 
-        const additionalDocuments = await reviewModel.aggregate([
-            { $match: { slug: { $ne: slug, $nin: moreLikeThis.map(doc => doc.slug) } } },
-            { $sample: { size: 8 - moreLikeThis.length } }
-        ]);
+    // Trenutno povuce 4 random objava koje imaju barem jedan jednaki tag
+    var moreLikeThis = await reviewModel.aggregate(pipeline)
 
-        moreLikeThis = [...moreLikeThis, ...additionalDocuments];
-    }
-
-    // console.log(moreLikeThis)
-
-    review.moreLikeThis = [...moreLikeThis]
+    review.moreLikeThis = moreLikeThis;
 
     return new NextResponse(JSON.stringify(review), {
         status: 200

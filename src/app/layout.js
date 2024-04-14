@@ -1,6 +1,6 @@
 import { Lexend } from "next/font/google";
 // Pocetni font je bio Inter
-import "./globals.css";
+import "./globals.scss";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/footer";
 import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
