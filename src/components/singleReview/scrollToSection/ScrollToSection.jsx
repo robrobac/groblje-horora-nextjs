@@ -14,11 +14,11 @@ export default function ScrollToSection() {
         setLoading(true)
         if (movieParam) {
             const scrollTarget = document.getElementById(`movie${movieParam}`)
-            console.log(scrollTarget)
+            // console.log(scrollTarget) // Keep in Development
             if (scrollTarget) {
                 scrollTarget.scrollIntoView()
                 window.scrollBy(0, -100); // Adjust the offset value as needed
-                console.log("scrolled")
+                // console.log("scrolled") // Keep in Development
             }
             
         }

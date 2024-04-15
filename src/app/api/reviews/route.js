@@ -5,6 +5,7 @@ import { slugify } from "@/lib/utils";
 import { NextResponse } from "next/server"
 
 export const GET = async (request) => {
+    // query parameters from the request URL
     const sort = request.nextUrl.searchParams.get('sort');
     const order = request.nextUrl.searchParams.get('order');
     const search = request.nextUrl.searchParams.get('search');
@@ -13,6 +14,7 @@ export const GET = async (request) => {
     const selectedFilterKey = request.nextUrl.searchParams.get('selectedFilterKey')
     const selectedFilterVal = request.nextUrl.searchParams.get('selectedFilterVal')
 
+    // Define a function to determine the order of sorting
     const getOrder = (orderBy) => {
         if (orderBy === 'desc') {
             return -1
@@ -22,6 +24,7 @@ export const GET = async (request) => {
         }
     }
 
+    // Calculate the number of documents to skip based on pagination
     const skip = (page - 1) * perPage
 
     try {
@@ -132,21 +135,21 @@ export async function POST(request) {
     dbConnect()
     const data = await request.json()
     const { reviewTitle, movies, comments, likes, contentImages, selectedcategory, quadOgImage, quadOgImagePath } = data
-    console.log(movies)
-    console.log('links: ', [quadOgImage, quadOgImagePath])
+    // console.log(movies) // Keep in Development
+    // console.log('links: ', [quadOgImage, quadOgImagePath]) // Keep in Development
 
+    // Generate slug based on the number of movies
     let slug = ''
-
     if (movies.length === 4) {
         slug = slugify(reviewTitle)
     }
     if (movies.length === 1) {
         slug = slugify(reviewTitle, movies[0].year)
     }
-    console.log(slug)
+    // console.log(slug) // Keep in Development
 
+    // Validate required fields
     let emptyFields = []
-
     if (!reviewTitle) {
         emptyFields.push('reviewTitle')
     }

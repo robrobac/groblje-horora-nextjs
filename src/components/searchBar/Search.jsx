@@ -33,7 +33,7 @@ export default function Search() {
         
     //  close virtual keyboard on enter
     const onEnter = (e) => {
-        console.log('On Enter')
+        // console.log('On Enter') // Keep in Development
         if (e.key === "Enter") {
             e.target.blur();
         }

@@ -22,8 +22,8 @@ export const GET = async (request, { params }) => {
         })
     }
 
+    // Extract tags from movies in the review
     var tagArray = []
-
     review.movies.forEach((movie) => {
         movie.tags.forEach((tag) => {
             tagArray.push(tag.tagValue)
@@ -105,14 +105,14 @@ export const GET = async (request, { params }) => {
                 "tagsMatched": { "$first": "$tagsMatched" },
                 "countTagsMatched" : {"$sum": "$countTagsMatched"}
             }
-        }, 
+        },
         {
             "$sort": {
                 "countTagsMatched": -1
             }
         },
         {
-            "$limit": 8 - tagArray.length
+            "$limit": 8 - (tagArray.length < 8 ? tagArray.length : 0)
         }
     ];
 
@@ -174,7 +174,7 @@ export const PATCH = async (request, { params }) => {
     if (movies.length === 1) {
         newSlug = slugify(reviewTitle, movies[0].year)
     }
-    console.log(newSlug)
+    // console.log(newSlug) // Keep in Development
 
     let emptyFields = []
 
@@ -244,10 +244,6 @@ export const PATCH = async (request, { params }) => {
             }, { new: true })
         }
 
-        // const review = await Review.findOneAndUpdate({ _id: id }, {
-        //     reviewTitle, movies, comments, likes, contentImages
-        // }, { new: true })
-
         if (!review) {
             return new NextResponse(JSON.stringify({ error: 'No such review' }), {
                 status: 404
@@ -266,7 +262,7 @@ export const PATCH = async (request, { params }) => {
 export async function DELETE(request, { params }) {
     dbConnect()
     const { slug } = params
-    console.log(slug)
+    // console.log(slug) // Keep in Development
 
     if (!mongoose.Types.ObjectId.isValid(slug)) {
         return new NextResponse(JSON.stringify({ error: 'No such review' }), {

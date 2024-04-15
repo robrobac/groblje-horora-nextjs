@@ -4,7 +4,7 @@ import { useEffect } from "react";
 export const UnauthorizedRedirect = () => {
     const router = useRouter();
 
-    console.log('redirecting')
+    // console.log('redirecting')
   
     // Perform redirection when the component is rendered
     useEffect(() => {

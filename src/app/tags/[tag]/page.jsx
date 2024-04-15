@@ -8,9 +8,9 @@ export const dynamic = 'force-dynamic';
 
 
 const getData = async (tag, page, perPage) => {
-    console.log(tag, page, perPage)
+    // console.log(tag, page, perPage) // Keep in Development
     const res = await fetch(`${process.env.DOMAIN_URL}/api/tags/${tag}?page=${page}&perPage=${perPage}`);
-    console.log(`Reviews with ${tag} tag fetched`)
+    // console.log(`Reviews with ${tag} tag fetched`) // Keep in Development
     
     if (!res.ok) {
         throw new Error(`Failed to fetch Reviews with ${tag} tag`);
@@ -47,7 +47,7 @@ const SingleTagPage = async ({params, searchParams}) => {
     const {page} = searchParams;
 
     const reviews = await getData(tag, page, 20);
-    console.log(page)
+    // console.log(page) // Keep in Development
 
     const filteredTag = tags.filter(tagValue => tagValue.tagValue === tag)
     const currentTag = filteredTag[0].tagLabel

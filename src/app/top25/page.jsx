@@ -18,7 +18,7 @@ export const metadata = {
 
 const getData = async () => {
     const res = await fetch(`${process.env.DOMAIN_URL}/api/reviews/top25`);
-    console.log("Top25 Reviews data fetched")
+    // console.log("Top25 Reviews data fetched") // Keep in Development
     if (!res.ok) {
         throw new Error('Failed to fetch Top25 Reviews data');
     }

@@ -42,7 +42,7 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
                     });
                     // Don't compress if file is not of image type
                 } else {
-                    console.log('file is not an image, skipped', file.name)
+                    // console.log('file is not an image, skipped', file.name) // Keep in Development
                 }
             });
             setUploadingImages(false)

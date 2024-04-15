@@ -9,12 +9,12 @@ export default function PageSelect({tag, page, totalPages}) {
     const router = useRouter()
     const currentPage = parseInt(searchParams.get('page'))
     const [inputPage, setInputPage] = useState(currentPage || page || 1)
-    console.log("inputpage:", inputPage)
-    console.log("currentpage:", currentPage)
-    console.log("page:", page)
+    // console.log("inputpage:", inputPage) // Keep in Development
+    // console.log("currentpage:", currentPage) // Keep in Development
+    // console.log("page:", page) // Keep in Development
     
     
-    console.log(currentPage, page)
+    // console.log(currentPage, page) // Keep in Development
 
     const handleSubmit = (e) => {
         e.preventDefault()

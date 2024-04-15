@@ -31,19 +31,20 @@ const PrijavaPage = ({searchParams}) => {
     const [verficationAuthData, setVerificationAuthData] = useState(null)
     const [sendingVerification, setSendingVerification] = useState(false)
 
+    // Effect hook to check if user's email is verified
     useEffect(() => {
         if (auth.currentUser?.emailVerified === false) {
             setVerificationAuthData(auth.currentUser)
             setError('Potvrdi email prije prijave')
             setEmailVerified(false)
-            logout()
+            logout() // Logout if email is not verified
         }
     }, [])
 
     // Handle login form submission
     const handleLogin = async (e) => {
         e.preventDefault()
-        console.log('Login Form Submitted')
+        // console.log('Login Form Submitted') // Keep in Development
         setLoggingIn(true)
         setError('')
         setSuccess('')
@@ -51,9 +52,9 @@ const PrijavaPage = ({searchParams}) => {
         try {
             // Sign in with email and password using Firebase
             const user = await signInWithEmailAndPassword(auth, email, password)
-            console.log('Firebase User Signed In', user.user);
+            // console.log('Firebase User Signed In', user.user); // Keep in Development
 
-            console.log('Login Successful')
+            // console.log('Login Successful') // Keep in Development
 
             if (auth.currentUser?.emailVerified === false) {
                 setVerificationAuthData(auth.currentUser)
@@ -66,10 +67,10 @@ const PrijavaPage = ({searchParams}) => {
             const backURL = sessionStorage.getItem('lastVisitedUrl');
             if (backURL) {
                 sessionStorage.removeItem('lastVisitedUrl');
-                console.log('Navigating to last visited URL')
-                router.push(backURL)
+                // console.log('Navigating to last visited URL') // Keep in Development
+                router.push(backURL) // Redirect to last visited URL if available
             } else {
-                console.log('Navigating to Home page')
+                // console.log('Navigating to Home page') // Keep in Development
                 router.push('/')
             }
             setEmail('')
@@ -84,6 +85,7 @@ const PrijavaPage = ({searchParams}) => {
         }
     }
 
+    // Handle forgot password form submission
     const handleForgotPassword = async (e) => {
         e.preventDefault()
         setLoggingIn(true)
@@ -110,30 +112,22 @@ const PrijavaPage = ({searchParams}) => {
         }
     }
 
+    // Handle switch between login and forgot password modes
     const handleSwitch = (val) => {
         setForgotPassword(val)
         setError('')
         setPassword('')
     }
 
-    // const handleResendVerification = async () => {
-    //     setSendingVerification(true)
-    //     console.log(verficationAuthData)
-    //     await sendEmailVerification(verficationAuthData);
-    //     console.log('verification email sent')
-    //     setSendingVerification(false)
-    //     setSuccess('Email za potvrdu poslan')
-    //     setError('')
-    // }
-
+    // Handle resend email verification
     const handleResendVerification = async () => {
         setSendingVerification(true);
-        // console.log(verficationAuthData);
+        // console.log(verficationAuthData);  // Keep in Development
         setSuccess('');
         setError('')
         try {
             await sendEmailVerification(verficationAuthData);
-            console.log('verification email sent');
+            // console.log('verification email sent'); // Keep in Development
             setSuccess('Email za potvrdu poslan');
             setError('');
         } catch (error) {

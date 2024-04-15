@@ -22,9 +22,10 @@ const RegistracijaPage = () => {
 
     const [creatingUser, setCreatingUser] = useState(false)
 
+    // Handle registration form submission
     const handleRegister = async (e) => {
         e.preventDefault();
-        console.log('Register Form Submitted')
+        // console.log('Register Form Submitted') // Keep in Development
 
         const formattedEmail = email.replace(/\s/g, '').trim()
         // setEmail(formattedEmail)
@@ -32,11 +33,12 @@ const RegistracijaPage = () => {
         // setUsername(formattedUsername)
         const formattedPassword = password.replace(/\s/g, '')
         setPassword(formattedPassword)
-        // console.log(formattedEmail)
-        console.log('strings formatted, no empty spaces allowed.')
+        // console.log(formattedEmail) // Keep in Development
+        // console.log('strings formatted, no empty spaces allowed.') // Keep in Development
         setCreatingUser(true)
         setErrors([])
         try {
+            // Validate new user data
             const validation = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/validateNewUser`, {
                 method: 'POST',
                 body: JSON.stringify({ username, email, password }),
@@ -51,23 +53,27 @@ const RegistracijaPage = () => {
                 return
             }
 
-            console.log('Validation success');
+            // console.log('Validation success'); // Keep in Development
 
+            // Create user with email and password using Firebase
             const user = await createUserWithEmailAndPassword(auth, email, password);
-            console.log('Firebase  User Created', user.user)
+            // console.log('Firebase  User Created', user.user) // Keep in Development
 
             // Update user profile with the provided username
             await updateProfile(user.user, {
                 displayName: username
             });
-            console.log('Firebase User Display Name Updated', user.user);
+            // console.log('Firebase User Display Name Updated', user.user); // Keep in Development
 
+            // Prepare user data for storing to MongoDB
             const userData = {
                 username: username,
                 email: email,
                 role: 'user',
             };
-            console.log('User Data prepared for storing to MongoDB')
+            // console.log('User Data prepared for storing to MongoDB') // Keep in Development
+
+            // Store user data to MongoDB
             const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/users`, {
                 method: 'POST',
                 body: JSON.stringify(userData),
@@ -81,15 +87,17 @@ const RegistracijaPage = () => {
                 console.log(json);
                 return;
             }
-            console.log('User Data stored to MongoDB', json);
+            // console.log('User Data stored to MongoDB', json); // Keep in Development
 
             // Send email verification
             await sendEmailVerification(auth.currentUser);
-            console.log('verification email sent')
+            // console.log('verification email sent') // Keep in Development
 
             // Redirect to the previous page stored in session storage
             
-            console.log('Registration Successful')
+            // console.log('Registration Successful') // Keep in Development
+
+            // WILL MAYBE USE IT LATER
             // const backURL = sessionStorage.getItem('lastVisitedUrl');
             // if (backURL) {
             //     sessionStorage.removeItem('lastVisitedUrl');
@@ -106,7 +114,8 @@ const RegistracijaPage = () => {
             setEmail('')
             setUsername('')
             setPassword('')
-            console.log('Navigating to Login page')
+            // console.log('Navigating to Login page') // Keep in Development
+            // Redirect to the login page
             router.push(`/prijava${auth.currentUser ? `?email=${auth.currentUser.email}` : ''}`)
             
         
@@ -119,7 +128,7 @@ const RegistracijaPage = () => {
             });
             const deleteJson = await deleteResponse.json();
             if (deleteResponse.ok) {
-                console.log('User deleted from MongoDB', deleteJson);
+                // console.log('User deleted from MongoDB', deleteJson); // Keep in Development
             }
         } finally {
             setCreatingUser(false)

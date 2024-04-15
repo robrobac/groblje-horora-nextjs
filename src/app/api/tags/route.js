@@ -7,12 +7,11 @@ export const GET = async (request) => {
 
     dbConnect()
     const tags = sortedTags
-    console.log("taaags")
     var countedTags = []
 
     await Promise.all(tags.map(async(tag) => {
         const handleCountTag = await reviewModel.countDocuments({
-            "movies.tags.tagValue": tag.tagValue // Direct query, no aggregation pipeline
+            "movies.tags.tagValue": tag.tagValue
         });
         countedTags.push({
             tagValue: tag.tagValue,

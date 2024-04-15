@@ -14,7 +14,7 @@ export default function Comments({post, slug}) {
     const { user, mongoUser } = useAuth()
 
     const [comments, setComments] = useState([])
-    // console.log(comments)
+    // console.log(comments) // Keep in Development
 
     const [liked, setLiked] = useState(false)
     const [numberOfLikes, setNumberOfLikes] = useState(0)
@@ -35,15 +35,15 @@ export default function Comments({post, slug}) {
 
 
     useEffect(() => {
-        const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL); // Replace with your server URL and port
+        const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL);
 
         socket.on('connect', () => {
-            console.log('Connected to socket.io');
+            // console.log('Connected to socket.io'); // Keep in Development
             setSocketConnected(true)
         });
 
         socket.on('reviewChange', (change) => {
-            console.log('changed', change)
+            // console.log('changed', change) // Keep in Development
             fetchPost()
         });
 
@@ -56,7 +56,7 @@ export default function Comments({post, slug}) {
             }
 
             if (!response.ok) {
-                console.log("error fetching comments", data)
+                // console.log("error fetching comments", data) // Keep in Development
             }
         }
 
@@ -71,7 +71,7 @@ export default function Comments({post, slug}) {
     // Handle comment form submission
     const handleSubmitComment = async (e) => {
         e.preventDefault();
-        console.log('Comment Form Submitted')
+        // console.log('Comment Form Submitted') // Keep in Development
         setPostingComment(true)
         try {
             // Prepare comment data for MongoDB
@@ -80,7 +80,7 @@ export default function Comments({post, slug}) {
                 authorEmail: mongoUser.email,
                 message: commentValue,
             };
-            console.log('Comment Data prepared for storing to MongoDB')
+            // console.log('Comment Data prepared for storing to MongoDB') // Keep in Development
     
             // Add comment data to MongoDB
             const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/comments?id=${post._id}`, {
@@ -91,13 +91,13 @@ export default function Comments({post, slug}) {
                 }
             });
             const json = await response.json();
-            console.log('server response', json)
+            // console.log('server response', json) // Keep in Development
             if (!response.ok) {
                 console.log(json);
                 setPostingComment(false)
                 return;
             }
-            console.log('comment data stored to MongoDB', json);
+            // console.log('comment data stored to MongoDB', json); // Keep in Development
             setCommentValue('')
             setPostingComment(false)
             
@@ -109,7 +109,7 @@ export default function Comments({post, slug}) {
 
     // Handle liked submit
     const handleSubmitLike = async () => {
-        console.log('Like Submitted')
+        // console.log('Like Submitted') // Keep in Development
         setLiked(!liked)
         try {
             if (liked) {
@@ -119,12 +119,12 @@ export default function Comments({post, slug}) {
                     method: 'DELETE',
                 });
                 const json = await response.json();
-                console.log('server response', json)
+                // console.log('server response', json) // Keep in Development
                 if (!response.ok) {
                     console.log(json);
                     return;
                 }
-                console.log('like removed from MongoDB', json);
+                // console.log('like removed from MongoDB', json); // Keep in Development
             }
 
             if (!liked) {
@@ -134,7 +134,7 @@ export default function Comments({post, slug}) {
                     likeName: mongoUser.username,
                     likeEmail: mongoUser.email,
                 };
-                console.log('like Data prepared for storing to MongoDB', likeData)
+                // console.log('like Data prepared for storing to MongoDB', likeData) // Keep in Development
         
                 // Add like data to MongoDB
                 const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/likes?id=${post._id}`, {
@@ -145,12 +145,12 @@ export default function Comments({post, slug}) {
                     }
                 });
                 const json = await response.json();
-                console.log('server response', json)
+                // console.log('server response', json) // Keep in Development
                 if (!response.ok) {
                     console.log(json);
                     return;
                 }
-                console.log('like data stored to MongoDB', json);
+                // console.log('like data stored to MongoDB', json); // Keep in Development
             }
         } catch (err) {
             console.log(err);
@@ -167,7 +167,7 @@ export default function Comments({post, slug}) {
             const json = await deleteResponse.json()
 
             if (deleteResponse.ok) {
-                console.log("comment deleted", json)
+                // console.log("comment deleted", json) // Keep in Development
             }
         } catch (err) {
             console.log(err)

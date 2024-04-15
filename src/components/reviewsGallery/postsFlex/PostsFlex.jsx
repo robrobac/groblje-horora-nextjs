@@ -2,7 +2,7 @@ import styles from '@/components/reviewsGallery/postsFlex/postsFlex.module.scss'
 import PostCard from './postCard/PostCard';
 
 export default function PostsFlex({posts, handleRefresh, user, mongoUser}) {
-    console.log("teeeeeeeeeest")
+
     return (
         <section className={styles.postsFlexContainer}>
             <div className={styles.postsFlexRow}>

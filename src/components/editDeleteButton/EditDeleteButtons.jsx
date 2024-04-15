@@ -33,7 +33,7 @@ export default function EditDeleteButtons({post, targetBlank, handleRefresh, use
                 imagesToDelete.push(review.quadOgImagePath)
             }
 
-            console.log('images to delete: ', imagesToDelete)
+            // console.log('images to delete: ', imagesToDelete) // Keep in Development
 
             try {
                 const deleteResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${review._id}`, {
@@ -41,15 +41,15 @@ export default function EditDeleteButtons({post, targetBlank, handleRefresh, use
                 });
                 const deleteJson = await deleteResponse.json();
                 if (deleteResponse.ok) {
-                    console.log('Review Deleted', deleteJson);
+                    // console.log('Review Deleted', deleteJson); // Keep in Development
 
-                    console.log('images to delete: ', imagesToDelete)
+                    // console.log('images to delete: ', imagesToDelete) // Keep in Development
 
                     imagesToDelete.forEach(async (image) => {
                         await deleteImageFromFirebaseStorage(image)
-                        console.log("image deleted from firebase")
+                        // console.log("image deleted from firebase") // Keep in Development
                     })
-                    console.log("all images removed from firebase")
+                    // console.log("all images removed from firebase") // Keep in Development
                 }
             } catch (err) {
                 console.log(err)

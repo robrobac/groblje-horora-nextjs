@@ -9,7 +9,7 @@ export const GET = async (request) => {
     try {
         dbConnect()
         const data = await reviewModel.find({ 'movies.0.worse20': true }).sort({ createdAt: -1 })
-        console.log('Worse 20 Reviews successfully fetched')
+        // console.log('Worse 20 Reviews successfully fetched') // Keep in Development
         return NextResponse.json(data)
     } catch (err) {
         throw new Error('Failed to fetch Worse 20 Reviews', err)

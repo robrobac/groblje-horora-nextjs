@@ -8,7 +8,7 @@ export const GET = async (request) => {
     try {
         dbConnect()
         const data = await reviewModel.find({ 'movies': { $size: 4 } }).sort({ createdAt: -1 }).limit(1)
-        console.log('Latest quad post successfully fetched', data[0].reviewTitle)
+        // console.log('Latest quad post successfully fetched', data[0].reviewTitle) // Keep in Development
         return NextResponse.json(data)
     } catch (err) {
         throw new Error('Failed to fetch latest quad post', err)

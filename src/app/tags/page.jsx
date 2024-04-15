@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 
 const getData = async () => {
     const res = await fetch(`${process.env.DOMAIN_URL}/api/tags`);
-    console.log(`Tags counted`)
+    // console.log(`Tags counted`) // Keep in Development
     
     if (!res.ok) {
         throw new Error(`Failed to count tags`);
@@ -17,7 +17,7 @@ const getData = async () => {
 export const generateMetadata = async () => {
     const tags = await getData();
 
-    console.log(`Oznake: ${tags.map(singleTag => singleTag.tagLabel).join(', ')}`)
+    // console.log(`Oznake: ${tags.map(singleTag => singleTag.tagLabel).join(', ')}`) // Keep in Development
 
     return {
         title: "Oznake | Groblje Horora",
