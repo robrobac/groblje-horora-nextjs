@@ -40,7 +40,7 @@ export default async function sitemap() {
             lastModified: new Date()
         },
         {
-            url: `${process.env.DOMAIN_URL}/0-blogu`,
+            url: `${process.env.DOMAIN_URL}/o-blogu`,
             lastModified: new Date()
         },
         ...postsUrls,
