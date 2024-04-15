@@ -155,3 +155,24 @@ export const checkLongestTitle = async (reviews) => {
         console.error("Error:", error);
     }
 }
+
+export const checkMostTags = async (reviews) => {
+    try {
+        let reviewWithMostTags = null;
+        let maxTagsCount = 0;
+
+        for (const review of reviews) {
+            for (const movie of review.movies) {
+                const tagsCount = movie.tags.length;
+                if (tagsCount > maxTagsCount) {
+                    maxTagsCount = tagsCount
+                    reviewWithMostTags = movie
+                }
+            }
+        }
+
+        return reviewWithMostTags
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}

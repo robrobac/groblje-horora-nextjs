@@ -33,6 +33,7 @@ export const GET = async (request, { params }) => {
     var pipeline = [ // sorted by number of matched tags
         {
             "$match": {
+                slug: { $ne: slug }, // Exclude the current review
                 "movies.tags.tagValue": {
                     "$in": tagArray
                 }
@@ -111,12 +112,37 @@ export const GET = async (request, { params }) => {
             }
         },
         {
-            "$limit": 8
+            "$limit": 8 - tagArray.length
         }
     ];
 
     // Trenutno povuce 4 random objava koje imaju barem jedan jednaki tag
     var moreLikeThis = await reviewModel.aggregate(pipeline)
+
+    if (moreLikeThis.length < 8) {
+        for (const tag of tagArray) {
+            var moreLikeThis2 = await reviewModel.aggregate([
+                {
+                    "$match": {
+                        slug: { $ne: slug, $nin: moreLikeThis.map(doc => doc.slug) },
+                        "movies.tags.tagValue": tag
+                    }
+                },
+                { "$sample": { "size": 1 } },
+            ])
+
+            moreLikeThis = [...moreLikeThis, ...moreLikeThis2];
+        }
+    }
+
+    if (moreLikeThis.length < 8) {
+        const additionalDocuments = await reviewModel.aggregate([
+            { $match: { slug: { $ne: slug, $nin: moreLikeThis.map(doc => doc.slug) } } },
+            { $sample: { size: 8 - moreLikeThis.length } }
+        ]);
+
+        moreLikeThis = [...moreLikeThis, ...additionalDocuments];
+    }
 
     review.moreLikeThis = moreLikeThis;
 

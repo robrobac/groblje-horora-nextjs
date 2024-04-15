@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import useAuth from "@/hooks/useAuth";
 import useCountReviews from "@/hooks/useCountReviews";
-import { checkLongestTitle, getAllPostsWithoutOGImage, compareStorageAndDb, getAllContentImagePaths, getAllCoverImagePaths, getAllMovieCoverImagePaths, getAllOgImagePaths, getAllPostContentImagePaths, getAllPostOgImagePaths, getAllMoviesWithoutTag, getAllMoviesWithoutImdbLink } from "@/lib/compareStorageAndDb";
+import { checkLongestTitle, getAllPostsWithoutOGImage, compareStorageAndDb, getAllContentImagePaths, getAllCoverImagePaths, getAllMovieCoverImagePaths, getAllOgImagePaths, getAllPostContentImagePaths, getAllPostOgImagePaths, getAllMoviesWithoutTag, getAllMoviesWithoutImdbLink, checkMostTags } from "@/lib/compareStorageAndDb";
 
 export default function AdminCheckButton() {
     const [checkFunctionStarted, setCheckFunctionStarted] = useState(false)
@@ -74,9 +74,12 @@ export default function AdminCheckButton() {
 
 
             const longest = await checkLongestTitle(reviews)
+            const mostTags = await checkMostTags(reviews)
+            console.log(mostTags)
             console.log(await checkLongestTitle(reviews))
             setFunctionProcess(prevProcess => [...prevProcess, `<span style="color: white; font-size: 14px; line-height: 21px;">Longest Post Title: ${longest.longestTitle}</span>`])
             setFunctionProcess(prevProcess => [...prevProcess, `<span style="color: white; font-size: 14px; line-height: 21px;">Longest Word in Post Title: ${longest.longestWord}</span>`])
+            setFunctionProcess(prevProcess => [...prevProcess, `<span style="color: white; font-size: 14px; line-height: 21px;">Most tags movie: ${mostTags.title}</span>`])
             setFunctionProcess(prevProcess => [...prevProcess, `----------`])
 
 
