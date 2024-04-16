@@ -23,8 +23,10 @@
         text-decoration: underline;
         cursor: var(--pointerCursor);
 
-        &:hover {
-            color: var(--red);
+        @media (hover: hover) {
+            &:hover {
+                color: var(--red);
+            }
         }
     }
 }

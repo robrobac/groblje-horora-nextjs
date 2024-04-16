@@ -1,3 +1,5 @@
+"use client"
+
 import styles from '@/components/singleReview/moreLikeThis/moreLikeThis.module.scss'
 import PostImage from '@/components/reviewsGallery/postsFlex/postCard/PostImage';
 import { Rating } from '@/components/rating/Rating';

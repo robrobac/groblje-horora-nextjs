@@ -26,9 +26,10 @@
     &.disabled {
         opacity: .3;
         cursor: var(--defaultCursor);
-
-        &:hover {
-            background-color: unset;
+        @media (hover: hover) {
+            &:hover {
+                background-color: unset;
+            }
         }
     }
 }

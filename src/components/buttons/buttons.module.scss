@@ -30,17 +30,21 @@
         opacity: .5;
         cursor: var(--defaultCursor);
 
-        &:hover {
-            background-color: var(--red);
-        }
+        @media (hover: hover) {
+            &:hover {
+                background-color: var(--red);
+            }
+        }    
     }
 
     &:disabled {
         opacity: .5;
         cursor: var(--defaultCursor);
 
-        &:hover {
-            background-color: var(--red);
+        @media (hover: hover) {
+            &:hover {
+                background-color: var(--red);
+            }
         }
     }
 
