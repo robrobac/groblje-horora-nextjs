@@ -4,6 +4,9 @@ import "./globals.scss";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/footer";
 import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
+import dynamic from "next/dynamic";
+
+const GoogleAnalyticsComp = dynamic(() => import("@/components/googleAnalyticsComp/GoogleAnalyticsComp"), { ssr: false })
 
 const lexend = Lexend({ subsets: ["latin"] });
 
@@ -34,6 +37,7 @@ export default function RootLayout({ children }) {
                 {children}
                 <Footer />
                 <BackToTopButton />
+                {/* <GoogleAnalyticsComp /> */}
             </body>
         </html>
     );
