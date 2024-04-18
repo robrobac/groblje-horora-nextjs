@@ -4,7 +4,7 @@ import "./globals.scss";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/footer";
 import dynamic from "next/dynamic";
-const BackToTopButton = dynamic(() => import("@/components/backToTopButton/BackToTopButton"), { ssr: false })
+import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
 const GoogleAnalyticsComp = dynamic(() => import("@/components/googleAnalyticsComp/GoogleAnalyticsComp"), { ssr: false })
 
 const lexend = Lexend({ subsets: ["latin"] });
