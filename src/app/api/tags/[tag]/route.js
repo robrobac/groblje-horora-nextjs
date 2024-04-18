@@ -1,6 +1,5 @@
 import { dbConnect } from "@/lib/mongo/dbConnect";
 import reviewModel from "@/lib/mongo/models/reviewModel";
-import { persistentMultipleTabManager } from "firebase/firestore";
 import { NextResponse } from "next/server"
 
 export const GET = async (request, { params }) => {
@@ -11,8 +10,6 @@ export const GET = async (request, { params }) => {
     const { tag } = params;
 
     const skip = page === "undefined" ? 0 : ((page - 1) * parseInt(perPage));
-
-    // const reviews = await reviewModel.findOne({ "movies[0].tags[0].tagLabel": "70-e" })
     const reviews = await reviewModel.aggregate([
         {
             $match: {
