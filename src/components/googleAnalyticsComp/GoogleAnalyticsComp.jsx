@@ -9,7 +9,7 @@ export function reportWebVitals({ id, name, label, value }) {
       value: Math.round(name === "CLS" ? value * 1000 : value), // values must be integers
       label: id, // id unique to current page load
       nonInteraction: true, // avoids affecting bounce rate.
-    }, process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID);
+    });
 }
 
 
