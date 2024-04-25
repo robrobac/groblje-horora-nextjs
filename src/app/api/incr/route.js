@@ -19,8 +19,8 @@ export async function POST(req) {
         return new NextResponse("Slug not found for Redis counter", {status: 400})
     }
 
-    const ip = req.ip;
-    console.log(req)
+    const ip = req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.ip;
+    console.log(ip)
 
     const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(ip));
 
