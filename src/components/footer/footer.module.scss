@@ -28,7 +28,7 @@
     max-width: 210px;
     width: 100%;
 
-    h5 {
+    p {
         font-size: var(--textS);
         line-height: calc(var(--textS) * 1.5);
         color: var(--white);
@@ -57,7 +57,7 @@
     @media (max-width: 1024px) {
         max-width: 180px;
 
-        h5 {
+        p {
             font-size: var(--textXS);
             line-height: calc(var(--textXS) * 1.5);
         }

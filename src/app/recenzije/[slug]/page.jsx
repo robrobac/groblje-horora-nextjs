@@ -1,6 +1,7 @@
 
 
 import styles from "@/app/recenzije/[slug]/page.module.scss";
+import ViewCounter from "@/components/ViewCounter";
 import CommentsAndLikes from "@/components/commentsAndLikes/CommentsAndLikes";
 import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteButtonsSingle";
 import ReadingProgress from "@/components/readingProgress/ReadingProgress";
@@ -14,7 +15,8 @@ import { getRawContent } from "@/lib/utils";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
+export const revalidate = 60
 
 function shortenStringTo30Words(str) {
     const cleanedString = str.replace(/<\/?[^>]+(>|$)/g, "");
@@ -98,6 +100,7 @@ const SinglePostPage = async ({params}) => {
         <main className={styles.singlePostContainer}>
             <ScrollToSection />
             <ReadingProgress />
+            <ViewCounter slug={slug} />
             {data.reviewType === 'quad' && (
                 <>
                 <ReviewHeader data={data}/>

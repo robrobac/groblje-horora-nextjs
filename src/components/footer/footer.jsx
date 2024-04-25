@@ -31,7 +31,7 @@ export const Footer = () => {
                     <Link href={`${process.env.NEXT_PUBLIC_DOMAIN_URL}`} aria-label="Idi na Groblje Horora Naslovnu" >
                         <Logo />
                     </Link>
-                    <h5>Recenzije horor filmova i serija</h5>
+                    <p>Recenzije horor filmova i serija</p>
 
                 </div>
 
