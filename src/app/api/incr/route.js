@@ -35,7 +35,7 @@ export async function POST(req) {
     });
 
     if (!isNew) {
-        new NextResponse(null, {status: 202 })
+        return new NextResponse(null, {status: 202 })
     }
 
     await redis.incr(["pageviews", "projects", slug].join(":"));
