@@ -1,5 +1,3 @@
-
-
 import styles from "@/app/recenzije/[slug]/page.module.scss";
 import ViewCounter from "@/components/ViewCounter";
 import CommentsAndLikes from "@/components/commentsAndLikes/CommentsAndLikes";
@@ -100,7 +98,6 @@ const SinglePostPage = async ({params}) => {
         <main className={styles.singlePostContainer}>
             <ScrollToSection />
             <ReadingProgress />
-            <ViewCounter slug={slug} />
             {data.reviewType === 'quad' && (
                 <>
                 <ReviewHeader data={data}/>
@@ -108,7 +105,7 @@ const SinglePostPage = async ({params}) => {
                 
                     <EditDeleteButtonsSingle post={data}/>
                     <p className={styles.reviewDate}>
-                        {format(new Date(data?.createdAt), 'dd.MM.yyyy')}
+                        <ViewCounter slug={slug} /> - objavljeno {format(new Date(data?.createdAt), 'dd.MM.yyyy')}
                     </p>
                     
                     <h1 className={`${styles.titleH1} ${styles.h1Margin}`}>
@@ -119,7 +116,7 @@ const SinglePostPage = async ({params}) => {
             )}
             
             {data?.movies.map((movie, index) => (
-                <Movie key={movie._id} data={data} movie={movie} id={`movie${index + 1}`} index={index}/>
+                <Movie key={movie._id} data={data} movie={movie} id={`movie${index + 1}`} index={index} slug={slug}/>
             ))}
             <CommentsAndLikes post={data} slug={slug}/>
             {data.reviewType === 'quad' && <SocialShare slug={slug} reviewType='single' title={data.reviewTitle} additionalPadding={true}/>}

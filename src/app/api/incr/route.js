@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 import { Redis } from "@upstash/redis"
 
-const redis = new Redis({
+export const redis = new Redis({
     url: process.env.UPSTASH_REDIS_REST_URL,
     token: process.env.UPSTASH_REDIS_REST_TOKEN,
   })
@@ -15,12 +15,12 @@ export async function POST(req) {
     const body = await req.json();
     const slug = body.slug;
 
+
     if (!slug) {
         return new NextResponse("Slug not found for Redis counter", {status: 400})
     }
 
     const ip = req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.ip;
-    console.log(ip)
 
     const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(ip));
 
@@ -31,13 +31,15 @@ export async function POST(req) {
 
     const isNew = await redis.set(["deduplicate", hash, slug].join(":"), true, {
         nx: true,
-        ex: 24 * 60 * 60,
+        ex: 12 * 60 * 60,
     });
 
     if (!isNew) {
-        return new NextResponse(null, {status: 202 })
+        const views = await redis.get(["pageviews", "projects", slug].join(":")) ?? 0
+        return new NextResponse(views, {status: 202 })
     }
 
     await redis.incr(["pageviews", "projects", slug].join(":"));
-    return new NextResponse(null, { status: 202 });
+    const views = await redis.get(["pageviews", "projects", slug].join(":")) ?? 0
+    return new NextResponse(views, { status: 202 });
 }

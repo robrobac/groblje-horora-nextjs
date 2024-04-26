@@ -11,8 +11,9 @@ import imdbLogo from '../../../../public/images/imdblogo.png';
 import Link from "next/link";
 import OgImageLink from "../ogImageLink/OgImageLink";
 import Image from "next/image";
+import ViewCounter from "@/components/ViewCounter";
 
-export const Movie = ({data, movie, id, index}) => {
+export const Movie = ({data, movie, id, index, slug}) => {
 
     return (
         <article className={styles.movieContainer} id={id}>
@@ -23,7 +24,7 @@ export const Movie = ({data, movie, id, index}) => {
                     </figure>
                     <EditDeleteButtonsSingle post={data}/>
                     <p className={pageStyles.reviewDate}>
-                        {format(new Date(data.createdAt), 'dd.MM.yyyy')}
+                    <ViewCounter slug={slug} /> - objavljeno {format(new Date(data?.createdAt), 'dd.MM.yyyy')}
                     </p>
                     <h1 className={pageStyles.titleH1}>{movie.title} <span>({movie.year})</span></h1>
                     <Rating rating={movie.rating} detailed={true}/>
