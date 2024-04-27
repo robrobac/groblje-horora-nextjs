@@ -1,0 +1,11 @@
+.rootLoadingContainer {
+    z-index: 900; 
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    background-color: var(--black);
+}

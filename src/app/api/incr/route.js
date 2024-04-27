@@ -43,3 +43,6 @@ export async function POST(req) {
     const views = await redis.get(["pageviews", "projects", slug].join(":")) ?? 0
     return new NextResponse(views, { status: 202 });
 }
+
+// 1 command if IP already visited the single post in last 12hours
+// 3 commands if IP did not visit the single post in last 12hours
