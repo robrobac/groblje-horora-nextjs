@@ -24,27 +24,37 @@ export const metadata = {
 
 export default function Naslovna() {
     const post = {
-        title: 'How to Add JSON-LD Structured Data to a Next.js Website',
-        description: 'Learn how to improve your Next.js website\'s SEO by adding JSON-LD structured data.',
-        datePublished: '2024-03-23',
-        author: {
-          "@type": "Person",
-          "name": "John Doe"
-        },
-        image: "https://via.placeholder.com/800x400",
-        publisher: {
-          "@type": "Organization",
-          "name": "My Blog",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://via.placeholder.com/200x100"
+        "@context": "https://schema.org/",
+        "@type": "Review",
+        "itemReviewed": {
+          "@type": "Restaurant",
+          "image": "https://www.example.com/seafood-restaurant.jpg",
+          "name": "Legal Seafood",
+          "servesCuisine": "Seafood",
+          "priceRange": "$$$",
+          "telephone": "1234567",
+          "address" :{
+            "@type": "PostalAddress",
+            "streetAddress": "123 William St",
+            "addressLocality": "New York",
+            "addressRegion": "NY",
+            "postalCode": "10038",
+            "addressCountry": "US"
           }
         },
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": "https://www.example.com/blog/how-to-add-json-ld-to-next-js"
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "4"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Bob Smith"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Washington Times"
         }
-      };
+      }
     return (
         <main>
             <HomepageCover />
