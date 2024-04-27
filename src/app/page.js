@@ -1,3 +1,4 @@
+import JsonLd from "@/components/JsonLd";
 import { HomepageCover } from "@/components/homepageCover/HomepageCover";
 import { Introduction } from "@/components/introduction/Introduction";
 import { LatestPregled } from "@/components/latest/LatestPregled";
@@ -22,6 +23,28 @@ export const metadata = {
 };
 
 export default function Naslovna() {
+    const post = {
+        title: 'How to Add JSON-LD Structured Data to a Next.js Website',
+        description: 'Learn how to improve your Next.js website\'s SEO by adding JSON-LD structured data.',
+        datePublished: '2024-03-23',
+        author: {
+          "@type": "Person",
+          "name": "John Doe"
+        },
+        image: "https://via.placeholder.com/800x400",
+        publisher: {
+          "@type": "Organization",
+          "name": "My Blog",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://via.placeholder.com/200x100"
+          }
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": "https://www.example.com/blog/how-to-add-json-ld-to-next-js"
+        }
+      };
     return (
         <main>
             <HomepageCover />
@@ -31,6 +54,7 @@ export default function Naslovna() {
             <Top25 />
             <RecenzijeComponent />
             <Worse20 />
+            <JsonLd data={post}/>
         </main>
     );
 }
