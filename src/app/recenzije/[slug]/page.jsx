@@ -10,6 +10,8 @@ import { getRawContent } from "@/lib/utils";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
 
+
+// TODO Read more about dynamic imports and see if it's even needed in this case because webvitals are not changing at all
 const ScrollToSection = dynamic(() => import("@/components/singleReview/scrollToSection/ScrollToSection"), { ssr: false })
 const ReadingProgress = dynamic(() => import("@/components/readingProgress/ReadingProgress"), { ssr: false })
 const SocialShare = dynamic(() => import("@/components/singleReview/socialShare/SocialShare"), { ssr: false })

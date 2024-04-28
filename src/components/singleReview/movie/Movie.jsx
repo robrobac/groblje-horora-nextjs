@@ -12,6 +12,7 @@ import OgImageLink from "../ogImageLink/OgImageLink";
 import Image from "next/image";
 import ViewCounter from "@/components/ViewCounter";
 
+// TODO Read more about dynamic imports and see if it's even needed in this case because webvitals are not changing at all
 const SocialShare = dynamic(() => import("../socialShare/SocialShare"), { ssr: false })
 
 export const Movie = ({data, movie, id, index, slug}) => {

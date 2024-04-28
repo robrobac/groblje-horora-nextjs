@@ -12,7 +12,7 @@ const lexend = Lexend({ subsets: ["latin"] });
 export default function RootLayout({ children }) {
     return (
         <html lang="hr">
-            <body suppressHydrationWarning={true} className={lexend.className}>
+            <body suppressHydrationWarning={true} className={`${lexend.className} mainBody`}>
                 <Header />
                 {children}
                 <Footer />

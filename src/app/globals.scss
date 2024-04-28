@@ -103,8 +103,10 @@
 body {
     background-color: var(--black);
     color: var(--white);
+}
 
-   
+.mainBody {
+    min-height: 100vh;
 }
 
 main {
