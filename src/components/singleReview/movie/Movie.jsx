@@ -1,17 +1,18 @@
-'use server'
+import dynamic from "next/dynamic";
 import pageStyles from "@/app/recenzije/[slug]/page.module.scss"
 import styles from "@/components/singleReview/movie/movie.module.scss";
 import { format } from "date-fns";
 import { Rating } from "@/components/rating/Rating";
 import { getRawContent } from "@/lib/utils";
 import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteButtonsSingle";
-import SocialShare from "../socialShare/SocialShare";
 import TagDisplay from "../tagDisplay/TagDisplay";
 import imdbLogo from '../../../../public/images/imdblogo.png';
 import Link from "next/link";
 import OgImageLink from "../ogImageLink/OgImageLink";
 import Image from "next/image";
 import ViewCounter from "@/components/ViewCounter";
+
+const SocialShare = dynamic(() => import("../socialShare/SocialShare"), { ssr: false })
 
 export const Movie = ({data, movie, id, index, slug}) => {
 
