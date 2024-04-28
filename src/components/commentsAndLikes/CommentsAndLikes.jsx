@@ -26,6 +26,7 @@ export default function Comments({post, slug}) {
         // Check if the current user has liked the post
         const hasLiked = post?.likes?.some(like => like.likeName === user?.username || like.likeEmail === mongoUser?.email);
         setLiked(hasLiked);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mongoUser, post]);
 
     useEffect(() => {

@@ -70,33 +70,37 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
 
         // Update searchParams with default values if needed
         router.push(pathname + '?' + newSearchParams.toString(), { scroll: false });
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); // Empty dependency array ensures the effect runs only once when the component mounts
 
     
-    const fetchReviews = async () => {
-        setLoading(true);
-        try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews?search=${search}&sort=${sort}&order=${order}&page=${page}&perPage=${perPage}&selectedFilterKey=${selectedFilterKey}&selectedFilterVal=${selectedFilterVal}`);
-            const json = await res.json()
-            if (!res.ok) {
-                throw new Error('Failed to fetch Reviews data');
-            }
-            if (res.ok) {
-                setReviews(json.reviews);
-                const pagesArray = Array.from({ length: json.totalPages }, (_, index) => index + 1);
-                setTotalPages(pagesArray);
-                setTotalItems(json.totalItems)
-            }
-        } catch (err) {
-            console.error('Error fetching reviews:', err.message);
-        } finally {
-            setLoading(false);
-        }   
-    }
+    
 
     useEffect(() => {
+        const fetchReviews = async () => {
+            setLoading(true);
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews?search=${search}&sort=${sort}&order=${order}&page=${page}&perPage=${perPage}&selectedFilterKey=${selectedFilterKey}&selectedFilterVal=${selectedFilterVal}`);
+                const json = await res.json()
+                if (!res.ok) {
+                    throw new Error('Failed to fetch Reviews data');
+                }
+                if (res.ok) {
+                    setReviews(json.reviews);
+                    const pagesArray = Array.from({ length: json.totalPages }, (_, index) => index + 1);
+                    setTotalPages(pagesArray);
+                    setTotalItems(json.totalItems)
+                }
+            } catch (err) {
+                console.error('Error fetching reviews:', err.message);
+            } finally {
+                setLoading(false);
+            }   
+        }
+
         fetchReviews();
-    }, [page, selectedFilterKey, selectedFilterVal, sort, order, search, refresh]);
+    }, [page, selectedFilterKey, selectedFilterVal, sort, order, search, refresh, perPage]);
 
 
     useEffect(() => {
@@ -113,7 +117,7 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
         setOrder(orderValue)
         setSearch(searchValue)
         
-    }, [searchParams.get('page'), searchParams.get('key'), searchParams.get('filter'), searchParams.get('sort'), searchParams.get('order'), searchParams.get('search')])
+    }, [searchParams])
 
 
     const handlePageChange = (num) => {

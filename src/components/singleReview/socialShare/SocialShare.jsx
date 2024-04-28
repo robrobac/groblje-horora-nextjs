@@ -6,8 +6,6 @@ import copyLinkIcon from '../../../../public/images/copyLinkIcon.png';
 import {
     FacebookShareButton,
     FacebookIcon,
-    EmailShareButton,
-    EmailIcon,
     WhatsappShareButton,
     WhatsappIcon,
     ViberShareButton,

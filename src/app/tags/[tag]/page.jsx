@@ -1,4 +1,3 @@
-import Pagination from "@/components/pagination/Pagination";
 import PaginationSSR from "@/components/pagination/PaginationSSR";
 import PostsFlex from "@/components/reviewsGallery/postsFlex/PostsFlex";
 import TitleSubtitle from "@/components/reviewsGallery/titleSubtitle/TitleSubtitle";

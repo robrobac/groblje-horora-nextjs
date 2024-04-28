@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from '@/components/latest/latest.module.scss';
 import { Rating } from "../rating/Rating";
 import { StandardBtn } from "../buttons/standardBtn/StandardBtn";
-import { formatMongoDate, getRawContent } from "@/lib/utils";
+import { formatMongoDate } from "@/lib/utils";
 import Image from "next/image";
 
 const getData = async () => {

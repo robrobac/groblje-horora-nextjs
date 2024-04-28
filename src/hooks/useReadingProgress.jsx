@@ -1,9 +1,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-/**
- * React Hook to get the scroll percentage from the page, returns value from 0 to 100
- */
+// React Hook to get the scroll percentage from the page, returns value from 0 to 100
 export function useReadingProgress() {
   const [completion, setCompletion] = useState(0);
   const path = usePathname();

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import styles from './imageRepo.module.scss';

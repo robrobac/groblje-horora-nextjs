@@ -12,6 +12,7 @@ export default function useAuth() {
         if (!user) {
             setMongoUser(null)
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mongoUser])
 
     useEffect(() => {

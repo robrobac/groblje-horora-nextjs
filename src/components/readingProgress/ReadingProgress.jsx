@@ -2,7 +2,7 @@
 
 import styles from './readingProgress.module.scss'
 import { useReadingProgress } from '@/hooks/useReadingProgress';
-import React, { useState } from 'react'
+import React from 'react'
 
 export default function ReadingProgress() {
     const completion = useReadingProgress();

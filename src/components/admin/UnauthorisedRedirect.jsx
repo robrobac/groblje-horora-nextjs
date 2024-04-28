@@ -9,6 +9,7 @@ export const UnauthorizedRedirect = () => {
     // Perform redirection when the component is rendered
     useEffect(() => {
       router.push("/"); // Replace "/" with the desired URL you want to redirect to
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
   
     // This component doesn't render anything since it redirects immediately

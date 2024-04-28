@@ -6,8 +6,7 @@ import Link from "next/link";
 import { XIcon } from "./svg/XIcon";
 import { HambIcon } from "./svg/HambIcon";
 import { Suspense, useEffect, useState } from "react";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
-import { handleLastVisitedURL } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 import HeaderAuth from "./headerAuth/HeaderAuth";
 
 

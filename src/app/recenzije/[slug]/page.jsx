@@ -101,6 +101,7 @@ const SinglePostPage = async ({params}) => {
         "itemReviewed": {
             "@type": "Movie",
             "name": `${data.reviewTitle}`,
+            "image": `${data.movies[0].coverImage}`
         },
         "aggregateRating": {
             "@type": "AggregateRating",

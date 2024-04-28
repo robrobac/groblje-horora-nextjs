@@ -12,6 +12,7 @@ export const ReviewHeader = ({data}) => {
                         {movie.coverImage ? (
                             <Image priority={true} width={480} height={773} sizes="(max-width: 768px) 150px, (max-width: 1024px) 200px, 300px" style={{objectFit: 'cover'}} className={styles[`image${index}`]} src={movie.coverImage} alt='movie-cover'></Image>
                         ) : (
+                            // eslint-disable-next-line @next/next/no-img-element
                             <img className={styles[`image${index}`]} src={movie.compressedCoverImage ? URL.createObjectURL(movie.compressedCoverImage) : ''} alt='movie-cover'></img>
                         )}
                     </div>
