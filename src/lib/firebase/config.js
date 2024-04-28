@@ -13,7 +13,10 @@ const firebaseConfig = {
 };
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-const auth = getAuth(app);
+// const auth = getAuth(app);
+const auth = initializeAuth(app, {
+    persistence: [indexedDBLocalPersistence, browserLocalPersistence]
+  });
 const storage = getStorage(app);
 
 export { app, auth, storage }
