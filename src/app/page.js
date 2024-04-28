@@ -22,39 +22,24 @@ export const metadata = {
     }
 };
 
+const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "url": "https://www.groblje-horora.com/",
+    "sameAs": [
+        "https://www.facebook.com/recenzijefilmova.blog.hr/",
+    ],
+    "logo": "https://firebasestorage.googleapis.com/v0/b/groblje-horora-89186.appspot.com/o/organisation-logo.jpg?alt=media&token=8d26d941-2799-4cc2-8db9-48bec1b9cb3d",
+    "name": "Groblje Horora",
+    "alternateName": "Groblje Horora",
+    "description": 'Blog "Groblje horrora" napravljen je negdje u lipnju 2007. godine, a njegova namjena je prikaz dnevnika autora koji kako pogleda neki horror, tako baci omanji osvrt ili recenziju na određeni film.',
+    "founder": "Bruno Koić",
+    "foundingDate": "2007-08-20",
+    "email": "bruno.koic1@gmail.com"
+}
+
 export default function Naslovna() {
-    const post = {
-        "@context": "https://schema.org/",
-        "@type": "Review",
-        "itemReviewed": {
-          "@type": "Restaurant",
-          "image": "https://www.example.com/seafood-restaurant.jpg",
-          "name": "Legal Seafood",
-          "servesCuisine": "Seafood",
-          "priceRange": "$$$",
-          "telephone": "1234567",
-          "address" :{
-            "@type": "PostalAddress",
-            "streetAddress": "123 William St",
-            "addressLocality": "New York",
-            "addressRegion": "NY",
-            "postalCode": "10038",
-            "addressCountry": "US"
-          }
-        },
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "4"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "Bob Smith"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Washington Times"
-        }
-      }
+    console.log(structuredData)
     return (
         <main>
             <HomepageCover />
@@ -64,7 +49,7 @@ export default function Naslovna() {
             <Top25 />
             <RecenzijeComponent />
             <Worse20 />
-            <JsonLd data={post}/>
+            <JsonLd data={structuredData}/>
         </main>
     );
 }

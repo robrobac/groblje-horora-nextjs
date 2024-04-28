@@ -1,4 +1,5 @@
 import styles from "@/app/recenzije/[slug]/page.module.scss";
+import JsonLd from "@/components/JsonLd";
 import ViewCounter from "@/components/ViewCounter";
 import CommentsAndLikes from "@/components/commentsAndLikes/CommentsAndLikes";
 import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteButtonsSingle";
@@ -94,6 +95,26 @@ const SinglePostPage = async ({params}) => {
     const data = await getData(slug);
     // console.log(data.moreLikeThis)
 
+    const structuredData = {
+        "@context": "https://schema.org/",
+        "@type": "Review",
+        "itemReviewed": {
+            "@type": "Movie",
+            "name": `${data.reviewTitle}`,
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": `${data.movies[0].rating}`,
+            "bestRating": "5",
+            "reviewCount": "1"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Bruno Koić"
+        },
+        "datePublished": `${data.createdAt}`,
+    }
+
     return (
         <main className={styles.singlePostContainer}>
             <ScrollToSection />
@@ -122,6 +143,8 @@ const SinglePostPage = async ({params}) => {
             {data.reviewType === 'quad' && <SocialShare slug={slug} reviewType='single' title={data.reviewTitle} additionalPadding={true}/>}
             {data.reviewType === 'quad' && <OgImageLink link={data.quadOgImage} title={data.reviewTitle} additionalPadding={true}/>}
             <MoreLikeThis data={data.moreLikeThis} postType={data.reviewType}/>
+
+            <JsonLd data={structuredData} />
         </main>
     );
 };
