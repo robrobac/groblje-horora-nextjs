@@ -1,18 +1,20 @@
+import dynamic from "next/dynamic";
 import styles from "@/app/recenzije/[slug]/page.module.scss";
 import JsonLd from "@/components/JsonLd";
 import ViewCounter from "@/components/ViewCounter";
-import CommentsAndLikes from "@/components/commentsAndLikes/CommentsAndLikes";
 import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteButtonsSingle";
-import ReadingProgress from "@/components/readingProgress/ReadingProgress";
-import MoreLikeThis from "@/components/singleReview/moreLikeThis/MoreLikeThis";
 import { Movie } from "@/components/singleReview/movie/Movie";
 import OgImageLink from "@/components/singleReview/ogImageLink/OgImageLink";
 import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeader";
-import ScrollToSection from "@/components/singleReview/scrollToSection/ScrollToSection";
-import SocialShare from "@/components/singleReview/socialShare/SocialShare";
 import { getRawContent } from "@/lib/utils";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
+
+const ScrollToSection = dynamic(() => import("@/components/singleReview/scrollToSection/ScrollToSection"), { ssr: false })
+const ReadingProgress = dynamic(() => import("@/components/readingProgress/ReadingProgress"), { ssr: false })
+const SocialShare = dynamic(() => import("@/components/singleReview/socialShare/SocialShare"), { ssr: false })
+const MoreLikeThis = dynamic(() => import("@/components/singleReview/moreLikeThis/MoreLikeThis"), { ssr: false })
+const CommentsAndLikes = dynamic(() => import("@/components/commentsAndLikes/CommentsAndLikes"), { ssr: false })
 
 // export const dynamic = 'force-dynamic';
 export const revalidate = 60
