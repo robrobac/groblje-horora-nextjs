@@ -4,7 +4,6 @@ import useFetchReviewsWithParams from '@/hooks/useFetchReviewsWithParams'
 import PostsFlex from './postsFlex/PostsFlex';
 import Pagination from '../pagination/Pagination';
 import Search from '../searchBar/Search';
-import GhostSpinner from '../ghostSpinner/GhostSpinner';
 import useAuth from '@/hooks/useAuth';
 import { SORTING_OPTIONS } from '@/lib/sortOptions';
 
@@ -46,14 +45,10 @@ export default function ReviewsGallery() {
             loading,
         }}>
             <Search controls={true}/>
-            {loading ? (<GhostSpinner />) : (
-                <>
-                    <PostsFlex posts={reviews} loading={loading} handleRefresh={handleRefresh} user={user} mongoUser={mongoUser}/>
-                    {reviews.length !== 0 ? 
-                        <Pagination currentPage={page} totalPages={totalPages} handlePageChange={handlePageChange}/>
-                    : ""} 
-                </>
-            )}
+            <PostsFlex posts={reviews} loading={loading} handleRefresh={handleRefresh} user={user} mongoUser={mongoUser}/>
+                {reviews.length !== 0 ? 
+                <Pagination currentPage={page} totalPages={totalPages} handlePageChange={handlePageChange}/>
+            : ""} 
         </ReviewsGalleryContext.Provider>
     )
 }

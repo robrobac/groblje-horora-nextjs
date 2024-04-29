@@ -1,6 +1,7 @@
 .postsFlexContainer {
     max-width: var(--widthDefault);
     margin: 0 auto;
+    position: relative;
 }
 
 .postsFlexRow {
@@ -25,4 +26,15 @@
     @media (max-width: 320px) { // POST FLEX LAST EDIT - ovo je dodano
         gap: 40px;
     }
+}
+
+.loadingContainer {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--black);
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
 }
