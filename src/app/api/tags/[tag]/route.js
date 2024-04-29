@@ -3,35 +3,28 @@ import reviewModel from "@/lib/mongo/models/reviewModel";
 import { NextResponse } from "next/server"
 
 export const GET = async (request, { params }) => {
-
     dbConnect()
     const page = request.nextUrl.searchParams.get('page');
     const perPage = request.nextUrl.searchParams.get('perPage');
     const { tag } = params;
 
     const skip = page === "undefined" ? 0 : ((page - 1) * parseInt(perPage));
-    const reviews = await reviewModel.aggregate([
-        {
-            $match: {
-                "movies.tags.tagValue": tag
-            }
-        },
-        {
-            $skip: parseInt(skip)
-        },
-        {
-            $limit: parseInt(perPage)
-        },
-        {
-            $sort: {"createdAt": -1}
-        }
-    ])
 
-    const reviewsCount = await reviewModel.countDocuments({
-        "movies.tags.tagValue": tag // Direct query, no aggregation pipeline
-    });
+    const query = {
+        "movies.tags.tagValue": tag
+    };
 
-    if (!reviews) {
+    const reviews = await reviewModel.find(query)
+                                     .skip(parseInt(skip))
+                                     .limit(parseInt(perPage))
+                                     .sort({ "createdAt": -1 })
+                                     .exec();
+
+    const reviewsCount = await reviewModel.countDocuments(query);
+
+    const totalPages = Math.ceil(reviewsCount / perPage);
+
+    if (!reviews || reviews.length === 0) {
         return new NextResponse(JSON.stringify({ error: 'No reviews with that tag' }), {
             status: 404
         })
@@ -40,7 +33,7 @@ export const GET = async (request, { params }) => {
     return new NextResponse(JSON.stringify({
         reviews,
         reviewsCount,
-        totalPages: Math.ceil(reviewsCount / perPage)
+        totalPages,
     }), {
         status: 200
     })

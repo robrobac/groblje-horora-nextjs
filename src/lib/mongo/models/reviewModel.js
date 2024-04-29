@@ -141,6 +141,7 @@ const ReviewSchema = new Schema({
 ReviewSchema.index({
     reviewTitle: 'text',
     'movies.title': 'text',
+    'movies.tags.tagLabel': 'text',
 })
 
 export default mongoose.models.Review || mongoose.model('Review', ReviewSchema);

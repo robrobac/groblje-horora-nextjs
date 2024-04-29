@@ -1,10 +1,9 @@
-
 import React from 'react'
 import Link from "next/link";
 import styles from '@/components/pagination/pagination.module.scss'
 import PageSelect from './PageSelect';
 
-export default function PaginationSSR({tag, page, totalPages}) {
+export default async function PaginationSSR({tag, page, totalPages}) {
 
     return (
         <div className={styles.styledPagination}>
