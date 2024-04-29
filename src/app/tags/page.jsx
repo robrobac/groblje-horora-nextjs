@@ -46,7 +46,7 @@ const TagsPage = async () => {
             />
             <div className={styles.tagsList}>
                 {tags.map(tag =>
-                    <Link href={`${process.env.DOMAIN_URL}/tags/${tag.tagValue}`} key={tag.tagValue}>
+                    <Link href={`${process.env.DOMAIN_URL}/tags/${tag.tagValue}?page=1`} key={tag.tagValue}>
                         <p className={`${styles.tag}`}>{tag.tagLabel} <span>({tag.tagCount})</span></p>
                     </Link>
                 )}
