@@ -1,6 +1,7 @@
 import styles from './page.module.scss'
 import Link from "next/link";
 import TitleSubtitle from "@/components/reviewsGallery/titleSubtitle/TitleSubtitle";
+import Footer from '@/components/footer/footer';
 
 export const dynamic = 'force-dynamic';
 
@@ -37,6 +38,7 @@ const TagsPage = async () => {
     const tags = await getData();
 
     return (
+        <>
         <main className={styles.tagsPageContainer}>
             <TitleSubtitle
                 title={"Oznake"}
@@ -50,6 +52,8 @@ const TagsPage = async () => {
                 )}
             </div>          
         </main>
+        <Footer />
+        </>
     );
 };
 

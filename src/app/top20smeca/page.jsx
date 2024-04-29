@@ -1,3 +1,4 @@
+import Footer from "@/components/footer/footer";
 import PostsFlex from "@/components/reviewsGallery/postsFlex/PostsFlex";
 import TitleSubtitle from "@/components/reviewsGallery/titleSubtitle/TitleSubtitle";
 
@@ -29,6 +30,7 @@ const Top20SmecaPage = async () => {
     const reviews = await getData();
 
     return (
+        <>
         <main className="reviewsContainer">
             <TitleSubtitle
                 title={metadata.title}
@@ -36,6 +38,8 @@ const Top20SmecaPage = async () => {
             />
             <PostsFlex posts={reviews} />
         </main>
+        <Footer />
+        </>
     );
 };
 

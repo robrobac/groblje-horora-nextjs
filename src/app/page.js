@@ -1,4 +1,5 @@
 import JsonLd from "@/components/JsonLd";
+import Footer from "@/components/footer/footer";
 import { HomepageCover } from "@/components/homepageCover/HomepageCover";
 import { Introduction } from "@/components/introduction/Introduction";
 import { LatestPregled } from "@/components/latest/LatestPregled";
@@ -41,6 +42,7 @@ const structuredData = {
 export default function Naslovna() {
     console.log(structuredData)
     return (
+        <>
         <main>
             <HomepageCover />
             <Introduction />
@@ -51,5 +53,7 @@ export default function Naslovna() {
             <Worse20 />
             <JsonLd data={structuredData}/>
         </main>
+        <Footer />
+        </>
     );
 }

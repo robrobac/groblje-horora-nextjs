@@ -1,4 +1,5 @@
 import AdminCheckButton from "@/components/adminCheckButton/AdminCheckButton";
+import Footer from "@/components/footer/footer";
 
 export const metadata = {
     title: "O Blogu | Groblje Horora",
@@ -15,9 +16,12 @@ export const metadata = {
 
 const OBloguPage = () => {
     return (
+        <>
         <div style={{minHeight: "80vh"}}>
             <AdminCheckButton />
         </div>
+        <Footer />
+        </>
     );
 };
 

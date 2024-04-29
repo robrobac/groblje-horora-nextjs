@@ -15,7 +15,6 @@ export default function RootLayout({ children }) {
             <body suppressHydrationWarning={true} className={`${lexend.className} mainBody`}>
                 <Header />
                 {children}
-                <Footer />
                 <BackToTopButton />
                 <GoogleAnalyticsComp />
             </body>

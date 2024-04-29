@@ -1,3 +1,4 @@
+import Footer from "@/components/footer/footer";
 import PaginationSSR from "@/components/pagination/PaginationSSR";
 import PostsFlex from "@/components/reviewsGallery/postsFlex/PostsFlex";
 import TitleSubtitle from "@/components/reviewsGallery/titleSubtitle/TitleSubtitle";
@@ -53,6 +54,7 @@ const SingleTagPage = async ({params, searchParams}) => {
     
 
     return (
+        <>
         <main className="reviewsContainer smallerContainerHeight">
             <TitleSubtitle
                 title={`${currentTag} (${reviews.reviewsCount})`}
@@ -65,6 +67,8 @@ const SingleTagPage = async ({params, searchParams}) => {
                 <PaginationSSR tag={tag} page={page == undefined ? 1 : parseInt(page)} totalPages={reviews.totalPages}/>
             : ""}
         </main>
+        <Footer/>
+        </>
     );
 };
 

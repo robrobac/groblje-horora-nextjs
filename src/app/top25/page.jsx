@@ -1,5 +1,6 @@
 import TitleSubtitle from "@/components/reviewsGallery/titleSubtitle/TitleSubtitle";
 import PostsFlex from "@/components/reviewsGallery/postsFlex/PostsFlex";
+import Footer from "@/components/footer/footer";
 
 export const dynamic = 'force-dynamic';
 
@@ -29,6 +30,7 @@ const Top25Page = async () => {
     const reviews = await getData();
 
     return (
+        <>
         <main className="reviewsContainer">
             <TitleSubtitle
                 title={metadata.title}
@@ -36,6 +38,8 @@ const Top25Page = async () => {
             />
             <PostsFlex posts={reviews} />
         </main>
+        <Footer />
+        </>
     );
 };
 

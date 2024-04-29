@@ -9,6 +9,7 @@ import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeade
 import { getRawContent } from "@/lib/utils";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
+import Footer from "@/components/footer/footer";
 
 
 // TODO Read more about dynamic imports and see if it's even needed in this case because webvitals are not changing at all
@@ -121,6 +122,7 @@ const SinglePostPage = async ({params}) => {
     }
 
     return (
+        <>
         <main className={styles.singlePostContainer}>
             <ScrollToSection />
             <ReadingProgress />
@@ -151,6 +153,8 @@ const SinglePostPage = async ({params}) => {
 
             <JsonLd data={structuredData} />
         </main>
+        <Footer />
+        </>
     );
 };
 

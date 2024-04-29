@@ -1,4 +1,5 @@
 import styles from "@/app/recenzije/page.module.scss";
+import Footer from "@/components/footer/footer";
 import NewPostButtons from "@/components/newPostButtons/NewPostButtons";
 import ReviewsGallery from "@/components/reviewsGallery/ReviewsGallery";
 
@@ -19,6 +20,7 @@ export const metadata = {
 
 const RecenzijePage = () => {
     return (
+        <>
         <main className="reviewsContainer">
             <section className={styles.reviewsTitleContainer}>
                 <h1>{metadata.title}</h1>
@@ -27,6 +29,8 @@ const RecenzijePage = () => {
             <NewPostButtons />
             <ReviewsGallery />
         </main>
+        <Footer />
+        </>
     );
 };
 
