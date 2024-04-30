@@ -10,6 +10,14 @@ import Worse20 from "@/components/topComponents/Worse20";
 
 export const dynamic = 'force-dynamic';
 
+const getData = async () => {
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/homepageInitial`, { next: { revalidate: 5 } });
+    if (!res.ok) {
+        throw new Error('Failed to fetch LatestSingle data');
+    }
+    return res.json();
+}
+
 export const metadata = {
     title: "Groblje Horora | Recenzije Horor Filmova",
     description: 'Blog "Groblje horrora" napravljen je negdje u lipnju 2007. godine, a njegova namjena je prikaz dnevnika autora koji kako pogleda neki horror, tako baci omanji osvrt ili recenziju na određeni film. Moje ime je Bruno Koić i po struci sam magistar medijske kulture i kulturologije. Nadam se da će ti se svidjeti koncept onoga što radim i tebi prikazujem, hvala ti na posjeti!',
@@ -39,17 +47,17 @@ const structuredData = {
     "email": "bruno.koic1@gmail.com"
 }
 
-export default function Naslovna() {
-    console.log(structuredData)
+export default async function Naslovna() {
+    const data = await getData()
     return (
         <>
         <main>
             <HomepageCover />
             <Introduction />
-            <LatestPregled />
-            <LatestRecenzija />
+            <LatestPregled data={data.latestQuad}/>
+            <LatestRecenzija data={data.latestSingle}/>
             <Top25 />
-            <RecenzijeComponent />
+            <RecenzijeComponent count={data.count}/>
             <Worse20 />
             <JsonLd data={structuredData}/>
         </main>

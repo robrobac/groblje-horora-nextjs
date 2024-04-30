@@ -5,17 +5,7 @@ import { StandardBtn } from "../buttons/standardBtn/StandardBtn";
 import { formatMongoDate } from "@/lib/utils";
 import Image from "next/image";
 
-const getData = async () => {
-    const res = await fetch(`${process.env.DOMAIN_URL}/api/latestRecenzija`, { next: { revalidate: 5 } });
-    if (!res.ok) {
-        throw new Error('Failed to fetch LatestSingle data');
-    }
-    return res.json();
-}
-
-export const LatestRecenzija = async () => {
-    const data = await getData();
-
+export const LatestRecenzija = async ({data}) => {
     return (
         <>
             {/* DESKTOP VERSION */}

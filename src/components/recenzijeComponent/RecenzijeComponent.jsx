@@ -6,9 +6,7 @@ import { StandardBtn } from "../buttons/standardBtn/StandardBtn"
 import Image from 'next/image'
 
 
-export const RecenzijeComponent = async () => {
-    const count = await getCountAll()
-
+export const RecenzijeComponent = async ({count}) => {
     return (
         <article className={styles.recenzijeHomeCoverContainer}>
             <div className={styles.imageContainer}>

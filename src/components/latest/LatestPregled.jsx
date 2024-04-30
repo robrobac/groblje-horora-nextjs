@@ -4,17 +4,7 @@ import Link from 'next/link';
 import { StandardBtn } from '../buttons/standardBtn/StandardBtn';
 import Image from 'next/image';
 
-const getData = async () => {
-    const res = await fetch(`${process.env.DOMAIN_URL}/api/latestPregled`, { next: { revalidate: 5 } });
-    if (!res.ok) {
-        throw new Error('Failed to fetch LatestQuad data');
-    }
-    return res.json();
-}
-
-export const LatestPregled = async () => {
-    const data = await getData();
-
+export const LatestPregled = async ({data}) => {
     return (
         <>
             {/* DESKTOP VERSION */}
