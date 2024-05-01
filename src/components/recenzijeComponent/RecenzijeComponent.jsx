@@ -1,5 +1,4 @@
 import styles from '@/components/recenzijeComponent/recenzijeComponent.module.scss'
-import { getCountAll } from "@/lib/utils"
 import image from '../../../public/images/groblje-horora-recenzije-home-image.jpg'
 import Link from "next/link"
 import { StandardBtn } from "../buttons/standardBtn/StandardBtn"
