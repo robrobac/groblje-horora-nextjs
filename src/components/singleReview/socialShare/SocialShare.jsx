@@ -3,16 +3,17 @@
 import React, { useState } from 'react'
 import styles from './socialShare.module.scss'
 import copyLinkIcon from '../../../../public/images/copyLinkIcon.png';
-import {
-    FacebookShareButton,
-    FacebookIcon,
-    WhatsappShareButton,
-    WhatsappIcon,
-    ViberShareButton,
-    ViberIcon,
-  } from 'next-share'
-import CopyToClipboard from 'react-copy-to-clipboard';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+const FacebookShareButton = dynamic(() => import('next-share').then(mod => mod.FacebookShareButton));
+const FacebookIcon = dynamic(() => import('next-share').then(mod => mod.FacebookIcon));
+const WhatsappShareButton = dynamic(() => import('next-share').then(mod => mod.WhatsappShareButton));
+const WhatsappIcon = dynamic(() => import('next-share').then(mod => mod.WhatsappIcon));
+const ViberShareButton = dynamic(() => import('next-share').then(mod => mod.ViberShareButton));
+const ViberIcon = dynamic(() => import('next-share').then(mod => mod.ViberIcon));
+
+const CopyToClipboard = dynamic(() => import("react-copy-to-clipboard"), { ssr: false })
 
 export default function SocialShare({slug, reviewType, index, title, additionalPadding}) {
     const [copied, setCopied] = useState(false)
