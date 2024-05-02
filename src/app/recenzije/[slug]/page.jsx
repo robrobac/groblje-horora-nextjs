@@ -16,7 +16,6 @@ const SocialShare = dynamic(() => import("@/components/singleReview/socialShare/
 // TODO Read more about dynamic imports and see if it's even needed in this case because webvitals are not changing at all
 const ScrollToSection = dynamic(() => import("@/components/singleReview/scrollToSection/ScrollToSection"), { ssr: false })
 const ReadingProgress = dynamic(() => import("@/components/readingProgress/ReadingProgress"), { ssr: false })
-
 const MoreLikeThis = dynamic(() => import("@/components/singleReview/moreLikeThis/MoreLikeThis"), { ssr: false })
 const CommentsAndLikes = dynamic(() => import("@/components/commentsAndLikes/CommentsAndLikes"), { ssr: false })
 
