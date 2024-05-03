@@ -57,7 +57,7 @@
     flex-direction: column;
     gap: 8px;
 
-    h5 {
+    h2, h3 {
         cursor: var(--pointerCursor);
 
         @media (hover: hover) {

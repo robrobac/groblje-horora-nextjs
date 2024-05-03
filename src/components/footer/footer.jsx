@@ -4,12 +4,12 @@ import { getYear } from 'date-fns';
 import { Logo } from "../header/svg/Logo";
 
 const links = [
-    { name: 'Naslovna', path: '/', activeLink: '/' },
-    { name: 'Top 25', path: '/top25', activeLink: '/top25' },
-    { name: 'Recenzije', path: '/recenzije', activeLink: '/recenzije' },
-    { name: 'Top 20 smeća', path: '/top20smeca', activeLink: '/top20smeca' },
-    { name: 'O Blogu', path: '/o-blogu', activeLink: '/o-blogu' },
-    { name: 'Oznake', path: '/tags', activeLink: '/tags' },
+    { name: 'Naslovna', path: '/', activeLink: '/', prefetch: false },
+    { name: 'Top 25', path: '/top25', activeLink: '/top25', prefetch: false },
+    { name: 'Recenzije', path: '/recenzije', activeLink: '/recenzije', prefetch: false },
+    { name: 'Top 20 smeća', path: '/top20smeca', activeLink: '/top20smeca', prefetch: false },
+    { name: 'O Blogu', path: '/o-blogu', activeLink: '/o-blogu', prefetch: false },
+    { name: 'Oznake', path: '/tags', activeLink: '/tags', prefetch: true },
 ];
 
 export const Footer = () => {
@@ -30,7 +30,7 @@ export const Footer = () => {
 
                     <nav className={styles.footerNav}>
                         {links.map((link => (
-                            <Link href={link.path} key={link.name} className={styles.footerNavLink}>{link.name}</Link>
+                            <Link prefetch={link.prefetch} href={link.path} key={link.name} className={styles.footerNavLink}>{link.name}</Link>
                         )))}
                     </nav>
 

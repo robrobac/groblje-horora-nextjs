@@ -18,8 +18,8 @@ export default function MoreLikeThis({data, postType}) {
                         <article key={post._id} className={styles.moreLikeThisPost}>
                             <div className={styles.moreLikeThisPostInfo}>
                                 <PrivremeniTagovi post={post} />
-                                <PostImage post={post} newTab={false}/>
-                                <Link href={`/recenzije/${post?.slug}`}>
+                                <PostImage post={post} newTab={true}/>
+                                <Link target='_blank' href={`/recenzije/${post?.slug}`}>
                                     {postType === 'single' ? (
                                         <h2>{post.reviewTitle} {post.movies.length === 1 && (<span>({post?.movies[0].year})</span>)}</h2>
                                     ) : (
@@ -33,7 +33,7 @@ export default function MoreLikeThis({data, postType}) {
                                     </p>
                                 )}
                             </div>
-                            <StandardBtn path={`/recenzije/${post?.slug}`} content='Pročitaj više →' type='textOnly' newTab={false}/>
+                            <StandardBtn path={`/recenzije/${post?.slug}`} content='Pročitaj više →' type='textOnly' newTab={true}/>
                             
                         </article>
                     ))}

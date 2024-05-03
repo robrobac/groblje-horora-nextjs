@@ -9,6 +9,7 @@ export const NavLink = ({link}) => {
 
     return (
             <Link
+            prefetch={true}
             href={link.path}
             className={`${styles.navLink} ${currentPath === link.activeLink && styles.active}`}
             >
