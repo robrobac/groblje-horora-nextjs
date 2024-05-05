@@ -13,42 +13,42 @@ export default async function sitemap() {
     const postsUrls = posts.map((review) => {
         return {
             url: `${process.env.DOMAIN_URL}/recenzije/${review.slug}`,
-            lastModified: new Date(review.updatedAt)
+            lastModified: review.updatedAt.substring(0, 10)
         };
     }) ?? [];
 
     const tagUrls = tags.map((tag) => {
         return {
             url: `${process.env.DOMAIN_URL}/tags/${tag.tagValue}`,
-            lastModified: new Date(),
+            lastModified: posts[0].createdAt.substring(0, 10)
         }
     }) ?? [];
 
     return [
         {
             url: process.env.DOMAIN_URL,
-            lastModified: new Date()
+            lastModified: posts[0].createdAt.substring(0, 10)
         },
         {
             url: `${process.env.DOMAIN_URL}/top25`,
-            lastModified: new Date()
+            lastModified: posts[0].createdAt.substring(0, 10)
         },
         {
             url: `${process.env.DOMAIN_URL}/recenzije`,
-            lastModified: new Date()
+            lastModified: posts[0].createdAt.substring(0, 10)
         },
         {
             url: `${process.env.DOMAIN_URL}/top20smeca`,
-            lastModified: new Date()
+            lastModified: posts[0].createdAt.substring(0, 10)
         },
         {
             url: `${process.env.DOMAIN_URL}/o-blogu`,
-            lastModified: new Date()
+            lastModified: posts[0].createdAt.substring(0, 10)
         },
         ...postsUrls,
         {
             url: `${process.env.DOMAIN_URL}/tags`,
-            lastModified: new Date()
+            lastModified: posts[0].createdAt.substring(0, 10)
         },
         ...tagUrls,
     ]
