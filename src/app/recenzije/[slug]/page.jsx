@@ -22,6 +22,12 @@ const CommentsAndLikes = dynamic(() => import("@/components/commentsAndLikes/Com
 // export const dynamic = 'force-dynamic';
 export const revalidate = 60
 
+function cleanDescription(str) {
+    const cleanedString = str.replace(/<\/?[^>]+(>|$)/g, "");
+    const cleanedStringWithoutTags = cleanedString.replace(/<\/?(p|b|strong|em|i|u|strike)>/g, "");
+    return cleanedStringWithoutTags;
+}
+
 function shortenStringTo30Words(str) {
     const cleanedString = str.replace(/<\/?[^>]+(>|$)/g, "");
     const cleanedStringWithoutTags = cleanedString.replace(/<\/?(p|b|strong|em|i|u|strike)>/g, "");
@@ -95,32 +101,122 @@ export const generateMetadata = async ({params, searchParams}) => {
     }
 }
 
-const SinglePostPage = async ({params}) => {
+const SinglePostPage = async ({params, searchParams}) => {
     const {slug} = params;
+    const {movie} = searchParams;
+    
+
     const data = await getData(slug);
     // console.log(data.moreLikeThis)
 
-    const structuredData = {
-        "@context": "https://schema.org/",
-        "@type": "Review",
-        "itemReviewed": {
-            "@type": "Movie",
-            "name": `${data.reviewTitle}`,
-            "image": `${data.movies[0].coverImage}`
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": `${data.movies[0].rating}`,
-            "bestRating": "5",
-            "reviewCount": "1"
-        },
-        "author": {
-            "@type": "Person",
-            "name": "Bruno Koić"
-        },
-        "datePublished": `${data.createdAt}`,
-    }
+    // console.log("type of movie: ", typeof movie)
+    // console.log("movie: ", movie)
+    // console.log("Type: ", data.reviewType)
 
+    const generateStructuredData = () => {
+        if (data.reviewType == "quad" && movie === undefined) {
+            // return {
+            //     "@context": "http://schema.org",
+            //     "@type": "Review",
+            //     "name": `${data.reviewTitle}`,
+            //     "image": `${data.quadOgImage}`,
+            //     "review": {
+            //         "@type": "Review",
+            //         "author": {
+            //             "@type": "Person",
+            //             "name": "Bruno Koić"
+            //         },
+            //         "datePublished": `${data.createdAt}`,
+            //         "dateModified": `${data.updatedAt}`,
+            //         "reviewBody": `${data?.movies[0].title}(${data?.movies[0].year}), ${data.movies[1].title}(${data.movies[1].year}), ${data.movies[2].title}(${data.movies[2].year}), ${data.movies[3].title}(${data.movies[3].year})`
+            //     }
+            // }
+            return {
+                "@context": "http://schema.org",
+                "@type": "BlogPosting",
+                "headline": `${data.reviewTitle}`,
+                "image": [`${data.quadOgImage}`],
+                "datePublished": `${data.createdAt}`,
+                "dateModified": `${data.updatedAt}`,
+                "author": [{
+                    "@type": "Person",
+                    "name": "Bruno Koić"
+                }],
+            }
+        } else return {
+            "@context": "http://schema.org",
+            "@type": "Movie",
+            "name": `${movie !== undefined ? data.movies[movie - 1].title : data.movies[0].title}`,
+            "image": `${movie !== undefined ? data.movies[movie - 1].coverImage : data.movies[0].coverImage}`,
+            "review": {
+                "@type": "Review",
+                "author": {
+                    "@type": "Person",
+                    "name": "Bruno Koić"
+                },
+                "datePublished": `${data.createdAt}`,
+                "dateModified": `${data.updatedAt}`,
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": `${movie !== undefined ? data.movies[movie - 1].rating : data.movies[0].rating}`,
+                    "bestRating": "5",
+                    "worstRating": "1"
+                },
+                "reviewBody": `${movie !== undefined ?
+                    cleanDescription(getRawContent(data.movies[movie - 1].reviewContent))
+                    :
+                    cleanDescription(getRawContent(data.movies[0].reviewContent))
+                }`,
+            }
+        }
+    }
+    
+
+    // const structuredData = {
+    //     "@context": "http://schema.org",
+    //     "@type": "Movie",
+    //     "name": `${movie !== undefined ? data.movies[movie - 1].title : data.movies[0].title}`,
+    //     "image": `${movie !== undefined ? data.movies[movie - 1].coverImage : data.movies[0].coverImage}`,
+    //     "review": {
+    //         "@type": "Review",
+    //         "author": {
+    //             "@type": "Person",
+    //             "name": "Bruno Koić"
+    //         },
+    //         "datePublished": `${data.createdAt}`,
+    //         "dateModified": `${data.updatedAt}`,
+    //         "reviewRating": {
+    //             "@type": "Rating",
+    //             "ratingValue": `${movie !== undefined ? data.movies[movie - 1].rating : data.movies[0].rating}`,
+    //             "bestRating": "5",
+    //             "worstRating": "1"
+    //         },
+    //         "reviewBody": `${movie !== undefined ?
+    //             cleanDescription(getRawContent(data.movies[movie - 1].reviewContent))
+    //             :
+    //             cleanDescription(getRawContent(data.movies[0].reviewContent))
+    //         }`,
+    //     }
+    // }
+
+    // const structuredDataQuad = {
+    //     "@context": "http://schema.org",
+    //     "@type": "Movie",
+    //     "name": `${data.reviewTitle}`,
+    //     "image": `${data.quadOgImage}`,
+    //     "review": {
+    //         "@type": "Review",
+    //         "author": {
+    //             "@type": "Person",
+    //             "name": "Bruno Koić"
+    //         },
+    //         "datePublished": `${data.createdAt}`,
+    //         "dateModified": `${data.updatedAt}`,
+    //         "reviewBody": `${data?.movies[0].title}(${data?.movies[0].year}), ${data.movies[1].title}(${data.movies[1].year}), ${data.movies[2].title}(${data.movies[2].year}), ${data.movies[3].title}(${data.movies[3].year})`
+    //     }
+    // }
+
+    
     return (
         <>
         <main className={styles.singlePostContainer}>
@@ -150,8 +246,8 @@ const SinglePostPage = async ({params}) => {
             {data.reviewType === 'quad' && <SocialShare slug={slug} reviewType='single' title={data.reviewTitle} additionalPadding={true}/>}
             {data.reviewType === 'quad' && <OgImageLink link={data.quadOgImage} title={data.reviewTitle} additionalPadding={true}/>}
             <MoreLikeThis data={data.moreLikeThis} postType={data.reviewType}/>
+            <JsonLd data={generateStructuredData()}/>
 
-            <JsonLd data={structuredData} />
         </main>
         <Footer />
         </>
