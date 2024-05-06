@@ -18,7 +18,7 @@ export const metadata = {
 };
 
 const getData = async () => {
-    const res = await fetch(`${process.env.DOMAIN_URL}/api/reviews/worse20`);
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/reviews/worse20`, { next: { revalidate: 0 } });
     // console.log("Worse20 Reviews data fetched") // Keep in Development
     if (!res.ok) {
         throw new Error('Failed to fetch Worse20 Reviews data');
@@ -28,6 +28,8 @@ const getData = async () => {
 
 const Top20SmecaPage = async () => {
     const reviews = await getData();
+
+    console.log(reviews)
 
     return (
         <>
