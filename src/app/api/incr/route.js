@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { Redis } from "@upstash/redis"
 import reviewModel from "@/lib/mongo/models/reviewModel";
 import { dbConnect } from "@/lib/mongo/dbConnect";
+import { headers } from "next/headers";
 
 export const redis = new Redis({
     url: process.env.UPSTASH_REDIS_REST_URL,
@@ -24,9 +25,9 @@ export async function POST(req) {
         return new NextResponse("Slug not found for Redis counter", {status: 400})
     }
 
-    const ip = req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.ip;
+    const ip = headers().get('x-real-ip') || headers().get('x-forwarded-for') || req.ip;
 
-    console.log(req.headers)
+    console.log(ip)
 
     const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(ip));
 
@@ -46,8 +47,6 @@ export async function POST(req) {
             { $inc: { views: 0 } },
             { new: true }
         );
-
-        const views = await redis.get(["pageviews", "projects", slug].join(":")) ?? 0
         return new NextResponse(updatedViews.views, {status: 202 })
     }
 

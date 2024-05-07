@@ -8,7 +8,6 @@ const getViews = async (slug) => {
             body: JSON.stringify({ slug }),
         });
         const data = await response.json();
-        console.log("dadaadadadaa:",data)
         return data;
     } catch (error) {
         console.error('Error fetching data:', error);
