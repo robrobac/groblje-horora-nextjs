@@ -105,7 +105,8 @@ const ReviewSchema = new Schema({
     },
     slug: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
     },
     contentImages: {
         type: Array,
@@ -133,7 +134,12 @@ const ReviewSchema = new Schema({
     quadOgImagePath: {
         type: String,
         required: false,
-    }
+    },
+    views: {
+        type: Number,
+        required: false,
+        default: 0,
+    },
 }, {
     timestamps: true
 })
