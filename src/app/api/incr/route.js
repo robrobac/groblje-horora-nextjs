@@ -26,6 +26,8 @@ export async function POST(req) {
 
     const ip = req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.ip;
 
+    console.log(ip)
+
     const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(ip));
 
     const hash = Array.from(new Uint8Array(buf))
