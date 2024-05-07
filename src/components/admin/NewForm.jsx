@@ -14,8 +14,8 @@ const Editor = dynamic(() => import('react-draft-wysiwyg').then(mod => mod.Edito
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./editor.scss";
 
-import { getRawContent, shortenStringTo30Words, slugify, stringFormatting } from '@/lib/utils';
-import { deleteImageFromFirebaseStorage, uploadImageToFirebaseStorage } from '@/lib/firebase/firebaseUtils';
+import { getRawContent, shortenStringTo30Words, slugify } from '@/lib/utils';
+import { uploadImageToFirebaseStorage } from '@/lib/firebase/firebaseUtils';
 import { compressImage, compressOgImage } from '@/lib/compressImage';
 import { useRouter } from 'next/navigation';
 import PreviewDialog from './PreviewDialog';
