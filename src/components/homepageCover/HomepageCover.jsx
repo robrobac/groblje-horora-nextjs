@@ -22,7 +22,7 @@ export const HomepageCover = async () => {
         <>
         <div className={styles.coverImage}>
             <Image className={styles.coverImageGraves} src={graves} alt='graves' style={{position: "absolute"}}/>
-            <Image priority={true} src={cover} alt='main background, a graveyard silhouette'/>
+            <Image placeholder='blur' priority={true} src={cover} alt='main background, a graveyard silhouette'/>
             <div className={styles.coverImageTrees}>
                 <Image className={styles.leftTree} width={428} height={800} src={'/images/groblje-horora-cover-left-tree.svg'} alt='tree silhouette on the left side of the screen'/>
                 <div className={styles.coverTitleDesktopWrap}>
