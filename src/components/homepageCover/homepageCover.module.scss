@@ -29,19 +29,28 @@
 
     }
 
-    img {
+    img:not(.coverImageGraves) {
         width: 100%;
         height: 100%;
         object-fit: cover;
         object-position: center;
-        mix-blend-mode: lighten;
+    }
+
+    .coverImageGraves {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        top: 0;
+        
     }
 
     .coverImageTrees {
         position: absolute;
         width: 100%;
         max-width: 2560px;
-        height: 100%;
+        height: 101%;
         display: flex;
         justify-content: space-between;
         align-items: center;
