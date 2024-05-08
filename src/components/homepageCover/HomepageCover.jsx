@@ -2,27 +2,30 @@
 import styles from '@/components/homepageCover/homepageCover.module.scss';
 import Image from 'next/image';
 import cover from '../../../public/images/1920-groblje-horora-home-page-cover.webp'
+import coverMobile from '../../../public/images/425-groblje-horora-home-page-cover.webp'
 import graves from '../../../public/images/groblje-horora-graves.svg'
-// import cover2 from '../../../public/images/500-groblje-horora-home-page-cover.jpg'
 
 import { Creepster } from "next/font/google";
-// import { headers } from 'next/headers';
-// import { UAParser } from 'ua-parser-js';
+import { headers } from 'next/headers';
+import { UAParser } from 'ua-parser-js';
 
 const creepster = Creepster({ subsets: ["latin"], weight: '400' });
 
 
 
 export const HomepageCover = async () => {
-    // const headersList = headers().get('user-agent')
-    // let parser = new UAParser(headersList);
-    // let parserResults = parser.getResult();
-    // console.log(parserResults);
+    const headersList = headers().get('user-agent')
+    let parser = new UAParser(headersList);
+    let parserResults = parser.getResult();
+    console.log(parserResults.device.type);
+
+    const coverImage = parserResults.device.type === "mobile" ? coverMobile : cover;
+    
     return (
         <>
         <div className={styles.coverImage}>
             <Image className={styles.coverImageGraves} src={graves} alt='graves' style={{position: "absolute"}}/>
-            <Image placeholder='blur' priority={true} src={cover} alt='main background, a graveyard silhouette'/>
+            <Image placeholder='blur' priority={true} src={coverImage} alt='main background, a graveyard silhouette'/>
             <div className={styles.coverImageTrees}>
                 <Image className={styles.leftTree} width={428} height={800} src={'/images/groblje-horora-cover-left-tree.svg'} alt='tree silhouette on the left side of the screen'/>
                 <div className={styles.coverTitleDesktopWrap}>
