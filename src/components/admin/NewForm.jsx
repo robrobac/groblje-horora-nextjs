@@ -212,32 +212,32 @@ export default function NewForm({ numberOfMovies }) {
                     }
                 }
 
-                // console.log('--------- OG IMAGE UPLOADING -----------') // Keep in Development
+                console.log('--------- OG IMAGE UPLOADING -----------') // Keep in Development
                 const ogImageData = {
                     title: movie.title,
                     year: movie.year,
                     reviewContent: shortenStringTo30Words(getRawContent(movie.reviewContent)),
                     rating: movie.rating,
                 }
-                // console.log('ogImageData: ', ogImageData) // Keep in Development
+                console.log('ogImageData: ', ogImageData) // Keep in Development
                 const ogImageDataCoverUrl = [url];
-                // console.log('ogImageDataCoverUrl', ogImageDataCoverUrl) // Keep in Development
+                console.log('ogImageDataCoverUrl', ogImageDataCoverUrl) // Keep in Development
 
                 const encodedogImageData = encodeURIComponent(JSON.stringify(ogImageData))
                 const encodedogImageDataCoverUrl = encodeURIComponent(JSON.stringify(ogImageDataCoverUrl))
-                // console.log('encoded', [encodedogImageData, encodedogImageDataCoverUrl]) // Keep in Development
+                console.log('encoded', [encodedogImageData, encodedogImageDataCoverUrl]) // Keep in Development
 
                 const ogImageRequestUrl = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?images=${encodedogImageDataCoverUrl}&data=${encodedogImageData}&type=single`
-                // console.log('ogImageRequestUrl: ', ogImageRequestUrl) // Keep in Development
+                console.log('ogImageRequestUrl: ', ogImageRequestUrl) // Keep in Development
 
                 const ogImageResponse = await fetch(ogImageRequestUrl)
                 const ogImageBlob = await ogImageResponse.blob();
-                // console.log('og image blob: ', ogImageBlob); // Keep in Development
+                console.log('og image blob: ', ogImageBlob); // Keep in Development
 
                 compressOgImage (ogImageBlob, async (compressedResult) => {
                     const ogUploadPath = `ogImages/${slugify(movie.title, movie.year)}-ogImage-${Date.now()}.jpg`;
                     const ogUploadResult = await uploadImageToFirebaseStorage(compressedResult, ogUploadPath);
-                    // console.log('ogUploadResult', ogUploadResult) // Keep in Development
+                    console.log('ogUploadResult', ogUploadResult) // Keep in Development
 
                     const ogUrl = ogUploadResult.url
                     const ogPath = ogUploadResult.path
@@ -275,37 +275,37 @@ export default function NewForm({ numberOfMovies }) {
                 };
 
                 if (resolvedMovieReviews.length === 4) {
-                    // console.log('---------QUAD OG IMAGE UPLOADING -----------') // Keep in Development
+                    console.log('---------QUAD OG IMAGE UPLOADING -----------') // Keep in Development
                     const quadOgImageData = review.movies.map((movie, index) => {
                         return {
                             title: movie.title,
                             rating: movie.rating
                         };
                     })
-                // console.log('quadOgImageData: ', quadOgImageData) // Keep in Development
+                console.log('quadOgImageData: ', quadOgImageData) // Keep in Development
 
                 const quadOgImageDataCoverUrls = review.movies.map((movie, index) => {
                     return movie.coverImage
                 })
-                // console.log('quadOgImageDataCoverUrls', quadOgImageDataCoverUrls) // Keep in Development
+                console.log('quadOgImageDataCoverUrls', quadOgImageDataCoverUrls) // Keep in Development
                 
                 const encodedQuadOgImageData = encodeURIComponent(JSON.stringify(quadOgImageData))
                 const encodedQuadOgImageDataCoverUrls = encodeURIComponent(JSON.stringify(quadOgImageDataCoverUrls))
-                // console.log('encoded', [encodedQuadOgImageData, encodedQuadOgImageDataCoverUrls]) // Keep in Development
+                console.log('encoded', [encodedQuadOgImageData, encodedQuadOgImageDataCoverUrls]) // Keep in Development
 
                 const quadOgImageRequestUrl = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/og?images=${encodedQuadOgImageDataCoverUrls}&data=${encodedQuadOgImageData}&type=quad`
-                // console.log('quadOgImageRequestUrl: ', quadOgImageRequestUrl) // Keep in Development
+                console.log('quadOgImageRequestUrl: ', quadOgImageRequestUrl) // Keep in Development
 
 
                 const quadOgImageResponse = await fetch(quadOgImageRequestUrl)
                 const quadOgImageBlob = await quadOgImageResponse.blob();
-                // console.log('quad og image blob: ', quadOgImageBlob); // Keep in Development
+                console.log('quad og image blob: ', quadOgImageBlob); // Keep in Development
 
                 const quadOgUploadResult = await new Promise(resolve => {
                     compressOgImage(quadOgImageBlob, async (compressedResult) => {
                         const quadOgUploadPath = `ogImages/${slugify(review.reviewTitle)}-ogImage-${Date.now()}.jpg`;
                         const quadOgUploadResult = await uploadImageToFirebaseStorage(compressedResult, quadOgUploadPath);
-                        // console.log('ogUploadResult', quadOgUploadResult) // Keep in Development
+                        console.log('ogUploadResult', quadOgUploadResult) // Keep in Development
 
                         resolve(quadOgUploadResult)
                     })
@@ -317,7 +317,7 @@ export default function NewForm({ numberOfMovies }) {
                 review.quadOgImage = quadOgUrl;
                 review.quadOgImagePath = quadOgPath;
 
-                // console.log('PREPARED REVIEW', review) // Keep in Development
+                console.log('PREPARED REVIEW', review) // Keep in Development
                 }
 
                 // API Call to post a new Review
@@ -334,7 +334,7 @@ export default function NewForm({ numberOfMovies }) {
                     setEmptyFields(json.emptyFields)
                     setFormFailed(!formFailed)
                     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-                    // console.log(json) // Keep in Development
+                    console.log(json) // Keep in Development
 
                     setLoading(false)
                 }
@@ -484,7 +484,6 @@ export default function NewForm({ numberOfMovies }) {
                                                 alignmentEnabled: true,
                                                 className: 'imageButton',
                                                 popupClassName: 'imagePopup',
-                                                alt: { mandatory: true },
                                             }
                                         }}
                                     />
