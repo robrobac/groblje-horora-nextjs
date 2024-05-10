@@ -10,11 +10,36 @@ export default async function sitemap() {
     const tags = sortedTags;
     const posts = await res.json()
 
-    const postsUrls = posts.map((review) => {
-        return {
-            url: `${process.env.DOMAIN_URL}/recenzije/${review.slug}`,
-            lastModified: review.updatedAt.substring(0, 10)
-        };
+    const postsUrls = posts.flatMap((review) => {
+        if (review.reviewType === "quad") {
+            return [
+                {
+                    url: `${process.env.DOMAIN_URL}/recenzije/${review.slug}`,
+                    lastModified: review.updatedAt.substring(0, 10)
+                },
+                {
+                    url: `${process.env.DOMAIN_URL}/recenzije/${review.slug}?movie=1`,
+                    lastModified: review.updatedAt.substring(0, 10)
+                },
+                {
+                    url: `${process.env.DOMAIN_URL}/recenzije/${review.slug}?movie=2`,
+                    lastModified: review.updatedAt.substring(0, 10)
+                },
+                {
+                    url: `${process.env.DOMAIN_URL}/recenzije/${review.slug}?movie=3`,
+                    lastModified: review.updatedAt.substring(0, 10)
+                },
+                {
+                    url: `${process.env.DOMAIN_URL}/recenzije/${review.slug}?movie=4`,
+                    lastModified: review.updatedAt.substring(0, 10)
+                }
+            ];
+        } else {
+            return {
+                url: `${process.env.DOMAIN_URL}/recenzije/${review.slug}`,
+                lastModified: review.updatedAt.substring(0, 10)
+            };
+        }
     }) ?? [];
 
     const tagUrls = tags.map((tag) => {
