@@ -642,6 +642,7 @@ export default function EditForm({slug}) {
                                                 alignmentEnabled: true,
                                                 className: 'imageButton',
                                                 popupClassName: 'imagePopup',
+                                                alt: { mandatory: true },
                                             }
                                         }}
                                     />

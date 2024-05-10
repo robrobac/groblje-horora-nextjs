@@ -18,7 +18,7 @@ export default function OpenGraphSingle({coverImage, title, content, rating, yea
         }}
     >
         <img
-            alt='dadada'
+            alt=''
             itemType='image/jpeg'
             height='100%'
             src={coverImage}

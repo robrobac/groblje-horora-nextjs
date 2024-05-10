@@ -18,7 +18,7 @@ export default function Worse20() {
             </section>
             <figure className={styles.topImage}>
                 <Link href={`/top20smeca`} target='_blank'>
-                    <Image src={topImage} alt='movie-cover'></Image>
+                    <Image src={topImage} alt='Groblje Horora Top 20 Smeća Naslovna Slika'></Image>
                 </Link>
             </figure>
         </article>

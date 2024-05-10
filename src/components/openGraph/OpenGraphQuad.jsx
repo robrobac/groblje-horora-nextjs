@@ -20,7 +20,7 @@ export default function OpenGraphQuad({data, images}) {
             <div style={{display: 'flex', width: '25%', height: '100%', padding: '12px', overflow: 'hidden', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between'}}>
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px', width: '100%', overflow: 'hidden', borderRadius: 20}}>
                     <img
-                        alt='dadada'
+                        alt=''
                         itemType='image/jpeg'
                         src={images[0]}
                         style={{boxShadow: '0px 0px 21px 1px #000000', width: '100%', height: '100%', objectFit: 'cover'}}
@@ -32,7 +32,7 @@ export default function OpenGraphQuad({data, images}) {
             <div style={{display: 'flex', width: '25%', height: '100%', padding: '12px', overflow: 'hidden', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between'}}>
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px', width: '100%', overflow: 'hidden', borderRadius: 20}}>
                     <img
-                        alt='dadada'
+                        alt=''
                         itemType='image/jpeg'
                         src={images[1]}
                         style={{boxShadow: '0px 0px 21px 1px #000000', width: '100%', height: '100%', objectFit: 'cover'}}
@@ -44,7 +44,7 @@ export default function OpenGraphQuad({data, images}) {
             <div style={{display: 'flex', width: '25%', height: '100%', padding: '12px', overflow: 'hidden', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between'}}>
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px', width: '100%', overflow: 'hidden', borderRadius: 20}}>
                     <img
-                        alt='dadada'
+                        alt=''
                         itemType='image/jpeg'
                         src={images[2]}
                         style={{boxShadow: '0px 0px 21px 1px #000000', width: '100%', height: '100%', objectFit: 'cover'}}
@@ -56,7 +56,7 @@ export default function OpenGraphQuad({data, images}) {
             <div style={{display: 'flex', width: '25%', height: '100%', padding: '12px', overflow: 'hidden', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between'}}>
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px', width: '100%', overflow: 'hidden', borderRadius: 20}}>
                     <img
-                        alt='dadada'
+                        alt=''
                         itemType='image/jpeg'
                         src={images[3]}
                         style={{boxShadow: '0px 0px 21px 1px #000000', width: '100%', height: '100%', objectFit: 'cover'}}

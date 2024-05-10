@@ -484,6 +484,7 @@ export default function NewForm({ numberOfMovies }) {
                                                 alignmentEnabled: true,
                                                 className: 'imageButton',
                                                 popupClassName: 'imagePopup',
+                                                alt: { mandatory: true },
                                             }
                                         }}
                                     />

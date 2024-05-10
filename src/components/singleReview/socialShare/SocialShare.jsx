@@ -51,7 +51,7 @@ export default function SocialShare({slug, reviewType, index, title, additionalP
                 </ViberShareButton>
                 <CopyToClipboard text={reviewType === 'single' ? `https://www.groblje-horora.com/recenzije/${slug}` : `https://www.groblje-horora.com/recenzije/${slug}?movie=${index + 1}`} onCopy={handleCopy}>
                     <div className={styles.copyLinkButton}>
-                        <Image width={36} height={36} src={copyLinkIcon.src} alt="copy link icon" />
+                        <Image width={36} height={36} src={copyLinkIcon.src} alt={`Ikona za kopiranje linka recenzije`} />
                     </div>
                 </CopyToClipboard>
                 {copied && (

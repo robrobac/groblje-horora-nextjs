@@ -26,8 +26,9 @@ export const LatestPregled = async ({data}) => {
                     <section className={styles.quadCoverContainer}>
                         {data[0].movies.map((movie, index) => (
                             <figure className={styles.quadCoverImageContainer} key={movie._id}>
-                                <Image width={300} height={472.5} className={styles[`image${index}`]} src={movie.coverImage} alt={`${movie.title} cover image`}></Image>
+                                <Image width={300} height={472.5} className={styles[`image${index}`]} src={movie.coverImage} alt={`Naslovna slika horor filma ${movie.title}(${movie.year}), najnoviji kratki pregled pogledanog`}></Image>
                             </figure>
+                            
                         ))}
                     </section>
                 </Link>
@@ -46,7 +47,7 @@ export const LatestPregled = async ({data}) => {
                     <section className={styles.quadCoverContainer}>
                         {data[0].movies.map((movie, index) => (
                             <figure className={styles.quadCoverImageContainer} key={movie._id}>
-                                <Image width={212.5} height={324.3} className={styles[`image${index}`]} src={movie.coverImage} alt={`${movie.title} cover image`}></Image>
+                                <Image width={212.5} height={324.3} className={styles[`image${index}`]} src={movie.coverImage} alt={`Naslovna slika horor filma ${movie.title}(${movie.year}), najnoviji kratki pregled pogledanog`}></Image>
                             </figure>
                         ))}
                     </section>

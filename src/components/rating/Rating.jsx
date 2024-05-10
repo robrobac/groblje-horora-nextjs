@@ -15,7 +15,7 @@ export const Rating = ({rating, detailed}) => {
      
     return (
         <div className={styles.ratingContainer}>
-            <Image width={108} height={20} src={`/images/rating/${formatRating(rating)}.png`} alt={`rating: ${rating}/5`}/>
+            <Image width={108} height={20} src={`/images/rating/${formatRating(rating)}.png`} alt={`Ocjena filma: ${rating}/5`}/>
             {detailed ? <span>{rating} / 5</span> : ''}
         </div>
     )

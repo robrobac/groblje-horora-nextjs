@@ -11,7 +11,7 @@ export default async function Top25() {
         <article className={styles.topContainer}>
             <figure className={styles.topImage}>
                 <Link href={`/top25`} target='_blank'>
-                    <Image src={topImage} alt='top 25 preporuka, izrezbarena bundeva u mraku'></Image>
+                    <Image src={topImage} alt='Groblje Horora Top 25 Preporuka Naslovna Slika'></Image>
                 </Link>
             </figure>
             <section className={styles.topInfo}>

@@ -27,11 +27,11 @@ export const LatestRecenzija = async ({data}) => {
                 </div>
                 <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
                     <figure className={styles.latestSingleImage}>
-                        <Image width={300} height={440} src={data[0].movies[0].coverImage} alt={`${data[0].movies[0].title} cover image`}></Image>
+                        <Image width={300} height={440} src={data[0].movies[0].coverImage} alt={`Naslovna slika horor filma ${data[0].movies[0].title}(${data[0].movies[0].year}), najnovija recenzija`}></Image>
                     </figure>
                 </Link>
             </article>
-
+            
 
             {/* MOBILE VERSION, component reordered only. */}
             <article className={`${styles.latestRecenzijaContainer} ${styles.mobileRecenzija}`}>
@@ -41,7 +41,7 @@ export const LatestRecenzija = async ({data}) => {
                 <div className={styles.latestSingleInfo}>
                     <Link href={`/recenzije/${data[0].slug}`} className={styles.latestRecenzijaLink} target='_blank'>
                         <figure className={styles.latestSingleImage}>
-                            <Image width={425} height={623} src={data[0].movies[0].coverImage} alt={`${data[0].movies[0].title} cover image`} ></Image>
+                            <Image width={425} height={623} src={data[0].movies[0].coverImage} alt={`Naslovna slika horor filma ${data[0].movies[0].title}(${data[0].movies[0].year}), najnovija recenzija`} ></Image>
                         </figure>
                     </Link>
                     <section className={styles.titleAndRating}>

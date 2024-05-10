@@ -9,7 +9,7 @@ export const RecenzijeComponent = async ({count}) => {
     return (
         <article className={styles.recenzijeHomeCoverContainer}>
             <div className={styles.imageContainer}>
-                <Image className={styles.coverImage} src={image} alt='Recenzije section background image, a screaming skeleton'></Image>
+                <Image className={styles.coverImage} src={image} alt='Groblje Horora Recenzija Naslovna Slika'></Image>
             </div>
             <section className={styles.coverContent}>
                 <Link href={`/recenzije?page=1&sort=createdAt&order=desc`} target='_blank'>

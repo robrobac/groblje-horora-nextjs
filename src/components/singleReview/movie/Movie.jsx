@@ -22,7 +22,7 @@ export const Movie = ({data, movie, id, index, slug}) => {
             {data.reviewType === 'single' ? (
                 <div className={styles.movieInfo}>
                     <figure className={styles.movieImage}>
-                        <Image priority={true} width={400} height={579.5} src={movie.coverImage} alt={`${movie.title} cover image`}></Image>
+                        <Image priority={true} width={400} height={579.5} src={movie.coverImage} alt={`Naslovna slika horor filma ${movie.title}(${movie.year})`}></Image>
                     </figure>
                     <EditDeleteButtonsSingle post={data}/>
                     <p className={pageStyles.reviewDate}>
@@ -34,7 +34,7 @@ export const Movie = ({data, movie, id, index, slug}) => {
             ) : (
                 <div className={styles.movieInfo}>
                     <figure className={styles.movieImage}>
-                        <Image width={400} height={579.5} src={movie.coverImage} alt={`${movie.title} cover image`}></Image>
+                        <Image width={400} height={579.5} src={movie.coverImage} alt={`Naslovna slika horor filma ${movie.title}(${movie.year})`}></Image>
                     </figure>
                     <h2 className={pageStyles.titleH2}>{movie.title} <span>({movie.year})</span></h2>
                     <Rating rating={movie.rating} detailed={true}/>
@@ -44,7 +44,7 @@ export const Movie = ({data, movie, id, index, slug}) => {
                 <section className={styles.readingContent} dangerouslySetInnerHTML={{__html: getRawContent(movie.reviewContent)}}/>
             </div>
             <Link className={styles.imdbLink} href={movie.imdbLink} target="_blank">
-                <Image width={59} height={30} src={imdbLogo.src} alt="imdb logo"></Image>
+                <Image width={59} height={30} src={imdbLogo.src} alt="IMDB ikona"></Image>
             </Link>
             {movie.tags.length > 0 && <TagDisplay tags={movie.tags}/>}
             <SocialShare slug={data?.slug} reviewType={data?.reviewType} index={index} title={movie.title}/>
