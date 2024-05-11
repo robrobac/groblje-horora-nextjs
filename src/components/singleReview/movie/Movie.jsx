@@ -3,7 +3,7 @@ import pageStyles from "@/app/recenzije/[slug]/page.module.scss"
 import styles from "@/components/singleReview/movie/movie.module.scss";
 import { format } from "date-fns";
 import { Rating } from "@/components/rating/Rating";
-import { getRawContent } from "@/lib/utils";
+import { getRawContent, updateContentAlt } from "@/lib/utils";
 import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteButtonsSingle";
 import TagDisplay from "../tagDisplay/TagDisplay";
 import imdbLogo from '../../../../public/images/imdblogo.png';
@@ -16,6 +16,11 @@ import ViewCounter from "@/components/ViewCounter";
 const SocialShare = dynamic(() => import("../socialShare/SocialShare"), { ssr: false })
 
 export const Movie = ({data, movie, id, index, slug}) => {
+
+    // console.log(getRawContent(movie.reviewContent))
+
+    const reviewContent = updateContentAlt(getRawContent(movie.reviewContent), movie.title, movie.year)
+    
 
     return (
         <article className={styles.movieContainer} id={id}>
@@ -41,7 +46,7 @@ export const Movie = ({data, movie, id, index, slug}) => {
                 </div>
             )}
             <div className={styles.readingSection}>
-                <section className={styles.readingContent} dangerouslySetInnerHTML={{__html: getRawContent(movie.reviewContent)}}/>
+                <section className={styles.readingContent} dangerouslySetInnerHTML={{__html: reviewContent}}/>
             </div>
             <Link className={styles.imdbLink} href={movie.imdbLink} target="_blank">
                 <Image width={59} height={30} src={imdbLogo.src} alt="IMDB ikona"></Image>

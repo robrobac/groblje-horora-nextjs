@@ -10,6 +10,22 @@ export const getRawContent = (content) => {
     }
 }
 
+export const updateContentAlt = (htmlString, movieTitle, movieYear) => {
+    let counter = 1;
+    // Define the regular expression pattern
+    const regex = /alt="undefined"/g;
+    
+    // Use replace method with a callback function
+    const updatedHtml = htmlString.replace(regex, function(match) {
+        // Replace each occurrence of alt="undefined" with alt="undefined{n}"
+        const replacement = `alt="${movieTitle}(${movieYear}) scene screenshot ${counter}"`;
+        counter++; // Increment the counter for next occurrence
+        return replacement;
+    });
+    
+    return updatedHtml;
+}
+
 export const formatMongoDate = (date) => {
     const newDate = new Date(date)
     const formattedDate = format(newDate, 'dd.MM.yyyy')
