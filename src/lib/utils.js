@@ -18,7 +18,7 @@ export const updateContentAlt = (htmlString, movieTitle, movieYear) => {
     // Use replace method with a callback function
     const updatedHtml = htmlString.replace(regex, function(match) {
         // Replace each occurrence of alt="undefined" with alt="undefined{n}"
-        const replacement = `alt="${movieTitle}(${movieYear}) scene screenshot ${counter}"`;
+        const replacement = `alt="Scena iz filma ${movieTitle}(${movieYear}) ${counter}"`;
         counter++; // Increment the counter for next occurrence
         return replacement;
     });
