@@ -4,13 +4,14 @@ import { getYear } from 'date-fns';
 import { Logo } from "../header/svg/Logo";
 
 const links = [
-    { name: 'Naslovna', path: '/', activeLink: '/', prefetch: false },
-    { name: 'Top 25', path: '/top25', activeLink: '/top25', prefetch: false },
-    { name: 'Recenzije', path: '/recenzije', activeLink: '/recenzije', prefetch: false },
-    { name: 'Top 20 smeća', path: '/top20smeca', activeLink: '/top20smeca', prefetch: false },
-    { name: 'O Blogu', path: '/o-blogu', activeLink: '/o-blogu', prefetch: false },
-    { name: 'Oznake', path: '/tags', activeLink: '/tags', prefetch: true },
+    { name: 'Naslovna', path: `${process.env.NEXT_PUBLIC_DOMAIN_URL}`, activeLink: '/', prefetch: false },
+    { name: 'Top 25', path: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/top25`, activeLink: '', prefetch: false },
+    { name: 'Recenzije', path: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/recenzije`, activeLink: '/recenzije', prefetch: false },
+    { name: 'Top 20 smeća', path: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/top20smeca`, activeLink: '/top20smeca', prefetch: false },
+    { name: 'O Blogu', path: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/o-blogu`, activeLink: '/o-blogu', prefetch: false },
+    { name: 'Oznake', path: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/tags`, activeLink: '/tags', prefetch: true },
 ];
+
 
 export const Footer = () => {
     return (
