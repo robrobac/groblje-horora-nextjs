@@ -8,7 +8,7 @@ export const Links = () => {
         { name: 'Recenzije', path: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/recenzije`, activeLink: '/recenzije', prefetch: false },
         { name: 'Top 20 smeća', path: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/top20smeca`, activeLink: '/top20smeca', prefetch: false },
         { name: 'O Blogu', path: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/o-blogu`, activeLink: '/o-blogu', prefetch: false },
-        { name: 'Oznake', path: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/tags`, activeLink: '/tags', prefetch: true },
+        // { name: 'Oznake', path: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/tags`, activeLink: '/tags', prefetch: true },
     ];
 
     return (
