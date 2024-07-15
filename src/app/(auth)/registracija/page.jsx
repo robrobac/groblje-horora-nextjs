@@ -139,7 +139,7 @@ const RegistracijaPage = () => {
     return (
         <main className="authContainer">
             <div className={styles.authPage} style={{backgroundImage: `url(${background.src})`}}>
-                <Link href={'/'} >
+                <Link href={'/'} className={styles.loginRegisterLogo}>
                     <Logo />
                 </Link>
                 <div className={styles.authContainer}>

@@ -91,3 +91,16 @@
 .linkDisabled {
     pointer-events: none;
 }
+
+.redirectLoading {
+    z-index: 900; 
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: var(--black);
+}

@@ -8,11 +8,31 @@ export const GET = async (request, { params }) => {
     const perPage = request.nextUrl.searchParams.get('perPage');
     const { tag } = params;
 
-    const skip = page === "undefined" ? 0 : ((page - 1) * parseInt(perPage));
-
     const query = {
         "movies.tags.tagValue": tag
     };
+
+    const reviewsCount = await reviewModel.countDocuments(query);
+
+    if (parseInt(page) === 0) {
+        const currentUrl = request.nextUrl.href;
+        const newUrl = new URL(currentUrl);
+        newUrl.searchParams.set('page', '1');
+
+        return NextResponse.redirect(newUrl.toString());
+    } else if (parseInt(page) > Math.ceil(reviewsCount / perPage)) {
+        const currentUrl = request.nextUrl.href;
+        const newUrl = new URL(currentUrl);
+        newUrl.searchParams.set('page', Math.ceil(reviewsCount / perPage));
+
+        return NextResponse.redirect(newUrl.toString());
+    }
+
+    const skip = page === "undefined" ? 0 : ((page - 1) * parseInt(perPage));
+
+    // const query = {
+    //     "movies.tags.tagValue": tag
+    // };
 
     const reviews = await reviewModel.find(query)
                                      .skip(parseInt(skip))
@@ -20,7 +40,7 @@ export const GET = async (request, { params }) => {
                                      .sort({ "createdAt": -1 })
                                      .exec();
 
-    const reviewsCount = await reviewModel.countDocuments(query);
+    // const reviewsCount = await reviewModel.countDocuments(query);
 
     const totalPages = Math.ceil(reviewsCount / perPage);
 

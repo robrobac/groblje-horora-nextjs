@@ -1,5 +1,6 @@
 import Footer from "@/components/footer/footer";
 import PaginationSSR from "@/components/pagination/PaginationSSR";
+import PaginationRedirectLoading from "@/components/PaginationRedirectLoading";
 import PostsFlex from "@/components/reviewsGallery/postsFlex/PostsFlex";
 import TitleSubtitle from "@/components/reviewsGallery/titleSubtitle/TitleSubtitle";
 import { sortedTags } from "@/lib/tags";
@@ -51,8 +52,14 @@ const SingleTagPage = async ({params, searchParams}) => {
 
     const filteredTag = tags.filter(tagValue => tagValue.tagValue === tag)
     const currentTag = filteredTag[0].tagLabel
-    
 
+    if (page == "0" || page > reviews.totalPages) {
+        return (
+            <PaginationRedirectLoading currentPage={page} totalPages={reviews.totalPages}/>
+        );
+    }
+
+    
     return (
         <>
         <main className="reviewsContainer smallerContainerHeight">
