@@ -2,6 +2,7 @@
 import { SORTING_OPTIONS } from '@/lib/sortOptions';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react';
+import useDebounce from './useDebounce';
 
 export default function useFetchReviewsWithParams(initialSort, initialOrder, initialPerPage) {
     // console.log('----------')
@@ -43,7 +44,9 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
 
     const urlSearch = searchParams.get('search')
     const [search, setSearch] = useState(urlSearch ? urlSearch : '')
+    const debouncedSearch = useDebounce(search, 500);
     // console.log('search: ', search)
+    // console.log("debouncedSearch: ", debouncedSearch)
 
 
     useEffect(() => {
@@ -81,7 +84,7 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
         const fetchReviews = async () => {
             setLoading(true);
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews?search=${search}&sort=${sort}&order=${order}&page=${page}&perPage=${perPage}&selectedFilterKey=${selectedFilterKey}&selectedFilterVal=${selectedFilterVal}`);
+                const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews?search=${debouncedSearch}&sort=${sort}&order=${order}&page=${page}&perPage=${perPage}&selectedFilterKey=${selectedFilterKey}&selectedFilterVal=${selectedFilterVal}`);
                 const json = await res.json()
                 if (!res.ok) {
                     throw new Error('Failed to fetch Reviews data');
@@ -100,7 +103,7 @@ export default function useFetchReviewsWithParams(initialSort, initialOrder, ini
         }
 
         fetchReviews();
-    }, [page, selectedFilterKey, selectedFilterVal, sort, order, search, refresh, perPage]);
+    }, [page, selectedFilterKey, selectedFilterVal, sort, order, debouncedSearch, refresh, perPage]);
 
 
     useEffect(() => {
