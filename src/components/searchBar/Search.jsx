@@ -51,7 +51,7 @@ export default function Search() {
                     onKeyUp={onEnter}
                     id='adminSearch'
                     type='search'
-                    placeholder='Search'
+                    placeholder='Pretraži po nazivu'
                     value={search}
                     onChange={(e) => handleSearch(e.target.value || '')}
                 />

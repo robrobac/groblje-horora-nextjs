@@ -105,6 +105,11 @@ body {
     color: var(--white);
 }
 
+font {
+    font-size: inherit;
+    line-height: inherit;
+}
+
 .mainBody {
     min-height: 100vh;
 }
