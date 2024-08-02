@@ -6,6 +6,7 @@
 
     .error {
         border: 1px solid red;
+        animation: breatheEditorError 1.5s infinite;
     }
 
     .DraftEditor-root * * {
@@ -121,3 +122,15 @@
         }
     }
 }
+
+@keyframes breatheEditorError {
+    0% {
+      border-color: red;
+    }
+    50% {
+        border-color: var(--white15);
+    }
+    100% {
+        border-color: red;
+    }
+  }

@@ -186,6 +186,20 @@ export default function NewForm({ numberOfMovies }) {
             }
         })
 
+        if (requiredInputs.length > 0) {
+            console.log(requiredInputs)
+            setEmptyFields(requiredInputs)
+            setFormFailed(!formFailed)
+            setLoading(false)
+            return
+        }
+
+        
+        
+        
+
+        console.log(requiredInputs)
+
         const movieReviews = movies.map(async (movie, index) => {
             return new Promise(async (resolve, reject) => {
                 let url = '';
@@ -377,14 +391,15 @@ export default function NewForm({ numberOfMovies }) {
                     {numberOfMovies === 4 ? (
                         <>
                             <div className='inputContainer'>
-                                <label className='inputLabel' htmlFor='reviewTitle'>Review Title {emptyFields.includes('titleExists') ? <span className='error'>Title already exists</span> : ''}</label>
-                                <input className={`inputField ${emptyFields.includes('reviewTitle') ? 'error' : '' }`} id='reviewTitle' type='text' value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)}/>
+                                <label className='inputLabel' htmlFor='reviewTitle'>Review Title * {emptyFields.includes('titleExists') ? <span className='error'>Title already exists</span> : ''}</label>
+                                <input className={`inputField ${emptyFields.includes('reviewTitle') && reviewTitle === ""  ? 'error' : '' }`} id='reviewTitle' type='text' value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)}/>
                             </div>
                             <div className={styles.categoryContainer}>
                                 {Object.values(FILTERING_OPTIONS.QUAD.categories).map(category => (
                                     <div key={category.dbValue} className={styles.checkboxWrapper} style={{width: '170px'}}>
                                         <input id={category.dbValue} type='checkbox' onChange={() => setSelectedcategory(category.dbValue)} checked={selectedcategory === category.dbValue}/>
-                                        <label htmlFor={category.dbValue} className={emptyFields.includes('category') ? styles.error : ''}>{category.label}</label>
+
+                                        <label htmlFor={category.dbValue} className={emptyFields.includes('category') && selectedcategory === "" ? styles.error : ''}>{category.label}</label>
                                     </div>
                                 ))}
                             </div>
@@ -394,7 +409,7 @@ export default function NewForm({ numberOfMovies }) {
                             {Object.values(FILTERING_OPTIONS.SINGLE.categories).map(category => (
                                 <div key={category.dbValue} className={styles.checkboxWrapper} style={{width: '160px'}}>
                                     <input id={category.dbValue} type='checkbox' onChange={() => setSelectedcategory(category.dbValue)} checked={selectedcategory === category.dbValue}/>
-                                    <label htmlFor={category.dbValue} className={emptyFields.includes('category') ? styles.error : ''}>{category.label}</label>
+                                    <label htmlFor={category.dbValue} className={emptyFields.includes('category') && selectedcategory === "" ? styles.error : ''}>{category.label}</label>
                                 </div>
                             ))}
                         </div>  
@@ -403,8 +418,10 @@ export default function NewForm({ numberOfMovies }) {
                     <div className={styles.tabs}>
                         <div className={styles.tabList}>
                             {movies.map((movie, index) => (
-                                <div className={`${styles.tab} ${selectedTab === `movie${index + 1}` && styles.isActive}`} key={`movie${index + 1}`} onClick={() => setSelectedTab(`movie${index + 1}`)}>Movie {index + 1}</div>
+                                <div className={`${styles.tab} ${selectedTab === `movie${index + 1}` && styles.isActive} ${emptyFields.some(str => str.includes(`movie${index}coverImage`)) ? styles.error : ''}`} key={`movie${index + 1}`} onClick={() => setSelectedTab(`movie${index + 1}`)}>Movie {index + 1}</div>
                             ))}
+                            
+
                         </div>
                     </div>
                     {movies.map((movie, index) => (
@@ -417,23 +434,23 @@ export default function NewForm({ numberOfMovies }) {
                                         ?
                                             <img src={URL.createObjectURL(movie.compressedCoverImage)} className={styles.uploadedCoverImage} alt='uploadedImage' onClick={() => handleUploadClick(index)}/>
                                         :
-                                            <label className={`${styles.fileLabel} ${emptyFields.includes(`movie${index}coverImage`) ? 'error' : ''}`} htmlFor={`coverImage${index}`}>Cover Image</label>
+                                            <label className={`${styles.fileLabel} ${emptyFields.includes(`movie${index}coverImage`) ? styles.error : ''}`} htmlFor={`coverImage${index}`}>Cover Image *</label>
                                         }
                                         <input className={styles.file} id={`coverImage${index}`} type='file' accept='image/' onChange={(e) => handleCompressImage(e, index)}/>
                                     </div>
                                 </div>
                                 <div className={styles.formContent}>
                                     <div className='inputContainer'>
-                                        <label className='inputLabel' htmlFor='title'>Title {emptyFields.includes('titleExists') && numberOfMovies === 1 ? <span className='error'>Title already exists</span> : ''}</label>
-                                        <input className={`inputField ${emptyFields.includes(`movie${index}title`) ? 'error' : ''}`} id='title' type='text' value={movie.title} onChange={(e) => handleChange(index, 'title', e.target.value)}/>
+                                        <label className='inputLabel' htmlFor='title'>Title * {emptyFields.includes('titleExists') && numberOfMovies === 1 ? <span className='error'>Title already exists</span> : ''}</label>
+                                        <input className={`inputField ${emptyFields.includes(`movie${index}title`) && movie.title === "" ? 'error' : ''}`} id='title' type='text' value={movie.title} onChange={(e) => handleChange(index, 'title', e.target.value)}/>
                                     </div>
                                     <div className='inputContainer'>
-                                        <label className='inputLabel' htmlFor='year'>Year</label>
-                                        <input className={`inputField ${emptyFields.includes(`movie${index}year`) ? 'error' : '' }`} id='year' type='number' value={movie.year} onChange={(e) => handleChange(index, 'year', e.target.value)}/>
+                                        <label className='inputLabel' htmlFor='year'>Year *</label>
+                                        <input className={`inputField ${emptyFields.includes(`movie${index}year`) && movie.year === "" ? 'error' : '' }`} id='year' type='number' value={movie.year} onChange={(e) => handleChange(index, 'year', e.target.value)}/>
                                     </div>
                                     <div className='inputContainer'>
-                                        <label className='inputLabel' htmlFor='rating'>Rating</label>
-                                        <input className={`inputField ${emptyFields.includes(`movie${index}rating`) ? 'error' : '' }`} id='rating' type='number' value={movie.rating} onChange={(e) => handleChange(index, 'rating', parseFloat(e.target.value))} step='0.5' min='1' max='5'/>
+                                        <label className='inputLabel' htmlFor='rating'>Rating *</label>
+                                        <input className={`inputField ${emptyFields.includes(`movie${index}rating`) && movie.rating === "" ? 'error' : '' }`} id='rating' type='number' value={movie.rating} onChange={(e) => handleChange(index, 'rating', parseFloat(e.target.value))} step='0.5' min='1' max='5'/>
                                     </div>
                                     <div className='inputContainer'>
                                         <label className='inputLabel' htmlFor='imdbLink'>Imdb Link</label>
@@ -470,9 +487,9 @@ export default function NewForm({ numberOfMovies }) {
                                 </div>
                             </div>
                             <div className={styles.textEditorContainer}>
-                                <label className='inputLabel'>Post Content</label>
+                                <label className='inputLabel'>Post Content *</label>
                                 <div className='styledEditor'>
-                                    <Editor wrapperClassName={emptyFields.includes(`movie${index}reviewContent`) ? 'error' : '' } editorState={movie.editorState} onEditorStateChange={(newEditorState) => handleEditorStateChange(index, newEditorState)}
+                                    <Editor wrapperClassName={emptyFields.includes(`movie${index}reviewContent`) && movie.reviewContent === "" ? 'error' : '' } editorState={movie.editorState} onEditorStateChange={(newEditorState) => handleEditorStateChange(index, newEditorState)}
                                         toolbar={{
                                             options: ['inline', 'image', 'link', 'history'],
                                             inline: {

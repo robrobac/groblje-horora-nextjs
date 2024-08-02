@@ -38,7 +38,8 @@
 
     &.error {
         color: red;
-        border: 1px solid red;
+        animation: breatheColor 1.5s infinite;
+        // border: 1px solid red;
     }
 
     @media (hover: hover) {
@@ -116,10 +117,11 @@
     align-items: center;
     width: 320px;
     height: 460px;
+}
 
-    &.error {
-        border: 1px solid red;
-    }
+.fileLabel.error {
+    border: 1px solid red;
+    animation: breatheImageError 1.5s infinite;
 }
 
 .formImage {
@@ -217,6 +219,7 @@
 
     &.error {
         color: red;
+        animation: breatheColor 1.5s infinite;
     }
 }
 
@@ -288,3 +291,26 @@
     }
 }
 
+@keyframes breatheColor {
+    0% {
+      color: red;
+    }
+    50% {
+      color: var(--white);
+    }
+    100% {
+      color: red;
+    }
+  }
+
+  @keyframes breatheImageError {
+    0% {
+      border-color: red;
+    }
+    50% {
+        border-color: var(--white15);
+    }
+    100% {
+        border-color: red;
+    }
+  }

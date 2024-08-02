@@ -181,6 +181,8 @@ a {
 
     &.error {
         border: 1px solid red;
+        animation: breatheInputError 1.5s infinite;
+        
     }
 
     &:focus {
@@ -218,3 +220,16 @@ a {
         line-height: 13px;
     }
 }
+
+
+@keyframes breatheInputError {
+    0% {
+      border-color: red;
+    }
+    50% {
+        border-color: var(--white15);
+    }
+    100% {
+        border-color: red;
+    }
+  }
