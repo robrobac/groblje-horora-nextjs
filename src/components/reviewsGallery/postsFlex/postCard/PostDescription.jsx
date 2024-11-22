@@ -29,7 +29,7 @@ export default function PostDescription({post, mongoUser}) {
                         </div>
                     </div>
                     <p className={styles.postDate}>{format(new Date(post?.createdAt), 'dd.MM.yyyy')}</p>
-                    <Link href={`/recenzije/${post?.slug}`} target='_blank'>
+                    <Link href={`/recenzije/${post?.slug}`}>
                         <h2 className={styles.postTitle}>{post?.movies[0].title} <span>({post?.movies[0].year})</span></h2>
                     </Link>
                     <Rating rating={post?.movies[0].rating} detailed={false}/>
@@ -45,7 +45,7 @@ export default function PostDescription({post, mongoUser}) {
                         </div>
                     </div>
                     <p className={styles.postDate}>{format(new Date(post.createdAt), 'dd.MM.yyyy')}</p>
-                    <Link href={`/recenzije/${post?.slug}`} target='_blank'>
+                    <Link href={`/recenzije/${post?.slug}`}>
                         <h2 className={styles.postTitle}>{post?.reviewTitle}</h2>
                     </Link>
                     <p className={styles.postSubTitle}>

@@ -15,7 +15,7 @@ export const LatestRecenzija = async ({data}) => {
                         Najnovija Recenzija <span>{formatMongoDate(data[0].createdAt)}</span>
                     </p>
                     <section className={styles.titleAndRating}>
-                        <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
+                        <Link href={`/recenzije/${data[0].slug}`}>
                             <h3 className={styles.recenzijaTitle}>
                                 {data[0].movies[0].title} <span>({data[0].movies[0].year})</span>
                             </h3>
@@ -23,9 +23,9 @@ export const LatestRecenzija = async ({data}) => {
                         <Rating rating={data[0].movies[0].rating} detailed={true} />
                         <p className={styles.recenzijaDescription}>{data[0].shortDescription}</p>
                     </section>
-                    <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={true}/>
+                    <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={false}/>
                 </div>
-                <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
+                <Link href={`/recenzije/${data[0].slug}`}>
                     <figure className={styles.latestSingleImage}>
                         <Image width={300} height={440} src={data[0].movies[0].coverImage} alt={`Naslovna slika horor filma ${data[0].movies[0].title}(${data[0].movies[0].year}), najnovija recenzija`}></Image>
                     </figure>
@@ -39,13 +39,13 @@ export const LatestRecenzija = async ({data}) => {
                     Najnovija Recenzija <span>{formatMongoDate(data[0].createdAt)}</span>
                 </p>
                 <div className={styles.latestSingleInfo}>
-                    <Link href={`/recenzije/${data[0].slug}`} className={styles.latestRecenzijaLink} target='_blank'>
+                    <Link href={`/recenzije/${data[0].slug}`} className={styles.latestRecenzijaLink}>
                         <figure className={styles.latestSingleImage}>
                             <Image width={425} height={623} src={data[0].movies[0].coverImage} alt={`Naslovna slika horor filma ${data[0].movies[0].title}(${data[0].movies[0].year}), najnovija recenzija`} ></Image>
                         </figure>
                     </Link>
                     <section className={styles.titleAndRating}>
-                        <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
+                        <Link href={`/recenzije/${data[0].slug}`}>
                             <h3 className={styles.recenzijaTitle}>
                                 {data[0].movies[0].title} <span>({data[0].movies[0].year})</span>
                             </h3>
@@ -54,7 +54,7 @@ export const LatestRecenzija = async ({data}) => {
                         <p className={styles.recenzijaDescription}>{data[0].shortDescription}</p>
                     </section>
                     <div className={styles.buttonContainer}>
-                        <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={true}/>
+                        <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={false}/>
                     </div>
                 </div>
             </article>

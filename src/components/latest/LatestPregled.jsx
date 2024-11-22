@@ -13,7 +13,7 @@ export const LatestPregled = async ({data}) => {
                     <p className={styles.pregledSubTitle}>
                         Najnoviji Kratki Pregled <span>{formatMongoDate(data[0].createdAt)}</span>
                     </p>
-                    <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
+                    <Link href={`/recenzije/${data[0].slug}`}>
                         <h3 className={styles.pregledTitle}>
                             {data[0].reviewTitle}
                         </h3>
@@ -22,7 +22,7 @@ export const LatestPregled = async ({data}) => {
                         {data[0].movies[0].title} <span>({data[0].movies[0].year})</span>, {data[0].movies[1].title} <span>({data[0].movies[1].year})</span>, {data[0].movies[2].title} <span>({data[0].movies[2].year})</span>, {data[0].movies[3].title} <span>({data[0].movies[3].year})</span>
                     </p>
                 </section>
-                <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
+                <Link href={`/recenzije/${data[0].slug}`}>
                     <section className={styles.quadCoverContainer}>
                         {data[0].movies.map((movie, index) => (
                             <figure className={styles.quadCoverImageContainer} key={movie._id}>
@@ -32,7 +32,7 @@ export const LatestPregled = async ({data}) => {
                         ))}
                     </section>
                 </Link>
-                <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={true}/>
+                <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={false}/>
             </article>
 
 
@@ -43,7 +43,7 @@ export const LatestPregled = async ({data}) => {
                         Najnoviji Kratki Pregled <span>{formatMongoDate(data[0].createdAt)}</span>
                     </p>
                 </div>
-                <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
+                <Link href={`/recenzije/${data[0].slug}`}>
                     <section className={styles.quadCoverContainer}>
                         {data[0].movies.map((movie, index) => (
                             <figure className={styles.quadCoverImageContainer} key={movie._id}>
@@ -53,7 +53,7 @@ export const LatestPregled = async ({data}) => {
                     </section>
                 </Link>
                 <section className={styles.latestPregledInfo}>
-                    <Link href={`/recenzije/${data[0].slug}`} target='_blank'>
+                    <Link href={`/recenzije/${data[0].slug}`}>
                         <h3 className={styles.pregledTitle}>
                             {data[0].reviewTitle}
                         </h3>
@@ -63,7 +63,7 @@ export const LatestPregled = async ({data}) => {
                     </p>
                 </section>
                 <div className={styles.buttonContainer}>
-                    <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={true}/>
+                    <StandardBtn path={`/recenzije/${data[0].slug}`} content='Pročitaj više' newTab={false}/>
                 </div>
             </article>
         </>

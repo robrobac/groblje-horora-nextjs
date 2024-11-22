@@ -67,7 +67,7 @@ const SingleTagPage = async ({params, searchParams}) => {
                 title={`${currentTag} (${reviews.reviewsCount})`}
                 subtitle={`Recenzije označene s oznakom ${currentTag}`}
                 link={`${process.env.DOMAIN_URL}/tags`}
-                linkText={"← Povratak na sve oznake"}
+                linkText={"← Sve oznake"}
             />
             <PostsFlex posts={reviews.reviews} />
             {reviews.reviews.length !== 0 ? 

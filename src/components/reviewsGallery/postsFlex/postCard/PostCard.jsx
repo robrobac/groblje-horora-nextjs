@@ -8,11 +8,11 @@ export default function PostCard({post, handleRefresh, user, mongoUser}) {
     return (
         <article className={styles.postCardContainer}>
             <div className={styles.postCardDetails}>
-                <PostImage post={post} newTab={true}/>
+                <PostImage post={post} newTab={false}/>
                 <EditDeleteButtons post={post} targetBlank={true} handleRefresh={handleRefresh} user={user} mongoUser={mongoUser}/>
                 <PostDescription post={post} mongoUser={mongoUser}/>
             </div>
-            <StandardBtn path={`/recenzije/${post?.slug}`} content='Pročitaj više →' type='textOnly' newTab={true}/>
+            <StandardBtn path={`/recenzije/${post?.slug}`} content='Pročitaj više →' type='textOnly' newTab={false}/>
         </article>
     )
 }
