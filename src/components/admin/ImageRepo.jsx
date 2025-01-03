@@ -118,7 +118,7 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
                 path: path,
             };
             console.log("Uploaded image object created:", JSON.stringify(uploadedImage))
-            localLogs.push(setLogsFunction(`Uploaded image object created: ${uploadedImage}`))
+            localLogs.push(setLogsFunction(`Uploaded image object created: ${JSON.stringify(uploadedImage)}`))
     
             // Saving uploaded image to MongoDB collection
             console.log("Saving image to MongoDB, started")
@@ -136,6 +136,7 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
             if (!response.ok) {
                 console.log("Error saving image to MongoDB", json)
                 localLogs.push(setLogsFunction(`Error saving image to MongoDB: ${json}`))
+                localLogs.push(setLogsFunction(`Error saving image to MongoDB: ${JSON.stringify(json)}`))
                 setError(json.error);
                 localLogs.push(setLogsFunction(`Error saving image to MongoDB: ${json.error}`))
             }
