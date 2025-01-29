@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 
 // Create a new Temp Media
 export async function POST(request) {
-    await dbConnect()
+    dbConnect()
     const data = await request.json()
     const { url, path } = data
 
