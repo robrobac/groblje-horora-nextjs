@@ -6,7 +6,6 @@ import { getRawContent, shortenStringTo30Words, slugify, stringFormatting } from
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import PreviewDialog from './PreviewDialog'
 import ImageRepo from './ImageRepo'
 import dynamic from 'next/dynamic'; // Import dynamic from next/dynamic
 // Dynamic import of react-draft-wysiwyg
@@ -19,9 +18,9 @@ import styles from './newForm.module.scss';
 import { FILTERING_OPTIONS } from '@/lib/sortOptions'
 import { sortedTags } from '@/lib/tags'
 import GhostSpinner from '../ghostSpinner/GhostSpinner'
+import { LoadingBtn } from '../buttons/loadingBtn'
 
 export default function EditForm({slug}) {
-    const [postPreview, setPostPreview] = useState(null)
     const [selectedTab, setSelectedTab] = useState('movie1')
 
     const [post, setPost] = useState({})
@@ -144,30 +143,6 @@ export default function EditForm({slug}) {
         }
         fetchPost()
     }, [slug])
-
-    // Creating State for Preview Screen before Submitting the Form
-    useEffect(() => {
-        const reviewPreview = {
-            reviewTitle: reviewTitle,
-            movies: movies.map((movie) => {
-                return {
-                    title: movie.title,
-                    year: movie.year,
-                    rating: movie.rating,
-                    compressedCoverImage: movie.compressedCoverImage,
-                    reviewContent: convertToRaw(movie.editorState.getCurrentContent()),
-                    imdbLink: movie.imdbLink,
-                    top25: movie.top25,
-                    worse20: movie.worse20,
-                    coverImage: movie.coverImage,
-                    coverImagePath: movie.coverImagePath,
-                    tags: movie.tags
-                }
-            }),
-            contentImages: contentImages,
-        }
-        setPostPreview(reviewPreview)
-    }, [contentImages, movies, reviewTitle])
 
     // Compressing Image to prepare it for upload to Firebase Storage once form is submited
     const handleCompressImage = (e, index) => {
@@ -637,7 +612,9 @@ export default function EditForm({slug}) {
                             </div>
                         </div>
                     ))}
-                    {postPreview ? <PreviewDialog loading={loading} postPreview={postPreview} formFailed={formFailed}/> : ''}
+                    <div className={styles.submitBtnContainer}>
+                        <LoadingBtn loading={loading} content="Objavi" type={loading ? 'button' : 'submit'} size={'20px'}/>
+                    </div>
                 </form>
                 <ImageRepo handleContentImages={handleContentImages} contentImages={contentImages} formSubmitted={formSubmitted} isEditing={true}/>
             </div>

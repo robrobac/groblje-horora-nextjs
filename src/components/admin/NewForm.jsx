@@ -18,10 +18,10 @@ import { getRawContent, shortenStringTo30Words, slugify } from '@/lib/utils';
 import { uploadImageToFirebaseStorage } from '@/lib/firebase/firebaseUtils';
 import { compressImage, compressOgImage } from '@/lib/compressImage';
 import { useRouter } from 'next/navigation';
-import PreviewDialog from './PreviewDialog';
 import ImageRepo from './ImageRepo';
 import { FILTERING_OPTIONS } from '@/lib/sortOptions';
 import { sortedTags } from '@/lib/tags';
+import { LoadingBtn } from '../buttons/loadingBtn';
 
 
 
@@ -33,7 +33,6 @@ export default function NewForm({ numberOfMovies }) {
     const [selectedcategory, setSelectedcategory] = useState('')
 
     const [selectedTab, setSelectedTab] = useState('movie1')
-    const [postPreview, setPostPreview] = useState(null);
 
     const [formSubmitted, setFormSubmitted] = useState(false);
     // If form fails checks on backend, change the state to trigger useEffect in PreviewDialog components and that way close the Preview Modal.
@@ -51,7 +50,7 @@ export default function NewForm({ numberOfMovies }) {
     useEffect(() => {
         const handleBeforeUnload = (event) => {
           // Perform actions before the component unloads
-        //   console.log('izlazimmmmmmmmmmmmmmmmmmmmm')
+            // console.log('izlazimmmmmmmmmmmmmmmmmmmmm')
           event.preventDefault();
           event.returnValue = '';
         };
@@ -62,25 +61,6 @@ export default function NewForm({ numberOfMovies }) {
         };
     }, []);
     
-    // Creating State for Preview Screen before Submitting the Form
-    useEffect(() => {
-        const reviewPreview = {
-            reviewTitle,
-            movies: movies.map((movie) => ({
-                title: movie.title,
-                year: movie.year,
-                rating: movie.rating,
-                compressedCoverImage: movie.compressedCoverImage,
-                reviewContent: convertToRaw(movie.editorState.getCurrentContent()),
-                imdbLink: movie.imdbLink,
-                top25: movie.top25,
-                worse20: movie.worse20,
-                tags: movie.tags
-            })),
-            contentImages,
-        };
-        setPostPreview(reviewPreview);
-    }, [contentImages, movies, reviewTitle]);
 
     // Compressing Image to prepare it for upload to Firebase Storage once form is submited
     const handleCompressImage = (e, index) => {
@@ -152,8 +132,6 @@ export default function NewForm({ numberOfMovies }) {
         }
     }
 
-
-
     // Function to handle all logic behind Form Submit.
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -193,10 +171,6 @@ export default function NewForm({ numberOfMovies }) {
             setLoading(false)
             return
         }
-
-        
-        
-        
 
         console.log(requiredInputs)
 
@@ -496,7 +470,9 @@ export default function NewForm({ numberOfMovies }) {
                             </div>
                         </div>
                     ))}
-                    {postPreview ? <PreviewDialog loading={loading} postPreview={postPreview} formFailed={formFailed}/> : ''}
+                    <div className={styles.submitBtnContainer}>
+                        <LoadingBtn loading={loading} content="Objavi" type={loading ? 'button' : 'submit'} size={'20px'}/>
+                    </div>
                 </form>
                 <ImageRepo handleContentImages={handleContentImages} contentImages={contentImages} formSubmitted={formSubmitted}/>
             </div>
