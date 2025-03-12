@@ -363,18 +363,6 @@ export default function NewForm({ numberOfMovies }) {
                     // Change FormSubmitted state in order to re render ImageRepo so it will clear its states
                     setFormSubmitted(!formSubmitted);
 
-                    // Delete images from tempImages, Images in ImageRepo are saved to TempImages in case user uploaded images through ImageRepo but never finished the form.
-                    // That way we know what images are uploaded to firebase storage but are not used for anything in the posts
-                    contentImages.forEach(async (image) => {
-                        const deleteResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/tempMedia/${image.id}`, {
-                            method: 'DELETE',
-                        });
-                        const deleteJson = await deleteResponse.json();
-                        if (deleteResponse.ok) {
-                            console.log('deleted from tempImages', deleteJson);
-                        }
-                    });
-
                     // Clear ContentImages state
                     setContentImages([]);
 

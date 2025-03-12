@@ -105,61 +105,30 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
                 console.log("Image uploaded, path:", path)
                 localLogs.push(setLogsFunction(`Image uploaded, path: ${path}`))
 
+                // Creating Uploaded Image object in order to save it to MongoDB
+                const uploadedImage = {
+                    url: url,
+                    path: path,
+                };
+                console.log("Uploaded image object created:", JSON.stringify(uploadedImage))
+                localLogs.push(setLogsFunction(`Uploaded image object created: ${JSON.stringify(uploadedImage)}`))
+        
+                // setting uploaded images state and clearing compressed images state because all compressed images are uploaded to Storage.
+                setCompressedImages([]);
+                imagesInputRef.current.value = null;
+                handleContentImages((prev) => [...prev, uploadedImage]);
+
             } catch (error) {
                 console.log("Error uploading image to firebase storage:", error.message)
                 localLogs.push(setLogsFunction(`Error uploading image to firebase storage: ${error.message}`))
                 console.log(error);
                 setError(error);
             }
-    
-            // Creating Uploaded Image object in order to save it to MongoDB
-            const uploadedImage = {
-                url: url,
-                path: path,
-            };
-            console.log("Uploaded image object created:", JSON.stringify(uploadedImage))
-            localLogs.push(setLogsFunction(`Uploaded image object created: ${JSON.stringify(uploadedImage)}`))
-    
-            // Saving uploaded image to MongoDB collection
-            console.log("Saving image to MongoDB, started")
-            localLogs.push(setLogsFunction("Saving image to MongoDB, started"))
-            const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/tempMedia`, {
-                method: 'POST',
-                body: JSON.stringify(uploadedImage),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-    
-            const json = await response.json();
-    
-            if (!response.ok) {
-                console.log("Error saving image to MongoDB", json)
-                localLogs.push(setLogsFunction(`Error saving image to MongoDB: ${json}`))
-                localLogs.push(setLogsFunction(`Error saving image to MongoDB: ${JSON.stringify(json)}`))
-                setError(json.error);
-                localLogs.push(setLogsFunction(`Error saving image to MongoDB: ${json.error}`))
-            }
-    
-            if (response.ok) {
-                console.log("Image saved to MongoDB", json)
-                localLogs.push(setLogsFunction(`Image saved to MongoDB: ${JSON.stringify(json)}`))
-                // Retrieving new MongoDB data
-                const uploaded = {
-                    url,
-                    path,
-                    id: json._id,
-                };
-    
-                // setting uploaded images state and clearing compressed images state because all compressed images are uploaded to Storage.
-                setCompressedImages([]);
-                imagesInputRef.current.value = null;
-                handleContentImages((prev) => [...prev, uploaded]);
-            }
-    
+
             // Introduce a 500ms delay before processing the next image
             await new Promise((resolve) => setTimeout(resolve, 500));
         }
+
         setUploadingImages(false)
         console.log("Upload images to firebase storage, finished")
         localLogs.push(setLogsFunction("Upload images to firebase storage, finished"))
@@ -180,15 +149,6 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
         deleteImageFromFirebaseStorage(path)
 
         handleContentImages(contentImages.filter((image) => image.path !== imageToDelete.path))
-        
-        const deleteResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/tempMedia/${imageToDelete.id}`, {
-            method: 'DELETE'
-        })
-        const json = await deleteResponse.json()
-
-        if (deleteResponse.ok) {
-            console.log("deleted from tempImages", json)
-        }
     }
  
   return (
