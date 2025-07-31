@@ -17,23 +17,17 @@ export default function Comments({post, slug}) {
     // console.log(comments) // Keep in Development
 
     const [liked, setLiked] = useState(false)
+    const [likes, setLikes] = useState([])
     const [numberOfLikes, setNumberOfLikes] = useState(0)
     const [postingComment, setPostingComment] = useState(false)
 
     const [socketConnected, setSocketConnected] = useState(false)
 
+
     useEffect(() => {
-        // Check if the current user has liked the post
-        const hasLiked = post?.likes?.some(like => like.likeName === user?.username || like.likeEmail === mongoUser?.email);
+        const hasLiked = likes?.some(like => like.likeName === user?.username || like.likeEmail === mongoUser?.email);
         setLiked(hasLiked);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [mongoUser, post]);
-
-    useEffect(() => {
-        const likes = post?.likes.length
-        setNumberOfLikes(likes)
-    }, [post])
-
+    }, [likes, mongoUser?.email, user?.username])
 
     useEffect(() => {
         const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL);
@@ -54,6 +48,8 @@ export default function Comments({post, slug}) {
 
             if (response.ok) {
                 setComments(data.comments)
+                setLikes(data.likes)
+                setNumberOfLikes(data.likes.length)
             }
 
             if (!response.ok) {

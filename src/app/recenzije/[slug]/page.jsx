@@ -20,7 +20,7 @@ const MoreLikeThis = dynamic(() => import("@/components/singleReview/moreLikeThi
 const CommentsAndLikes = dynamic(() => import("@/components/commentsAndLikes/CommentsAndLikes"), { ssr: false })
 
 // export const dynamic = 'force-dynamic';
-// export const revalidate = 60
+export const revalidate = 60
 
 function cleanDescription(str) {
     const cleanedString = str.replace(/<\/?[^>]+(>|$)/g, "");

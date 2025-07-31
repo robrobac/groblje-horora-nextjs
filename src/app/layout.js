@@ -4,7 +4,6 @@ import "./globals.scss";
 import Header from "../components/header/Header";
 import dynamic from "next/dynamic";
 import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
-const GoogleTagManagerComp = dynamic(() => import("@/components/googleComps/GoogleTagManagerComp"), { ssr: false })
 
 const lexend = Lexend({ subsets: ["latin"] });
 
@@ -15,7 +14,6 @@ export default function RootLayout({ children }) {
                 <Header />
                 {children}
                 <BackToTopButton />
-                <GoogleTagManagerComp />
             </body>
         </html>
     );
