@@ -41,6 +41,10 @@ export const Footer = () => {
                         <Link target='_blank' href={'https://www.behance.net/robertov'}>Roberto Vukomanović</Link> & <Link target='_blank' href={'https://www.behance.net/tenavuksani'}> Tena Vuksanić </Link>
                     </p>
 
+                    <p className={styles.copyright}>
+                        <Link href={'/politika-privatnosti'}>Politika privatnosti</Link>
+                    </p>
+
                 </div>
 
             </div>

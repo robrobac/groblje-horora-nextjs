@@ -160,7 +160,15 @@ const RegistracijaPage = () => {
                         </div>
                         <LoadingBtn loading={creatingUser} content="Registracija" type={creatingUser ? 'button' : 'submit'} size={'20px'}/>
                     </form>
-                    <p>Već imate račun? <Link href='/prijava'>Prijavite se</Link></p>
+                    <p>
+                        Već imate račun? 
+                        <Link href='/prijava'> Prijavite se</Link>
+                        <br></br>
+                        <br></br>
+                        <Link style={{fontWeight: "300"}} href='/politika-privatnosti'>Politika privatnosti</Link>
+                    </p>
+                    
+                    
                 </div>
             </div>
         </main>

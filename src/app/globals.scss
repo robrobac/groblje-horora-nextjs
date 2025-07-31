@@ -226,6 +226,61 @@ a {
     }
 }
 
+// Sections with simple HTML for privacy policy or About page
+.defaultSection {
+    width: 100%;
+    max-width: var(--widthDefault);
+    min-height: 80vh;
+    margin: 0 auto;
+    padding: 0 var(--paddingM);
+    align-items: unset;
+
+    section {
+        max-width: var(--widthReading);
+        margin-bottom: 2.5rem;
+    }
+
+    h1, h2, h3, h4, p {
+        margin-bottom: 1rem;
+    }
+
+    h1 {
+        font-size: var(--textXXXL);
+        line-height: calc(var(--textXXXL) * 1.5);
+    }
+
+    h2 {
+        font-size: var(--textXXL);
+        line-height: calc(var(--textXXL) * 1.5);
+    }
+
+    h3 {
+        font-size: var(--textXL);
+        line-height: calc(var(--textXL) * 1.5);
+    }
+
+    h4 {
+        font-size: var(--textL);
+        line-height: calc(var(--textL) * 1.5);
+    }
+
+    a {
+        color: var(--redBright);
+        text-decoration: underline;
+        cursor: var(--pointerCursor);
+    }
+
+    ul {
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+}
+
 
 @keyframes breatheInputError {
     0% {
@@ -237,4 +292,4 @@ a {
     100% {
         border-color: red;
     }
-  }
+}
