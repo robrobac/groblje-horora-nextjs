@@ -33,7 +33,8 @@ export const GET = async (request) => {
         if (search) {
             
             // handling edge case for search term "vhs" because it does not find a movies named "v/h/s"
-            const searchTerm = search == "vhs" ? "v/h/s" : search;
+            const normalized = search.toLowerCase();
+            const searchTerm = normalized === "vhs" ? "v/h/s" : search;
 
             // Will test this query later
             // const searchQuery = {
