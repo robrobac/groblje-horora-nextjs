@@ -31,25 +31,70 @@ export const GET = async (request) => {
         dbConnect()
 
         if (search) {
-            const reviewsQuery = {
-                $or: [
-                    { $text: { $search: search } },
-                    // { "reviewTitle": { $regex: new RegExp(`.*${search}.*`, 'i') } }
-                ],
-            }
-            //  If SEARCH is in query, do the search.
-            const reviews = await reviewModel.find(reviewsQuery)
-                .skip(skip)
-                .limit(perPage)
-                // .sort([['createdAt', -1]])
-                .sort({ score: { $meta: "textScore" } })  // Sort by relevance
-            const totalReviewsCount = await reviewModel.countDocuments(reviewsQuery)
+            
+            // handling edge case for search term "vhs" because it does not find a movies named "v/h/s"
+            const searchTerm = search == "vhs" ? "v/h/s" : search;
 
+            // Will test this query later
+            // const searchQuery = {
+            //     $search: {
+            //         index: 'reviews_index',
+            //         text: {
+            //             query: search,
+            //             path: ['reviewTitle', 'movies.title', 'movies.tags.tagLabel'],
+            //             fuzzy: {
+            //                 maxEdits: 2,
+            //                 prefixLength: 2,
+            //                 maxExpansions: 20
+            //             }
+            //         }
+            //     }
+            // }
+
+            const searchQuery = {
+                $search: {
+                    index: 'reviews_index',
+                    compound: {
+                    must: [{
+                        text: {
+                            query: searchTerm,
+                            path: ['movies.title', 'movies.tags.tagLabel'],
+                            fuzzy: { maxEdits: 2, prefixLength: 2, maxExpansions: 20 },
+                        }
+                    }],
+                    should: [
+                        {
+                            phrase: {
+                                query: searchTerm,
+                                path: 'movies.title',
+                                slop: 0,
+                                score: { boost: { value: 20 } }
+                            }
+                        },
+                        {
+                            text: {
+                                query: searchTerm,
+                                path: 'movies.title',
+                                score: { boost: { value: 6 } }
+                            }
+                        },
+                    ],
+                    }
+                }
+            };
+
+            const results = await reviewModel.aggregate([
+                searchQuery,
+                { $limit: Number(perPage) }
+            ])
+
+            // totalItems and totalPages is hardcoded to max 1 page or 20 results
             return NextResponse.json({
-                reviews,
-                totalItems: totalReviewsCount,
-                totalPages: Math.ceil(totalReviewsCount / perPage)
+                reviews: results,
+                totalItems: 20,
+                totalPages: 1
             })
+
         } else {
             // Else if there's no Search in the query, continue with sorting and ordering
 
@@ -127,7 +172,8 @@ export const GET = async (request) => {
 
         }
     } catch (err) {
-        throw new Error('Failed to fetch Reviews', err)
+        console.error('Failed to fetch Reviews:', err); // will show the real reason
+        throw new Error('Failed to fetch Reviews:', err)
     }
 }
 

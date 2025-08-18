@@ -11,6 +11,10 @@ export default function FilterAndSort() {
     const filterAndSortControlsRef = useRef(null);
     const [optionsOpen, setOptionsOpen] = useState(false)
 
+    const handleOpenOptions = () => {
+        setOptionsOpen(!optionsOpen);
+    }
+
     const {
         search,
         handleFilter,
@@ -22,6 +26,7 @@ export default function FilterAndSort() {
         totalItems,
         loading,
     } = useContext(ReviewsGalleryContext)
+
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -40,7 +45,11 @@ export default function FilterAndSort() {
 
     return (
         <div className={styles.filterAndSortContainer}>
-            <button className={`${buttonStyles.button} ${buttonStyles.sortAndFilterButton} ${optionsOpen && buttonStyles.active}`} onClick={(e) => setOptionsOpen(!optionsOpen)}>
+            <button
+                className={`${buttonStyles.button} ${buttonStyles.sortAndFilterButton} ${optionsOpen && buttonStyles.active}`}
+                onClick={handleOpenOptions}
+                style={{pointerEvents: search ? 'none' : 'auto', opacity: search ? .25 : 1}}
+            >
                 Filtriranje i Sortiranje
                 <SortAndFilterIcon />
             </button>
