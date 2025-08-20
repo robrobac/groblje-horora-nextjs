@@ -96,3 +96,23 @@ export function shortenStringTo30Words(str) {
     const shortenedString = shortenedWords.join(' ');
     return shortenedString;
 }
+
+export async function getReviewsFromIds(ids) {
+    if (!ids || ids.length === 0) {
+        return [];
+    }
+
+    const params = new URLSearchParams();
+    ids.forEach(id => params.append("ids", id));
+
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviewsFromIds?${params.toString()}`
+    );
+
+    if (!res.ok) {
+        throw new Error("Failed to search Reviews data");
+    }
+
+    const json = await res.json();
+    return json.reviews;
+}
