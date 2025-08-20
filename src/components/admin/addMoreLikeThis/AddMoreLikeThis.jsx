@@ -3,6 +3,7 @@ import styles from '@/components/admin/addMoreLikeThis/addMoreLikeThis.module.sc
 import SearchIcon from "@/components/searchBar/svg/SearchIcon";
 import useDebounce from '@/hooks/useDebounce';
 import { useEffect, useRef, useState } from 'react';
+import AddMoreLikeThisList from './AddMoreLikeThisList';
 
 export default function AddMoreLikeThis() {
     const inputRef = useRef(null);
@@ -15,8 +16,8 @@ export default function AddMoreLikeThis() {
 
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
+
     
-    const labelFor = (item) => item?.title || item?.name || item?.slug || 'Untitled';
 
     useEffect(() => {
         // Fetch search results when debounced search term changes 
@@ -91,6 +92,7 @@ export default function AddMoreLikeThis() {
 
     return (
         <div className={styles.addMoreLikeThisContainer}>
+            <p>Moglo bi vas zanimati...</p>
             <div className={styles.addMoreLikeThis}>
                 <div className={styles.addMoreLikeThisSearchContainer}>
 
@@ -109,6 +111,11 @@ export default function AddMoreLikeThis() {
                             setSearch(e.target.value || '');
                             setOpen(true);
                         }}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                e.preventDefault();
+                            }
+                        }}
                     />
 
                 </div>
@@ -123,7 +130,7 @@ export default function AddMoreLikeThis() {
                         )}
 
                         {!loading && searchResult.length > 0 && (
-                            <ul className={styles.addMoreLikeThisDropdownList}>
+                            <ol className={styles.addMoreLikeThisDropdownList}>
                                 {searchResult.map((item, index) => {
                                     return (
                                         <li
@@ -131,11 +138,16 @@ export default function AddMoreLikeThis() {
                                             className={`${styles.addMoreLikeThisDropdownItem}`}
                                             onClick={() => handleSelect(item)}
                                         >
-                                            {item._id}
+                                            <h4>{item.reviewTitle} {item.movies.length === 1 && (<span>({item?.movies[0].year})</span>)}</h4>
+                                            {item.movies.length === 4 && (
+                                                <p className={styles.addMoreLikeThisDescription}>
+                                                    {item.movies[0].title} <span>({item?.movies[0].year})</span>, {item?.movies[1].title} <span>({item?.movies[1].year})</span>, {item?.movies[2].title} <span>({item?.movies[2].year})</span>, {item?.movies[3].title} <span>({item?.movies[3].year})</span>
+                                                </p>
+                                            )}
                                         </li>
                                     );
                                 })}
-                            </ul>
+                            </ol>
                         )}
                     </div>
                 )}
@@ -143,17 +155,7 @@ export default function AddMoreLikeThis() {
 
             {/* Selected reviews list */}
             {selected.length > 0 && (
-                <div className={styles.selectedChips}>
-                    {selected.map((item, index) => {
-                        
-                        return (
-                            <span className={styles.chip} key={item}>
-                                <span className={styles.chipText}>{item}</span>
-                                <button className={styles.chipRemove} onClick={() => removeSelected(item)}>×</button>
-                            </span>
-                        );
-                    })}
-                </div>
+                <AddMoreLikeThisList selectedIds={selected} removeSelected={removeSelected}/>
             )}
         </div>
     );

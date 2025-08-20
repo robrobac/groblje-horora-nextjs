@@ -4,9 +4,24 @@ import bloodyBorder from '../../../../../public/images/bloody-border.png'
 import Image from 'next/image';
 
 
-export default function postImage({post, newTab}) {
+export default function postImage({post, newTab, disableLink = false}) {
+
+    const Wrapper = ({ children }) =>
+        disableLink ? (
+            <div className={styles.postImageLink}>{children}</div>
+        ) : (
+            <Link
+                className={styles.postImageLink}
+                href={`/recenzije/${post?.slug}`}
+                target={newTab ? '_blank' : '_self'}
+            >
+                {children}
+            </Link>
+    );
+
+
     return (
-        <Link className={styles.postImageLink} href={`/recenzije/${post?.slug}`} target={newTab ? '_blank' : '_self'}>
+        <Wrapper>
             {post?.movies.length === 4 ? (
                 <div className={styles.quadImageContainer}>
                     <figure className={styles.quadImage}>
@@ -28,6 +43,6 @@ export default function postImage({post, newTab}) {
                     {post.movies[0].top25 && (<Image className={styles.bloodyBorder} src={bloodyBorder} alt='Top 25 Preporuka okvir'></Image>)}
                 </figure>
             )}
-        </Link>
+        </Wrapper>
     )
 }
