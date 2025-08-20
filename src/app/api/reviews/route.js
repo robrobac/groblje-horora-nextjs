@@ -183,7 +183,7 @@ export const GET = async (request) => {
 export async function POST(request) {
     dbConnect()
     const data = await request.json()
-    const { reviewTitle, movies, comments, likes, contentImages, selectedcategory, quadOgImage, quadOgImagePath } = data
+    const { reviewTitle, movies, comments, likes, contentImages, selectedcategory, quadOgImage, quadOgImagePath, moreLikeThis } = data
     // console.log(movies) // Keep in Development
     // console.log('links: ', [quadOgImage, quadOgImagePath]) // Keep in Development
 
@@ -249,6 +249,7 @@ export async function POST(request) {
                 contentImages,
                 reviewType: 'single',
                 category: selectedcategory,
+                moreLikeThis
             })
         }
         if (movies.length === 4) {
@@ -263,6 +264,7 @@ export async function POST(request) {
                 category: selectedcategory,
                 quadOgImage: quadOgImage,
                 quadOgImagePath: quadOgImagePath,
+                moreLikeThis
             })
         }
         return new NextResponse(JSON.stringify(review), {

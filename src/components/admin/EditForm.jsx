@@ -19,9 +19,11 @@ import { FILTERING_OPTIONS } from '@/lib/sortOptions'
 import { sortedTags } from '@/lib/tags'
 import GhostSpinner from '../ghostSpinner/GhostSpinner'
 import { LoadingBtn } from '../buttons/loadingBtn'
+import AddMoreLikeThis from './addMoreLikeThis/AddMoreLikeThis'
 
 export default function EditForm({slug}) {
     const [selectedTab, setSelectedTab] = useState('movie1')
+    const [selectedMoreLikeThis, setSelectedMoreLikeThis] = useState([]);
 
     const [post, setPost] = useState({})
     const [reviewTitle, setReviewTitle] = useState('')
@@ -113,6 +115,7 @@ export default function EditForm({slug}) {
                     setSelectedcategory(data.category)
                     setQuadOgImage(data.quadOgImage)
                     setQuadOgImagePath(data.quadOgImagePath)
+                    setSelectedMoreLikeThis(data.moreLikeThis);
 
                     setMovies(data.movies.map((movie) => {
                         return {
@@ -343,6 +346,7 @@ export default function EditForm({slug}) {
                     selectedcategory: selectedcategory,
                     quadOgImage: '',
                     quadOgImagePath: '',
+                    moreLikeThis: selectedMoreLikeThis,
                 }
 
                 if (resolvedMovieReviews.length === 4) {
@@ -480,6 +484,8 @@ export default function EditForm({slug}) {
                     // Clear ContentImages state
                     setContentImages([])
 
+                    setSelectedMoreLikeThis([])
+                    
                     // Navigate to edited post
                     router.push(`/recenzije/${json.slug}`)
                 }
@@ -612,6 +618,7 @@ export default function EditForm({slug}) {
                             </div>
                         </div>
                     ))}
+                    <AddMoreLikeThis selected={selectedMoreLikeThis} setSelected={setSelectedMoreLikeThis}/>
                     <div className={styles.submitBtnContainer}>
                         <LoadingBtn loading={loading} content="Objavi" type={loading ? 'button' : 'submit'} size={'20px'}/>
                     </div>

@@ -23,128 +23,128 @@ export const GET = async (request, { params }) => {
     }
 
     // Extract tags from movies in the review
-    var tagArray = []
-    review.movies.forEach((movie) => {
-        movie.tags.forEach((tag) => {
-            tagArray.push(tag.tagValue)
-        })
-    })
+    // var tagArray = []
+    // review.movies.forEach((movie) => {
+    //     movie.tags.forEach((tag) => {
+    //         tagArray.push(tag.tagValue)
+    //     })
+    // })
 
-    var pipeline = [ // sorted by number of matched tags
-        {
-            "$match": {
-                slug: { $ne: slug }, // Exclude the current review
-                "movies.tags.tagValue": {
-                    "$in": tagArray
-                }
-            }
-        }, 
-        {
-            "$addFields": {
-                "tagsMatched": {
-                    "$map": {
-                        "input": "$movies",
-                        "as": "movie",
-                        "in": {
-                            "$reduce": {
-                                "input": "$$movie.tags",
-                                "initialValue": [],
-                                "in": {
-                                    "$cond": {
-                                        "if": {
-                                            "$in": [
-                                                "$$this.tagValue",
-                                                tagArray
-                                            ]
-                                        },
-                                        "then": {
-                                            "$concatArrays": [
-                                                "$$value",
-                                                [
-                                                    "$$this.tagValue"
-                                                ]
-                                            ]
-                                        },
-                                        "else": "$$value"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }, 
-        {
-            "$unwind": {
-                "path": "$tagsMatched",
-                "preserveNullAndEmptyArrays": false
-            }
-        }, 
-        {
-            "$addFields": {
-                "countTagsMatched": {
-                    "$size": "$tagsMatched"
-                }
-            }
-        }, 
-        {
-            "$group": {
-                "_id": "$_id",
-                "reviewTitle": {"$first": "$reviewTitle"},
-                "slug": {"$first": "$slug"},
-                "contentImages": {"$first": "$contentImages"},
-                "movies": {"$first": "$movies"},
-                "reviewType": {"$first": "$reviewType"},
-                "likes": {"$first": "$likes"},
-                "comments": {"$first": "$comments"},
-                "createdAt": {"$first": "$createdAt"},
-                "updatedAt": {"$first": "$updatedAt"},
-                "category": {"$first": "$category"},
-                "quadOgImage": {"$first": "$quadOgImage"},
-                "quadOgImagePath": {"$first": "$quadOgImagePath"},
-                "tagsMatched": { "$first": "$tagsMatched" },
-                "countTagsMatched" : {"$sum": "$countTagsMatched"}
-            }
-        },
-        {
-            "$sort": {
-                "countTagsMatched": -1
-            }
-        },
-        {
-            "$limit": 8 - (tagArray.length < 8 ? tagArray.length : 0)
-        }
-    ];
+    // var pipeline = [ // sorted by number of matched tags
+    //     {
+    //         "$match": {
+    //             slug: { $ne: slug }, // Exclude the current review
+    //             "movies.tags.tagValue": {
+    //                 "$in": tagArray
+    //             }
+    //         }
+    //     }, 
+    //     {
+    //         "$addFields": {
+    //             "tagsMatched": {
+    //                 "$map": {
+    //                     "input": "$movies",
+    //                     "as": "movie",
+    //                     "in": {
+    //                         "$reduce": {
+    //                             "input": "$$movie.tags",
+    //                             "initialValue": [],
+    //                             "in": {
+    //                                 "$cond": {
+    //                                     "if": {
+    //                                         "$in": [
+    //                                             "$$this.tagValue",
+    //                                             tagArray
+    //                                         ]
+    //                                     },
+    //                                     "then": {
+    //                                         "$concatArrays": [
+    //                                             "$$value",
+    //                                             [
+    //                                                 "$$this.tagValue"
+    //                                             ]
+    //                                         ]
+    //                                     },
+    //                                     "else": "$$value"
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }, 
+    //     {
+    //         "$unwind": {
+    //             "path": "$tagsMatched",
+    //             "preserveNullAndEmptyArrays": false
+    //         }
+    //     }, 
+    //     {
+    //         "$addFields": {
+    //             "countTagsMatched": {
+    //                 "$size": "$tagsMatched"
+    //             }
+    //         }
+    //     }, 
+    //     {
+    //         "$group": {
+    //             "_id": "$_id",
+    //             "reviewTitle": {"$first": "$reviewTitle"},
+    //             "slug": {"$first": "$slug"},
+    //             "contentImages": {"$first": "$contentImages"},
+    //             "movies": {"$first": "$movies"},
+    //             "reviewType": {"$first": "$reviewType"},
+    //             "likes": {"$first": "$likes"},
+    //             "comments": {"$first": "$comments"},
+    //             "createdAt": {"$first": "$createdAt"},
+    //             "updatedAt": {"$first": "$updatedAt"},
+    //             "category": {"$first": "$category"},
+    //             "quadOgImage": {"$first": "$quadOgImage"},
+    //             "quadOgImagePath": {"$first": "$quadOgImagePath"},
+    //             "tagsMatched": { "$first": "$tagsMatched" },
+    //             "countTagsMatched" : {"$sum": "$countTagsMatched"}
+    //         }
+    //     },
+    //     {
+    //         "$sort": {
+    //             "countTagsMatched": -1
+    //         }
+    //     },
+    //     {
+    //         "$limit": 8 - (tagArray.length < 8 ? tagArray.length : 0)
+    //     }
+    // ];
 
-    // Trenutno povuce 4 random objava koje imaju barem jedan jednaki tag
-    var moreLikeThis = await reviewModel.aggregate(pipeline)
+    // // Trenutno povuce 4 random objava koje imaju barem jedan jednaki tag
+    // var moreLikeThis = await reviewModel.aggregate(pipeline)
 
-    if (moreLikeThis.length < 8) {
-        for (const tag of tagArray) {
-            var moreLikeThis2 = await reviewModel.aggregate([
-                {
-                    "$match": {
-                        slug: { $ne: slug, $nin: moreLikeThis.map(doc => doc.slug) },
-                        "movies.tags.tagValue": tag
-                    }
-                },
-                { "$sample": { "size": 1 } },
-            ])
+    // if (moreLikeThis.length < 8) {
+    //     for (const tag of tagArray) {
+    //         var moreLikeThis2 = await reviewModel.aggregate([
+    //             {
+    //                 "$match": {
+    //                     slug: { $ne: slug, $nin: moreLikeThis.map(doc => doc.slug) },
+    //                     "movies.tags.tagValue": tag
+    //                 }
+    //             },
+    //             { "$sample": { "size": 1 } },
+    //         ])
 
-            moreLikeThis = [...moreLikeThis, ...moreLikeThis2];
-        }
-    }
+    //         moreLikeThis = [...moreLikeThis, ...moreLikeThis2];
+    //     }
+    // }
 
-    if (moreLikeThis.length < 8) {
-        const additionalDocuments = await reviewModel.aggregate([
-            { $match: { slug: { $ne: slug, $nin: moreLikeThis.map(doc => doc.slug) } } },
-            { $sample: { size: 8 - moreLikeThis.length } }
-        ]);
+    // if (moreLikeThis.length < 8) {
+    //     const additionalDocuments = await reviewModel.aggregate([
+    //         { $match: { slug: { $ne: slug, $nin: moreLikeThis.map(doc => doc.slug) } } },
+    //         { $sample: { size: 8 - moreLikeThis.length } }
+    //     ]);
 
-        moreLikeThis = [...moreLikeThis, ...additionalDocuments];
-    }
+    //     moreLikeThis = [...moreLikeThis, ...additionalDocuments];
+    // }
 
-    review.moreLikeThis = moreLikeThis;
+    // review.moreLikeThis = moreLikeThis;
 
     return new NextResponse(JSON.stringify(review), {
         status: 200
@@ -164,7 +164,7 @@ export const PATCH = async (request, { params }) => {
     }
 
     const data = await request.json()
-    const { reviewTitle, movies, comments, likes, contentImages, selectedcategory, quadOgImage, quadOgImagePath } = data
+    const { reviewTitle, movies, comments, likes, contentImages, selectedcategory, quadOgImage, quadOgImagePath, moreLikeThis } = data
 
     let newSlug = ''
 
@@ -227,6 +227,7 @@ export const PATCH = async (request, { params }) => {
                 contentImages,
                 reviewType: 'single',
                 category: selectedcategory,
+                moreLikeThis
             }, { new: true })
         }
         if (movies.length === 4) {
@@ -241,6 +242,7 @@ export const PATCH = async (request, { params }) => {
                 category: selectedcategory,
                 quadOgImage: quadOgImage,
                 quadOgImagePath: quadOgImagePath,
+                moreLikeThis
             }, { new: true })
         }
 

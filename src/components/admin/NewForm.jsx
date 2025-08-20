@@ -34,6 +34,8 @@ export default function NewForm({ numberOfMovies }) {
 
     const [selectedTab, setSelectedTab] = useState('movie1')
 
+    const [selectedMoreLikeThis, setSelectedMoreLikeThis] = useState([]);
+
     const [formSubmitted, setFormSubmitted] = useState(false);
     // If form fails checks on backend, change the state to trigger useEffect in PreviewDialog components and that way close the Preview Modal.
     const [formFailed, setFormFailed] = useState(false)
@@ -260,6 +262,7 @@ export default function NewForm({ numberOfMovies }) {
                     selectedcategory: selectedcategory,
                     quadOgImage: '',
                     quadOgImagePath: '',
+                    moreLikeThis: selectedMoreLikeThis,
                 };
 
                 if (resolvedMovieReviews.length === 4) {
@@ -340,6 +343,7 @@ export default function NewForm({ numberOfMovies }) {
                     // Clear ContentImages state
                     setContentImages([]);
 
+                    setSelectedMoreLikeThis([])
                     // Navigate to new post
                     router.push(`/recenzije/${json.slug}`);
                 }
@@ -470,7 +474,7 @@ export default function NewForm({ numberOfMovies }) {
                             </div>
                         </div>
                     ))}
-                    <AddMoreLikeThis />
+                    <AddMoreLikeThis selected={selectedMoreLikeThis} setSelected={setSelectedMoreLikeThis}/>
                     <div className={styles.submitBtnContainer}>
                         <LoadingBtn loading={loading} content="Objavi" type={loading ? 'button' : 'submit'} size={'20px'}/>
                     </div>

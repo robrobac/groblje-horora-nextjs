@@ -5,14 +5,13 @@ import useDebounce from '@/hooks/useDebounce';
 import { useEffect, useRef, useState } from 'react';
 import AddMoreLikeThisList from './AddMoreLikeThisList';
 
-export default function AddMoreLikeThis() {
+export default function AddMoreLikeThis({selected, setSelected}) {
     const inputRef = useRef(null);
 
     const [search, setSearch] = useState('');
     const debouncedSearch = useDebounce(search, 500);
 
     const [searchResult, setSearchResult] = useState([]);
-    const [selected, setSelected] = useState([]);
 
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);

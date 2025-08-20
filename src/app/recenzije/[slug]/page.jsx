@@ -6,7 +6,7 @@ import EditDeleteButtonsSingle from "@/components/editDeleteButton/EditDeleteBut
 import { Movie } from "@/components/singleReview/movie/Movie";
 import OgImageLink from "@/components/singleReview/ogImageLink/OgImageLink";
 import { ReviewHeader } from "@/components/singleReview/reviewHeader/ReviewHeader";
-import { getRawContent } from "@/lib/utils";
+import { getRawContent, getReviewsFromIds } from "@/lib/utils";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
 import Footer from "@/components/footer/footer";
@@ -44,7 +44,13 @@ const getData = async (slug) => {
         notFound()
         // throw new Error('Failed to fetch Single Post data');
     }
-    return res.json();
+    
+    const data = await res.json();
+
+    const moreLikeThis = await getReviewsFromIds(data.moreLikeThis);
+    data.moreLikeThis = moreLikeThis;
+
+    return data;
 }
 
 
