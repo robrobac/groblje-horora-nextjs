@@ -52,6 +52,8 @@ export const GET = async (request) => {
             //     }
             // }
 
+
+            // TODO: Merge these settings with settings in the "api/quickSearch" route!
             const searchQuery = {
                 $search: {
                     index: 'reviews_index',
@@ -173,7 +175,7 @@ export const GET = async (request) => {
 
         }
     } catch (err) {
-        console.error('Failed to fetch Reviews:', err); // will show the real reason
+        console.error('Failed to fetch Reviews:', err);
         throw new Error('Failed to fetch Reviews:', err)
     }
 }

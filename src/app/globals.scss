@@ -121,12 +121,12 @@ main {
 }
 
 /* SCROLLBAR */
-::-webkit-scrollbar {
+::-webkit-scrollbar:not(.addMoreLikeThisDropdown) {
     width: 0;
 }
 
 /* For Edge and IE */
-body::-ms-scrollbar {
+body::-ms-scrollbar:not(.addMoreLikeThisDropdown) {
     width: 0;
 }
 

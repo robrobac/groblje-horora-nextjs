@@ -22,7 +22,7 @@ import ImageRepo from './ImageRepo';
 import { FILTERING_OPTIONS } from '@/lib/sortOptions';
 import { sortedTags } from '@/lib/tags';
 import { LoadingBtn } from '../buttons/loadingBtn';
-
+import AddMoreLikeThis from './addMoreLikeThis/AddMoreLikeThis';
 
 
 export default function NewForm({ numberOfMovies }) {
@@ -470,6 +470,7 @@ export default function NewForm({ numberOfMovies }) {
                             </div>
                         </div>
                     ))}
+                    <AddMoreLikeThis />
                     <div className={styles.submitBtnContainer}>
                         <LoadingBtn loading={loading} content="Objavi" type={loading ? 'button' : 'submit'} size={'20px'}/>
                     </div>

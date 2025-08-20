@@ -1,0 +1,130 @@
+.addMoreLikeThisContainer {
+    padding: var(--paddingM);
+    background-color: var(--commentsBG);
+    border-radius: 0 0 var(--radiusM) var(--radiusM);
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--paddingM);
+    min-height: 500px;
+}
+
+.addMoreLikeThisSearchContainer {
+    display: flex;
+    align-items: center;
+}
+
+.addMoreLikeThisSearchIcon {
+    position: absolute;
+    display: flex;
+    padding: 10px;
+
+    svg {
+        fill: var(--white50);
+    }
+}
+
+.addMoreLikeThisSearchBar {
+    border: 1px solid var(--white50);
+    background-color: transparent;
+    font-size: 1rem;
+    color: var(--white);
+    padding: 10px;
+    padding-left: 40px;
+    width: 100%;
+    border-radius: var(--radiusS);
+    cursor: var(--inputCursor);
+
+    &:focus {
+        border: 1px solid var(--white);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: var(--white25);
+    }
+}
+
+.addMoreLikeThisDropdown {
+    position: relative;
+}
+.addMoreLikeThis {
+    position: relative;
+}
+.addMoreLikeThisDropdown {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    max-height: 8rem;
+    overflow: auto;
+    background: #101110;
+    border: 1px solid var(--white25);
+    border-radius: var(--radiusS);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+
+.addMoreLikeThisDropdownStatus {
+    padding: 10px;
+    font-size: 0.95rem;
+    color: var(--white50);
+}
+
+.addMoreLikeThisDropdownList {
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+}
+
+.addMoreLikeThisDropdownItem {
+    padding: 10px;
+    cursor: pointer;
+    color: var(--white);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &:hover {
+        background: rgba(255,255,255,0.08);
+    }
+}
+
+/* Optional chips for selected items */
+.selectedChips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: var(--radiusS);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--white25);
+    color: var(--white);
+    max-width: 100%;
+}
+
+.chipText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chipRemove {
+    border: none;
+    background: transparent;
+    color: var(--white50);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0 2px;
+
+    &:hover {
+        color: var(--white);
+    }
+}
