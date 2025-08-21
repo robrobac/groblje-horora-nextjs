@@ -490,8 +490,11 @@ export default function EditForm({slug}) {
                     setSelectedMoreLikeThis([])
                     setPrevMoreLikeThis([])
                     
+                    router.replace(`/recenzije/${json.slug}`);
+                    router.refresh();
+
                     // Navigate to edited post
-                    router.push(`/recenzije/${json.slug}`)
+                    // router.push(`/recenzije/${json.slug}`)
                 }
             })
     }

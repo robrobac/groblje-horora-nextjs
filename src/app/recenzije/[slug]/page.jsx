@@ -20,7 +20,7 @@ const MoreLikeThis = dynamic(() => import("@/components/singleReview/moreLikeThi
 const CommentsAndLikes = dynamic(() => import("@/components/commentsAndLikes/CommentsAndLikes"), { ssr: false })
 
 // export const dynamic = 'force-dynamic';
-export const revalidate = 60
+// export const revalidate = 60
 
 function cleanDescription(str) {
     const cleanedString = str.replace(/<\/?[^>]+(>|$)/g, "");
@@ -39,7 +39,7 @@ function shortenStringTo30Words(str) {
 
 const getData = async (slug) => {
     // console.log(slug)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${slug}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${slug}`, { next: { revalidate: 60, tags: [`review:${slug}`] } });
     if (!res.ok) {
         notFound()
         // throw new Error('Failed to fetch Single Post data');

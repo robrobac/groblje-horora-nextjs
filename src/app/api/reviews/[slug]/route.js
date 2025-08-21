@@ -2,6 +2,7 @@ import { dbConnect } from "@/lib/mongo/dbConnect"
 import reviewModel from "@/lib/mongo/models/reviewModel"
 import { slugify, toObjectIds } from "@/lib/utils"
 import mongoose, { Mongoose } from "mongoose"
+import { revalidatePath, revalidateTag } from "next/cache"
 import { NextResponse } from "next/server"
 
 export const GET = async (request, { params }) => {
@@ -153,7 +154,7 @@ export const GET = async (request, { params }) => {
 
 export const PATCH = async (request, { params }) => {
     dbConnect()
-    const { slug } = params;
+    const { slug: oldSlug } = params;
     const id = request.nextUrl.searchParams.get('id');
 
 
@@ -267,14 +268,24 @@ export const PATCH = async (request, { params }) => {
             )
         }
 
+        // 1) Bust the Data Cache for both old and (potential) new tag
+        revalidateTag(`review:${oldSlug}`);
+        if (newSlug && newSlug !== oldSlug) revalidateTag(`review:${newSlug}`);
+
+        // 2) Bust the Full Route Cache (HTML/RSC) for the page path(s)
+        revalidatePath(`/recenzije/${oldSlug}`, 'page');
+        if (newSlug && newSlug !== oldSlug) revalidatePath(`/recenzije/${newSlug}`, 'page');
+
         if (!review) {
             return new NextResponse(JSON.stringify({ error: 'No such review' }), {
                 status: 404
             })
         }
+
         return new NextResponse(JSON.stringify(review), {
             status: 200
         })
+
     } catch (error) {
         return new NextResponse(JSON.stringify({ error: error.message }), {
             status: 400
