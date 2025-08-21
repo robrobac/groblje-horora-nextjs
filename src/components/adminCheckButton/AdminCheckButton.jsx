@@ -223,7 +223,122 @@ export default function AdminCheckButton() {
             ])
             moviesWithoutImdbLink.forEach((noLink) => {
                 setFunctionProcess(prevProcess => [...prevProcess, `<li style="color: white; font-size: 14px; line-height: 21px;">${noLink}</li>`])
-            })    
+            })
+
+
+            // ---------- NEW STEP: verify reciprocity of `moreLikeThis` links ----------
+            // AI GENERATED logic
+            setFunctionProcess(prev => [...prev, `----------`]);
+            setFunctionProcess(prev => [...prev, `Checking reciprocity of moreLikeThis links...`]);
+
+            // Helper to normalize various ID shapes (string / {_id} / ObjectId-like)
+            const normalizeId = (v) => {
+                if (!v) return "";
+                if (typeof v === "string") return v;
+                if (typeof v === "object") {
+                    if (typeof v._id === "string") return v._id;
+                    if (v._id && v._id.toString) return v._id.toString();
+                    if (v.toString) return v.toString();
+                }
+                try { return String(v); } catch { return ""; }
+            };
+
+            // Build fast lookup map: id -> review
+            const byId = new Map(reviews.map((r) => [normalizeId(r._id), r]));
+
+            // Collect docs that actually have moreLikeThis entries
+            const docsWithMlt = reviews.filter((r) => Array.isArray(r.moreLikeThis) && r.moreLikeThis.length > 0);
+
+            setFunctionProcess(prev => [...prev, `${docsWithMlt.length} posts have at least one moreLikeThis reference`]);
+            setFunctionProcess(prev => [...prev, `----------`]);
+
+            // Track results
+            const missingReciprocals = [];
+            const danglingRefs = [];
+
+            // Avoid duplicate logs for the same directed pair
+            const seenDirected = new Set();
+
+            for (const doc of docsWithMlt) {
+                const sourceId = normalizeId(doc._id);
+                const sourceTitle = doc.reviewTitle || sourceId;
+
+                const targets = doc.moreLikeThis
+                    .map((x) => normalizeId(x))
+                    .filter(Boolean);
+
+                for (const targetId of targets) {
+                    const key = `${sourceId}->${targetId}`;
+                    if (seenDirected.has(key)) continue;
+                    seenDirected.add(key);
+
+                    console.log(targetId)
+
+                    const targetDoc = byId.get(targetId);
+                    console.log(targetDoc)
+                    if (!targetDoc) {
+                        // Reference points to a document we didn't fetch / doesn't exist
+                        danglingRefs.push({
+                            sourceId,
+                            sourceTitle,
+                            targetId
+                        });
+                        continue;
+                    }
+                    console.log(danglingRefs)
+
+                    const targetMlt = Array.isArray(targetDoc.moreLikeThis)
+                        ? targetDoc.moreLikeThis.map((x) => normalizeId(x)).filter(Boolean)
+                        : [];
+
+                    if (!targetMlt.includes(sourceId)) {
+                        missingReciprocals.push({
+                            sourceId: doc._id,
+                            sourceTitle: doc.reviewTitle,
+                            targetId: targetDoc._id,
+                            targetTitle: targetDoc.reviewTitle
+                        });
+                    }
+                }
+            }
+
+            // Log non-reciprocal links
+            setFunctionProcess(prev => [
+                ...prev,
+                `<span style="${missingReciprocals.length === 0 ? 'color: green' : 'color: red'}; font-size: 14px; line-height: 21px;">
+                    ${missingReciprocals.length} non-reciprocal moreLikeThis links
+                </span>`
+            ]);
+
+            missingReciprocals.forEach(({ sourceId, sourceTitle, targetId, targetTitle }) => {
+                setFunctionProcess(prev => [
+                    ...prev,
+                    `<li style="color: white; font-size: 14px; line-height: 21px;">
+                    ${sourceTitle} <i>(${sourceId})</i> → ${targetTitle} <i>(${targetId})</i>
+                    </li>`
+                ]);
+            });
+
+            setFunctionProcess(prev => [...prev, `----------`]);
+
+            // Log dangling references (targets not found)
+            setFunctionProcess(prev => [
+                ...prev,
+                `<span style="${danglingRefs.length === 0 ? 'color: green' : 'color: orange'}; font-size: 14px; line-height: 21px;">
+                    ${danglingRefs.length} dangling moreLikeThis references (target not found)
+                </span>`
+            ]);
+
+            danglingRefs.forEach(({ sourceId, sourceTitle, targetId }) => {
+                setFunctionProcess(prev => [
+                    ...prev,
+                    `<li style="color: white; font-size: 14px; line-height: 21px;">
+                    ${sourceTitle} (<i>${sourceId}</i>) → <i>${targetId}</i> not found
+                    </li>`
+                ]);
+            });
+            // ---------- END NEW STEP ----------
+
     
         } catch (error) {
             console.error("Error comparing storage and DB:", error);
