@@ -24,6 +24,7 @@ import AddMoreLikeThis from './addMoreLikeThis/AddMoreLikeThis'
 export default function EditForm({slug}) {
     const [selectedTab, setSelectedTab] = useState('movie1')
     const [selectedMoreLikeThis, setSelectedMoreLikeThis] = useState([]);
+    const [prevMoreLikeThis, setPrevMoreLikeThis] = useState([]);
 
     const [post, setPost] = useState({})
     const [reviewTitle, setReviewTitle] = useState('')
@@ -116,6 +117,7 @@ export default function EditForm({slug}) {
                     setQuadOgImage(data.quadOgImage)
                     setQuadOgImagePath(data.quadOgImagePath)
                     setSelectedMoreLikeThis(data.moreLikeThis);
+                    setPrevMoreLikeThis(data.moreLikeThis);
 
                     setMovies(data.movies.map((movie) => {
                         return {
@@ -347,6 +349,7 @@ export default function EditForm({slug}) {
                     quadOgImage: '',
                     quadOgImagePath: '',
                     moreLikeThis: selectedMoreLikeThis,
+                    prevMoreLikeThis: prevMoreLikeThis,
                 }
 
                 if (resolvedMovieReviews.length === 4) {
@@ -485,6 +488,7 @@ export default function EditForm({slug}) {
                     setContentImages([])
 
                     setSelectedMoreLikeThis([])
+                    setPrevMoreLikeThis([])
                     
                     // Navigate to edited post
                     router.push(`/recenzije/${json.slug}`)

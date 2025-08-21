@@ -1,6 +1,6 @@
 import { dbConnect } from "@/lib/mongo/dbConnect"
 import reviewModel from "@/lib/mongo/models/reviewModel"
-import { slugify } from "@/lib/utils"
+import { slugify, toObjectIds } from "@/lib/utils"
 import mongoose, { Mongoose } from "mongoose"
 import { NextResponse } from "next/server"
 
@@ -164,7 +164,7 @@ export const PATCH = async (request, { params }) => {
     }
 
     const data = await request.json()
-    const { reviewTitle, movies, comments, likes, contentImages, selectedcategory, quadOgImage, quadOgImagePath, moreLikeThis } = data
+    const { reviewTitle, movies, comments, likes, contentImages, selectedcategory, quadOgImage, quadOgImagePath, moreLikeThis, prevMoreLikeThis } = data
 
     let newSlug = ''
 
@@ -227,7 +227,7 @@ export const PATCH = async (request, { params }) => {
                 contentImages,
                 reviewType: 'single',
                 category: selectedcategory,
-                moreLikeThis
+                moreLikeThis: toObjectIds(moreLikeThis),
             }, { new: true })
         }
         if (movies.length === 4) {
@@ -242,8 +242,29 @@ export const PATCH = async (request, { params }) => {
                 category: selectedcategory,
                 quadOgImage: quadOgImage,
                 quadOgImagePath: quadOgImagePath,
-                moreLikeThis
+                moreLikeThis: toObjectIds(moreLikeThis)
             }, { new: true })
+        }
+
+
+        // updating moreLikeThis arrays for the current document and the documents in moreLikeThis, those removed and those added
+        const prevMoreLikeThisSet = new Set(prevMoreLikeThis || [])
+        const newMoreLikeThisSet  = new Set(moreLikeThis || [])
+
+        const toAdd    = [...newMoreLikeThisSet].filter(x => !prevMoreLikeThisSet.has(x))   // newly added ids
+        const toRemove = [...prevMoreLikeThisSet].filter(x => !newMoreLikeThisSet.has(x))   // removed ids
+
+        if (toAdd.length) {
+            await reviewModel.updateMany(
+                { _id: { $in: toAdd } },
+                { $addToSet: { moreLikeThis: review._id } }
+            )
+        }
+        if (toRemove.length) {
+            await reviewModel.updateMany(
+                { _id: { $in: toRemove } },
+                { $pull: { moreLikeThis: review._id } }
+            )
         }
 
         if (!review) {
@@ -263,8 +284,12 @@ export const PATCH = async (request, { params }) => {
 
 export async function DELETE(request, { params }) {
     dbConnect()
+    // This is named "slug" but it is actually the ID of the review because of the way the route is set up
+    // The slug is used to generate the URL, but the ID is used to delete the review
     const { slug } = params
     // console.log(slug) // Keep in Development
+
+    const id = new mongoose.Types.ObjectId(slug)
 
     if (!mongoose.Types.ObjectId.isValid(slug)) {
         return new NextResponse(JSON.stringify({ error: 'No such review' }), {
@@ -272,13 +297,19 @@ export async function DELETE(request, { params }) {
         })
     }
 
-    const review = await reviewModel.findOneAndDelete({ _id: slug })
+    const review = await reviewModel.findOneAndDelete({ _id: id })
 
     if (!review) {
         return new NextResponse(JSON.stringify({ error: 'No such review' }), {
             status: 404
         })
     }
+
+    // Remove the current document ID from the moreLikeThis array of all documents that have it
+    await reviewModel.updateMany(
+        { moreLikeThis: id },
+        { $pull: { moreLikeThis: id } }
+    )
 
     return new NextResponse(JSON.stringify(review), {
         status: 200

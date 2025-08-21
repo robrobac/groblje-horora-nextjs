@@ -121,10 +121,12 @@ const ReviewSchema = new Schema({
         type: String,
         required: true
     },
-    moreLikeThis: {
-        type: Array,
-        required: false
-    },
+    // moreLikeThis: {
+    //     type: Array,
+    //     required: false
+    // },
+    moreLikeThis: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review', default: [] }],
+
     likes: [LikeSchema],
     comments: [CommentSchema],
     quadOgImage: {

@@ -1,7 +1,7 @@
 
 import { dbConnect } from "@/lib/mongo/dbConnect"
 import reviewModel from "@/lib/mongo/models/reviewModel"
-import { slugify } from "@/lib/utils";
+import { slugify, toObjectIds } from "@/lib/utils";
 import { NextResponse } from "next/server"
 
 export const GET = async (request) => {
@@ -249,7 +249,7 @@ export async function POST(request) {
                 contentImages,
                 reviewType: 'single',
                 category: selectedcategory,
-                moreLikeThis
+                moreLikeThis: toObjectIds(moreLikeThis)
             })
         }
         if (movies.length === 4) {
@@ -264,9 +264,19 @@ export async function POST(request) {
                 category: selectedcategory,
                 quadOgImage: quadOgImage,
                 quadOgImagePath: quadOgImagePath,
-                moreLikeThis
+                moreLikeThis: toObjectIds(moreLikeThis)
             })
         }
+
+        // For each moreLikeThis document add current document ID to their moreLikeThis array
+        if (moreLikeThis && moreLikeThis.length > 0) {
+            await reviewModel.updateMany(
+                { _id: { $in: moreLikeThis } },
+                { $addToSet: { moreLikeThis: review._id } }
+            )
+        }
+
+
         return new NextResponse(JSON.stringify(review), {
             status: 200
         })
@@ -276,3 +286,20 @@ export async function POST(request) {
         })
     }
 }
+
+
+// Creating document
+// Create document with 3 IDs inside the moreLikeThis array
+// Get those 3 documents and check if they have the current document ID in their moreLikeThis array
+// If they don't, add the current document ID to their moreLikeThis array
+// If they do, do nothing
+
+// Deleting document
+// Get all documents that have the current document ID in their moreLikeThis array
+// Remove the current document ID from their moreLikeThis array
+
+// Updating document
+// Update the document and its moreLikeThis array
+// Get those documents and check if they have the current document ID in their moreLikeThis array
+// If they don't, add the current document ID to their moreLikeThis array
+// If they do, do nothing

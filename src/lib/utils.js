@@ -1,6 +1,7 @@
 
 import { format } from "date-fns"
 import draftToHtml from "draftjs-to-html"
+import mongoose from "mongoose"
 
 export const getRawContent = (content) => {
     if (content) {
@@ -115,4 +116,8 @@ export async function getReviewsFromIds(ids) {
 
     const json = await res.json();
     return json.reviews;
+}
+
+export function toObjectIds(ids=[]) {
+    return ids.filter(mongoose.isValidObjectId).map(id => new mongoose.Types.ObjectId(id));
 }
