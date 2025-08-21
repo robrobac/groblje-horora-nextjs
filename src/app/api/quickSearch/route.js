@@ -1,10 +1,17 @@
 
 import { dbConnect } from "@/lib/mongo/dbConnect"
 import reviewModel from "@/lib/mongo/models/reviewModel"
+import mongoose from "mongoose";
 import { NextResponse } from "next/server"
 
 export const GET = async (request) => {
     const search = request.nextUrl.searchParams.get('search');
+    const exclude = request.nextUrl.searchParams.getAll('exclude');
+
+    const idsToExclude = exclude
+        .filter(Boolean)
+        .map(id => (mongoose.isValidObjectId(id) ? new mongoose.Types.ObjectId(id) : null))
+        .filter(Boolean);
 
     try {
         dbConnect()
@@ -13,7 +20,7 @@ export const GET = async (request) => {
             const normalized = search.toLowerCase();
             const searchTerm = normalized === "vhs" ? "v/h/s" : search;
 
-            // TODO: Merge these settings with settings in the "api/reviews" route!
+            // TODO: Merge these settings with settings in the "api/reviews" route! - The only difference is in the $match line after the searchQuery
             const searchQuery = {
                 $search: {
                     index: 'reviews_index',
@@ -48,6 +55,7 @@ export const GET = async (request) => {
 
             const results = await reviewModel.aggregate([
                 searchQuery,
+                { $match: { _id: { $nin: idsToExclude } } },
                 { $limit: 20 }
             ])
 

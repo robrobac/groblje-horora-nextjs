@@ -5,7 +5,7 @@ import useDebounce from '@/hooks/useDebounce';
 import { useEffect, useRef, useState } from 'react';
 import AddMoreLikeThisList from './AddMoreLikeThisList';
 
-export default function AddMoreLikeThis({selected, setSelected}) {
+export default function AddMoreLikeThis({selected, setSelected, currentDocId}) {
     const inputRef = useRef(null);
 
     const [search, setSearch] = useState('');
@@ -30,7 +30,16 @@ export default function AddMoreLikeThis({selected, setSelected}) {
             }
             setLoading(true);
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/quickSearch?search=${term}`);
+                const params = new URLSearchParams();
+                params.set('search', term);
+                
+                selected.forEach(id => {
+                    if (id) params.append('exclude', id);
+                });
+
+                if (currentDocId) params.append('exclude', currentDocId);
+
+                const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/quickSearch?${params.toString()}`,);
                 const json = await res.json();
 
                 if (!res.ok) throw new Error('Failed to search Reviews data');

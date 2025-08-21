@@ -622,7 +622,7 @@ export default function EditForm({slug}) {
                             </div>
                         </div>
                     ))}
-                    <AddMoreLikeThis selected={selectedMoreLikeThis} setSelected={setSelectedMoreLikeThis}/>
+                    <AddMoreLikeThis selected={selectedMoreLikeThis} setSelected={setSelectedMoreLikeThis} currentDocId={post._id}/>
                     <div className={styles.submitBtnContainer}>
                         <LoadingBtn loading={loading} content="Objavi" type={loading ? 'button' : 'submit'} size={'20px'}/>
                     </div>
