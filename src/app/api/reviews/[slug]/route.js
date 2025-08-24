@@ -329,7 +329,7 @@ export async function DELETE(request, { params }) {
     const moreLikeThisSlugs = await getSlugsFromIds(moreLikeThis)
     moreLikeThisSlugs.forEach((slug) =>{
         revalidateTag(`review:${slug}`);
-        revalidatePath(`review:${slug}`);
+        revalidatePath(`/recenzije/${slug}`);
     })
 
     return new NextResponse(JSON.stringify(review), {

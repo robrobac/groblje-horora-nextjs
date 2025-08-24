@@ -276,7 +276,7 @@ export async function POST(request) {
             const moreLikeThisSlugs = await getSlugsFromIds(moreLikeThis)
             moreLikeThisSlugs.forEach((slug) =>{
                 revalidateTag(`review:${slug}`);
-                revalidatePath(`review:${slug}`);
+                revalidatePath(`/recenzije/${slug}`);
             })
 
         }
