@@ -36,7 +36,9 @@ export default function EditDeleteButtons({post, targetBlank, handleRefresh, use
             // console.log('images to delete: ', imagesToDelete) // Keep in Development
 
             try {
-                const deleteResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${review._id}`, {
+                const query = review.moreLikeThis ? `?moreLikeThis=${review.moreLikeThis.join(',')}` : '';
+
+                const deleteResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${review._id}${query}`, {
                     method: 'DELETE',
                 });
                 const deleteJson = await deleteResponse.json();

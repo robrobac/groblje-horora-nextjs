@@ -1,6 +1,6 @@
 import { dbConnect } from "@/lib/mongo/dbConnect"
 import reviewModel from "@/lib/mongo/models/reviewModel"
-import { slugify, toObjectIds } from "@/lib/utils"
+import { getSlugsFromIds, slugify, toObjectIds } from "@/lib/utils"
 import mongoose, { Mongoose } from "mongoose"
 import { revalidatePath, revalidateTag } from "next/cache"
 import { NextResponse } from "next/server"
@@ -299,6 +299,9 @@ export async function DELETE(request, { params }) {
     // The slug is used to generate the URL, but the ID is used to delete the review
     const { slug } = params
     // console.log(slug) // Keep in Development
+    const url = new URL(request.url);
+    const moreLikeThisParam = url.searchParams.get('moreLikeThis');
+    const moreLikeThis = moreLikeThisParam ? moreLikeThisParam.split(',') : [];
 
     const id = new mongoose.Types.ObjectId(slug)
 
@@ -321,6 +324,13 @@ export async function DELETE(request, { params }) {
         { moreLikeThis: id },
         { $pull: { moreLikeThis: id } }
     )
+
+    // get the slugs of each moreLikeThis document and revalidate it
+    const moreLikeThisSlugs = await getSlugsFromIds(moreLikeThis)
+    moreLikeThisSlugs.forEach((slug) =>{
+        revalidateTag(`review:${slug}`);
+        revalidatePath(`review:${slug}`);
+    })
 
     return new NextResponse(JSON.stringify(review), {
         status: 200
