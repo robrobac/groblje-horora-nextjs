@@ -118,6 +118,26 @@ export async function getReviewsFromIds(ids) {
     return json.reviews;
 }
 
+export async function getSlugsFromIds(ids) {
+    if (!ids || ids.length === 0) {
+        return [];
+    }
+
+    const params = new URLSearchParams();
+    ids.forEach(id => params.append("ids", id));
+
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/slugsFromIds?${params.toString()}`
+    );
+
+    if (!res.ok) {
+        throw new Error("Failed to search Reviews data");
+    }
+
+    const json = await res.json();
+    return json.reviews;
+}
+
 export function toObjectIds(ids=[]) {
     return ids.filter(mongoose.isValidObjectId).map(id => new mongoose.Types.ObjectId(id));
 }
