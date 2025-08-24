@@ -276,6 +276,16 @@ export const PATCH = async (request, { params }) => {
         revalidatePath(`/recenzije/${oldSlug}`, 'page');
         if (newSlug && newSlug !== oldSlug) revalidatePath(`/recenzije/${newSlug}`, 'page');
 
+        const moreLikeThisRevalidateIds = [...toAdd, ...toRemove]
+        if (moreLikeThisRevalidateIds.length) {
+            const moreLikeThisRevalidateSlugs = await getSlugsFromIds(moreLikeThisRevalidateIds)
+
+            moreLikeThisRevalidateSlugs.forEach((slug) =>{
+                revalidateTag(`review:${slug}`);
+                revalidatePath(`/recenzije/${slug}`);
+            })
+        }
+
         if (!review) {
             return new NextResponse(JSON.stringify({ error: 'No such review' }), {
                 status: 404
