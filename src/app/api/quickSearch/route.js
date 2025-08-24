@@ -16,11 +16,13 @@ export const GET = async (request) => {
     try {
         dbConnect()
             
-            // handling edge case for search term "vhs" because it does not find a movies named "v/h/s"
-            const normalized = search.toLowerCase();
-            const searchTerm = normalized === "vhs" ? "v/h/s" : search;
 
             // TODO: Merge these settings with settings in the "api/reviews" route! - The only difference is in the $match line after the searchQuery
+            
+            // handling edge case for search term "vhs" because it does not find a movies named "v/h/s"
+            const normalized = search.toLowerCase();
+            const searchTerm = normalized === "vhs" ? "v/h/s" : normalized;
+
             const searchQuery = {
                 $search: {
                     index: 'reviews_index',
@@ -53,11 +55,23 @@ export const GET = async (request) => {
                 }
             };
 
-            const results = await reviewModel.aggregate([
-                searchQuery,
-                { $match: { _id: { $nin: idsToExclude } } },
-                { $limit: 20 }
-            ])
+            let results = [];
+            
+            // handling edge case for search term "it" because it does not find movies named "It" (2017) and "It" (1990) because MongoDB atlas search have minimum token length of 3 characters
+            if (searchTerm === "it") {
+
+                results = await reviewModel.find({
+                    slug: { $in: ["it-2017", "it-1990"] }
+                }).sort({ createdAt: -1 })
+
+            } else {
+                results = await reviewModel.aggregate([
+                    searchQuery,
+                    { $match: { _id: { $nin: idsToExclude } } },
+                    { $limit: 20 }
+                ])
+
+            }
 
             return NextResponse.json({
                 reviews: results,

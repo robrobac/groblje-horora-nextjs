@@ -32,28 +32,11 @@ export const GET = async (request) => {
 
         if (search) {
             
+            // TODO: Merge these settings with settings in the "api/quickSearch" route!
             // handling edge case for search term "vhs" because it does not find a movies named "v/h/s"
             const normalized = search.toLowerCase();
-            const searchTerm = normalized === "vhs" ? "v/h/s" : search;
+            const searchTerm = normalized === "vhs" ? "v/h/s" : normalized;
 
-            // Will test this query later
-            // const searchQuery = {
-            //     $search: {
-            //         index: 'reviews_index',
-            //         text: {
-            //             query: search,
-            //             path: ['reviewTitle', 'movies.title', 'movies.tags.tagLabel'],
-            //             fuzzy: {
-            //                 maxEdits: 2,
-            //                 prefixLength: 2,
-            //                 maxExpansions: 20
-            //             }
-            //         }
-            //     }
-            // }
-
-
-            // TODO: Merge these settings with settings in the "api/quickSearch" route!
             const searchQuery = {
                 $search: {
                     index: 'reviews_index',
@@ -86,10 +69,23 @@ export const GET = async (request) => {
                 }
             };
 
-            const results = await reviewModel.aggregate([
-                searchQuery,
-                { $limit: Number(perPage) }
-            ])
+            let results = [];
+
+            // handling edge case for search term "it" because it does not find movies named "It" (2017) and "It" (1990) because MongoDB atlas search have minimum token length of 3 characters
+            if (searchTerm === "it") {
+
+                results = await reviewModel.find({
+                    slug: { $in: ["it-2017", "it-1990"] }
+                }).sort({ createdAt: -1 })
+
+            } else {
+                results = await reviewModel.aggregate([
+                    searchQuery,
+                    { $limit: Number(perPage) }
+                ])
+
+            }
+
 
             // totalItems and totalPages is hardcoded to max 1 page or 20 results
             return NextResponse.json({
