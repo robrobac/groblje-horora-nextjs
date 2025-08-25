@@ -39,7 +39,7 @@ function shortenStringTo30Words(str) {
 
 const getData = async (slug) => {
     // console.log(slug)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${slug}`, { next: { revalidate: 60, tags: [`review:${slug}`] } });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/reviews/${slug}`, { next: { revalidate: false, tags: [`review:${slug}`] } });
     if (!res.ok) {
         notFound()
         // throw new Error('Failed to fetch Single Post data');
@@ -48,7 +48,7 @@ const getData = async (slug) => {
     const data = await res.json();
 
     const moreLikeThis = await getReviewsFromIds(data.moreLikeThis);
-    data.moreLikeThis = moreLikeThis;
+    data.moreLikeThisData = moreLikeThis;
 
     return data;
 }
@@ -189,7 +189,7 @@ const SinglePostPage = async ({params, searchParams}) => {
             <CommentsAndLikes post={data} slug={slug}/>
             {data.reviewType === 'quad' && <SocialShare slug={slug} reviewType='single' title={data.reviewTitle} additionalPadding={true}/>}
             {data.reviewType === 'quad' && <OgImageLink link={data.quadOgImage} title={data.reviewTitle} additionalPadding={true}/>}
-            <MoreLikeThis data={data.moreLikeThis} postType={data.reviewType}/>
+            <MoreLikeThis data={data.moreLikeThisData} postType={data.reviewType}/>
             <JsonLd data={generateStructuredData()}/>
 
         </main>
