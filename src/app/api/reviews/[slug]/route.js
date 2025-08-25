@@ -335,8 +335,12 @@ export async function DELETE(request, { params }) {
         { $pull: { moreLikeThis: id } }
     )
 
+    // revalidate deleted post path
+    revalidateTag(`review:${review.slug}`);
+    revalidatePath(`/recenzije/${review.slug}`);
+
     // get the slugs of each moreLikeThis document and revalidate it
-    const moreLikeThisSlugs = await getSlugsFromIds([...moreLikeThis, slug])
+    const moreLikeThisSlugs = await getSlugsFromIds(moreLikeThis)
     moreLikeThisSlugs.forEach((slug) =>{
         revalidateTag(`review:${slug}`);
         revalidatePath(`/recenzije/${slug}`);
