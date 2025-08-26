@@ -141,3 +141,9 @@ export async function getSlugsFromIds(ids) {
 export function toObjectIds(ids=[]) {
     return ids.filter(mongoose.isValidObjectId).map(id => new mongoose.Types.ObjectId(id));
 }
+
+export function getCurrentTime() {
+    const now = new Date();
+    const formattedTime = `${now.toLocaleString()}:${now.getMilliseconds().toString().padStart(3, '0')}`;
+    return formattedTime;   
+}

@@ -53,39 +53,11 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
         }
     };
 
-    const getCurrentTime = () => {
-        const now = new Date();
-        const formattedTime = `${now.toLocaleString()}:${now.getMilliseconds().toString().padStart(3, '0')}`;
-        return formattedTime;
-    };
-
-    const setLogsFunction = (message) => {
-        const timestamp = getCurrentTime();
-        return `[${timestamp}] ${message}`
-    }
-
-    const downloadLogs = (logsArray) => {
-        const timestamp = Date.now();
-        console.log("LOGS", logsArray)
-        // const logText = logs.join('\n'); // Join all logs with newlines
-        const logText = JSON.stringify(logsArray, null, 2); // Pretty print the logs
-        console.log("LOGTEXT", logText)
-        const blob = new Blob([logText], { type: 'text/plain' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = `console-logs_${timestamp}.txt`; // The name of the downloaded file
-        link.click(); // Trigger the download
-    };
-
-
     // Uploading compressed images to Firebase Storage and retrieveing its url path
     const getLinks = async () => {
         setUploadingImages(true)
 
-        const localLogs = [];
-
         console.log("Upload images to firebase storage, started")
-        localLogs.push(setLogsFunction("Upload images to firebase storage, started"))
         for (const image of compressedImages) {
             let url = '';
             let path = '';
@@ -93,7 +65,6 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
             // create firebase storage path
             path = `postImages/${stringFormatting('post-image-', Date.now())}`;
             console.log("Image firebase storage path created:", path)
-            localLogs.push(setLogsFunction(`Image firebase storage path created: ${path}`))
     
             try {
                 // Upload to Firebase and retrieve image's url and path
@@ -101,9 +72,7 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
                 url = result.url;
                 path = result.path;
                 console.log("Image uploaded, URL:", url)
-                localLogs.push(setLogsFunction(`Image uploaded, URL: ${url}`))
                 console.log("Image uploaded, path:", path)
-                localLogs.push(setLogsFunction(`Image uploaded, path: ${path}`))
 
                 // Creating Uploaded Image object in order to save it to MongoDB
                 const uploadedImage = {
@@ -111,7 +80,6 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
                     path: path,
                 };
                 console.log("Uploaded image object created:", JSON.stringify(uploadedImage))
-                localLogs.push(setLogsFunction(`Uploaded image object created: ${JSON.stringify(uploadedImage)}`))
         
                 // setting uploaded images state and clearing compressed images state because all compressed images are uploaded to Storage.
                 setCompressedImages([]);
@@ -120,7 +88,6 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
 
             } catch (error) {
                 console.log("Error uploading image to firebase storage:", error.message)
-                localLogs.push(setLogsFunction(`Error uploading image to firebase storage: ${error.message}`))
                 console.log(error);
                 setError(error);
             }
@@ -131,11 +98,8 @@ export default function ImageRepo({handleContentImages, contentImages, formSubmi
 
         setUploadingImages(false)
         console.log("Upload images to firebase storage, finished")
-        localLogs.push(setLogsFunction("Upload images to firebase storage, finished"))
 
         await new Promise((resolve) => setTimeout(resolve, 200));
-        console.log(localLogs)
-        downloadLogs(localLogs);
     };
     
     const handleDeleteCompressed = (imageToDelete) => {
