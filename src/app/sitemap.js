@@ -1,12 +1,7 @@
 import { sortedTags } from "@/lib/tags";
 
-export const dynamic = 'force-dynamic';
-
-// TODO : either remove dynamir or revalidate
-
-
 export default async function sitemap() {
-    const res = await fetch(`${process.env.DOMAIN_URL}/api/generateSitemap`, {next: {revalidate: 20}});
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/generateSitemap`, {next: {revalidate: false, tags: [`sitemap-cache`]}});
     const tags = sortedTags;
     const posts = await res.json()
 
