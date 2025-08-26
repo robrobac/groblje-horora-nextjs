@@ -286,6 +286,8 @@ export const PATCH = async (request, { params }) => {
             })
         }
 
+        revalidateTag('sitemap-cache');
+
         if (!review) {
             return new NextResponse(JSON.stringify({ error: 'No such review' }), {
                 status: 404
