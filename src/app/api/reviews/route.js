@@ -281,11 +281,7 @@ export async function POST(request) {
 
         }
 
-        
-
-
-
-
+        revalidateTag('sitemap-cache');
 
         return new NextResponse(JSON.stringify(review), {
             status: 200

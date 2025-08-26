@@ -348,6 +348,8 @@ export async function DELETE(request, { params }) {
         revalidatePath(`/recenzije/${slug}`);
     })
 
+    revalidateTag('sitemap-cache');
+
     return new NextResponse(JSON.stringify(review), {
         status: 200
     })
