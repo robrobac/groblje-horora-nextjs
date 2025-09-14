@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
                 {children}
                 <BackToTopButton />
             </body>
-            <Script src="https://analytics.roberto-vukomanovic.com/script.js" data-website-id="b8e49143-346b-42d4-8dac-1c228a387cc0"/>
+            <Script src="https://analytics.robac.site/script.js" data-website-id="b8e49143-346b-42d4-8dac-1c228a387cc0"/>
         </html>
     );
 }
