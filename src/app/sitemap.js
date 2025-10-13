@@ -1,7 +1,9 @@
 import { sortedTags } from "@/lib/tags";
 
+export const dynamic = 'force-dynamic';
+
 export default async function sitemap() {
-    const res = await fetch(`${process.env.DOMAIN_URL}/api/generateSitemap`, {next: {revalidate: 43200, tags: [`sitemap-cache`]}});
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/generateSitemap`, {next: {revalidate: 3600, tags: [`sitemap-cache`]}});
     const tags = sortedTags;
     const posts = await res.json()
 

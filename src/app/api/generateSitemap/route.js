@@ -2,10 +2,7 @@ import { dbConnect } from "@/lib/mongo/dbConnect"
 import reviewModel from "@/lib/mongo/models/reviewModel"
 import { NextResponse } from "next/server"
 
-export const revalidate = 43200;
-export const fetchCache = "default-cache";
-export const dynamic = "force-static";
-
+export const dynamic = 'force-dynamic';
 
 export const GET = async () => {
     try {
