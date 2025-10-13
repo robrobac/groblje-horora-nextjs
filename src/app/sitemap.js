@@ -1,7 +1,7 @@
 import { sortedTags } from "@/lib/tags";
 
 export default async function sitemap() {
-    const res = await fetch(`${process.env.DOMAIN_URL}/api/generateSitemap`, {next: {revalidate: false, tags: [`sitemap-cache`]}});
+    const res = await fetch(`${process.env.DOMAIN_URL}/api/generateSitemap`, {next: {revalidate: 10, tags: [`sitemap-cache`]}});
     const tags = sortedTags;
     const posts = await res.json()
 
