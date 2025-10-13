@@ -1,12 +1,15 @@
-import { Lexend } from "next/font/google";
+// import { Lexend } from "next/font/google";
 // Pocetni font je bio Inter
 import "./globals.scss";
 import Header from "../components/header/Header";
 import dynamic from "next/dynamic";
 import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
 import Script from "next/script";
+import { Lexend } from "next/font/google";
 
 const lexend = Lexend({ subsets: ["latin"] });
+
+console.log(lexend)
 
 export default function RootLayout({ children }) {
     return (

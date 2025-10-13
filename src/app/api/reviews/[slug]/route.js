@@ -287,7 +287,7 @@ export const PATCH = async (request, { params }) => {
         }
 
         revalidateTag('sitemap-cache');
-        revalidatePath('/sitemap.xml')
+        revalidatePath('/sitemap')
 
         if (!review) {
             return new NextResponse(JSON.stringify({ error: 'No such review' }), {
@@ -350,7 +350,7 @@ export async function DELETE(request, { params }) {
     })
 
     revalidateTag('sitemap-cache');
-    revalidatePath('/sitemap.xml')
+    revalidatePath('/sitemap')
 
     return new NextResponse(JSON.stringify(review), {
         status: 200
