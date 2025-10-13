@@ -281,8 +281,8 @@ export async function POST(request) {
 
         }
 
-        // revalidateTag('sitemap-cache');
-        // revalidatePath('/sitemap')
+        revalidateTag('sitemap-cache');
+        revalidatePath('/sitemap')
 
         return new NextResponse(JSON.stringify(review), {
             status: 200
