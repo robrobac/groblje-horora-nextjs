@@ -5,11 +5,13 @@ import Header from "../components/header/Header";
 import dynamic from "next/dynamic";
 import BackToTopButton from "@/components/backToTopButton/BackToTopButton";
 import Script from "next/script";
-import { Lexend } from "next/font/google";
+import localFont from "next/font/local";
 
-const lexend = Lexend({ subsets: ["latin"] });
+const lexend = localFont({
+    src: "../../public/Lexend-VariableFont_wght.ttf",
+    variable: "--font-lexend",
+});
 
-console.log(lexend)
 
 export default function RootLayout({ children }) {
     return (
