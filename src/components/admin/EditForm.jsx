@@ -246,7 +246,7 @@ export default function EditForm({slug}) {
             if (!movie.reviewContent) {
                 requiredInputs.push(`movie${index}reviewContent`)
             }
-            if (!movie.compressedCoverImage) {
+            if (!movie.compressedCoverImage && !movie.coverImage) {
                 requiredInputs.push(`movie${index}coverImage`)
             }
         })
