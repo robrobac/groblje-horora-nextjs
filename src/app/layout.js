@@ -21,7 +21,8 @@ export default function RootLayout({ children }) {
                 {children}
                 <BackToTopButton />
             </body>
-            <Script src="https://analytics.robac.site/script.js" data-website-id="b8e49143-346b-42d4-8dac-1c228a387cc0"/>
+            <script defer src="https://analitika.robac.site/script.js" data-website-id="c579a2ae-427a-49c9-86ff-ff20b3133e4b"></script>
+            <script data-goatcounter="https://www.groblje-horora.com/count" async src="//www.groblje-horora.com/count.js"></script>
         </html>
     );
 }
